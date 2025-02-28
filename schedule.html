@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legacie Web - scheduleDate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* General Animations */
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .scale-hover {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .scale-hover:hover {
+            transform: scale(1.05);
+        }
+
+        .button-effect {
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .button-effect:hover {
+            background: #1e40af;
+            transform: translateY(-3px);
+        }
+
+        .button-effect:active {
+            transform: translateY(2px);
+        }
+
+        /* Navbar Sticky Effect */
+        .sticky-nav {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .scrolled {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section Styling */
+        .hero-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .hero-text {
+            width: 50%;
+            text-align: left;
+        }
+
+        .hero-image {
+            width: 50%;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ensure Hero Section is Neat on Small Screens */
+        @media (max-width: 768px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text, .hero-image {
+                width: 100%;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+          /* Navbar Transparent Effect */
+    .sticky-nav {
+        transition: all 0.2s ease-in-out;
+    }
+
+   /* Navbar Transparent Effect */
+.sticky-nav {
+    transition: all 0.3s ease-in-out;
+}
+
+ /* Navbar Transparent Effect */
+ .sticky-nav {
+        transition: all 0.3s ease-in-out;
+    }
+
+ /* Navbar Transparent Effect */
+ .sticky-nav {
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Shaking Logo Animation */
+    .shaking-logo img {
+        animation: shake 4s infinite ease-in-out;
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: rotate(0deg); }
+        10%, 30%, 50%, 70%, 90% { transform: rotate(-2deg); }
+        20%, 40%, 60%, 80% { transform: rotate(2deg); }
+    }
+
+    /* Sliding Buttons Animation */
+    .slide-from-top {
+        opacity: 0;
+        transform: translateY(-20px);
+        animation: slideDown 1s infinite alternate ease-in-out;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Navigation Button Styling */
+    .nav-button {
+        background: rgba(50, 119, 202, 0.2);
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .nav-button:hover {
+        background: rgba(255, 255, 255, 0.5);
+        transform: scale(1.1);
+    }
+
+    .nav-button:active {
+        transform: translateY(2px);
+    }
+
+    /* Semi-Transparent Mobile Dropdown */
+    #mobile-menu {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease-in-out;
+    }
+
+   /* General Reset for Box Sizing */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Animation Styles */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animation to each service card */
+.service-card {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 0.2s;
+    animation-iteration-count: 1; /* This makes sure the animation only runs once when the section is visible */
+}
+
+.service-card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.service-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.service-card:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+.service-card:nth-child(5) {
+    animation-delay: 1s;
+}
+
+.service-card:nth-child(6) {
+    animation-delay: 1.2s;
+}
+
+.service-card:nth-child(7) {
+    animation-delay: 1.4s;
+}
+
+/* Hover animations */
+.service-card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Prevent content overlap by making text more responsive */
+.service-card h3, .service-card p {
+    word-wrap: break-word;
+    text-align: left;
+}
+
+/* Make sure the content in each tile is properly spaced and not overflowing */
+.service-card {
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Let’s Talk Section Styles */
+#contact-us {
+    background-color: #f7fafc;
+    padding-bottom: 20px; /* Prevent the section from being too compressed */
+}
+
+#contact-us h2 {
+    color: #1a202c;
+}
+
+#contact-us p {
+    color: #4a5568;
+}
+
+#contact-us a {
+    background-color: #3182ce;
+    transition: transform 0.3s ease;
+}
+
+#contact-us a:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Layout: Adjust for smaller screens */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr 1fr; /* Two columns on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+    }
+
+    #contact-us h2 {
+        font-size: 24px;
+    }
+
+    #contact-us p {
+        font-size: 16px;
+    }
+
+    #contact-us a {
+        font-size: 18px;
+        padding: 12px 24px;
+    }
+}
+/* Footer Styling */
+footer {
+    background: #111;
+    color: #ccc;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Shaking Logo Animation */
+.shaking-logo {
+    animation: shake 1s infinite ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    10%, 30%, 50%, 70%, 90% { transform: rotate(-2deg); }
+    20%, 40%, 60%, 80% { transform: rotate(2deg); }
+}
+
+/* Footer Links */
+.footer-link {
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+    font-size: 14px;
+}
+
+.footer-link:hover {
+    color: #fff;
+}
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <!-- Navbar -->
+<nav id="navbar" class="sticky-nav fixed w-full top-0 z-10 bg-transparent transition-all duration-300">
+    <div class="container mx-auto flex justify-between items-center p-3">
+        <!-- Logo with Shaking Animation -->
+        <a href="#" class="shaking-logo">
+            <img src="download-removebg-preview.png" alt="Legacie Web Logo" class="h-10 md:h-12 transition-transform duration-300">
+        </a>
+
+        <!-- Centered Menu with Sliding Animation -->
+        <ul id="nav-links" class="hidden md:flex space-x-6 text-black mx-auto slide-from-top">
+            <li><a href="dashboard.html" class="nav-button">Dashboard</a></li>
+        </ul>
+
+
+        <!-- Mobile Menu Button with Sliding Animation -->
+        <button id="mobile-menu-btn" class="md:hidden bg-blue-600 text-white px-4 py-2 rounded button-effect slide-from-top">Menu</button>
+    </div>
+
+    <!-- Mobile Dropdown Menu with Semi-Transparent Background -->
+    <div id="mobile-menu" class="absolute w-full bg-white bg-opacity-80 shadow-md hidden">
+        <ul class="flex flex-col space-y-4 p-4 text-center">
+            <li><a href="#services" class="nav-button">Services</a></li>
+            <li><a href="#pricing" class="nav-button">Pricing</a></li>
+            <li><a href="#testimonials" class="nav-button">Testimonials</a></li>
+            <li><a href="#contact" class="nav-button">Contact</a></li>
+                <button id="close-menu-btn" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded block button-effect">Close Menu</button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+    <!-- Form Section -->
+    <div class="max-w-2xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold text-center mb-4">Request a Customization Appointment</h2>
+
+        <!-- Notification Box -->
+        <div id="notification" class="hidden p-4 mb-4 text-white font-semibold text-center rounded-lg"></div>
+
+        <!-- Email and Password Section (Initially Visible) -->
+        <div id="email-password-section">
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold mb-2">Email</label>
+                <input type="email" id="email" class="w-full p-3 border rounded" placeholder="Your Email" required>
+                <button type="button" onclick="checkEmail()" class="bg-blue-500 text-white px-4 py-2 rounded mt-3 w-full">Check Email</button>
+            </div>
+
+            <!-- Password Field -->
+            <div id="password-section" class="hidden mb-4">
+                <label id="password-label" class="block text-gray-700 font-semibold mb-2">Enter Password</label>
+                <input type="password" id="password" class="w-full p-3 border rounded" placeholder="Enter Password">
+                <button type="button" onclick="handleAuth()" id="auth-button" class="bg-green-500 text-white px-4 py-2 rounded mt-3 w-full">Login</button>
+            </div>
+        </div>
+
+        <!-- Full Form (Initially Hidden) -->
+        <div id="full-form" class="hidden">
+            <form id="schedule-form">
+                <!-- Contact Information -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Full Name</label>
+                    <input type="text" id="full-name" class="w-full p-3 border rounded" placeholder="Your Name" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Phone</label>
+                    <input type="tel" id="phone" class="w-full p-3 border rounded" placeholder="Your Phone Number" required>
+                </div>
+
+                <!-- Template Name (Auto-Filled) -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Template Name</label>
+                    <input type="text" id="template-name" class="w-full p-3 border rounded bg-gray-200" readonly>
+                </div>
+
+                <!-- Schedule Details -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Date</label>
+                    <input type="date" id="schedule-date" class="w-full p-3 border rounded" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Time</label>
+                    <input type="time" id="schedule-time" class="w-full p-3 border rounded" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Customization Details</label>
+                    <textarea id="schedule-notes" class="w-full p-3 border rounded" rows="3" placeholder="Describe any additional details or changes you need."></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center mt-6">
+                    <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 w-full">Submit Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+
+    <script>
+        const API_URL = "http://localhost:5000";
+        document.getElementById("schedule-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Check if user is logged in
+    const loggedInUser = localStorage.getItem("userEmail");
+    if (!loggedInUser) {
+        showPopupAndRedirect();
+        return;
+    }
+
+    const scheduleData = {
+        fullName: document.getElementById("full-name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        templateName: document.getElementById("template-name").value,
+        scheduleDate: document.getElementById("schedule-date").value,
+        scheduleTime: document.getElementById("schedule-time").value,
+        scheduleNotes: document.getElementById("schedule-notes").value
+    };
+
+    const response = await fetch(`${API_URL}/api/schedule`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(scheduleData)
+    });
+
+    if (response.ok) {
+        alert("Schedule submitted successfully!");
+        window.location.href = "dashboard.html";
+    } else {
+        alert("Failed to submit. Try again.");
+    }
+});
+
+// Function to show popup and scroll to email verification
+function showPopupAndRedirect() {
+    showNotification("Verify email and secure details before submitting.", "bg-red-500");
+
+    // Scroll to "Check Email" button
+    const checkEmailButton = document.querySelector("button[onclick='checkEmail()']");
+    if (checkEmailButton) {
+        checkEmailButton.scrollIntoView({ behavior: "smooth" });
+    }
+}
+
+        // Auto-fill template name from URL parameter
+        function getQueryParam(name) {
+            return new URLSearchParams(window.location.search).get(name);
+        }
+        document.getElementById("template-name").value = getQueryParam("template") || "Default Template";
+
+        // Function to handle email verification and reveal form
+        async function checkEmail() {
+            const email = document.getElementById("email").value;
+            if (!email) {
+                showNotification("Please enter your email.", "bg-red-500");
+                return;
+            }
+
+            const response = await fetch(`${API_URL}/api/user/${email}`);
+
+            if (response.status === 200) {
+                document.getElementById("password-section").classList.remove("hidden");
+                document.getElementById("password-label").textContent = "Enter Password";
+                document.getElementById("auth-button").textContent = "Login";
+                showNotification("Existing user detected. Please log in.", "bg-yellow-500");
+            } else {
+                document.getElementById("password-section").classList.remove("hidden");
+                document.getElementById("password-label").textContent = "Create Password";
+                document.getElementById("auth-button").textContent = "Sign Up";
+                showNotification("New user detected. Create a password to sign up.", "bg-green-500");
+            }
+        }
+
+        async function handleAuth() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const authButton = document.getElementById("auth-button").textContent;
+
+            let response;
+            if (authButton === "Login") {
+                response = await fetch(`${API_URL}/api/login`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+            } else {
+                const fullName = document.getElementById("full-name").value;
+                const phone = document.getElementById("phone").value;
+
+                response = await fetch(`${API_URL}/api/register`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ fullName, email, phone, password })
+                });
+            }
+
+            if (response.ok) {
+                localStorage.setItem("userEmail", email);
+                showNotification(authButton + " successful! You can now access the form.", "bg-green-500");
+
+                // Show full form and hide email-password section
+                document.getElementById("full-form").classList.remove("hidden");
+                document.getElementById("email-password-section").classList.add("hidden");
+            } else {
+                showNotification(authButton + " failed. Try again.", "bg-red-500");
+            }
+        }
+
+        function showNotification(message, colorClass) {
+            const notification = document.getElementById("notification");
+            notification.textContent = message;
+            notification.className = `block ${colorClass} p-4 text-white font-semibold text-center rounded-lg`;
+            setTimeout(() => notification.classList.add("hidden"), 3000);
+        }
+async function signUpUser() {
+    const fullName = document.getElementById("full-name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const password = document.getElementById("password").value;
+
+    const response = await fetch(`${API_URL}/api/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fullName, email, phone, password })
+    });
+
+    if (response.ok) {
+        localStorage.setItem("userEmail", email);
+        document.getElementById("welcome-name").textContent = fullName;
+        document.getElementById("welcome-popup").classList.remove("hidden");
+        showNotification("Signup successful! You can now log in.", "bg-green-500");
+    } else {
+        showNotification("Signup failed. Try again.", "bg-red-500");
+    }
+}
+
+        function closePopup() {
+            document.getElementById("welcome-popup").classList.add("hidden");
+        }
+
+        function showNotification(message, colorClass) {
+            const notification = document.getElementById("notification");
+            notification.textContent = message;
+            notification.className = `block ${colorClass} p-4 text-white font-semibold text-center rounded-lg`;
+            setTimeout(() => notification.classList.add("hidden"), 3000);
+        }
+    </script>
+
+</body>
+</html>

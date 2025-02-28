@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Legacie Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-white shadow-md p-6 flex flex-col">
+        <h2 class="text-2xl font-bold mb-6 text-blue-600">Admin Panel</h2>
+
+        <button onclick="showSection('dashboard')" class="bg-gray-800 text-white px-4 py-2 rounded mb-4">Dashboard</button>
+        <button onclick="showSection('new-schedules')" class="bg-yellow-500 text-white px-4 py-2 rounded mb-4">New Schedules</button>
+        <button onclick="showSection('user-list')" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedules</button>
+        <button onclick="showSection('clients-section')" class="bg-purple-500 text-white px-4 py-2 rounded mb-4">Clients</button>
+        <button onclick="showSection('subscribers-section')" class="bg-red-500 text-white px-4 py-2 rounded mb-4">Subscribers</button>
+
+        <div class="text-red-500 font-bold mt-4" id="notification-badge">New Requests: 0</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-72 p-6">
+
+        <!-- Dashboard -->
+        <div id="dashboard" class="grid grid-cols-3 gap-6 mb-6">
+            <div class="bg-white p-6 shadow-md rounded-lg">
+                <h3 class="text-xl font-semibold">Total Users</h3>
+                <p id="total-users" class="text-3xl font-bold text-blue-600">0</p>
+            </div>
+            <div class="bg-white p-6 shadow-md rounded-lg">
+                <h3 class="text-xl font-semibold">Clients Count</h3>
+                <p id="clients-count" class="text-3xl font-bold text-green-600">0</p>
+            </div>
+            <div class="bg-white p-6 shadow-md rounded-lg">
+                <h3 class="text-xl font-semibold">Subscribers Count</h3>
+                <p id="subscribers-count" class="text-3xl font-bold text-purple-600">0</p>
+            </div>
+        </div>
+        <!-- New Schedules Section -->
+        <div id="new-schedules" class="hidden">
+            <h3 class="text-2xl font-bold mb-4 text-yellow-600">New Schedules</h3>
+            <div id="new-schedule-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+        <!-- User Scheduling Section -->
+        <div id="user-list" class="hidden">
+            <div class="flex items-center gap-4 mb-4">
+                <input type="text" id="search-email" placeholder="Search by Email" class="p-2 border rounded w-1/3" onkeyup="liveSearch()">
+                <label class="font-semibold">Filter:</label>
+                <select id="filter-options" class="p-2 border rounded" onchange="applyFilter()">
+                    <option value="newest">Newest to Oldest</option>
+                    <option value="oldest">Oldest to Newest</option>
+                    <option value="az">A-Z</option>
+                    <option value="za">Z-A</option>
+                </select>
+            </div>
+            <div id="schedule-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+
+        <!-- Clients Section -->
+        <div id="clients-section" class="hidden mt-6 p-6 bg-white shadow-lg rounded-lg">
+            <h3 class="text-2xl font-semibold mb-4 text-purple-600">Assigned Clients</h3>
+            <div id="clients-list" class="space-y-4"></div>
+        </div>
+
+        <!-- Subscribers Section -->
+        <div id="subscribers-section" class="hidden mt-6 p-6 bg-white shadow-lg rounded-lg">
+            <h3 class="text-2xl font-semibold mb-4 text-red-600">Subscribed Users</h3>
+            <div id="subscribers-list" class="space-y-4"></div>
+        </div>
+    </div>
+
+
+    <script>
+        let usersData = [];
+        let assignedClients = JSON.parse(localStorage.getItem("assignedClients")) || [];
+        let subscribers = JSON.parse(localStorage.getItem("subscribers")) || [];
+        let newSchedules = JSON.parse(localStorage.getItem("newSchedules")) || [];
+        let existingSchedules = JSON.parse(localStorage.getItem("existingSchedules")) || [];
+
+        document.addEventListener("DOMContentLoaded", () => {
+            showSection("dashboard");
+            fetchAllUsers();
+            displayClients();
+            displayNewSchedules();
+            displayExistingSchedules();
+            displaySubscribers();
+        });
+
+        function showSection(sectionId) {
+            document.querySelectorAll(".ml-72 > div").forEach(div => div.classList.add("hidden"));
+            document.getElementById(sectionId).classList.remove("hidden");
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchAllClients();
+            fetchAllSubscribers();
+        });
+
+        function fetchAllUsers() {
+            fetch("http://localhost:5000/api/admin/schedules")
+                .then(response => response.json())
+                .then(users => {
+                    usersData = users;
+                    displaySchedules(users);
+                    updateDashboard();
+                })
+                .then(() => identifyNewSchedules(usersData));
+        }
+
+        function displaySchedules(users) {
+    document.getElementById("schedule-list").innerHTML = "";
+    users.forEach(user => fetchUserSchedules(user._id, user.fullName, user.phone));
+}
+
+        function fetchUserSchedules(email, fullName, phone) {
+    fetch(`http://localhost:5000/api/schedules/${email}`)
+    .then(response => response.json())
+    .then(schedules => {
+        const userScheduleHTML = `
+        <div class="bg-white p-4 shadow-md rounded-lg">
+            <h3 class="text-xl font-bold">${fullName}</h3>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Phone:</strong> ${phone ? phone : "Not Available"}</p> <!-- Display Phone Number -->
+            <div id="schedule-${email}">
+            ${schedules.map(schedule => `
+                <div class="bg-gray-100 p-3 rounded shadow-sm border-l-4 border-blue-500">
+                    <p><strong>Template:</strong> ${schedule.templateName}</p>
+                    <p><strong>Scheduled Time:</strong> ${schedule.scheduleDate} at ${schedule.scheduleTime}</p>
+                    <p><strong>Time Left:</strong> <span id="timer-${schedule._id}"></span></p>
+                    <button onclick="assignToClient('${email}', '${fullName}', '${schedule.templateName}')" class="bg-green-500 text-white px-4 py-2 mt-2 rounded">Client</button>
+                </div>
+            `).join('')}
+            </div>
+        </div>
+        `;
+
+        document.getElementById("schedule-list").insertAdjacentHTML("beforeend", userScheduleHTML);
+        schedules.forEach(schedule => startCountdown(schedule._id, schedule.scheduleDate, schedule.scheduleTime));
+    });
+}
+
+        function startCountdown(scheduleId, date, time) {
+            function updateTimer() {
+                let now = new Date();
+                let target = new Date(`${date} ${time}`);
+                let difference = target - now;
+
+                if (difference > 0) {
+                    let hours = Math.floor(difference / (1000 * 60 * 60));
+                    let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                    document.getElementById(`timer-${scheduleId}`).textContent = `${hours}h ${minutes}m remaining`;
+                } else {
+                    document.getElementById(`timer-${scheduleId}`).textContent = "Expired";
+                }
+            }
+
+            updateTimer();
+            setInterval(updateTimer, 60000);
+        }
+
+        function updateDashboard() {
+            document.getElementById("total-users").textContent = usersData.length;
+            document.getElementById("clients-count").textContent = assignedClients.length;
+            document.getElementById("subscribers-count").textContent = subscribers.length;
+            document.getElementById("notification-badge").textContent = `New Requests: ${newSchedules.length}`;
+        }
+        function assignToClient(email, fullName, templateName) {
+    fetch("http://localhost:5000/api/clients", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, fullName, templateName })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);
+        fetchAllClients(); // Refresh Client List
+    })
+    .catch(error => console.error("Error:", error));
+}
+
+function fetchAllClients() {
+            fetch("http://localhost:5000/api/clients")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("clients-count").textContent = data.length;
+                    displayClients(data);
+                })
+                .catch(error => console.error("Error fetching clients:", error));
+        }
+
+        function displayClients(clients) {
+            let clientsList = document.getElementById("clients-list");
+            clientsList.innerHTML = clients.map(client => `
+                <div class="bg-white p-4 shadow-md rounded-lg">
+                    <h3 class="text-xl font-bold">${client.fullName}</h3>
+                    <p><strong>Email:</strong> ${client.email}</p>
+                    <p><strong>Template:</strong> ${client.templateName}</p>
+                    <button onclick="subscribeUser('${client.email}', '${client.fullName}', '${client.templateName}')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Subscribe</button>
+                </div>
+            `).join('');
+        }
+
+        function fetchAllSubscribers() {
+            fetch("http://localhost:5000/api/subscribers")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("subscribers-count").textContent = data.length;
+                    displaySubscribers(data);
+                })
+                .catch(error => console.error("Error fetching subscribers:", error));
+        }
+
+        function displaySubscribers(subscribers) {
+            let subscribersList = document.getElementById("subscribers-list");
+            subscribersList.innerHTML = subscribers.map(subscriber => `
+                <div class="bg-white p-4 shadow-md rounded-lg">
+                    <h3 class="text-xl font-bold">${subscriber.fullName}</h3>
+                    <p><strong>Email:</strong> ${subscriber.email}</p>
+                    <p><strong>Template:</strong> ${subscriber.templateName}</p>
+                    <p><strong>Price:</strong> $${subscriber.price}/month</p>
+                </div>
+            `).join('');
+        }
+
+        function subscribeUser(email, fullName, templateName) {
+            let price = prompt(`Enter subscription price for ${fullName}:`);
+            if (price) {
+                fetch("http://localhost:5000/api/subscribers", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, fullName, templateName, price })
+                })
+                .then(response => response.json())
+                .then(() => {
+                    fetchAllSubscribers(); // Update subscribers list immediately
+                    showSection('subscribers-section'); // Show subscribers section after subscribing
+                })
+                .catch(error => console.error("Error subscribing user:", error));
+            }
+        }
+    
+        function liveSearch() {
+            let query = document.getElementById("search-email").value.toLowerCase();
+            document.querySelectorAll("#schedule-list > div").forEach(card => {
+                card.style.display = card.textContent.toLowerCase().includes(query) ? "block" : "none";
+            });
+        }
+        function identifyNewSchedules(users) {
+    let existingSchedules = JSON.parse(localStorage.getItem("existingSchedules")) || [];
+    let tempNewSchedules = [];
+
+    users.forEach(user => {
+        fetch(`http://localhost:5000/api/schedules/${user._id}`)
+            .then(response => response.json())
+            .then(schedules => {
+                schedules.forEach(schedule => {
+                    let scheduleData = {
+                        id: schedule._id,
+                        email: user._id,
+                        fullName: user.fullName,
+                        templateName: schedule.templateName,
+                        scheduleDate: schedule.scheduleDate,
+                        scheduleTime: schedule.scheduleTime
+                    };
+
+                    // ✅ Only add if not in existingSchedules
+                    if (!existingSchedules.some(s => s.id === schedule._id)) {
+                        tempNewSchedules.push(scheduleData);
+                    }
+                });
+
+                // ✅ Update newSchedules only with unseen schedules
+                newSchedules = tempNewSchedules;
+                localStorage.setItem("newSchedules", JSON.stringify(newSchedules));
+                displayNewSchedules();
+            });
+    });
+}
+
+function displayNewSchedules() {
+    let newScheduleList = document.getElementById("new-schedule-list");
+
+    if (newSchedules.length === 0) {
+        newScheduleList.innerHTML = `<p class="text-gray-500">No new schedules available.</p>`;
+    } else {
+        newScheduleList.innerHTML = newSchedules.map(schedule => `
+            <div class="bg-yellow-100 p-4 shadow-md rounded-lg border-l-4 border-yellow-500">
+                <h3 class="text-xl font-bold">${schedule.fullName}</h3>
+                <p><strong>Email:</strong> ${schedule.email}</p>
+                <p><strong>Template:</strong> ${schedule.templateName}</p>
+                <p><strong>Scheduled Time:</strong> ${schedule.scheduleDate} at ${schedule.scheduleTime}</p>
+                <button onclick="markAsSeen('${schedule.id}')" class="bg-green-500 text-white px-4 py-2 mt-2 rounded">Done</button>
+            </div>
+        `).join('');
+    }
+}
+
+function markAsSeen(scheduleId) {
+    // Find the schedule before removing it
+    let seenSchedule = newSchedules.find(schedule => schedule.id === scheduleId);
+
+    if (!seenSchedule) return; // Safety check
+
+    // Remove the schedule from newSchedules
+    newSchedules = newSchedules.filter(schedule => schedule.id !== scheduleId);
+
+    // Get existingSchedules from localStorage
+    let existingSchedules = JSON.parse(localStorage.getItem("existingSchedules")) || [];
+
+    // Add to existingSchedules (avoid duplicates)
+    if (!existingSchedules.some(s => s.id === scheduleId)) {
+        existingSchedules.push(seenSchedule);
+    }
+
+    // ✅ Update localStorage permanently
+    localStorage.setItem("newSchedules", JSON.stringify(newSchedules));
+    localStorage.setItem("existingSchedules", JSON.stringify(existingSchedules));
+
+    // ✅ Refresh UI to remove marked schedule
+    displayNewSchedules();
+}
+
+    </script>
+
+</body>
+</html>

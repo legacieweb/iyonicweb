@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Legacie Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <!-- Sidebar for Large Screens -->
+    <div id="sidebar" class="hidden md:flex fixed top-0 left-0 w-64 h-full bg-white shadow-md p-6 flex-col">
+        <h2 class="text-xl font-bold mb-6">Dashboard</h2>
+        <button onclick="showSection('dashboard')" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">Dashboard</button>
+        <button onclick="showSection('payment')" class="bg-green-500 text-white px-4 py-2 rounded mb-4">Payment</button>
+        <button id="logout-btn" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
+    </div>
+
+    <!-- Mobile Dropdown Sidebar -->
+    <div class="md:hidden p-4">
+        <button id="menu-btn" class="bg-gray-800 text-white px-4 py-2 rounded">☰ Menu</button>
+        <div id="mobile-menu" class="hidden mt-2 bg-white shadow-lg rounded-lg p-4">
+            <button onclick="showSection('dashboard')" class="block bg-blue-500 text-white px-4 py-2 rounded mb-2 w-full">Dashboard</button>
+            <button onclick="showSection('payment')" class="block bg-green-500 text-white px-4 py-2 rounded mb-2 w-full">Payment</button>
+            <button id="logout-btn-mobile" class="block bg-red-500 text-white px-4 py-2 rounded w-full">Logout</button>
+        </div>
+    </div>
+
+    <!-- Login Popup -->
+    <div id="login-popup" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+        <div class="bg-white p-6 rounded shadow-lg w-96">
+            <h2 class="text-xl font-bold mb-4">Login</h2>
+            <input type="email" id="login-email" placeholder="Enter Email" class="w-full p-2 border rounded mb-3">
+            <input type="password" id="login-password" placeholder="Enter Password" class="w-full p-2 border rounded mb-3">
+            <button onclick="handleLogin()" class="bg-green-500 text-white px-4 py-2 rounded w-full">Login</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="md:ml-72 p-6">
+        <h2 class="text-3xl font-bold">Welcome to Your Dashboard</h2>
+        <p id="user-email-display" class="text-gray-600"></p>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard-section">
+            <h3 class="text-2xl font-semibold mt-6">Your Scheduled Customizations</h3>
+            <div id="schedule-list" class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </div>
+
+        <!-- Payment Section -->
+        <div id="payment-section" class="hidden mt-6 p-6 bg-white shadow-lg rounded-lg">
+            <h3 class="text-2xl font-semibold mb-4">Your Payment Dashboard</h3>
+            <p class="text-lg font-bold">Balance: <span id="balance" class="text-green-600">$0.00</span></p>
+            <input type="number" id="payment-amount" placeholder="Enter Amount" class="w-full p-2 border rounded my-4">
+            <div class="flex space-x-4">
+                <button onclick="payWithPaystack()" class="bg-blue-600 text-white px-4 py-2 rounded w-1/2">Pay with Paystack</button>
+                <button onclick="payWithFlutterwave()" class="bg-green-600 text-white px-4 py-2 rounded w-1/2">Pay with Flutterwave</button>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-6">Transaction History</h3>
+            <div id="transaction-list" class="mt-4 space-y-2 text-gray-700">
+                <p>No transactions yet.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "http://localhost:5000";
+        let userEmail = localStorage.getItem("userEmail");
+
+        function checkLoginStatus() {
+            if (!userEmail) {
+                document.getElementById("login-popup").classList.remove("hidden");
+            } else {
+                document.getElementById("user-email-display").textContent = `Logged in as: ${userEmail}`;
+                fetchSchedules();
+                fetchPaymentData();
+            }
+        }
+
+        async function fetchSchedules() {
+            const response = await fetch(`${API_URL}/api/schedules/${userEmail}`);
+            const schedules = await response.json();
+
+            if (!Array.isArray(schedules) || schedules.length === 0) {
+                document.getElementById("schedule-list").innerHTML = "<p class='text-gray-500'>No scheduled requests.</p>";
+                return;
+            }
+
+            document.getElementById("schedule-list").innerHTML = schedules.map(schedule => `
+                <div class="bg-white p-4 shadow-md rounded-lg">
+                    <h3 class="text-xl font-bold">${schedule.templateName}</h3>
+                    <p><strong>Scheduled Date:</strong> ${schedule.scheduleDate} at ${schedule.scheduleTime}</p>
+                    <p><strong>Details:</strong> ${schedule.scheduleNotes}</p>
+                    <p class="text-blue-500 font-semibold" id="timer-${schedule._id}"></p>
+                </div>
+            `).join('');
+
+            schedules.forEach(schedule => {
+                startCountdown(schedule._id, schedule.scheduleDate, schedule.scheduleTime);
+            });
+        }
+
+        function startCountdown(id, date, time) {
+            function updateTimer() {
+                const now = moment();
+                const eventTime = moment(`${date} ${time}`, "YYYY-MM-DD HH:mm");
+                const duration = moment.duration(eventTime.diff(now));
+
+                let timerText = duration.asSeconds() > 0 ? 
+                    `${duration.days()}d ${duration.hours()}h ${duration.minutes()}m ${duration.seconds()}s remaining` : 
+                    "<span class='text-red-500 font-bold'>Time Expired</span>";
+
+                document.getElementById(`timer-${id}`).innerHTML = timerText;
+
+                if (duration.asSeconds() > 0) {
+                    setTimeout(updateTimer, 1000);
+                }
+            }
+            updateTimer();
+        }
+
+        function showSection(section) {
+            document.getElementById("dashboard-section").classList.toggle("hidden", section !== "dashboard");
+            document.getElementById("payment-section").classList.toggle("hidden", section !== "payment");
+        }
+
+        document.getElementById("menu-btn").addEventListener("click", () => {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
+        });
+
+        checkLoginStatus();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iyonic Web - Custom Website Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* General Animations */
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .scale-hover {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .scale-hover:hover {
+            transform: scale(1.05);
+        }
+
+        .button-effect {
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .button-effect:hover {
+            background: #1e40af;
+            transform: translateY(-3px);
+        }
+
+        .button-effect:active {
+            transform: translateY(2px);
+        }
+
+        /* Navbar Sticky Effect */
+        .sticky-nav {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .scrolled {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section Styling */
+        .hero-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .hero-text {
+            width: 50%;
+            text-align: left;
+        }
+
+        .hero-image {
+            width: 50%;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ensure Hero Section is Neat on Small Screens */
+        @media (max-width: 768px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text, .hero-image {
+                width: 100%;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+          /* Navbar Transparent Effect */
+    .sticky-nav {
+        transition: all 0.2s ease-in-out;
+    }
+
+   /* Navbar Transparent Effect */
+.sticky-nav {
+    transition: all 0.3s ease-in-out;
+}
+
+ /* Navbar Transparent Effect */
+ .sticky-nav {
+        transition: all 0.3s ease-in-out;
+    }
+
+ /* Navbar Transparent Effect */
+ .sticky-nav {
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Shaking Logo Animation */
+    .shaking-logo img {
+        animation: shake 4s infinite ease-in-out;
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: rotate(0deg); }
+        10%, 30%, 50%, 70%, 90% { transform: rotate(-2deg); }
+        20%, 40%, 60%, 80% { transform: rotate(2deg); }
+    }
+
+    /* Sliding Buttons Animation */
+    .slide-from-top {
+        opacity: 0;
+        transform: translateY(-20px);
+        animation: slideDown 1s infinite alternate ease-in-out;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Navigation Button Styling */
+    .nav-button {
+        background: rgba(50, 119, 202, 0.2);
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .nav-button:hover {
+        background: rgba(255, 255, 255, 0.5);
+        transform: scale(1.1);
+    }
+
+    .nav-button:active {
+        transform: translateY(2px);
+    }
+
+    /* Semi-Transparent Mobile Dropdown */
+    #mobile-menu {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease-in-out;
+    }
+
+   /* General Reset for Box Sizing */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Animation Styles */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animation to each service card */
+.service-card {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 0.2s;
+    animation-iteration-count: 1; /* This makes sure the animation only runs once when the section is visible */
+}
+
+.service-card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.service-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.service-card:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+.service-card:nth-child(5) {
+    animation-delay: 1s;
+}
+
+.service-card:nth-child(6) {
+    animation-delay: 1.2s;
+}
+
+.service-card:nth-child(7) {
+    animation-delay: 1.4s;
+}
+
+/* Hover animations */
+.service-card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Prevent content overlap by making text more responsive */
+.service-card h3, .service-card p {
+    word-wrap: break-word;
+    text-align: left;
+}
+
+/* Make sure the content in each tile is properly spaced and not overflowing */
+.service-card {
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Let’s Talk Section Styles */
+#contact-us {
+    background-color: #f7fafc;
+    padding-bottom: 20px; /* Prevent the section from being too compressed */
+}
+
+#contact-us h2 {
+    color: #1a202c;
+}
+
+#contact-us p {
+    color: #4a5568;
+}
+
+#contact-us a {
+    background-color: #3182ce;
+    transition: transform 0.3s ease;
+}
+
+#contact-us a:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Layout: Adjust for smaller screens */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr 1fr; /* Two columns on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+    }
+
+    #contact-us h2 {
+        font-size: 24px;
+    }
+
+    #contact-us p {
+        font-size: 16px;
+    }
+
+    #contact-us a {
+        font-size: 18px;
+        padding: 12px 24px;
+    }
+}
+/* Footer Styling */
+footer {
+    background: #111;
+    color: #ccc;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Shaking Logo Animation */
+.shaking-logo {
+    animation: shake 1s infinite ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    10%, 30%, 50%, 70%, 90% { transform: rotate(-2deg); }
+    20%, 40%, 60%, 80% { transform: rotate(2deg); }
+}
+
+/* Footer Links */
+.footer-link {
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+    font-size: 14px;
+}
+
+.footer-link:hover {
+    color: #fff;
+}
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <!-- Navbar -->
+<nav id="navbar" class="sticky-nav fixed w-full top-0 z-10 bg-transparent transition-all duration-300">
+    <div class="container mx-auto flex justify-between items-center p-3">
+        <!-- Logo with Shaking Animation -->
+        <a href="#" class="shaking-logo">
+            <img src="download-removebg-preview.png" alt="Iyonic Web Logo" class="h-10 md:h-12 transition-transform duration-300">
+        </a>
+
+        <!-- Centered Menu with Sliding Animation -->
+        <ul id="nav-links" class="hidden md:flex space-x-6 text-black mx-auto slide-from-top">
+            <li><a href="#services" class="nav-button">Services</a></li>
+            <li><a href="#pricing" class="nav-button">Pricing</a></li>
+            <li><a href="#testimonials" class="nav-button">Testimonials</a></li>
+            <li><a href="#contact" class="nav-button">Contact</a></li>
+            <li><a href="dashboard.html" class="nav-button">Dashboard</a></li>
+        </ul>
+
+
+        <!-- Mobile Menu Button with Sliding Animation -->
+        <button id="mobile-menu-btn" class="md:hidden bg-blue-600 text-white px-4 py-2 rounded button-effect slide-from-top">Menu</button>
+    </div>
+
+    <!-- Mobile Dropdown Menu with Semi-Transparent Background -->
+    <div id="mobile-menu" class="absolute w-full bg-white bg-opacity-80 shadow-md hidden">
+        <ul class="flex flex-col space-y-4 p-4 text-center">
+            <li><a href="#services" class="nav-button">Services</a></li>
+            <li><a href="#pricing" class="nav-button">Pricing</a></li>
+            <li><a href="#testimonials" class="nav-button">Testimonials</a></li>
+            <li><a href="#contact" class="nav-button">Contact</a></li>
+            <li><a href="dashboard.html" class="nav-button">Dashboard</a></li>
+                <button id="close-menu-btn" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded block button-effect">Close Menu</button>
+            </li>
+        </ul>
+    </div>
+</nav>
+     <!-- Hero Section -->
+<section class="relative py-32 md:py-24 text-center text-white fade-in">
+    <!-- Background Image (Only Visible on Small Screens) -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden"
+        style="background-image: url('Unique color cabinets.jpeg');">
+    </div>
+
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-center relative z-10">
+        <!-- Hero Text with Semi-Transparent Background -->
+        <div class="md:w-1/2 text-center md:text-left px-6">
+            <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight">Create a Stunning Website with Ease</h1>
+                <p class="mt-4 text-lg">Custom-built and professionally designed websites tailored for your business growth.</p>
+            </div>
+        </div>
+        <!-- Hero Image (Only Visible on Large Screens) -->
+        <div class="md:w-1/2 mt-6 md:mt-0 hidden md:block">
+            <img src="Unique color cabinets.jpeg" alt="Hero Image" class="rounded-lg shadow-lg w-full">
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+ <section id="pricing" class="py-20 bg-gray-200 fade-in">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold text-blue-600">Choose Your Website Plan</h2>
+        <div class="grid md:grid-cols-3 grid-cols-2 gap-8 mt-8">
+            <div class="p-6 bg-white shadow-lg rounded-lg scale-hover">
+                <h3 class="text-xl font-bold">Complete Sites</h3>
+                <p class="text-md text-red-500">$29/month</p>
+                <p class="text-md">Exclusive, elegant websites with essential features.</p>
+                <p class="mt-2 text-gray-600">E-commerce, services, non-profits, Real estates, etc</p>
+                <a href="themes.html" class="mt-4 inline-block bg-blue-600 text-white py-2 px-6 rounded button-effect">View Designs</a>
+            </div>
+            <div class="p-6 bg-white shadow-lg rounded-lg scale-hover">
+                <h3 class="text-xl font-bold">Custom functions</h3>
+                <p class="text-md text-red-500">$ One-Time</p>
+                <p class="text-md">Animations, effects, Styling & Setting</p>
+                <p class="mt-2 text-gray-600">Buttons, headers, footers, preloaders, Hover effects & scrolling effects.</p>
+                <a href="functions.html" class="mt-4 inline-block bg-blue-600 text-white py-2 px-6 rounded button-effect">View Designs</a>
+            </div>
+            <div class="p-6 bg-white shadow-lg rounded-lg scale-hover">
+                <h3 class="text-xl font-bold">Tell Us Your Idea</h3>
+                <p class="mt-2 text-gray-600">Have a custom project in mind? Let's discuss your vision.</p>
+                <a href="contact.html" class="mt-4 inline-block bg-green-600 text-white py-2 px-6 rounded button-effect">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Section -->
+<section id="services" class="py-20 bg-white">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold text-black">Our Exceptional Web Services</h2>
+        <p class="mt-4 text-xl text-black opacity-75">We bring your vision to life with expert web solutions!</p>
+        <div class="grid md:grid-cols-3 grid-cols-2 gap-8 mt-8">
+            <!-- Web Creation -->
+            <div class="service-card p-8 bg-white shadow-xl rounded-lg transform transition-all">
+                <h3 class="text-2xl font-bold text-blue-600">Custom Website Creation</h3>
+                <p class="mt-2 text-lg text-gray-700">We design and build websites tailored to your needs, ensuring a flawless experience.</p>
+            </div>
+            <!-- Website Customization -->
+            <div class="service-card p-8 bg-white shadow-xl rounded-lg transform transition-all">
+                <h3 class="text-2xl font-bold text-green-600">Website Customization</h3>
+                <p class="mt-2 text-lg text-gray-700">Take your website to the next level with advanced customization options.</p>
+            </div>
+            <!-- Front & Backend Development -->
+            <div class="service-card p-8 bg-white shadow-xl rounded-lg transform transition-all">
+                <h3 class="text-2xl font-bold text-purple-600">Front & Backend Development</h3>
+                <p class="mt-2 text-lg text-gray-700">Create a robust, scalable solution for your business with our top-notch development services.</p>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-2 grid-cols-1 gap-8 mt-12">
+            <!-- Website Restructure -->
+            <div class="service-card p-8 bg-white shadow-xl rounded-lg transform transition-all">
+                <h3 class="text-2xl font-bold text-orange-600">Website Restructure</h3>
+                <p class="mt-2 text-lg text-gray-700">Need a fresh look? We’ll help you redesign your website to match the latest trends.</p>
+            </div>
+            <!-- Website Updates -->
+            <div class="service-card p-8 bg-white shadow-xl rounded-lg transform transition-all">
+                <h3 class="text-2xl font-bold text-yellow-600">Regular Website Updates</h3>
+                <p class="mt-2 text-lg text-gray-700">Keep your website up-to-date with the latest content, security patches, and features.</p>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-2 grid-cols-1 gap-8 mt-12">
+            <!-- Website Animations -->
+            <div class="service-card p-8 bg-white shadow-xl rounded-lg transform transition-all">
+                <h3 class="text-2xl font-bold text-pink-600">Website Animations</h3>
+                <p class="mt-2 text-lg text-gray-700">Enhance user experience with interactive animations and visual effects.</p>
+            </div>
+            <!-- Imagination -->
+            <div class="service-card p-8 bg-white shadow-xl rounded-lg transform transition-all">
+                <h3 class="text-2xl font-bold text-teal-600">Bring Your Imagination to Life</h3>
+                <p class="mt-2 text-lg text-gray-700">Have a unique idea? Let’s turn it into reality with creativity and innovation.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Let’s Talk Section -->
+<section id="contact-us" class="py-20 bg-gray-100 text-center">
+    <div class="container mx-auto">
+        <h2 class="text-3xl font-bold text-blue-600">Let’s Talk About Your Project!</h2>
+        <p class="mt-4 text-xl text-gray-700">We’d love to hear from you and bring your ideas to life. Reach out to us today!</p>
+        <a href="contact.html" class="mt-6 inline-block bg-blue-600 text-white py-3 px-8 rounded-lg transition-transform transform hover:scale-105">
+            Contact Us Now
+        </a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white text-center py-3 fade-in">
+    <div class="container mx-auto flex flex-col items-center px-6">
+        
+        <!-- Footer Navigation Links -->
+        <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 text-gray-400">
+            <a href="about.html" class="footer-link">About Us</a>
+            <a href="terms.html" class="footer-link">Terms & Conditions</a>
+            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+        </div>
+
+        <!-- Copyright -->
+        <p class="text-gray-500 text-sm mt-2">© 2025 Iyonic Web. All Rights Reserved.</p>
+
+        <!-- Powered by Legacie with Shaking Logo -->
+        <div class="flex items-center space-x-2 mt-3">
+            <img src="download-removebg-preview.png" alt="Iyonic Web Logo" class="h-10 md:h-12 shaking-logo">
+            <p class="text-blue-500 text-sm md:text-base">Powered by Legacie</p>
+        </div>
+
+    </div>
+</footer>
+
+    <!-- Dropdown Script -->
+    <script>
+        // Handle Menu Toggle
+    document.getElementById("mobile-menu-btn").addEventListener("click", () => {
+        document.getElementById("mobile-menu").classList.toggle("hidden");
+    });
+
+    document.getElementById("close-menu-btn").addEventListener("click", () => {
+        document.getElementById("mobile-menu").classList.add("hidden");
+    });
+
+ 
+document.addEventListener("DOMContentLoaded", function() {
+    const serviceCards = document.querySelectorAll('.service-card');
+    const section = document.getElementById('services');
+
+    function checkSectionInView() {
+        const rect = section.getBoundingClientRect();
+        if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+            serviceCards.forEach(card => {
+                card.style.animationPlayState = 'running';  // Start animation when section is in view
+            });
+        }
+    }
+
+    // Initially check if the section is in view
+    checkSectionInView();
+
+    // On scroll, check if section is in view and trigger animations
+    window.addEventListener('scroll', checkSectionInView);
+});
+    </script>
+
+
+</body>
+</html>
