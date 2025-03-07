@@ -102,6 +102,24 @@
       .hidden-button {
             display: none !important;
         }
+        .shaking-logo { animation: shake 1s infinite ease-in-out; }
+        @keyframes shake { 0%, 100% { transform: rotate(0deg); } 10%, 30%, 50%, 70%, 90% { transform: rotate(-2deg); } 20%, 40%, 60%, 80% { transform: rotate(2deg); } }
+        /* Preloader animation */
+    @keyframes fadeInScale {
+        0% { opacity: 0; transform: scale(0.8); }
+        50% { opacity: 1; transform: scale(1.05); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+
+    .animate-fadeInScale {
+        animation: fadeInScale 1.5s ease-in-out forwards;
+    }
+
+    /* Smooth fade-out */
+    .fade-out {
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+    }
         </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -240,7 +258,12 @@
 
     </div>
 </footer>
-
+<!-- Preloader (Add this just after <body> tag) -->
+    <div id="preloader" class="fixed inset-0 bg-blue-600 flex items-center justify-center z-50">
+        <h1 class="text-4xl font-bold opacity-0 scale-75 text-center text-white animate-fadeInScale">
+            <span class="text-black">iyonic</span><span class="text-white">web</span>
+        </h1>
+    </div>
 <script>
     const templates = JSON.parse(localStorage.getItem('templates')) || {};
     const categories = JSON.parse(localStorage.getItem('categories')) || ['restaurant', 'donations', 'ecommerce'];
@@ -590,6 +613,12 @@ function unlockAdminFeatures() {
     }
     setInterval(detectDevTools, 1000);
   })();
+              // Hide preloader when page fully loads
+              window.addEventListener("load", function() {
+        let preloader = document.getElementById("preloader");
+        preloader.classList.add("fade-out");
+        setTimeout(() => { preloader.style.display = "none"; }, 500);
+    });
 </script>
   
 </body>
