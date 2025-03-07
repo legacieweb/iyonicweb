@@ -3,13 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Iyonic Web</title>
-    
+    <title>Checkout</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Full Page Checkout */
+        .checkout-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #f8f8f8;
+            padding: 20px;
+        }
+
+        /* Checkout Box */
+        .purchase-box {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            animation: fadeInUp 0.3s ease-in-out;
+        }
+
+        /* Secure Payment Section */
+        .trust-section img {
+            width: 100px;
+        }
+        .trust-section p {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Cart Items */
+        #cart-items {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        /* Total Price */
+        .function-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2a9d8f;
+            margin-bottom: 10px;
+        }
+
+        /* Input Fields */
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .input-note {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        /* Payment Buttons */
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .buy-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+        .buy-btn:hover {
+            opacity: 0.8;
+        }
+        #paystack-btn {
+            background: #28a745;
+            color: white;
+        }
+        .paypal-btn {
+            background: #0070ba;
+            color: white;
+        }
+
+        /* PayPal Button */
+        #paypal-button-container {
+            margin-top: 10px;
+        }
+
+        /* Money-Back Guarantee */
+        .guarantee {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        .guarantee img {
+            width: 80px;
+        }
+
+        /* Fade In Animation */
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+         /* Shaking Logo Animation */
+    .shaking-logo {
+        animation: shake 1s infinite ease-in-out;
+    }
+    
+    @keyframes shake {
+        0%, 100% { transform: rotate(0deg); }
+        10%, 30%, 50%, 70%, 90% { transform: rotate(-2deg); }
+        20%, 40%, 60%, 80% { transform: rotate(2deg); }
+    }
+    
+    /* Footer Links */
+    .footer-link {
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+        font-size: 14px;
+    }
+    
+    .footer-link:hover {
+        color: #fff;
+    }
+      /* Hiding Buttons Initially */
+      .hidden-button {
+            display: none !important;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 text-gray-900">
+<body><body class="bg-gray-100 text-gray-900"></body>
+<!-- Admin Header -->
+<header id="admin-header" class="bg-transparent text-black p-4">
+    <div class="container mx-auto flex justify-between items-center p-3">
+        <!-- Logo with Shaking Animation -->
+        <a href="#" class="shaking-logo">
+            <img src="https://iyonicweb.iyonicorp.com/download-removebg-preview.png" alt="Legacie Web Logo" class="h-10 md:h-12 transition-transform duration-300">
+        </a>
+
+        <!-- Navigation Buttons -->
+        <nav class="space-x-4">
+            <button id="create-category-btn" class="bg-green-500 px-4 py-2 rounded hidden-button" onclick="openCreateCategoryPopup()">Create Category</button>
+            <button class="bg-blue-500 px-4 py-2 rounded" onclick="window.location.href='https://iyonicweb.iyonicorp.com/'">Return to Home</button>
+        </nav>
+    </div>
+    </div>
+</header>
+
 
     <div class="max-w-5xl mx-auto py-12 px-6">
         <h1 class="text-4xl font-bold text-center text-blue-600 mb-6">📬 Contact Us</h1>
