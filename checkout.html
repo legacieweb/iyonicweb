@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <style>
+        /* Full Page Checkout */
+        .checkout-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #f8f8f8;
+            padding: 20px;
+        }
+
+        /* Checkout Box */
+        .purchase-box {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            animation: fadeInUp 0.3s ease-in-out;
+        }
+
+        /* Secure Payment Section */
+        .trust-section img {
+            width: 100px;
+        }
+        .trust-section p {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Cart Items */
+        #cart-items {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        /* Total Price */
+        .function-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2a9d8f;
+            margin-bottom: 10px;
+        }
+
+        /* Input Fields */
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .input-note {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        /* Payment Buttons */
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .buy-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+        .buy-btn:hover {
+            opacity: 0.8;
+        }
+        #paystack-btn {
+            background: #28a745;
+            color: white;
+        }
+        .paypal-btn {
+            background: #0070ba;
+            color: white;
+        }
+
+        /* PayPal Button */
+        #paypal-button-container {
+            margin-top: 10px;
+        }
+
+        /* Money-Back Guarantee */
+        .guarantee {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        .guarantee img {
+            width: 80px;
+        }
+
+        /* Fade In Animation */
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+         /* Shaking Logo Animation */
+    .shaking-logo {
+        animation: shake 1s infinite ease-in-out;
+    }
+    
+    @keyframes shake {
+        0%, 100% { transform: rotate(0deg); }
+        10%, 30%, 50%, 70%, 90% { transform: rotate(-2deg); }
+        20%, 40%, 60%, 80% { transform: rotate(2deg); }
+    }
+    
+    /* Footer Links */
+    .footer-link {
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+        font-size: 14px;
+    }
+    
+    .footer-link:hover {
+        color: #fff;
+    }
+      /* Hiding Buttons Initially */
+      .hidden-button {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+<!-- Admin Header -->
+<header id="admin-header" class="bg-transparent text-black p-4">
+    <div class="container mx-auto flex justify-between items-center p-3">
+        <!-- Logo with Shaking Animation -->
+        <a href="#" class="shaking-logo">
+            <img src="https://web.iyonicorp.com/download-removebg-preview.png" alt="Legacie Web Logo" class="h-10 md:h-12 transition-transform duration-300">
+        </a>
+
+        <!-- Navigation Buttons -->
+        <nav class="space-x-4">
+            <button id="create-category-btn" class="bg-green-500 px-4 py-2 rounded hidden-button" onclick="openCreateCategoryPopup()">Create Category</button>
+            <button class="bg-blue-500 px-4 py-2 rounded" onclick="window.location.href='https://web.iyonicorp.com/'">Return to Home</button>
+        </nav>
+    </div>
+    </div>
+</header>
+    <div class="checkout-container">
+        <div class="purchase-box">
+            <!-- Trust Badges -->
+            <div class="trust-section">
+                <img src="https://ml5fuicvpcst.i.optimole.com/w:auto/h:auto/q:85/f:best/ig:avif/http://www.atlanticselfstorage.co.uk/atlantic-media/uploads/secure-payment-atlantic-white-green.svg" alt="Secure Payment">
+                <p>Secure Payment with End-to-End Encryption</p>
+            </div>
+
+            <!-- Cart Summary -->
+            <h2>🛒 Your Cart</h2>
+            <div id="cart-items"></div>
+
+            <!-- Total Price -->
+            <h2>Total: <span id="total-price">$0.00</span></h2>
+
+            <!-- User Information -->
+            <input type="email" id="buyer-email" class="input-field" placeholder="Enter your email" required>
+            <p class="input-note">We'll send the function and receipt to this email.</p>
+
+            <!-- Payment Options -->
+            <div class="payment-options">
+                <button id="paystack-btn" class="buy-btn" onclick="payWithPaystack()">Pay with Paystack</button>
+                <div id="paypal-button-container"></div>
+            </div>
+
+            <!-- Money-Back Guarantee -->
+            <div class="guarantee">
+                <img src="https://assets.crowdspring.com/marketing/landing-page/crowdspring-landing-page-guarantee-hero.png" alt="Money-Back Guarantee">
+                <p>100% Money-Back Guarantee if you don’t receive your function.</p>
+            </div>
+        </div>
+    </div>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white text-center py-3 fade-in">
+    <div class="container mx-auto flex flex-col items-center px-6">
+        
+        <!-- Footer Navigation Links -->
+        <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 text-gray-400">
+            <a href="about.html" class="footer-link">About Us</a>
+            <a href="terms.html" class="footer-link">Terms & Conditions</a>
+            <a href="privacy.html" class="footer-link">privacy policy</a>
+            <a href="refund-policy.html" class="footer-link">Refund policy</a>
+        </div>
+
+        <!-- Copyright -->
+        <p class="text-gray-500 text-sm mt-2">© 2025 Iyonic Web. All Rights Reserved.</p>
+
+        <!-- Powered by Legacie with Shaking Logo -->
+        <div class="flex items-center space-x-2 mt-3">
+            <img src="https://web.iyonicorp.com/download-removebg-preview.png" alt="Iyonic Web Logo" class="h-10 md:h-12 shaking-logo">
+            <p class="text-blue-500 text-sm md:text-base">Powered by Iyonicweb</p>
+        </div>
+
+    </div>
+</footer>
+    <script>
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let cartItems = document.getElementById("cart-items");
+            let totalPrice = 0;
+
+            cartItems.innerHTML = "";
+            cart.forEach(item => {
+                totalPrice += parseFloat(item.price);
+
+                let cartItem = document.createElement("div");
+                cartItem.innerHTML = `<h3>${item.name}</h3><p>Price: $${item.price}</p>`;
+                cartItems.appendChild(cartItem);
+            });
+
+            document.getElementById("total-price").textContent = `$${totalPrice.toFixed(2)}`;
+        }
+
+        function payWithPaystack() {
+            let email = document.getElementById('buyer-email').value;
+            if (!email) {
+                alert("Please enter your email.");
+                return;
+            }
+
+            let amount = parseFloat(document.getElementById('total-price').textContent.replace("$", "")) * 100;
+
+            let handler = PaystackPop.setup({
+                key: 'YOUR_PAYSTACK_PUBLIC_KEY',
+                email: email,
+                amount: amount,
+                currency: "USD",
+                callback: function (response) {
+                    alert('Payment successful! Transaction ID: ' + response.reference);
+                    localStorage.removeItem("cart");
+                    window.location.href = "thankyou.html";
+                },
+                onClose: function () {
+                    alert('Payment canceled');
+                }
+            });
+            handler.openIframe();
+        }
+
+        function setupPayPal() {
+    if (!window.paypal) {
+        console.error("PayPal SDK not loaded!");
+        return;
+    }
+
+    let paypalContainer = document.getElementById('paypal-button-container');
+    
+    if (!paypalContainer || paypalContainer.innerHTML.trim() !== "") {
+        console.warn("PayPal button already rendered, skipping...");
+        return;
+    }
+
+    paypal.Buttons({
+        createOrder: function (data, actions) {
+            let totalAmount = parseFloat(document.getElementById('total-price').textContent.replace("$", ""));
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: totalAmount.toFixed(2),
+                        currency_code: "USD"
+                    }
+                }]
+            });
+        },
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+                alert('Payment successful! Transaction ID: ' + details.id);
+                localStorage.removeItem("cart");
+                window.location.href = "thankyou.html";
+            });
+        },
+        onError: function (err) {
+            console.error("PayPal error:", err);
+            alert("Payment failed. Please try again.");
+        }
+    }).render('#paypal-button-container');
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    loadCart();
+    setupPayPal();  // Make sure this only runs once
+});
+
+    </script>
+        <script src="../assets/script.js"></script>
+        <script src="../assets/payment.js"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id=ASoOhWWopLvUnO1H9kowry3QUsrkMeSEUqRJQ9j3tYahteHYwRLfB4HrjNFpvfy4qkHk88p_fe1j7-Wv&currency=USD"></script>
+    
+        <script src="https://js.paystack.co/v1/inline.js"></script> <!-- Paystack SDK -->
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 🌍 Character Set & Viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ✅ Title: Optimized for SEO -->
+    <title>Web Development Marketplace | Buy Custom Web Functions & Components - Iyonic Web</title>
+
+    <!-- ✅ Meta Description: Improve Click-Through Rates -->
+    <meta name="description" content="Explore the Iyonic Web marketplace for custom website functions, animations, UI components, and templates. Enhance your web projects with high-quality digital products.">
+
+    <!-- ✅ Meta Keywords: Optimize for Search Engines -->
+    <meta name="keywords" content="web marketplace, custom web functions, website templates, HTML components, CSS animations, JavaScript plugins, UI elements, web development marketplace, Iyonic Web, e-commerce for developers">
+
+    <!-- ✅ Author Information -->
+    <meta name="author" content="Iyonicorp Technologies">
+
+    <!-- ✅ Canonical URL -->
+    <link rel="canonical" href="https://web.iyonicorp.com/marketplace.html">
+
+    <!-- ✅ Favicon -->
+    <link rel="icon" href="https://web.iyonicorp.com/favicon.ico" type="image/x-icon">
+
+    <!-- ✅ Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:title" content="Web Development Marketplace | Iyonic Web">
+    <meta property="og:description" content="Discover premium web development products, including website functions, animations, and UI components, available for purchase.">
+    <meta property="og:image" content="https://web.iyonicorp.com/assets/marketplace-preview.jpg">
+    <meta property="og:url" content="https://web.iyonicorp.com/marketplace.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Iyonic Web">
+
+    <!-- ✅ Twitter Card (Twitter SEO) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Web Development Marketplace | Iyonic Web">
+    <meta name="twitter:description" content="Browse the best digital products for web development, including custom animations, website functions, and UI elements.">
+    <meta name="twitter:image" content="https://web.iyonicorp.com/assets/marketplace-preview.jpg">
+    <meta name="twitter:site" content="@Iyonicorp">
+
+    <!-- ✅ Robots Meta (Ensure Search Engines Index the Site) -->
+    <meta name="robots" content="index, follow">
+
+    <!-- ✅ Sitemap (Helps Search Engines Crawl the Site) -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://web.iyonicorp.com/sitemap.xml">
+
+    <!-- ✅ Google Search Console Verification -->
+    <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE">
+
+    <!-- ✅ Bing Webmaster Verification -->
+    <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE">
+
+    <!-- ✅ Schema.org Structured Data for Marketplace Products -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Iyonic Web Marketplace",
+        "url": "https://web.iyonicorp.com/marketplace.html",
+        "description": "Buy premium website components, animations, and custom web functions to enhance your projects.",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Iyonic Web",
+            "logo": "https://web.iyonicorp.com/logo.png"
+        },
+        "offers": {
+            "@type": "AggregateOffer",
+            "url": "https://web.iyonicorp.com/marketplace.html",
+            "priceCurrency": "USD",
+            "lowPrice": "9.99",
+            "highPrice": "199.99",
+            "offerCount": "100"
+        }
+    }
+    </script>
+
+    <!-- ✅ Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Shaking Logo Animation */
+        .shaking-logo {
+            animation: shake 1s infinite ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            10%, 30%, 50%, 70%, 90% { transform: rotate(-2deg); }
+            20%, 40%, 60%, 80% { transform: rotate(2deg); }
+        }
+
+        /* Hidden Buttons */
+        .hidden-button {
+            display: none !important;
+        }
+
+        /* Category Card Styling */
+        .category-card {
+            @apply bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer;
+            @apply flex flex-col items-center text-xl font-semibold text-gray-700;
+            @apply hover:bg-blue-500 hover:text-white transform hover:scale-105 duration-200;
+        }
+
+        .category-img {
+            @apply w-32 h-32 object-cover rounded-md mb-3;
+        }
+    </style>
+    
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+
+    <!-- Header -->
+    <header class="bg-transparent text-black p-4">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="https://web.iyonicorp.com" class="shaking-logo">
+                <img src="https://web.iyonicorp.com/download-removebg-preview.png" alt="Iyonic Web Logo" class="h-12">
+            </a>
+
+            <!-- Navigation -->
+            <nav class="space-x-4">
+                <button id="create-category-btn" class="bg-green-500 px-4 py-2 rounded hidden-button" onclick="openCreateCategoryPopup()">Create Category</button>
+                <button class="bg-blue-500 px-4 py-2 rounded" onclick="window.location.href='https://web.iyonicorp.com'">Return to Home</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Marketplace Title -->
+    <div class="max-w-5xl mx-auto py-12 px-6 text-center">
+        <h1 class="text-3xl font-bold mb-4">🛒 Custom Functions Marketplace</h1>
+        <p class="text-lg text-gray-600 mb-6">Select a category to view and upload functions.</p>
+
+        <!-- Category Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+            <!-- Buttons -->
+            <a href="./buttons.html" class="category-card">
+                <img src="https://lh4.googleusercontent.com/CLYmvhmufxGQVBAPdz3iZBpe5lKOyTEVR9FrVsM70MVMoHDFFTxJjOHX_WkV50JXuLJFxGxNzcs4MBbWorOEVDnqJOhwG_TR3oCTOAJDBS8oZZF6ic7zXB3CtcEDoob6BC2_Z0KvoE_Q6xvPmg" alt="Buttons" class="category-img">
+                <h3>🔘 Buttons</h3>
+            </a>
+
+            <!-- Headers -->
+            <a href="./headers.html" class="category-card">
+                <img src="https://elementor.com/cdn-cgi/image/f=auto,w=2048/https://elementor.com/blog/wp-content/uploads/2021/08/1200_628-1-2048x1072.png" alt="Headers" class="category-img">
+                <h3>📌 Headers</h3>
+            </a>
+
+            <!-- Footers -->
+            <a href="./footers.html" class="category-card">
+                <img src="https://cdn.prod.website-files.com/6009ec8cda7f305645c9d91b/60107ec758f4bb02f210c81a_6002086f72b7274f8001e77d_think32-footer.jpeg" alt="Footers" class="category-img">
+                <h3>📏 Footers</h3>
+            </a>
+
+            <!-- Cursor Effects -->
+            <a href="./cursor effects.html" class="category-card">
+                <img src="https://cursor-trails.custom-cursor.com/uploads/custom_cursor_trail_d12079b6a9.png" alt="Cursor Effects" class="category-img">
+                <h3>🖱️ Cursor Effects</h3>
+            </a>
+
+            <!-- Security Features -->
+            <a href="./security.html" class="category-card">
+                <img src="https://cwatch.comodo.com/blog/wp-content/uploads/2020/05/good-website-security-plan.jpg" alt="Security Features" class="category-img">
+                <h3>🔒 Security Features</h3>
+            </a>
+
+            <!-- Sidebars -->
+            <a href="./sidebars.html" class="category-card">
+                <img src="https://d3kjluh73b9h9o.cloudfront.net/original/4X/e/7/f/e7fcbe8de1dadb1c2dd8603415504a93022d23bc.png" alt="Sidebars" class="category-img">
+                <h3>📂 Sidebars</h3>
+            </a>
+
+            <!-- Body Sections -->
+            <a href="./bodysections.html" class="category-card">
+                <img src="https://cdn.dribbble.com/userupload/8901848/file/original-bd70a64e6e05d5bd066b1069002a92ce.jpg?format=webp&resize=400x300&vertical=center" alt="Body Sections" class="category-img">
+                <h3>📄 Body Sections</h3>
+            </a>
+
+            <!-- Hero Sections -->
+            <a href="./heresection.html" class="category-card">
+                <img src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/271623713/original/8a37e28dc9aa0fef2917d9130bce5a069f13f248/create-a-modern-design-for-your-website-hero-section.png" alt="Hero Sections" class="category-img">
+                <h3>🚀 Hero Sections</h3>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>

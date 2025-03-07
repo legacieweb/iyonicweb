@@ -1,10 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- 🌍 Character Set & Viewport -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Template Management</title>
+
+    <!-- ✅ Title: Optimized for SEO -->
+    <title>Premium Website Themes | Iyonic Web - Beautiful & Customizable Designs</title>
+
+    <!-- ✅ Meta Description: Improve Click-Through Rates -->
+    <meta name="description" content="Discover stunning, customizable website themes by Iyonic Web. High-quality, responsive, and SEO-friendly themes for businesses, portfolios, and e-commerce stores.">
+
+    <!-- ✅ Meta Keywords: Optimize for Search Engines -->
+    <meta name="keywords" content="website themes, premium themes, responsive website templates, e-commerce themes, business website templates, HTML themes, Iyonic Web themes, WordPress themes, web templates, UI/UX themes, SEO-friendly themes, customizable themes, beautiful themes, stunning themes, modern themes, cheap websites, affordable themes, html5 themes, css3 themes, javascript themes, bootstrap themes, tailwind themes, react themes, angular themes, vue themes, svelte themes, nextjs themes, gatsby themes, jamstack themes, static site themes, dynamic site themes, web design themes, web development themes, web themes, website design themes, website development themes, website templates, website designs, website themes, website layouts, website styles, website skins, website skins, website frameworks, website builders, website creators, website generators, website editors, website tools, website resources, website assets, website components, website plugins, website modules, website widgets, website add-ons, website extensions, website integrations, website features, website functionalities, website elements, website sections, website blocks, website parts, website pieces, website snippets, website code, website scripts, website stylesheets, websites">
+
+    <!-- ✅ Author Information -->
+    <meta name="author" content="Iyonicorp Technologies">
+
+    <!-- ✅ Canonical URL -->
+    <link rel="canonical" href="https://web.iyonicorp.com/themes">
+
+    <!-- ✅ Favicon -->
+    <link rel="icon" href="https://web.iyonicorp.com/download-removebg-preview.png" type="image/x-icon">
+
+    <!-- ✅ Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:title" content="Premium Website Themes | Iyonic Web">
+    <meta property="og:description" content="Explore a collection of stunning, customizable website themes by Iyonic Web. Perfect for businesses, blogs, portfolios, and online stores.">
+    <meta property="og:image" content="https://web.iyonicorp.com/Unique%20color%20cabinets.jpeg">
+    <meta property="og:url" content="https://web.iyonicorp.com/themes">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Iyonic Web">
+
+    <!-- ✅ Twitter Card (Twitter SEO) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Premium Website Themes | Iyonic Web">
+    <meta name="twitter:description" content="Find the perfect website theme for your business, portfolio, or e-commerce store. Beautiful, responsive, and customizable.">
+    <meta name="twitter:image" content="https://web.iyonicorp.com/Unique%20color%20cabinets.jpeg">
+    <meta name="twitter:site" content="@Iyonicorp">
+
+    <!-- ✅ Robots Meta (Ensure Search Engines Index the Site) -->
+    <meta name="robots" content="index, follow">
+
+    <!-- ✅ Sitemap (Helps Search Engines Crawl the Site) -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://web.iyonicorp.com/sitemap.xml">
+
+    <!-- ✅ Google Search Console Verification -->
+    <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE">
+
+    <!-- ✅ Bing Webmaster Verification -->
+    <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE">
+
+    <!-- ✅ Schema.org Structured Data for Themes -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "Iyonic Web Themes",
+        "image": "https://web.iyonicorp.com/Unique%20color%20cabinets.jpeg",
+        "description": "Find the best website themes at Iyonic Web. Beautiful, responsive, and SEO-friendly themes for all types of websites.",
+        "brand": {
+            "@type": "Brand",
+            "name": "Iyonic Web"
+        },
+        "offers": {
+            "@type": "Offer",
+            "url": "https://web.iyonicorp.com/themes.html",
+            "priceCurrency": "USD",
+            "price": "29.99",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+
+    <!-- ✅ Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
     <style>
     /* Shaking Logo Animation */
     .shaking-logo {
@@ -40,13 +111,13 @@
     <div class="container mx-auto flex justify-between items-center p-3">
         <!-- Logo with Shaking Animation -->
         <a href="#" class="shaking-logo">
-            <img src="download-removebg-preview.png" alt="Legacie Web Logo" class="h-10 md:h-12 transition-transform duration-300">
+            <img src="https://web.iyonicorp.com/download-removebg-preview.png" alt="Legacie Web Logo" class="h-10 md:h-12 transition-transform duration-300">
         </a>
 
         <!-- Navigation Buttons -->
         <nav class="space-x-4">
             <button id="create-category-btn" class="bg-green-500 px-4 py-2 rounded hidden-button" onclick="openCreateCategoryPopup()">Create Category</button>
-            <button class="bg-blue-500 px-4 py-2 rounded" onclick="returnToHome()">Return to Home</button>
+            <button class="bg-blue-500 px-4 py-2 rounded" onclick="window.location.href='https://web.iyonicorp.com/'">Return to Home</button>
         </nav>
     </div>
 </header>
@@ -141,25 +212,26 @@
     </div>
 </div>
 
+
 <!-- Footer -->
-<footer class="bg-gray-900 text-white text-center py-3 fade-in fixed bottom-0 w-full">
+<footer class="bg-gray-900 text-white text-center py-3 fade-in">
     <div class="container mx-auto flex flex-col items-center px-6">
         
         <!-- Footer Navigation Links -->
         <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 text-gray-400">
-            <a href="about.html" class="footer-link">About Us</a>
-            <a href="terms.html" class="footer-link">Terms & Conditions</a>
-            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="../about" class="footer-link">About Us</a>
+            <a href="../terms" class="footer-link">Terms & Conditions</a>
+            <a href="../privacy" class="footer-link">privacy policy</a>
+            <a href="../refunds" class="footer-link">Refund policy</a>
         </div>
 
-         <!-- Password Protected Click -->
-         <p class="text-gray-500 text-sm mt-2">
-            © <span id="protected-year" class="cursor-pointer text-grey-500">2025</span> Legacie Web. All Rights Reserved.
-        </p>
+        <!-- Copyright -->
+        <p class="text-gray-500 text-sm mt-2">© 2025 Iyonic Web. All Rights Reserved.</p>
+
         <!-- Powered by Legacie with Shaking Logo -->
         <div class="flex items-center space-x-2 mt-3">
-            <img src="download-removebg-preview.png" alt="Legacie Web Logo" class="h-10 md:h-12 shaking-logo">
-            <p class="text-blue-500 text-sm md:text-base">Powered by Legacie</p>
+            <img src="https://web.iyonicorp.com/download-removebg-preview.png" alt="Iyonic Web Logo" class="h-10 md:h-12 shaking-logo">
+            <p class="text-blue-500 text-sm md:text-base">Powered by Iyonicweb</p>
         </div>
 
     </div>

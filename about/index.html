@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Iyonic Web</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Shaking Logo Animation */
+        .shaking-logo {
+            animation: shake 1s infinite ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            10%, 30%, 50%, 70%, 90% { transform: rotate(-2deg); }
+            20%, 40%, 60%, 80% { transform: rotate(2deg); }
+        }
+        
+        /* Footer Links */
+        .footer-link {
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+            font-size: 14px;
+        }
+        
+        .footer-link:hover {
+            color: #fff;
+        }
+          /* Hiding Buttons Initially */
+          .hidden-button {
+                display: none !important;
+            }
+            </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <!-- Admin Header -->
+<header id="admin-header" class="bg-transparent text-black p-4">
+    <div class="container mx-auto flex justify-between items-center p-3">
+        <!-- Logo with Shaking Animation -->
+        <a href="https://web.iyonicorp.com/" class="shaking-logo">
+            <img src="https://web.iyonicorp.com/download-removebg-preview.png" alt="Legacie Web Logo" class="h-10 md:h-12 transition-transform duration-300">
+        </a>
+
+        <!-- Navigation Buttons -->
+        <nav class="space-x-4">
+            <button id="create-category-btn" class="bg-green-500 px-4 py-2 rounded hidden-button" onclick="openCreateCategoryPopup()">Create Category</button>
+            <button class="bg-blue-500 px-4 py-2 rounded" onclick="window.location.href='https://web.iyonicorp.com/'">Return to Home</button>
+        </nav>
+    </div>
+</header>
+<body class="bg-gray-100 text-gray-900">
+
+    <div class="max-w-5xl mx-auto py-12 px-6">
+        <h1 class="text-4xl font-bold text-center text-blue-600 mb-6">About Us</h1>
+
+        <!-- Introduction -->
+        <div class="text-center mb-8">
+            <p class="text-lg text-gray-700">
+                Welcome to <span class="font-semibold">Iyonic Web</span> – the ultimate marketplace for custom web functions.
+                We empower developers, designers, and businesses with premium, ready-to-use web components.
+            </p>
+        </div>
+
+        <!-- Our Mission -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">🚀 Our Mission</h2>
+            <p class="text-gray-700">
+                At Iyonic Web, we strive to simplify web development by providing high-quality, customizable functions.
+                Whether you’re building a landing page, an e-commerce site, or an interactive web application, our marketplace
+                helps you integrate powerful web features effortlessly.
+            </p>
+        </div>
+
+        <!-- What We Offer -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">🌟 What We Offer</h2>
+            <ul class="list-disc list-inside text-gray-700">
+                <li>✅ A marketplace of custom buttons, headers, footers, preloaders, hover effects, and animations.</li>
+                <li>✅ A user-friendly interface to browse, purchase, and integrate web components.</li>
+                <li>✅ Secure payment options via PayPal & Paystack.</li>
+                <li>✅ A thriving developer community where creators can upload and sell their own web functions.</li>
+            </ul>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">💡 Why Choose Iyonic Web?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold text-gray-900">🔧 Customization & Flexibility</h3>
+                    <p class="text-gray-700">Easily tweak components to fit your project’s needs.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold text-gray-900">⚡ Time-Saving</h3>
+                    <p class="text-gray-700">No need to code from scratch—integrate functions in minutes.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold text-gray-900">🔒 Secure Payments</h3>
+                    <p class="text-gray-700">Pay safely with encrypted transactions via PayPal & Paystack.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold text-gray-900">👨‍💻 Developer-Friendly</h3>
+                    <p class="text-gray-700">Upload, share, and monetize your own functions effortlessly.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Us -->
+        <div class="bg-blue-100 p-6 rounded-lg text-center">
+            <h3 class="text-xl font-semibold text-gray-900">📬 Get in Touch</h3>
+            <p class="text-gray-700 mt-2">Have questions? Reach out to us!</p>
+            <ul class="list-disc list-inside text-gray-700 mt-4">
+                <li>📧 <strong>Email:</strong> <a href="mailto:iyonicorp@gmail.com" class="text-blue-500 hover:underline">iyonicorp@gmail.com</a></li>
+                <li>🌐 <strong>Website:</strong> <a href="https://web.iyonicorp.com/" class="text-blue-500 hover:underline">https://web.iyonicorp.com/</a></li>
+            </ul>
+        </div>
+    </div>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white text-center py-3 fade-in">
+    <div class="container mx-auto flex flex-col items-center px-6">
+        
+        <!-- Footer Navigation Links -->
+        <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 text-gray-400">
+            <a href="../privacy" class="footer-link">privacy policy</a>
+            <a href="../refunds" class="footer-link">Refund policy</a>
+            <a href="../terms" class="footer-link">Terms & Conditions</a>
+        </div>
+
+        <!-- Copyright -->
+        <p class="text-gray-500 text-sm mt-2">© 2025 Iyonic Web. All Rights Reserved.</p>
+
+        <!-- Powered by Legacie with Shaking Logo -->
+        <div class="flex items-center space-x-2 mt-3">
+            <img src="https://web.iyonicorp.com/download-removebg-preview.png" alt="Iyonic Web Logo" class="h-10 md:h-12 shaking-logo">
+            <p class="text-blue-500 text-sm md:text-base">Powered by Iyonicweb</p>
+        </div>
+
+    </div>
+</footer>
+    <style>
+        /* Team Member Styling */
+        .team-member {
+            @apply flex flex-col items-center bg-white p-6 rounded-lg shadow-md;
+        }
+        .team-img {
+            @apply w-32 h-32 object-cover rounded-full;
+        }
+    </style>
+
+</body>
+</html>

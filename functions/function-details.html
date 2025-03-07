@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Details</title>
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="function-title">Function Title</h1>
+        <div id="function-preview"></div>
+        <p id="function-details">Function details will appear here.</p>
+        <p class="function-price" id="function-price"></p>
+        <button class="buy-btn">Buy Function</button>
+    </div>
+
+    <script>
+        function loadFunctionDetails() {
+            let params = new URLSearchParams(window.location.search);
+            document.getElementById('function-title').textContent = params.get('title');
+            document.getElementById('function-preview').innerHTML = `<iframe style="width:100%; height:300px; border:none;">${decodeURIComponent(params.get('preview'))}</iframe>`;
+            document.getElementById('function-details').textContent = params.get('details');
+            document.getElementById('function-price').textContent = "$" + params.get('price');
+        }
+        window.onload = loadFunctionDetails;
+    </script>
+
+</body>
+</html>

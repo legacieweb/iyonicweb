@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 const cors = require('cors');
 const session = require('express-session');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const nodemailer = require("nodemailer");
 
 const app = express();
 const port = 5000;
@@ -25,8 +27,24 @@ app.use(session({
 }));
 // ✅ Import Routes
 
+// Routes
+// Create Express App
+
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/themes', { useNewUrlParser: true, useUnifiedTopology: true });
+// Ensure MONGO_URI is read correctly
+const mongoURI = process.env.MONGO_URI;
+if (!mongoURI) {
+  console.error("❌ ERROR: MONGO_URI is undefined. Check your .env file!");
+  process.exit(1);
+}
+
+// Connect to MongoDB
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log("✅ Connected to MongoDB Atlas"))
+.catch(err => console.error("❌ MongoDB Connection Error:", err));
 
 // Define Schemas
 const CategorySchema = new mongoose.Schema({
@@ -406,6 +424,74 @@ app.post("/api/mark-seen", async (req, res) => {
     }
 });
 
+const functionSchema = new mongoose.Schema({
+    name: String,
+    price: Number,
+    details: String,
+    code: String,
+    category: String 
+});
+
+const FunctionModel = mongoose.model('Function', functionSchema);
+
+// Get functions by category
+app.get('/functions/:category', async (req, res) => {
+    const functions = await FunctionModel.find({ category: req.params.category });
+    res.json(functions);
+});
+
+// Get a specific function
+app.get('/function/:id', async (req, res) => {
+    const func = await FunctionModel.findById(req.params.id);
+    res.json(func);
+});
+
+// Create a new function
+app.post('/functions', async (req, res) => {
+    const { name, price, details, code, category } = req.body;
+    const newFunction = new FunctionModel({ name, price, details, code, category });
+    await newFunction.save();
+    res.json(newFunction);
+});
+
+// Update a function
+app.put('/function/:id', async (req, res) => {
+    const { name, price, details, code } = req.body;
+    const updatedFunction = await FunctionModel.findByIdAndUpdate(
+        req.params.id,
+        { name, price, details, code },
+        { new: true }
+    );
+    res.json(updatedFunction);
+});
+// Nodemailer transporter setup
+const transporter = nodemailer.createTransport({
+  service: "gmail",  // Change if using another service
+  auth: {
+    user: process.env.EMAIL_USER,  // Use .env file for security
+    pass: process.env.EMAIL_PASS
+  }
+});
+
+// API endpoint for sending emails
+app.post("/send-email", async (req, res) => {
+    const { name, email, message } = req.body;
+
+    const mailOptions = {
+        from: email,
+        to: "iyonicorp@gmail.com", // Replace with your recipient email
+        subject: `New Contact Form Submission from ${name}`,
+        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        res.json({ message: "Your message has been sent successfully!" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error sending message. Please try again later." });
+    }
+});
 // ---- START SERVER ----
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security - Custom Functions</title>
+    <link rel="stylesheet" href="../assets/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Shaking Logo Animation */
+        .shaking-logo {
+            animation: shake 1s infinite ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            10%, 30%, 50%, 70%, 90% { transform: rotate(-2deg); }
+            20%, 40%, 60%, 80% { transform: rotate(2deg); }
+        }
+        
+        /* Footer Links */
+        .footer-link {
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+            font-size: 14px;
+        }
+        
+        .footer-link:hover {
+            color: #fff;
+        }
+          /* Hiding Buttons Initially */
+          .hidden-button {
+                display: none !important;
+            }
+            </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <!-- Admin Header -->
+<header id="admin-header" class="bg-transparent text-black p-4">
+    <div class="container mx-auto flex justify-between items-center p-3">
+        <!-- Logo with Shaking Animation -->
+        <a href="https://web.iyonicorp.com/" class="shaking-logo">
+            <img src="https://web.iyonicorp.com/download-removebg-preview.png" alt="Legacie Web Logo" class="h-10 md:h-12 transition-transform duration-300">
+        </a>
+
+        <!-- Navigation Buttons -->
+        <nav class="space-x-4">
+            <button id="create-category-btn" class="bg-green-500 px-4 py-2 rounded hidden-button" onclick="openCreateCategoryPopup()">Create Category</button>
+            <button class="bg-blue-500 px-4 py-2 rounded" onclick="window.location.href='Marketplace.html'">Return to categories</button>
+        </nav>
+    </div>
+</header>
+
+    <div class="container">
+        <h1>🔘 Security features</h1>
+        <button id="create-btn" class="create-btn admin-only" onclick="openUploadPopup()">+ Create Function</button>
+        <div id="functions-list"></div>
+    </div>
+
+    <!-- View Function Popup -->
+    <div class="popup" id="view-popup">
+        <div class="popup-content">
+            <span class="close-popup" onclick="closeViewPopup()">×</span>
+            <h2 id="view-title"></h2>
+            <div id="view-preview"></div>
+            <p id="view-details"></p>
+        </div>
+    </div>
+<!-- 🌟 Footer Section -->
+<footer class="footer">
+    <div class="footer-content">
+      <p>&copy; <span class="glitter-text">iyonic web. All rights reserved.</span></p>
+      <button id="unlock-btn" class="footer-btn" onclick="togglePasswordInput()">.</button>
+      <input type="password" id="admin-password" class="admin-password hidden" placeholder="Enter Admin Password">
+      <button id="submit-password" class="admin-password hidden" onclick="unlockAdminButtons()">Submit</button>
+    </div>
+    <script src="../assets/script.js"></script>
+
+</body>
+</html>
