@@ -66,7 +66,7 @@
     </div>
 
     <script>
-        const API_URL = "http://localhost:5000";
+        const API_URL = "https://iyonicweb.onrender.com";
         let userEmail = localStorage.getItem("userEmail");
 
         function checkLoginStatus() {
@@ -132,6 +132,32 @@
 
         checkLoginStatus();
     </script>
-
+<script>
+    setInterval(() => {
+      console.clear();
+    }, 100);
+  
+    (function() {
+      const devtools = /./;
+      devtools.toString = function() {
+        console.clear();
+        console.log("DevTools detection activated!");
+        return "";
+      };
+      console.log("%c", devtools);
+    })();
+  </script>
+<script>
+  (function() {
+    function detectDevTools() {
+      if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+        alert("DevTools detected! Redirecting...");
+        window.location.href = "about:blank";
+      }
+    }
+    setInterval(detectDevTools, 1000);
+  })();
+</script>
+  
 </body>
 </html>

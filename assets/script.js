@@ -11,7 +11,7 @@ async function loadFunctions() {
     functionsList.innerHTML = "";
 
     try {
-        const response = await fetch(`http://localhost:5000/functions/${currentCategory}`);
+        const response = await fetch(`https://iyonicweb.onrender.com/functions/${currentCategory}`);
         const functions = await response.json();
 
         functions.forEach(func => {
@@ -55,7 +55,7 @@ async function openUploadPopup(id = null) {
     document.getElementById('upload-popup').style.display = 'flex';
 
     if (id) {
-        const response = await fetch(`http://localhost:5000/function/${id}`);
+        const response = await fetch(`https://iyonicweb.onrender.com/function/${id}`);
         const func = await response.json();
 
         document.getElementById('function-id').value = func._id;
@@ -87,11 +87,11 @@ async function saveOrUpdateFunction() {
     let data = { name, price, details, code, category: currentCategory };
 
     try {
-        let url = "http://localhost:5000/functions";
+        let url = "https://iyonicweb.onrender.com/functions";
         let method = "POST";
 
         if (id) {
-            url = `http://localhost:5000/function/${id}`;
+            url = `https://iyonicweb.onrender.com/function/${id}`;
             method = "PUT";
         }
 
@@ -109,7 +109,7 @@ async function saveOrUpdateFunction() {
 }
 
 async function openViewPopup(id) {
-    const response = await fetch(`http://localhost:5000/function/${id}`);
+    const response = await fetch(`https://iyonicweb.onrender.com/function/${id}`);
     const func = await response.json();
 
     document.getElementById('view-title').textContent = func.name;

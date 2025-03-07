@@ -100,7 +100,7 @@
         });
 
         function fetchAllUsers() {
-            fetch("http://localhost:5000/api/admin/schedules")
+            fetch("https://iyonicweb.onrender.com/api/admin/schedules")
                 .then(response => response.json())
                 .then(users => {
                     usersData = users;
@@ -116,7 +116,7 @@
 }
 
         function fetchUserSchedules(email, fullName, phone) {
-    fetch(`http://localhost:5000/api/schedules/${email}`)
+    fetch(`https://iyonicweb.onrender.com/api/schedules/${email}`)
     .then(response => response.json())
     .then(schedules => {
         const userScheduleHTML = `
@@ -168,7 +168,7 @@
             document.getElementById("notification-badge").textContent = `New Requests: ${newSchedules.length}`;
         }
         function assignToClient(email, fullName, templateName) {
-    fetch("http://localhost:5000/api/clients", {
+    fetch("https://iyonicweb.onrender.com/api/clients", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, fullName, templateName })
@@ -182,7 +182,7 @@
 }
 
 function fetchAllClients() {
-            fetch("http://localhost:5000/api/clients")
+            fetch("https://iyonicweb.onrender.com/api/clients")
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById("clients-count").textContent = data.length;
@@ -204,7 +204,7 @@ function fetchAllClients() {
         }
 
         function fetchAllSubscribers() {
-            fetch("http://localhost:5000/api/subscribers")
+            fetch("https://iyonicweb.onrender.com/api/subscribers")
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById("subscribers-count").textContent = data.length;
@@ -228,7 +228,7 @@ function fetchAllClients() {
         function subscribeUser(email, fullName, templateName) {
             let price = prompt(`Enter subscription price for ${fullName}:`);
             if (price) {
-                fetch("http://localhost:5000/api/subscribers", {
+                fetch("https://iyonicweb.onrender.com/api/subscribers", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ email, fullName, templateName, price })
@@ -253,7 +253,7 @@ function fetchAllClients() {
     let tempNewSchedules = [];
 
     users.forEach(user => {
-        fetch(`http://localhost:5000/api/schedules/${user._id}`)
+        fetch(`https://iyonicweb.onrender.com/api/schedules/${user._id}`)
             .then(response => response.json())
             .then(schedules => {
                 schedules.forEach(schedule => {

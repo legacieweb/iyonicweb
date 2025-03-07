@@ -39,8 +39,8 @@
 <header id="admin-header" class="bg-transparent text-black p-4">
     <div class="container mx-auto flex justify-between items-center p-3">
         <!-- Logo with Shaking Animation -->
-        <a href="https://web.iyonicorp.com/" class="shaking-logo">
-            <img src="https://web.iyonicorp.com/download-removebg-preview.png" alt="Legacie Web Logo" class="h-10 md:h-12 transition-transform duration-300">
+        <a href="https://iyonicweb.iyonicorp.com/" class="shaking-logo">
+            <img src="https://iyonicweb.iyonicorp.com/download-removebg-preview.png" alt="Legacie Web Logo" class="h-10 md:h-12 transition-transform duration-300">
         </a>
 
         <!-- Navigation Buttons -->
@@ -113,18 +113,47 @@
             <button class="create-btn" onclick="saveOrUpdateFunction()">Save Function</button>
         </div>
     </div>
+  <!-- Footer -->
 <!-- 🌟 Footer Section -->
 <footer class="footer">
     <div class="footer-content">
-      <p>&copy; <span class="glitter-text">iyonic web. All rights reserved.</span></p>
-      <button id="unlock-btn" class="footer-btn" onclick="togglePasswordInput()">.</button>
+      <button id="unlock-btn" class="footer-btn" onclick="togglePasswordInput()">&copy;</button> <span class="glitter-text">iyonic web. All rights reserved.</span>
       <input type="password" id="admin-password" class="admin-password hidden" placeholder="Enter Admin Password">
       <button id="submit-password" class="admin-password hidden" onclick="unlockAdminButtons()">Submit</button>
     </div>
+  </footer>
+  
     <script src="../assets/script.js"></script>
     <script src="../assets/payment.js"></script>
     <script src="https://www.paypal.com/sdk/js?client-id=ASoOhWWopLvUnO1H9kowry3QUsrkMeSEUqRJQ9j3tYahteHYwRLfB4HrjNFpvfy4qkHk88p_fe1j7-Wv&currency=USD"></script>
 
     <script src="https://js.paystack.co/v1/inline.js"></script> <!-- Paystack SDK -->
+    <script>
+        setInterval(() => {
+          console.clear();
+        }, 100);
+      
+        (function() {
+          const devtools = /./;
+          devtools.toString = function() {
+            console.clear();
+            console.log("DevTools detection activated!");
+            return "";
+          };
+          console.log("%c", devtools);
+        })();
+      </script>
+    <script>
+      (function() {
+        function detectDevTools() {
+          if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+            alert("DevTools detected! Redirecting...");
+            window.location.href = "about:blank";
+          }
+        }
+        setInterval(detectDevTools, 1000);
+      })();
+    </script>
+      
 </body>
 </html>
