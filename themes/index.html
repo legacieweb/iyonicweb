@@ -102,6 +102,21 @@
       .hidden-button {
             display: none !important;
         }
+        /* 🌟 Glitter Text Effect */
+.glitter-text {
+    background: linear-gradient(45deg, #ffcc00, #ff66ff, #00ccff, #ffcc00);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glitter 4s infinite;
+}
+
+@keyframes glitter {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 
         </style>
 </head>
@@ -220,10 +235,7 @@
         
         <!-- Footer Navigation Links -->
         <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 text-gray-400">
-            <a href="../about" class="footer-link">About Us</a>
-            <a href="../terms" class="footer-link">Terms & Conditions</a>
-            <a href="../privacy" class="footer-link">privacy policy</a>
-            <a href="../refunds" class="footer-link">Refund policy</a>
+            <a href="./businesscategories" class="footer-link"> <span class="glitter-text">please Read the categories here</span></a>
         </div>
 
         <!-- Copyright -->
