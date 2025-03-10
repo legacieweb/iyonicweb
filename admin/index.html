@@ -9,69 +9,95 @@
 </head>
 <body class="bg-gray-50 text-gray-900">
 
-    <!-- Sidebar -->
-    <div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-white shadow-md p-6 flex flex-col">
-        <h2 class="text-2xl font-bold mb-6 text-blue-600">Admin Panel</h2>
+    <!-- Navbar for Mobile -->
+    <div class="md:hidden bg-white shadow-md p-4 flex justify-between items-center">
+        <h2 class="text-xl font-bold text-blue-600">Admin Panel</h2>
+        <button id="menu-toggle" class="text-gray-800 text-2xl">&#9776;</button>
+    </div>
 
-        <button onclick="showSection('dashboard')" class="bg-gray-800 text-white px-4 py-2 rounded mb-4">Dashboard</button>
-        <button onclick="showSection('new-schedules')" class="bg-yellow-500 text-white px-4 py-2 rounded mb-4">New Schedules</button>
-        <button onclick="showSection('user-list')" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedules</button>
-        <button onclick="showSection('clients-section')" class="bg-purple-500 text-white px-4 py-2 rounded mb-4">Clients</button>
-        <button onclick="showSection('subscribers-section')" class="bg-red-500 text-white px-4 py-2 rounded mb-4">Subscribers</button>
+   <!-- Sidebar -->
+<div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-white shadow-md p-6 flex flex-col transition-transform transform md:translate-x-0 -translate-x-full md:block z-50">
+    <h2 class="text-2xl font-bold mb-6 text-blue-600 hidden md:block">Admin Panel</h2>
+    
+    <button onclick="selectSection('dashboard')" class="bg-gray-800 text-white px-4 py-2 rounded mb-4">Dashboard</button>
+    <button onclick="selectSection('new-schedules')" class="bg-yellow-500 text-white px-4 py-2 rounded mb-4">New Schedules</button>
+    <button onclick="selectSection('user-list')" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedules</button>
+    <button onclick="selectSection('clients-section')" class="bg-purple-500 text-white px-4 py-2 rounded mb-4">Clients</button>
+    <button onclick="selectSection('subscribers-section')" class="bg-red-500 text-white px-4 py-2 rounded mb-4">Subscribers</button>
 
-        <div class="text-red-500 font-bold mt-4" id="notification-badge">New Requests: 0</div>
+    <div class="text-red-500 font-bold mt-4" id="notification-badge">New Requests: 0</div>
+</div>
+<!-- Main Content -->
+<div id="main-content" class="p-6 md:ml-64 transition-all">
+    <!-- Login Popup -->
+    <div id="login-popup" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-xl font-bold mb-4 text-center">Admin Login</h2>
+            <label class="block mb-2 font-semibold">Email</label>
+            <input type="email" id="admin-email" class="w-full p-2 border rounded mb-4" placeholder="Enter email">
+            
+            <label class="block mb-2 font-semibold">Password</label>
+            <input type="password" id="admin-password" class="w-full p-2 border rounded mb-4" placeholder="Enter password">
+            
+            <button onclick="validateLogin()" class="w-full bg-blue-600 text-white py-2 rounded">Login</button>
+            <p id="error-message" class="text-red-500 text-center mt-2 hidden">Invalid credentials</p>
+        </div>
     </div>
 
     <!-- Main Content -->
-    <div class="ml-72 p-6">
-
-        <!-- Dashboard -->
-        <div id="dashboard" class="grid grid-cols-3 gap-6 mb-6">
-            <div class="bg-white p-6 shadow-md rounded-lg">
-                <h3 class="text-xl font-semibold">Total Users</h3>
-                <p id="total-users" class="text-3xl font-bold text-blue-600">0</p>
-            </div>
-            <div class="bg-white p-6 shadow-md rounded-lg">
-                <h3 class="text-xl font-semibold">Clients Count</h3>
-                <p id="clients-count" class="text-3xl font-bold text-green-600">0</p>
-            </div>
-            <div class="bg-white p-6 shadow-md rounded-lg">
-                <h3 class="text-xl font-semibold">Subscribers Count</h3>
-                <p id="subscribers-count" class="text-3xl font-bold text-purple-600">0</p>
-            </div>
+<!-- Dashboard -->
+<div id="dashboard" class="content-section hidden">
+    <h3 class="text-2xl font-bold text-blue-600 mb-4">Dashboard</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-6 shadow-md rounded-lg">
+            <h3 class="text-xl font-semibold">Total Users</h3>
+            <p id="total-users" class="text-3xl font-bold text-blue-600">0</p>
         </div>
-        <!-- New Schedules Section -->
-        <div id="new-schedules" class="hidden">
-            <h3 class="text-2xl font-bold mb-4 text-yellow-600">New Schedules</h3>
-            <div id="new-schedule-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <div class="bg-white p-6 shadow-md rounded-lg">
+            <h3 class="text-xl font-semibold">Clients Count</h3>
+            <p id="clients-count" class="text-3xl font-bold text-green-600">0</p>
         </div>
-        <!-- User Scheduling Section -->
-        <div id="user-list" class="hidden">
-            <div class="flex items-center gap-4 mb-4">
-                <input type="text" id="search-email" placeholder="Search by Email" class="p-2 border rounded w-1/3" onkeyup="liveSearch()">
-                <label class="font-semibold">Filter:</label>
-                <select id="filter-options" class="p-2 border rounded" onchange="applyFilter()">
-                    <option value="newest">Newest to Oldest</option>
-                    <option value="oldest">Oldest to Newest</option>
-                    <option value="az">A-Z</option>
-                    <option value="za">Z-A</option>
-                </select>
-            </div>
-            <div id="schedule-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-        </div>
-
-        <!-- Clients Section -->
-        <div id="clients-section" class="hidden mt-6 p-6 bg-white shadow-lg rounded-lg">
-            <h3 class="text-2xl font-semibold mb-4 text-purple-600">Assigned Clients</h3>
-            <div id="clients-list" class="space-y-4"></div>
-        </div>
-
-        <!-- Subscribers Section -->
-        <div id="subscribers-section" class="hidden mt-6 p-6 bg-white shadow-lg rounded-lg">
-            <h3 class="text-2xl font-semibold mb-4 text-red-600">Subscribed Users</h3>
-            <div id="subscribers-list" class="space-y-4"></div>
+        <div class="bg-white p-6 shadow-md rounded-lg">
+            <h3 class="text-xl font-semibold">Subscribers Count</h3>
+            <p id="subscribers-count" class="text-3xl font-bold text-purple-600">0</p>
         </div>
     </div>
+</div>
+
+<!-- New Schedules Section -->
+<div id="new-schedules" class="content-section hidden">
+    <h3 class="text-2xl font-bold mb-4 text-yellow-600">New Schedules</h3>
+    <div id="new-schedule-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+
+<!-- User Scheduling Section -->
+<div id="user-list" class="content-section hidden">
+    <h3 class="text-2xl font-bold text-blue-600 mb-4">Schedules</h3>
+    <div class="flex items-center gap-4 mb-4">
+        <input type="text" id="search-email" placeholder="Search by Email" class="p-2 border rounded w-1/3" onkeyup="liveSearch()">
+        <label class="font-semibold">Filter:</label>
+        <select id="filter-options" class="p-2 border rounded" onchange="applyFilter()">
+            <option value="newest">Newest to Oldest</option>
+            <option value="oldest">Oldest to Newest</option>
+            <option value="az">A-Z</option>
+            <option value="za">Z-A</option>
+        </select>
+    </div>
+    <div id="schedule-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+</div>
+<!-- Clients Section -->
+<div id="clients-section" class="content-section hidden">
+    <h3 class="text-2xl font-bold text-purple-600 mb-4">Clients</h3>
+    <div id="clients-list" class="space-y-4"></div>
+</div>
+
+<!-- Subscribers Section -->
+<div id="subscribers-section" class="content-section hidden">
+    <h3 class="text-2xl font-bold text-red-600 mb-4">Subscribers</h3>
+    <div id="subscribers-list" class="space-y-4"></div>
+</div>
+</div>
+
 
 
     <script>
@@ -90,26 +116,53 @@
             displaySubscribers();
         });
 
-        function showSection(sectionId) {
-            document.querySelectorAll(".ml-72 > div").forEach(div => div.classList.add("hidden"));
-            document.getElementById(sectionId).classList.remove("hidden");
-        }
-        document.addEventListener("DOMContentLoaded", () => {
-            fetchAllClients();
-            fetchAllSubscribers();
+    // Fetch all data in sequence
+    fetchAllUsers()
+        .then(() => fetchAllClients())
+        .then(() => fetchAllSubscribers())
+        .then(() => {
+            identifyNewSchedules(usersData);
+            updateDashboard(); // Ensure dashboard updates last
         });
 
-        function fetchAllUsers() {
-            fetch("https://iyonicweb.onrender.com/api/admin/schedules")
-                .then(response => response.json())
-                .then(users => {
-                    usersData = users;
-                    displaySchedules(users);
-                    updateDashboard();
-                })
-                .then(() => identifyNewSchedules(usersData));
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+    // Set the default section to show
+    selectSection("dashboard");
 
+    // Mobile Menu Toggle
+    document.getElementById("menu-toggle").addEventListener("click", () => {
+        document.getElementById("sidebar").classList.toggle("-translate-x-full");
+    });
+});
+
+function selectSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll(".content-section").forEach(section => {
+        section.classList.add("hidden");
+    });
+
+    // Show only the selected section
+    let selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+        selectedSection.classList.remove("hidden");
+    }
+
+    // Auto-close sidebar on mobile
+    if (window.innerWidth < 768) {
+        document.getElementById("sidebar").classList.add("-translate-x-full");
+    }
+}
+
+
+        async function fetchAllUsers() {
+    try {
+        const response = await fetch("https://iyonicweb.onrender.com/api/admin/schedules");
+        usersData = await response.json();
+        displaySchedules(usersData);
+    } catch (error) {
+        console.error("Error fetching users:", error);
+    }
+}
         function displaySchedules(users) {
     document.getElementById("schedule-list").innerHTML = "";
     users.forEach(user => fetchUserSchedules(user._id, user.fullName, user.phone));
@@ -162,11 +215,11 @@
         }
 
         function updateDashboard() {
-            document.getElementById("total-users").textContent = usersData.length;
-            document.getElementById("clients-count").textContent = assignedClients.length;
-            document.getElementById("subscribers-count").textContent = subscribers.length;
-            document.getElementById("notification-badge").textContent = `New Requests: ${newSchedules.length}`;
-        }
+    document.getElementById("total-users").textContent = usersData.length || 0;
+    document.getElementById("clients-count").textContent = assignedClients.length || 0;
+    document.getElementById("subscribers-count").textContent = subscribers.length || 0;
+    document.getElementById("notification-badge").textContent = `New Requests: ${newSchedules.length || 0}`;
+}
         function assignToClient(email, fullName, templateName) {
     fetch("https://iyonicweb.onrender.com/api/clients", {
         method: "POST",
@@ -181,15 +234,16 @@
     .catch(error => console.error("Error:", error));
 }
 
-function fetchAllClients() {
-            fetch("https://iyonicweb.onrender.com/api/clients")
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("clients-count").textContent = data.length;
-                    displayClients(data);
-                })
-                .catch(error => console.error("Error fetching clients:", error));
-        }
+async function fetchAllClients() {
+    try {
+        const response = await fetch("https://iyonicweb.onrender.com/api/clients");
+        const data = await response.json();
+        assignedClients = data;
+        displayClients(data);
+    } catch (error) {
+        console.error("Error fetching clients:", error);
+    }
+}
 
         function displayClients(clients) {
             let clientsList = document.getElementById("clients-list");
@@ -203,15 +257,16 @@ function fetchAllClients() {
             `).join('');
         }
 
-        function fetchAllSubscribers() {
-            fetch("https://iyonicweb.onrender.com/api/subscribers")
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("subscribers-count").textContent = data.length;
-                    displaySubscribers(data);
-                })
-                .catch(error => console.error("Error fetching subscribers:", error));
-        }
+        async function fetchAllSubscribers() {
+    try {
+        const response = await fetch("https://iyonicweb.onrender.com/api/subscribers");
+        const data = await response.json();
+        subscribers = data;
+        displaySubscribers(data);
+    } catch (error) {
+        console.error("Error fetching subscribers:", error);
+    }
+}
 
         function displaySubscribers(subscribers) {
             let subscribersList = document.getElementById("subscribers-list");
@@ -322,8 +377,26 @@ function markAsSeen(scheduleId) {
     // ✅ Refresh UI to remove marked schedule
     displayNewSchedules();
 }
+function validateLogin() {
+            let email = document.getElementById("admin-email").value;
+            let password = document.getElementById("admin-password").value;
+
+            // Admin credentials
+            const adminEmail = "b0110296158@gmail.com";
+            const adminPassword = "@7Switched";
+
+            if (email === adminEmail && password === adminPassword) {
+                document.getElementById("login-popup").classList.add("hidden");
+                document.getElementById("content").classList.remove("hidden");
+            } else {
+                document.getElementById("error-message").classList.remove("hidden");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("login-popup").classList.remove("hidden");
+        });
 
     </script>
-
 </body>
 </html>

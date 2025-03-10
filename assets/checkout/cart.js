@@ -29,23 +29,3 @@ function removeFromCart(id) {
     loadCart();
 }
 
-function payWithPaystack() {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let totalAmount = cart.reduce((sum, item) => sum + parseFloat(item.price), 0);
-
-    let handler = PaystackPop.setup({
-        key: 'your-paystack-public-key',
-        email: "buyer@example.com",
-        amount: totalAmount * 100,
-        currency: "USD",
-        callback: function (response) {
-            alert('Payment successful! Transaction ID: ' + response.reference);
-            localStorage.removeItem("cart");
-            window.location.href = "thankyou.html";
-        },
-        onClose: function () {
-            alert('Payment canceled');
-        }
-    });
-    handler.openIframe();
-}
