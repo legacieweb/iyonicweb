@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buttons - Custom Functions</title>
+    <title>Body section - Custom Functions</title>
     <link rel="stylesheet" href="../assets/styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         /* Shaking Logo Animation */
         .shaking-logo {
@@ -47,24 +48,42 @@
         <nav class="space-x-4">
             <button id="create-category-btn" class="bg-green-500 px-4 py-2 rounded hidden-button" onclick="openCreateCategoryPopup()">Create Category</button>
             <button class="bg-blue-500 px-4 py-2 rounded" onclick="window.location.href='../categories'">Return to categories</button>
+
         </nav>
     </div>
 </header>
+
     <div class="container">
-        <h1>🔘 body sectionsS</h1>
+        <h1>🔘 body section</h1>
         <button id="create-btn" class="create-btn admin-only" onclick="openUploadPopup()">+ Create Function</button>
         <div id="functions-list"></div>
     </div>
 
-    <!-- View Function Popup -->
-    <div class="popup" id="view-popup">
+        <!-- View Function Popup -->
+        <div class="popup" id="view-popup">
+            <div class="popup-content">
+                <span class="close-popup" onclick="closeViewPopup()">×</span>
+                <h2 id="view-title">Function Title</h2>
+                <div id="view-preview"></div>
+                <p id="view-details"></p>
+            </div>
+        </div>
+
+    
+    <!-- Create/Edit Function Popup -->
+    <div class="popup" id="upload-popup">
         <div class="popup-content">
-            <span class="close-popup" onclick="closeViewPopup()">×</span>
-            <h2 id="view-title"></h2>
-            <div id="view-preview"></div>
-            <p id="view-details"></p>
+            <span class="close-popup" onclick="closeUploadPopup()">×</span>
+            <h2>Create/Edit Function</h2>
+            <input type="hidden" id="function-id">
+            <input type="text" id="function-name" class="input-field" placeholder="Function Name">
+            <input type="number" id="function-price" class="input-field" placeholder="Price ($)">
+            <textarea id="function-details" class="input-field" placeholder="Enter function details" rows="3"></textarea>
+            <textarea id="function-code" class="input-field" placeholder="Paste Full HTML Code" rows="5"></textarea>
+            <button class="create-btn" onclick="saveOrUpdateFunction()">Save Function</button>
         </div>
     </div>
+    <!-- Footer -->
 <!-- 🌟 Footer Section -->
 <footer class="footer">
     <div class="footer-content">
@@ -76,88 +95,6 @@
   
     <script src="../assets/script.js"></script>
     <script src="../assets/payment.js"></script>
-  
-    <script>
-        setInterval(() => {
-          console.clear();
-        }, 100);
-      
-        (function() {
-          const devtools = /./;
-          devtools.toString = function() {
-            console.clear();
-            console.log("DevTools detection activated!");
-            return "";
-          };
-          console.log("%c", devtools);
-        })();
-      </script>
-  <script>
-    (function() {
-       // 🔥 Disable Right-Click
-       document.addEventListener("contextmenu", function(event) {
-         event.preventDefault();
-       });
-   
-       // 🔒 Block F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-       document.addEventListener("keydown", function(event) {
-         if (event.keyCode == 123) { // F12
-           event.preventDefault();
-         }
-         if (event.ctrlKey && event.shiftKey && (event.keyCode == 73 || event.keyCode == 74)) { // Ctrl+Shift+I / J
-           event.preventDefault();
-         }
-         if (event.ctrlKey && event.keyCode == 85) { // Ctrl+U
-           event.preventDefault();
-         }
-       });
-   
-       // 🚨 Detect DevTools Opened
-       function detectDevTools() {
-         let devtoolsOpen = false;
-   
-         const before = new Date();
-         debugger;
-         const after = new Date();
-   
-         if (after - before > 100) {
-           devtoolsOpen = true;
-         }
-   
-         if (devtoolsOpen) {
-           document.body.innerHTML = `<div style="text-align:center; font-size:24px; font-weight:bold; color:red; margin-top:50px;">
-             🚨 ERROR: DevTools Detected! Please close DevTools to access this website. 🚨
-           </div>`;
-         }
-       }
-   
-       setInterval(detectDevTools, 1000);
-           // ❌ Prevent XSS Attacks (Sanitize Input Fields)
-           document.querySelectorAll("input, textarea").forEach((element) => {
-         element.addEventListener("input", function() {
-           this.value = this.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-         });
-       });
-   
-       // 🌍 Detect VPN or Proxy Usage
-       async function detectVPN() {
-         try {
-           const response = await fetch("https://vpnapi.io/api/?key=564239f58fd7438d8cbbbb1c0960ff07");
-           const data = await response.json();
-   
-           if (data.security.vpn || data.security.proxy || data.security.tor) {
-             document.body.innerHTML = `<div style="text-align:center; font-size:24px; font-weight:bold; color:red; margin-top:50px;">
-               🚨 ERROR: VPN/Proxy Detected! Please disable VPN to access this website. 🚨
-             </div>`;
-           }
-         } catch (error) {
-           console.log("VPN detection error:", error);
-         }
-       }
-   
-       detectVPN();
-   
-     })();
-   </script>
+
 </body>
 </html>
