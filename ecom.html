@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iyonicorp - Website Rentals</title>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+        nav {
+    background-color: #444;
+    padding: 10px;
+    text-align: center;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Keep items in one line */
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for mobile */
+}
+
+nav button {
+    background: none;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    flex: 0 0 auto; /* Prevent buttons from shrinking */
+}
+
+nav::-webkit-scrollbar {
+    height: 5px; /* Small scrollbar */
+}
+
+nav::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+nav::-webkit-scrollbar-track {
+    background: #555;
+}
+        nav button:hover {
+            text-decoration: underline;
+        }
+        .search-container {
+            text-align: center;
+            margin: 20px;
+        }
+        .search-container input, .search-container select {
+            padding: 10px;
+            margin-right: 10px;
+            width: 200px;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .product {
+            width: 300px;
+            margin: 15px;
+            padding: 15px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            border-radius: 5px;
+        }
+        .product img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .product button {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .preview-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        .details-btn {
+            background-color: #007bff;
+            color: white;
+        }
+        /* Full Screen Preview */
+        .preview-section {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: white;
+            z-index: 1000;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .close-preview {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: red;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+        }
+        .rent-btn { background-color: #ff6600; color: white; }
+
+    </style>
+</head>
+<body>
+
+<header>Iyonicorp - Website Rentals
+    <div class="search-container">
+        <input type="text" id="searchBox" placeholder="Search templates..." onkeyup="searchTemplates()">
+    </div>
+</header>
+
+<!-- Navigation for Categories -->
+<nav>
+    <button onclick="filterCategory('all')">All</button>
+    <button onclick="filterCategory('Fashion & Apparel')">Fashion & Apparel</button>
+    <button onclick="filterCategory('Electronics & Gadgets')">Electronics & Gadgets</button>
+    <button onclick="filterCategory('Health & Beauty')">Health & Beauty</button>
+    <button onclick="filterCategory('Home & Living')">Home & Living</button>
+    <button onclick="filterCategory('Food & Grocery')">Food & Grocery</button>
+    <button onclick="filterCategory('Kids & Toys')">Kids & Toys</button>
+    <button onclick="filterCategory('Books & Stationery')">Books & Stationery</button>
+    <button onclick="filterCategory('Hobbies & Entertainment')">Hobbies & Entertainment</button>
+    <button onclick="filterCategory('Pet Supplies')">Pet Supplies</button>
+    <button onclick="filterCategory('Office & Business Supplies')">Office & Business Supplies</button>
+    <button onclick="filterCategory('Fitness & Sports')">Fitness & Sports</button>
+    <button onclick="filterCategory('Travel & Luggage')">Travel & Luggage</button>
+    <button onclick="filterCategory('Gifts & Occasions')">Gifts & Occasions</button>
+</nav>
+
+
+
+<div class="container" id="mainPage">
+    <div class="product-list">
+        <div class="product" data-category="Fashion & Apparel" data-price="2">
+            <img src="https://media.licdn.com/dms/image/v2/D4D12AQEZths38-N2dg/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1709734306401?e=2147483647&v=beta&t=1jTFDzeGhbuP_0s8Eq1LgEJDUxMVBLPLqugeOMw1an0" alt="Template 1">
+            <h3>Modern Fashion & Apparel</h3>
+            <p>$2 / month</p>
+            <button class="preview-btn" onclick="previewTemplate('portifolio.html')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Modern Fashion & Apparel', 'Welcome to my digital Fashion & Apparel — a curated collection of my work as a creative web developer. Here you\'ll find projects that showcase my skills in front-end development, UI/UX design, and modern web technologies. Whether you\'re here to collaborate, hire, or get inspired, I\'m glad you stopped by. Let’s build something great together.', 2)">View Details</button>
+            <button onclick="rentTemplate('Modern Fashion & Apparel', 2)">Rent Site</button>
+
+        </div>
+
+        <div class="product" data-category="Food & Grocery" data-price="4">
+            <img src="https://www.fooodlove.com/images/jcogs_img/cache/012-close-up-view-of-freshly-baked-bakery_-_28de80_-_8782e36ca3e8764a9e4719edc333d3a48e3f4ae7_1110w.webp" alt="Template 2">
+            <h3>Bakery</h3>
+            <p>$4 / month</p>
+            <button class="preview-btn" onclick="previewTemplate('bakeryFood & Grocerypage.html')">Preview</button>
+            <button class="details-btn" onclick="showDetails('bakerylandingpage', 'A beautifully designed Bakery page for bakeries, showcasing your products, services, and contact information to attract customers.', 4)">View Details</button>
+            <button onclick="rentTemplate('bakerylandingpage', 4)">Rent Site</button>
+        </div>]
+
+        <div class="product" data-category="Health & Beauty" data-price="20">
+            <img src="https://i.imgur.com/OZdyiJb.png" alt="Template 3">
+            <h3>Shopright</h3>
+            <p>$20 / month</p>
+            <button class="preview-btn" onclick="previewTemplate('https://shopright.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Health & Beauty Store', 'An online store.', 20)">View Details</button>
+            <button onclick="previewAdmin('https://shopright.iyonicorp.com/admin')">View Admin</button>
+            <button onclick="rentTemplate('Shopright', 20)">Rent Site</button>
+
+            
+        </div>
+
+        <div class="product" data-category="Health & Beauty" data-price="20">
+            <img src="template4-thumbnail.jpg" alt="Template 4">
+            <h3>Weed Store</h3>
+            <p>$10 / month</p>
+            <button class="preview-btn" onclick="previewTemplate('https://plugin.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Weed Store', 'An online store.', 20)">View Details</button>
+            <button onclick="previewAdmin('template1-admin.html')">View Admin</button>
+            <button onclick="rentTemplate('Weed store', 10)">Rent Site</button>
+        </div>
+    </div>
+</div>
+
+<!-- Full-Screen Preview -->
+<div id="previewSection" class="preview-section">
+    <button class="close-preview" onclick="closePreview()">Close</button>
+    <iframe id="previewFrame"></iframe>
+</div>
+
+<script>
+    function previewTemplate(templateUrl) {
+        document.getElementById("previewFrame").src = templateUrl;
+        document.getElementById("previewSection").style.display = "block";
+        document.getElementById("mainPage").style.display = "none";
+    }
+
+    function closePreview() {
+        document.getElementById("previewSection").style.display = "none";
+        document.getElementById("mainPage").style.display = "block";
+    }
+
+    function searchTemplates() {
+        let query = document.getElementById("searchBox").value.toLowerCase();
+        let products = document.querySelectorAll(".product");
+        products.forEach(product => {
+            let name = product.querySelector("h3").innerText.toLowerCase();
+            product.style.display = name.includes(query) ? "block" : "none";
+        });
+    }
+
+    function filterCategory(category) {
+        let products = document.querySelectorAll(".product");
+        products.forEach(product => {
+            let productCategory = product.getAttribute("data-category");
+            product.style.display = (category === "all" || productCategory === category) ? "block" : "none";
+        });
+    }
+// Function to Preview Admin (same as site preview)
+function previewAdmin(templateUrl) {
+        document.getElementById("previewFrame").src = templateUrl;
+        document.getElementById("previewSection").style.display = "block";
+        document.getElementById("mainPage").style.display = "none";
+    }
+
+
+
+    function showDetails(title, description, price, templateUrl) {
+    let detailsPopup = document.createElement("div");
+    detailsPopup.style.position = "fixed";
+    detailsPopup.style.top = "50%";
+    detailsPopup.style.left = "50%";
+    detailsPopup.style.transform = "translate(-50%, -50%)";
+    detailsPopup.style.background = "white";
+    detailsPopup.style.padding = "20px";
+    detailsPopup.style.boxShadow = "0px 0px 10px rgba(0,0,0,0.3)";
+    detailsPopup.style.zIndex = "2000";
+    detailsPopup.style.borderRadius = "8px";
+    detailsPopup.innerHTML = `
+        <h2>${title}</h2>
+        <p>${description}</p>
+        <p><strong>Price:</strong> $${price} / month</p>
+        <button onclick="document.body.removeChild(this.parentElement)" 
+                style="background:red; color:white; padding:10px; border:none; cursor:pointer;">
+            Close
+        </button>
+    `;
+    document.body.appendChild(detailsPopup);
+}
+function rentTemplate(name, price) {
+    let sites = JSON.parse(localStorage.getItem('mySites')) || [];
+    sites.push({ name: name, newName: "", price: price, plan: "monthly", paid: false });
+    localStorage.setItem("mySites", JSON.stringify(sites));
+
+    // Redirect to dashboard
+    window.location.href = "dashboard.html";
+}
+
+
+
+</script>
+
+</body>
+</html>
