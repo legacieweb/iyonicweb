@@ -127,7 +127,17 @@ nav::-webkit-scrollbar-track {
             border-radius: 5px;
         }
         .rent-btn { background-color: #ff6600; color: white; }
+        .return-link {
+    color: #ffffffcc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
 
+.return-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
     </style>
 </head>
 <body>
@@ -135,8 +145,9 @@ nav::-webkit-scrollbar-track {
 <header>Iyonicorp - Ecommerce Templates
     <div class="search-container">
         <input type="text" id="searchBox" placeholder="Search templates..." onkeyup="searchTemplates()">
-    </div>
-</header>
+        </div>
+        <a href="index.html" class="return-link">Return to Home</a>
+    </header>
 
 
 
