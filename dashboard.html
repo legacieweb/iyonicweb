@@ -425,44 +425,31 @@ function payWithPaystack(siteIndex, amount) {
   }
 
   async function handleSignup() {
-  const email = document.getElementById("signupEmail").value.trim();
-  const password = document.getElementById("signupPassword").value.trim();
-  
-  if (!email || !password) {
-    alert("Please fill out all fields.");
-    return;
-  }
+  const email = document.getElementById("signupEmail").value;
+  const password = document.getElementById("signupPassword").value;
 
   try {
-    // Make an API call to register the user if needed
-    const response = await fetch('https://iyonicweb.onrender.com/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
+    const res = await fetch("https://iyonicweb.onrender.com/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
     });
 
-    // Check if response is not okay
-    if (!response.ok) {
-      throw new Error('Failed to sign up. Please try again later.');
+    if (res.status === 409) {
+      throw new Error("An account with this email already exists.");
     }
 
-    // Parse response data (if needed)
-    const data = await response.json();
-    
-    // Save the user data in localStorage (client-side)
-    localStorage.setItem("user", JSON.stringify({ email, password }));
-    localStorage.setItem("loggedIn", "true");
+    if (!res.ok) {
+      throw new Error("Failed to sign up. Please try again later.");
+    }
 
-    // Close signup popup and show dashboard
-    document.getElementById("signupPopup").style.display = "none";
-    showDashboard();
-  } catch (error) {
-    // Handle fetch or other errors
-    console.error('Error during signup:', error);
-    alert('An error occurred during signup: ' + error.message);
+    alert("Signup successful! Please log in.");
+    switchToLogin();
+  } catch (err) {
+    console.error("Error during signup:", err);
+    alert(err.message);
   }
 }
-
 
 async function handleLogin() {
   const email = document.getElementById("loginEmail").value.trim();
