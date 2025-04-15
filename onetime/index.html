@@ -12,13 +12,99 @@
             padding: 0;
             background-color: #f8f9fa;
         }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            font-size: 24px;
-            text-align: center;
-        }
+        .cool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #1d1f27, #3b3b98);
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    gap: 15px;
+}
+
+.brand-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.search-container {
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: center;
+    order: 3;
+}
+
+.search-container input {
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: none;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 350px;
+    transition: all 0.3s ease-in-out;
+    background-color: #f5f5f5;
+    color: #333;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.search-container input:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.nav-links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+}
+
+.nav-links .home-btn {
+    background-color: #ffffff22;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-links .home-btn:hover {
+    background-color: #ffffff44;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .cool-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .brand {
+        order: 1;
+    }
+
+    .nav-links {
+        order: 2;
+        justify-content: center;
+    }
+
+    .search-container {
+        order: 3;
+        margin-top: 10px;
+    }
+
+    .search-container input {
+        max-width: 90%;
+    }
+}
         nav {
     background-color: #444;
     padding: 10px;
@@ -142,11 +228,18 @@ nav::-webkit-scrollbar-track {
 </head>
 <body>
 
-    <header class="header">
+    <header class="cool-header">
+        <div class="brand">
+            <a href="https://iyonicorp.com/" class="brand-name">Iyonicorp</a>
+        </div>
+    
         <div class="search-container">
             <input type="text" id="searchBox" placeholder="Search templates..." onkeyup="searchTemplates()">
         </div>
-        <a href="index.html" class="return-link">Return to Home</a>
+    
+        <div class="nav-links">
+            <a href="https://iyonicorp.com/" class="home-btn">Home</a>
+        </div>
     </header>
     
 
@@ -280,7 +373,6 @@ function previewAdmin(templateUrl) {
     detailsPopup.innerHTML = `
         <h2>${title}</h2>
         <p>${description}</p>
-        <p><strong>Price:</strong> $${price} / month</p>
         <button onclick="document.body.removeChild(this.parentElement)" 
                 style="background:red; color:white; padding:10px; border:none; cursor:pointer;">
             Close

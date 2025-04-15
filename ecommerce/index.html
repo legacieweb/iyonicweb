@@ -12,13 +12,100 @@
             padding: 0;
             background-color: #f8f9fa;
         }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            font-size: 24px;
-            text-align: center;
-        }
+        .cool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #1d1f27, #3b3b98);
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    gap: 15px;
+}
+
+.brand-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.search-container {
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: center;
+    order: 3;
+}
+
+.search-container input {
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: none;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 350px;
+    transition: all 0.3s ease-in-out;
+    background-color: #f5f5f5;
+    color: #333;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.search-container input:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.nav-links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+}
+
+.nav-links .home-btn {
+    background-color: #ffffff22;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-links .home-btn:hover {
+    background-color: #ffffff44;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .cool-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .brand {
+        order: 1;
+    }
+
+    .nav-links {
+        order: 2;
+        justify-content: center;
+    }
+
+    .search-container {
+        order: 3;
+        margin-top: 10px;
+    }
+
+    .search-container input {
+        max-width: 90%;
+    }
+}
+
         nav {
     background-color: #444;
     padding: 10px;
@@ -132,12 +219,20 @@ nav::-webkit-scrollbar-track {
 </head>
 <body>
 
-<header>Iyonicorp - Website Rentals
-    <div class="search-container">
-        <input type="text" id="searchBox" placeholder="Search templates..." onkeyup="searchTemplates()">
-    </div>
-</header>
-
+    <header class="cool-header">
+        <div class="brand">
+            <a href="https://iyonicorp.com/" class="brand-name">Iyonicorp</a>
+        </div>
+    
+        <div class="search-container">
+            <input type="text" id="searchBox" placeholder="Search templates..." onkeyup="searchTemplates()">
+        </div>
+    
+        <div class="nav-links">
+            <a href="https://iyonicorp.com/" class="home-btn">Home</a>
+        </div>
+    </header>
+    
 <!-- Navigation for Categories -->
 <nav>
     <button onclick="filterCategory('all')">All</button>
@@ -179,7 +274,7 @@ nav::-webkit-scrollbar-track {
             <button onclick="rentTemplate('bakerylandingpage', 4)">Rent Site</button>
         </div>]
 
-        <div class="product" data-category="Health & Beauty" data-price="20">
+        <div class="product" data-category="Electronics & Gadgets" data-price="20">
             <img src="https://i.imgur.com/OZdyiJb.png" alt="Template 3">
             <h3>Shopright</h3>
             <p>$20 / month</p>
@@ -192,12 +287,12 @@ nav::-webkit-scrollbar-track {
         </div>
 
         <div class="product" data-category="Health & Beauty" data-price="20">
-            <img src="template4-thumbnail.jpg" alt="Template 4">
+            <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/i_7_0A1P.H6o/v0/1200x700.webp" alt="Template 4">
             <h3>Weed Store</h3>
             <p>$10 / month</p>
             <button class="preview-btn" onclick="previewTemplate('https://plugin.iyonicorp.com/')">Preview</button>
-            <button class="details-btn" onclick="showDetails('Weed Store', 'An online store.', 20)">View Details</button>
-            <button onclick="previewAdmin('template1-admin.html')">View Admin</button>
+            <button class="details-btn" onclick="showDetails('Weed Store', 'An online store.(2823) admin password', 20)">View Details</button>
+            <button onclick="previewAdmin('https://plugin.iyonicorp.com/admin')">View Admin</button>
             <button onclick="rentTemplate('Weed store', 10)">Rent Site</button>
         </div>
     </div>
@@ -274,7 +369,7 @@ function rentTemplate(name, price) {
     localStorage.setItem("mySites", JSON.stringify(sites));
 
     // Redirect to dashboard
-    window.location.href = "dashboard.html";
+    window.location.href = "../dashboard";
 }
 
 
