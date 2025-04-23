@@ -292,6 +292,12 @@ function startExpiryTimer(elementId, lastPaymentDate, planType = "monthly") {
       alert("Failed to toggle suspend.");
     }
   }
+  // ✅ Redirect to login if not authenticated
+if (!localStorage.getItem("admin")) {
+  window.location.href = "../adminlogin";
+}
+
+  
 </script>
 
 </body>
