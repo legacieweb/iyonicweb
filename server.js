@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
-const CustomDomain = require("./models/Customdomain"); // Adjust the path as needed
+const CustomDomain = require("./models/CustomDomain"); // Adjust the path as needed
 const nodemailer = require("nodemailer");
 
 // Load environment variables from .env
