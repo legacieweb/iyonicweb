@@ -1,402 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Iyonicorp</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iyonicorp Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="logo.png" />
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-100 min-h-screen font-sans">
 
-    <!-- Navbar for Mobile -->
-    <div class="md:hidden bg-white shadow-md p-4 flex justify-between items-center">
-        <h2 class="text-xl font-bold text-blue-600">Admin Panel</h2>
-        <button id="menu-toggle" class="text-gray-800 text-2xl">&#9776;</button>
+  <!-- Mobile Hamburger -->
+  <div class="md:hidden p-4 bg-black text-white flex justify-between items-center">
+    <h1 class="text-xl font-bold">Iyonicorp Admin</h1>
+    <button id="toggleMenu" class="text-white text-xl">☰</button>
+  </div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="bg-black text-white w-64 fixed top-0 left-0 h-full flex flex-col p-5 space-y-6 z-40 hidden md:flex">
+    <h1 class="text-2xl font-bold text-center hidden md:block">Iyonicorp Admin</h1>
+    <nav class="flex flex-col space-y-2">
+      <button onclick="showAdminSection('overview')" class="hover:bg-orange-500 px-4 py-2 text-left rounded">📊 Overview</button>
+      <button onclick="showAdminSection('users')" class="hover:bg-orange-500 px-4 py-2 text-left rounded">👥 Manage Users</button>
+    </nav>
+    <div class="mt-auto text-center">
+      <button onclick="logout()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded">Logout</button>
     </div>
+  </aside>
 
-   <!-- Sidebar -->
-<div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-white shadow-md p-6 flex flex-col transition-transform transform md:translate-x-0 -translate-x-full md:block z-50">
-    <h2 class="text-2xl font-bold mb-6 text-blue-600 hidden md:block">Admin Panel</h2>
-    
-    <button onclick="selectSection('dashboard')" class="bg-gray-800 text-white px-4 py-2 rounded mb-4">Dashboard</button>
-    <button onclick="selectSection('new-schedules')" class="bg-yellow-500 text-white px-4 py-2 rounded mb-4">New Schedules</button>
-    <button onclick="selectSection('user-list')" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedules</button>
-    <button onclick="selectSection('clients-section')" class="bg-purple-500 text-white px-4 py-2 rounded mb-4">Clients</button>
-    <button onclick="selectSection('subscribers-section')" class="bg-red-500 text-white px-4 py-2 rounded mb-4">Subscribers</button>
+  <!-- Main Content -->
+  <main class="md:ml-64 p-6 space-y-10">
 
-    <div class="text-red-500 font-bold mt-4" id="notification-badge">New Requests: 0</div>
-</div>
-<!-- Main Content -->
-<div id="main-content" class="p-6 md:ml-64 transition-all">
-    <!-- Login Popup -->
-    <div id="login-popup" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h2 class="text-xl font-bold mb-4 text-center">Admin Login</h2>
-            <label class="block mb-2 font-semibold">Email</label>
-            <input type="email" id="admin-email" class="w-full p-2 border rounded mb-4" placeholder="Enter email">
-            
-            <label class="block mb-2 font-semibold">Password</label>
-            <input type="password" id="admin-password" class="w-full p-2 border rounded mb-4" placeholder="Enter password">
-            
-            <button onclick="validateLogin()" class="w-full bg-blue-600 text-white py-2 rounded">Login</button>
-            <p id="error-message" class="text-red-500 text-center mt-2 hidden">Invalid credentials</p>
+    <!-- Overview -->
+    <section id="overviewSection" class="admin-section">
+      <h2 class="text-2xl font-bold mb-4">📊 Platform Overview</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded shadow">
+          <h3 class="text-lg font-semibold">Total Users</h3>
+          <p class="text-3xl font-bold" id="totalUsers">...</p>
         </div>
-    </div>
-
-    <!-- Main Content -->
-<!-- Dashboard -->
-<div id="dashboard" class="content-section hidden">
-    <h3 class="text-2xl font-bold text-blue-600 mb-4">Dashboard</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white p-6 shadow-md rounded-lg">
-            <h3 class="text-xl font-semibold">Total Users</h3>
-            <p id="total-users" class="text-3xl font-bold text-blue-600">0</p>
+        <div class="bg-white p-6 rounded shadow">
+          <h3 class="text-lg font-semibold">Active Sites</h3>
+          <p class="text-3xl font-bold" id="activeSites">...</p>
         </div>
-        <div class="bg-white p-6 shadow-md rounded-lg">
-            <h3 class="text-xl font-semibold">Clients Count</h3>
-            <p id="clients-count" class="text-3xl font-bold text-green-600">0</p>
+        <div class="bg-white p-6 rounded shadow">
+          <h3 class="text-lg font-semibold">Total Revenue</h3>
+          <p class="text-3xl font-bold text-green-600" id="totalRevenue">$...</p>
         </div>
-        <div class="bg-white p-6 shadow-md rounded-lg">
-            <h3 class="text-xl font-semibold">Subscribers Count</h3>
-            <p id="subscribers-count" class="text-3xl font-bold text-purple-600">0</p>
-        </div>
-    </div>
-</div>
+      </div>
+    </section>
 
-<!-- New Schedules Section -->
-<div id="new-schedules" class="content-section hidden">
-    <h3 class="text-2xl font-bold mb-4 text-yellow-600">New Schedules</h3>
-    <div id="new-schedule-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-        </div>
+    <!-- Users -->
+    <section id="usersSection" class="admin-section hidden">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+        <h2 class="text-2xl font-bold">👥 User Management</h2>
+        <input
+          type="text"
+          id="userSearchInput"
+          oninput="filterUsers()"
+          placeholder="Search by name or email..."
+          class="w-full md:w-80 px-4 py-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
+        />
+      </div>
+      <div id="usersTable" class="space-y-4">Loading users...</div>      
+    </section>
 
-<!-- User Scheduling Section -->
-<div id="user-list" class="content-section hidden">
-    <h3 class="text-2xl font-bold text-blue-600 mb-4">Schedules</h3>
-    <div class="flex items-center gap-4 mb-4">
-        <input type="text" id="search-email" placeholder="Search by Email" class="p-2 border rounded w-1/3" onkeyup="liveSearch()">
-        <label class="font-semibold">Filter:</label>
-        <select id="filter-options" class="p-2 border rounded" onchange="applyFilter()">
-            <option value="newest">Newest to Oldest</option>
-            <option value="oldest">Oldest to Newest</option>
-            <option value="az">A-Z</option>
-            <option value="za">Z-A</option>
-        </select>
-    </div>
-    <div id="schedule-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-</div>
-<!-- Clients Section -->
-<div id="clients-section" class="content-section hidden">
-    <h3 class="text-2xl font-bold text-purple-600 mb-4">Clients</h3>
-    <div id="clients-list" class="space-y-4"></div>
-</div>
+  </main>
 
-<!-- Subscribers Section -->
-<div id="subscribers-section" class="content-section hidden">
-    <h3 class="text-2xl font-bold text-red-600 mb-4">Subscribers</h3>
-    <div id="subscribers-list" class="space-y-4"></div>
-</div>
-</div>
+  <script>
+    const API_BASE = "https://iyonicweb.onrender.com/api/admin";
 
+    document.addEventListener("DOMContentLoaded", () => {
+      loadStats();
+      loadUsers();
 
-
-    <script>
-        let usersData = [];
-        let assignedClients = JSON.parse(localStorage.getItem("assignedClients")) || [];
-        let subscribers = JSON.parse(localStorage.getItem("subscribers")) || [];
-        let newSchedules = JSON.parse(localStorage.getItem("newSchedules")) || [];
-        let existingSchedules = JSON.parse(localStorage.getItem("existingSchedules")) || [];
-
-        document.addEventListener("DOMContentLoaded", () => {
-            showSection("dashboard");
-            fetchAllUsers();
-            displayClients();
-            displayNewSchedules();
-            displayExistingSchedules();
-            displaySubscribers();
-        });
-
-    // Fetch all data in sequence
-    fetchAllUsers()
-        .then(() => fetchAllClients())
-        .then(() => fetchAllSubscribers())
-        .then(() => {
-            identifyNewSchedules(usersData);
-            updateDashboard(); // Ensure dashboard updates last
-        });
-
-        document.addEventListener("DOMContentLoaded", () => {
-    // Set the default section to show
-    selectSection("dashboard");
-
-    // Mobile Menu Toggle
-    document.getElementById("menu-toggle").addEventListener("click", () => {
-        document.getElementById("sidebar").classList.toggle("-translate-x-full");
-    });
-});
-
-function selectSection(sectionId) {
-    // Hide all sections
-    document.querySelectorAll(".content-section").forEach(section => {
-        section.classList.add("hidden");
+      // Mobile menu toggle
+      document.getElementById("toggleMenu").addEventListener("click", () => {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("hidden");
+      });
     });
 
-    // Show only the selected section
-    let selectedSection = document.getElementById(sectionId);
-    if (selectedSection) {
-        selectedSection.classList.remove("hidden");
+    function showAdminSection(id) {
+  document.querySelectorAll(".admin-section").forEach(sec => sec.classList.add("hidden"));
+  document.getElementById(id + "Section").classList.remove("hidden");
+
+  // Auto-close sidebar on small screens
+  const sidebar = document.getElementById("sidebar");
+  if (window.innerWidth < 768) {
+    sidebar.classList.add("hidden");
+  }
+}
+
+
+    function logout() {
+      localStorage.removeItem("admin");
+      window.location.href = "../adminlogin";
     }
 
-    // Auto-close sidebar on mobile
-    if (window.innerWidth < 768) {
-        document.getElementById("sidebar").classList.add("-translate-x-full");
+    async function loadStats() {
+      try {
+        const res = await fetch(`${API_BASE}/stats`);
+        const data = await res.json();
+        document.getElementById("totalUsers").textContent = data.totalUsers;
+        document.getElementById("activeSites").textContent = data.activeSites;
+        document.getElementById("totalRevenue").textContent = "$" + parseFloat(data.totalRevenue).toFixed(2);
+      } catch (err) {
+        console.error("Stats error", err);
+      }
     }
-}
 
+    async function loadUsers() {
+  try {
+    const res = await fetch(`${API_BASE}/users-with-sites`);
+    const users = await res.json();
 
-        async function fetchAllUsers() {
-    try {
-        const response = await fetch("https://iyonicweb.onrender.com/api/admin/schedules");
-        usersData = await response.json();
-        displaySchedules(usersData);
-    } catch (error) {
-        console.error("Error fetching users:", error);
-    }
-}
-        function displaySchedules(users) {
-    document.getElementById("schedule-list").innerHTML = "";
-    users.forEach(user => fetchUserSchedules(user._id, user.fullName, user.phone));
-}
-
-        function fetchUserSchedules(email, fullName, phone) {
-    fetch(`https://iyonicweb.onrender.com/api/schedules/${email}`)
-    .then(response => response.json())
-    .then(schedules => {
-        const userScheduleHTML = `
-        <div class="bg-white p-4 shadow-md rounded-lg">
-            <h3 class="text-xl font-bold">${fullName}</h3>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Phone:</strong> ${phone ? phone : "Not Available"}</p> <!-- Display Phone Number -->
-            <div id="schedule-${email}">
-            ${schedules.map(schedule => `
-                <div class="bg-gray-100 p-3 rounded shadow-sm border-l-4 border-blue-500">
-                    <p><strong>Template:</strong> ${schedule.templateName}</p>
-                    <p><strong>Scheduled Time:</strong> ${schedule.scheduleDate} at ${schedule.scheduleTime}</p>
-                    <p><strong>Time Left:</strong> <span id="timer-${schedule._id}"></span></p>
-                    <button onclick="assignToClient('${email}', '${fullName}', '${schedule.templateName}')" class="bg-green-500 text-white px-4 py-2 mt-2 rounded">Client</button>
-                </div>
-            `).join('')}
-            </div>
-        </div>
-        `;
-
-        document.getElementById("schedule-list").insertAdjacentHTML("beforeend", userScheduleHTML);
-        schedules.forEach(schedule => startCountdown(schedule._id, schedule.scheduleDate, schedule.scheduleTime));
-    });
-}
-
-        function startCountdown(scheduleId, date, time) {
-            function updateTimer() {
-                let now = new Date();
-                let target = new Date(`${date} ${time}`);
-                let difference = target - now;
-
-                if (difference > 0) {
-                    let hours = Math.floor(difference / (1000 * 60 * 60));
-                    let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                    document.getElementById(`timer-${scheduleId}`).textContent = `${hours}h ${minutes}m remaining`;
-                } else {
-                    document.getElementById(`timer-${scheduleId}`).textContent = "Expired";
-                }
-            }
-
-            updateTimer();
-            setInterval(updateTimer, 60000);
-        }
-
-        function updateDashboard() {
-    document.getElementById("total-users").textContent = usersData.length || 0;
-    document.getElementById("clients-count").textContent = assignedClients.length || 0;
-    document.getElementById("subscribers-count").textContent = subscribers.length || 0;
-    document.getElementById("notification-badge").textContent = `New Requests: ${newSchedules.length || 0}`;
-}
-        function assignToClient(email, fullName, templateName) {
-    fetch("https://iyonicweb.onrender.com/api/clients", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, fullName, templateName })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.message);
-        fetchAllClients(); // Refresh Client List
-    })
-    .catch(error => console.error("Error:", error));
-}
-
-async function fetchAllClients() {
-    try {
-        const response = await fetch("https://iyonicweb.onrender.com/api/clients");
-        const data = await response.json();
-        assignedClients = data;
-        displayClients(data);
-    } catch (error) {
-        console.error("Error fetching clients:", error);
-    }
-}
-
-        function displayClients(clients) {
-            let clientsList = document.getElementById("clients-list");
-            clientsList.innerHTML = clients.map(client => `
-                <div class="bg-white p-4 shadow-md rounded-lg">
-                    <h3 class="text-xl font-bold">${client.fullName}</h3>
-                    <p><strong>Email:</strong> ${client.email}</p>
-                    <p><strong>Template:</strong> ${client.templateName}</p>
-                    <button onclick="subscribeUser('${client.email}', '${client.fullName}', '${client.templateName}')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Subscribe</button>
-                </div>
-            `).join('');
-        }
-
-        async function fetchAllSubscribers() {
-    try {
-        const response = await fetch("https://iyonicweb.onrender.com/api/subscribers");
-        const data = await response.json();
-        subscribers = data;
-        displaySubscribers(data);
-    } catch (error) {
-        console.error("Error fetching subscribers:", error);
-    }
-}
-
-        function displaySubscribers(subscribers) {
-            let subscribersList = document.getElementById("subscribers-list");
-            subscribersList.innerHTML = subscribers.map(subscriber => `
-                <div class="bg-white p-4 shadow-md rounded-lg">
-                    <h3 class="text-xl font-bold">${subscriber.fullName}</h3>
-                    <p><strong>Email:</strong> ${subscriber.email}</p>
-                    <p><strong>Template:</strong> ${subscriber.templateName}</p>
-                    <p><strong>Price:</strong> $${subscriber.price}/month</p>
-                </div>
-            `).join('');
-        }
-
-        function subscribeUser(email, fullName, templateName) {
-            let price = prompt(`Enter subscription price for ${fullName}:`);
-            if (price) {
-                fetch("https://iyonicweb.onrender.com/api/subscribers", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ email, fullName, templateName, price })
-                })
-                .then(response => response.json())
-                .then(() => {
-                    fetchAllSubscribers(); // Update subscribers list immediately
-                    showSection('subscribers-section'); // Show subscribers section after subscribing
-                })
-                .catch(error => console.error("Error subscribing user:", error));
-            }
-        }
-    
-        function liveSearch() {
-            let query = document.getElementById("search-email").value.toLowerCase();
-            document.querySelectorAll("#schedule-list > div").forEach(card => {
-                card.style.display = card.textContent.toLowerCase().includes(query) ? "block" : "none";
-            });
-        }
-        function identifyNewSchedules(users) {
-    let existingSchedules = JSON.parse(localStorage.getItem("existingSchedules")) || [];
-    let tempNewSchedules = [];
+    const container = document.getElementById("usersTable");
+    container.innerHTML = "";
 
     users.forEach(user => {
-        fetch(`https://iyonicweb.onrender.com/api/schedules/${user._id}`)
-            .then(response => response.json())
-            .then(schedules => {
-                schedules.forEach(schedule => {
-                    let scheduleData = {
-                        id: schedule._id,
-                        email: user._id,
-                        fullName: user.fullName,
-                        templateName: schedule.templateName,
-                        scheduleDate: schedule.scheduleDate,
-                        scheduleTime: schedule.scheduleTime
-                    };
+      const userCard = document.createElement("div");
+      userCard.className = "bg-white p-6 rounded shadow space-y-2";
+      userCard.setAttribute("data-name", (user.name || "").toLowerCase());
+      userCard.setAttribute("data-email", (user.email || "").toLowerCase());
 
-                    // ✅ Only add if not in existingSchedules
-                    if (!existingSchedules.some(s => s.id === schedule._id)) {
-                        tempNewSchedules.push(scheduleData);
-                    }
-                });
+      const panelId = `panel-${user._id}`;
 
-                // ✅ Update newSchedules only with unseen schedules
-                newSchedules = tempNewSchedules;
-                localStorage.setItem("newSchedules", JSON.stringify(newSchedules));
-                displayNewSchedules();
-            });
+      userCard.innerHTML = `
+        <p><strong>Name:</strong> ${user.name || "N/A"}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+        <p><strong>Phone:</strong> ${user.phone || "—"}</p>
+
+        <p><strong>Banned:</strong> 
+          <span class="${user.banned ? 'text-red-600' : 'text-green-600'} font-medium">
+            ${user.banned ? 'Yes' : 'No'}
+          </span>
+        </p>
+
+        <button onclick="toggleBan('${user.email}', ${!user.banned})"
+          class="mt-1 px-3 py-1 text-sm rounded ${
+            user.banned
+              ? 'bg-green-600 hover:bg-green-700 text-white'
+              : 'bg-red-600 hover:bg-red-700 text-white'
+          }">
+          ${user.banned ? "Unban User" : "Ban User"}
+        </button>
+
+        <button onclick="toggleUserPanel('${panelId}')"
+          class="ml-2 text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded">
+          ${user.sites.length > 0 ? "Manage User" : "Show Info"}
+        </button>
+
+        <div id="${panelId}" class="hidden mt-3">
+          ${user.sites.length > 0 ? `
+            <h4 class="font-semibold mb-1 text-gray-700">Sites:</h4>
+            <ul class="space-y-2">
+              ${user.sites.map((site, index) => {
+                const timerId = `countdown-${user._id}-${index}`;
+                return `
+                <li class="border p-3 rounded bg-gray-50">
+                  <p><strong>Original Site:</strong> ${site.siteName}</p>
+                  <p><strong>Custom Name:</strong> ${site.customName || "—"}</p>
+                  <p><strong>Domain:</strong> ${site.domain || "—"}</p>
+                  <p><strong>Price:</strong> $${site.price}</p>
+                  <p><strong>Plan:</strong> ${site.planType}</p>
+                  <p><strong>Status:</strong> 
+                    <span class="inline-block px-2 py-1 rounded text-xs font-medium ${
+                      site.suspended ? "bg-yellow-100 text-yellow-800" :
+                      site.status === "Active" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+                    }">${site.suspended ? "Suspended" : site.status}</span>
+                  </p>
+
+                  <button onclick="toggleSuspend('${site._id}', ${!site.suspended})"
+                    class="mt-2 px-3 py-1 text-sm rounded ${
+                      site.suspended
+                        ? 'bg-green-600 hover:bg-green-700 text-white'
+                        : 'bg-yellow-600 hover:bg-yellow-700 text-white'
+                    }">
+                    ${site.suspended ? "Unsuspend" : "Suspend"}
+                  </button>
+
+                  <p><strong>Time Left:</strong> <span id="${timerId}" class="text-sm text-gray-600">Calculating...</span></p>
+                </li>
+                `;
+              }).join("")}
+            </ul>
+          ` : `<p class="text-sm text-gray-500">No sites yet.</p>`}
+        </div>
+      `;
+
+      container.appendChild(userCard);
+
+      user.sites.forEach((site, index) => {
+        const elId = `countdown-${user._id}-${index}`;
+        startExpiryTimer(elId, site.lastPaymentDate, site.planType || "monthly");
+      });
+    });
+
+  } catch (err) {
+    console.error("Users + Sites load error", err);
+  }
+}
+
+function toggleBan(email, ban) {
+  fetch("https://iyonicweb.onrender.com/api/admin/ban-user", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, banned: ban })
+  })
+    .then(res => res.json())
+    .then(data => {
+      alert(data.message);
+      loadUsers(); // Refresh after action
+    })
+    .catch(err => {
+      console.error("Toggle ban error:", err);
+      alert("❌ Failed to toggle ban.");
     });
 }
 
-function displayNewSchedules() {
-    let newScheduleList = document.getElementById("new-schedule-list");
+function startExpiryTimer(elementId, lastPaymentDate, planType = "monthly") {
+  const msPerPlan = {
+    daily: 1 * 86400000,
+    weekly: 7 * 86400000,
+    monthly: 30 * 86400000
+  };
 
-    if (newSchedules.length === 0) {
-        newScheduleList.innerHTML = `<p class="text-gray-500">No new schedules available.</p>`;
-    } else {
-        newScheduleList.innerHTML = newSchedules.map(schedule => `
-            <div class="bg-yellow-100 p-4 shadow-md rounded-lg border-l-4 border-yellow-500">
-                <h3 class="text-xl font-bold">${schedule.fullName}</h3>
-                <p><strong>Email:</strong> ${schedule.email}</p>
-                <p><strong>Template:</strong> ${schedule.templateName}</p>
-                <p><strong>Scheduled Time:</strong> ${schedule.scheduleDate} at ${schedule.scheduleTime}</p>
-                <button onclick="markAsSeen('${schedule.id}')" class="bg-green-500 text-white px-4 py-2 mt-2 rounded">Done</button>
-            </div>
-        `).join('');
-    }
-}
+  const el = document.getElementById(elementId);
+  if (!el || !lastPaymentDate) return;
 
-function markAsSeen(scheduleId) {
-    // Find the schedule before removing it
-    let seenSchedule = newSchedules.find(schedule => schedule.id === scheduleId);
+  const planMS = msPerPlan[planType] || msPerPlan["monthly"];
+  const baseDate = new Date(lastPaymentDate).getTime();
+  const targetDate = baseDate + planMS;
 
-    if (!seenSchedule) return; // Safety check
+  function updateTimer() {
+    const now = Date.now();
+    const diff = targetDate - now;
 
-    // Remove the schedule from newSchedules
-    newSchedules = newSchedules.filter(schedule => schedule.id !== scheduleId);
-
-    // Get existingSchedules from localStorage
-    let existingSchedules = JSON.parse(localStorage.getItem("existingSchedules")) || [];
-
-    // Add to existingSchedules (avoid duplicates)
-    if (!existingSchedules.some(s => s.id === scheduleId)) {
-        existingSchedules.push(seenSchedule);
+    if (diff <= 0) {
+      el.textContent = "Expired";
+      clearInterval(timer);
+      return;
     }
 
-    // ✅ Update localStorage permanently
-    localStorage.setItem("newSchedules", JSON.stringify(newSchedules));
-    localStorage.setItem("existingSchedules", JSON.stringify(existingSchedules));
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
 
-    // ✅ Refresh UI to remove marked schedule
-    displayNewSchedules();
+    el.textContent = `${days}d ${hours}h ${mins}m`;
+  }
+
+  updateTimer(); // call immediately
+  const timer = setInterval(updateTimer, 60000);
 }
-function validateLogin() {
-            let email = document.getElementById("admin-email").value;
-            let password = document.getElementById("admin-password").value;
 
-            // Admin credentials
-            const adminEmail = "b0110296158@gmail.com";
-            const adminPassword = "@7Switched";
+    function filterUsers() {
+      const query = document.getElementById("userSearchInput").value.toLowerCase().trim();
+      const cards = document.querySelectorAll("#usersTable > div");
 
-            if (email === adminEmail && password === adminPassword) {
-                document.getElementById("login-popup").classList.add("hidden");
-                document.getElementById("content").classList.remove("hidden");
-            } else {
-                document.getElementById("error-message").classList.remove("hidden");
-            }
-        }
+      cards.forEach(card => {
+        const name = card.getAttribute("data-name") || "";
+        const email = card.getAttribute("data-email") || "";
+        const show = name.includes(query) || email.includes(query);
+        card.style.display = show ? "block" : "none";
+      });
+    }
+    function toggleUserPanel(id) {
+  const panel = document.getElementById(id);
+  if (panel) {
+    panel.classList.toggle("hidden");
+  }
+}
 
-        document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById("login-popup").classList.remove("hidden");
-        });
 
-    </script>
+  </script>
+<script>
+  async function toggleSuspend(subscriptionId, suspend) {
+    try {
+      const res = await fetch("https://iyonicweb.onrender.com/api/admin/toggle-suspend", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subscriptionId, suspend })
+      });
+
+      const data = await res.json();
+      alert(data.message);
+      loadUsers(); // refresh user list
+    } catch (err) {
+      console.error("Suspend toggle error:", err);
+      alert("Failed to toggle suspend.");
+    }
+  }
+</script>
+
 </body>
 </html>

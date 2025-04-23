@@ -3,514 +3,921 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard - Iyonicorp</title>
+  <title>Iyonicorp Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="logo.png" />
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: #f0f2f5;
       display: flex;
       height: 100vh;
-    }
-
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: #333;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      z-index: 10;
+      background-color: #f4f4f4;
+      overflow-x: hidden;
     }
 
     .sidebar {
       width: 250px;
-      background: #222;
+      background: #121212;
       color: white;
-      padding-top: 60px;
-      flex-shrink: 0;
-      height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
       position: fixed;
-      display: none;
+      height: 100%;
+      left: -260px;
+      transition: left 0.3s ease-in-out;
+      z-index: 50;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 20px;
     }
 
     .sidebar button {
-      width: 100%;
-      padding: 15px;
-      background: none;
-      border: none;
       color: white;
       text-align: left;
-      cursor: pointer;
-      border-bottom: 1px solid #333;
+      padding: 10px;
+      margin: 5px 0;
+      border: none;
+      background: transparent;
+      border-radius: 5px;
+      transition: background 0.3s;
     }
 
     .sidebar button:hover {
-      background: #444;
+      background: #ff6600;
     }
 
-    .main {
-      margin-left: 250px;
-      padding: 80px 30px 30px;
-      width: 100%;
-      overflow-y: auto;
-      display: none;
-    }
-
-    .section {
-      display: none;
-    }
-
-    .site-card {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-
-    input[type="text"] {
-      padding: 8px;
-      width: 70%;
-      margin: 5px 0;
-    }
-
-    button.action {
-      padding: 8px 12px;
-      margin-top: 5px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .price-tag {
-      color: #ff6600;
-      font-weight: bold;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.5);
-    }
-
-    .modal-content {
-      background-color: #fff;
-      margin: 10% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 400px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-
-    .modal-content input {
-      width: 100%;
-    }
-
-    .close {
-      float: right;
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    .domain-result {
-      background: #fff;
-      padding: 10px;
-      border-radius: 5px;
-      margin-top: 10px;
-    }
-
-    #signupPopup, #loginPopup {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .auth-box {
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      width: 300px;
-      text-align: center;
-    }
-
-    .auth-box input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-    }
-
-    .auth-box button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      cursor: pointer;
-    }
-
-    #logoutBtn {
-      display: none;
-      position: fixed;
-      top: 10px;
-      right: 10px;
+    .logout-btn {
+      margin-top: auto;
       background: red;
-      color: white;
-      border: none;
+      text-align: center;
       padding: 10px;
       border-radius: 5px;
-      z-index: 10000;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: darkred;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      margin-left: 0;
+      transition: margin-left 0.3s ease-in-out;
+      width: 100%;
+    }
+
+    .menu-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: #ff6600;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      z-index: 100;
+    }
+
+    .menu-btn:hover {
+      background: #cc5200;
+    }
+
+    @media (min-width: 768px) {
+      .sidebar {
+        left: 0;
+      }
+
+      .menu-btn {
+        display: none;
+      }
+
+      .main-content {
+        margin-left: 250px;
+      }
     }
   </style>
 </head>
+<body class="bg-gray-100">
+  <script src="https://js.paystack.co/v1/inline.js"></script>
 
-<body>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <h2>Iyonicorp</h2>
+    <button onclick="showSection('mySites')">My Sites</button>
+    <button onclick="showSection('subscriptions')">Subscriptions</button>
+    <button onclick="showSection('manageSubscription')">Manage Subscription</button>
+    <button onclick="showSection('domains')">Domains</button>
+    <button onclick="showSection('settings')">Settings</button>
+    <div class="logout-btn" onclick="logout()">Logout</div>
+  </div>
 
-<header>Iyonicorp - User Dashboard</header>
+  <!-- Toggle Button for Mobile -->
+  <button class="menu-btn" id="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
 
-<div class="sidebar">
-  <button onclick="showSection('sitesSection')">📄 My Sites</button>
-  <button onclick="showSection('domainSection')">🌐 Domain</button>
-  <button onclick="showSection('paymentSection')">💳 Payments</button>
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <section id="mySites" class="section">
+      <h2 class="text-2xl font-bold mb-4">Manage My Sites</h2>
+      <div id="siteSettings" class="space-y-4"></div>
+    </section>
+
+    <section id="subscriptions" class="section hidden">
+      <h2 class="text-2xl font-bold mb-4">My Subscriptions</h2>
+      <div id="subscriptionsList" class="space-y-4"></div>
+    </section>
+
+    <section id="manageSubscription" class="section hidden">
+      <h2 class="text-2xl font-bold mb-4">Subscription Payments</h2>
+      <div id="subscriptionDetails"></div>
+    </section>
+
+    <section id="domains" class="section hidden">
+      <h2 class="text-2xl font-bold mb-4">Domains</h2>
+      <div id="noSiteMessage" class="text-red-600 hidden">You must have an active site to claim a domain.</div>
+      <div id="claimOptions" class="hidden space-y-4">
+        <label class="block font-medium text-gray-700">Select your site:</label>
+        <select id="siteSelect" class="w-full border px-3 py-2 rounded"></select>
+
+        <label class="block font-medium text-gray-700">Free Domain (yoursite.iyonicorp.com)</label>
+        <input type="text" id="subdomainInput" placeholder="yourname" class="w-full px-3 py-2 border rounded" />
+        <button onclick="claimSubdomain()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full">
+          Claim Free Subdomain
+        </button>
+        <p id="domainStatus" class="text-sm text-green-600 hidden mt-2"></p>
+
+        <hr class="my-2">
+<!-- Buy a New Domain Section -->
+<div class="bg-white mt-8 p-6 rounded shadow border border-gray-200 space-y-4">
+  <div class="flex items-center space-x-2">
+    <span class="text-xl">🛒</span>
+    <h2 class="text-lg font-semibold text-gray-800">Need a New Domain?</h2>
+  </div>
+
+  <p class="text-gray-700 text-sm leading-relaxed">
+    If you don’t already have a domain, you can search for one now. <strong>But don’t buy it directly on Namecheap.</strong> 
+    Instead, let <strong>Iyonicorp manage it for you</strong> to avoid extra connection/setup fees later.
+  </p>
+
+  <div class="flex flex-col sm:flex-row gap-3">
+    <input type="text" id="domainSearchInput" placeholder="Search domain e.g. mybrand.com" class="w-full border px-3 py-2 rounded" />
+    <a target="_blank" id="namecheapLink" href="https://www.namecheap.com/domains/registration/results/?domain=" class="bg-gray-600 hover:bg-gray-800 text-white px-4 py-2 rounded text-center">
+      🔍 Search on Namecheap
+    </a>
+  </div>
+
+  <div class="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-400 text-sm text-yellow-700 rounded">
+    <strong>⚠️ Important:</strong> If you let Iyonicorp manage your domain purchase, we will take care of setup and configuration.<br />
+    After you submit a request, you will receive a <strong>subscription invoice by email</strong> to finalize the purchase and activate your domain.
+  </div>
+
+  <button onclick="requestManagedDomain()" class="mt-3 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full">
+    💼 Let Iyonicorp Handle Everything
+  </button>
 </div>
 
-<div class="main">
-  <div class="section" id="sitesSection">
-    <h2>My Sites</h2>
-    <div id="sitesList"></div>
+
+<!-- Custom Domain -->
+<div class="bg-white rounded-xl shadow-lg p-6 space-y-6 border border-gray-200">
+
+  <div class="flex items-center space-x-2">
+    <span class="text-2xl">🌍</span>
+    <h2 class="text-xl font-semibold text-gray-800">Connect Your Custom Domains</h2>
   </div>
 
-  <div class="section" id="domainSection">
-    <h2>Search & Claim Free Subdomain</h2>
-    <input type="text" id="domainSearch" placeholder="Enter name (e.g. mysite)">
-    <button class="action" onclick="checkDomain()">Check Availability</button>
-    <div class="domain-result" id="domainResult"></div>
+  <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800">
+    Choose how to connect your domain:
+    <ul class="list-disc list-inside mt-2">
+      <li><strong>🔧 Manual Setup ($2 each):</strong> You’ll update DNS yourself.</li>
+      <li><strong>🛠 Assisted Setup ($5 each):</strong> Let us do it for you!</li>
+      <li class="text-green-600">🎁 Get 30% OFF when you connect 3 or more domains at once!</li>
+    </ul>
   </div>
 
-  <div class="section" id="paymentSection">
-    <h2>Payments</h2>
-    <div id="paymentList"></div>
+  <div class="space-y-3" id="customDomainsContainer"></div>
+
+  <button onclick="addMoreDomainField()" 
+          class="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium">
+    ➕ Add Another Domain
+  </button>
+
+  <div class="flex flex-col md:flex-row items-start md:items-center gap-4 mt-4">
+    <label for="setupType" class="text-sm font-medium text-gray-700">Setup Type:</label>
+    <select id="setupType" class="border border-gray-300 px-4 py-2 rounded focus:ring-blue-500 focus:border-blue-500">
+      <option value="self">🔧 I’ll connect them myself ($2 each)</option>
+      <option value="assisted">🛠 Let Iyonicorp handle it ($5 each)</option>
+    </select>
+
+    <button onclick="calculateAndShowDomainCost()" 
+            class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded shadow-md transition">
+      💰 Calculate Total
+    </button>
   </div>
+
+  <p id="customDomainCost" class="mt-2 text-lg font-semibold text-green-700 hidden"></p>
+
+  <button id="payCustomDomainBtn"
+          class="mt-4 hidden bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded shadow-sm transition"
+          onclick="payForDomains()">
+    ✅ Proceed to Payment
+  </button>
+
+  <div id="manualInstructions" class="mt-6 hidden text-sm text-gray-800 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+    <h3 class="font-semibold text-yellow-700 mb-2">📘 Manual DNS Setup Instructions</h3>
+    <p>To manually connect your domain, create the following DNS records:</p>
+    <ul class="list-disc list-inside mt-2 ml-4 text-gray-700">
+      <li><strong>CNAME:</strong> <code>www.yourdomain.com → connect.iyonicorp.com</code></li>
+      <li><strong>A Record:</strong> <code>@ → 104.248.XX.XX</code> (replace XX.XX with final IP)</li>
+    </ul>
+    <p class="mt-3">After completing the setup, come back and click <strong>“Proceed to Payment”</strong> to activate your domain.</p>
+  </div>
+  <!-- Assign Domain to Site -->
+<div id="assignDomainSection" class="bg-white mt-6 p-4 rounded shadow hidden">
+  <h3 class="font-semibold text-lg text-gray-800 mb-2">🔗 Assign a Custom Domain to a Site</h3>
+
+  <div class="mb-4">
+    <label for="domainSelect" class="block text-sm font-medium text-gray-700 mb-1">Select Domain:</label>
+    <select id="domainSelect" class="w-full border px-3 py-2 rounded"></select>
+  </div>
+
+  <div class="mb-4">
+    <label for="siteAssignSelect" class="block text-sm font-medium text-gray-700 mb-1">Select Site:</label>
+    <select id="siteAssignSelect" class="w-full border px-3 py-2 rounded"></select>
+  </div>
+
+  <button onclick="assignDomainToSite()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full">
+    Assign Domain
+  </button>
+
+  <p id="assignDomainStatus" class="text-sm mt-2 text-green-600 hidden"></p>
 </div>
 
-<!-- Site Modal -->
-<div id="siteModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">×</span>
-    <h3>Manage Site</h3>
-    <input type="text" id="renameInput" placeholder="New site name"><br>
-    <input type="text" id="domainInput" placeholder="Connected domain"><br>
-    <button class="action" onclick="saveSiteChanges()">Save</button>
-  </div>
 </div>
 
-<!-- Signup Modal -->
-<div id="signupPopup">
-  <div class="auth-box">
-    <h2>Sign Up</h2>
-    <input type="email" id="signupEmail" placeholder="Email">
-    <input type="password" id="signupPassword" placeholder="Password">
-    <button onclick="handleSignup()" style="background: green; color: white;">Sign Up</button>
-    <p>Already have an account? <a href="#" onclick="switchToLogin()">Login</a></p>
+    </section>
+
+    <section id="settings" class="section hidden">
+      <div class="bg-white p-6 rounded shadow space-y-6">
+        <h2 class="text-2xl font-bold text-gray-800">⚙️ Account Settings</h2>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            
+            <div class="bg-white p-6 rounded shadow" id="userDetails"></div>
+            <div class="mt-6">
+              <h3 class="font-semibold text-lg text-gray-700 mb-2">🔐 Change Password</h3>
+              <form id="changePasswordForm" class="space-y-4">
+                <input type="password" id="oldPassword" placeholder="Current Password" class="w-full p-2 border rounded" required />
+                <input type="password" id="newPassword" placeholder="New Password" class="w-full p-2 border rounded" required />
+                <button type="submit" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">Update Password</button>
+              </form>
+              <p id="passwordStatus" class="text-sm mt-2 text-green-600 hidden"></p>
+            </div>
+            
+    
+          <div>
+            <h3 class="font-semibold text-lg mb-2 text-gray-700">📦 Subscription Tips</h3>
+            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+              <li>Ensure your payment method is active to avoid interruptions.</li>
+              <li>You can upgrade or downgrade your plan anytime.</li>
+              <li>Connect a custom domain for better branding.</li>
+              <li>Check the "Manage Subscription" tab to view timers and renewals.</li>
+            </ul>
+          </div>
+        </div>
+    
+        <div class="mt-8">
+          <h3 class="font-semibold text-lg text-gray-700 mb-2">📬 Contact Support</h3>
+          <p class="text-gray-600 mb-2">Need help or have a question? Reach out to us:</p>
+          <div class="flex items-center space-x-4">
+            <a href="mailto:iyonicorp@gmail.com.com" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Email Support</a>
+            <a href="https://wa.me/19405032012" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">WhatsApp Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
   </div>
-</div>
 
-<!-- Login Modal -->
-<div id="loginPopup">
-  <div class="auth-box">
-    <h2>Login</h2>
-    <input type="email" id="loginEmail" placeholder="Email">
-    <input type="password" id="loginPassword" placeholder="Password">
-    <button onclick="handleLogin()" style="background: blue; color: white;">Login</button>
-    <p><a onclick="switchToReset()">Forgot password?</a></p>
+  <script>
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) window.location.href = "../login";
+  
+    const sidebar = document.getElementById("sidebar");
+    const menuBtn = document.getElementById("menu-btn");
+  
+    function toggleSidebar() {
+      sidebar.classList.toggle("open");
+      menuBtn.style.display = sidebar.classList.contains("open") ? "none" : "block";
+    }
+    function showSection(id) {
+  document.querySelectorAll(".section").forEach(sec => sec.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
 
-    <p>Don't have an account? <a href="#" onclick="switchToSignup()">Sign Up</a></p>
-  </div>
-</div>
-
-<button id="logoutBtn" onclick="logout()">Logout</button>
-
-<script src="https://js.paystack.co/v1/inline.js"></script>
-<script>
-  let sites = JSON.parse(localStorage.getItem("mySites")) || [];
-  let editingIndex = null;
-
-  function showSection(id) {
-    document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
-    document.getElementById(id).style.display = 'block';
-    if (id === 'paymentSection') renderPayments();
-    if (id === 'sitesSection') renderSites();
-  }
-
-  function renderSites() {
-    const container = document.getElementById("sitesList");
-    container.innerHTML = sites.length === 0 ? "<p>No rented sites yet.</p>" : "";
-    sites.forEach((site, index) => {
-      const div = document.createElement("div");
-      div.className = "site-card";
-      div.innerHTML = `
-        <h3>${site.newName || site.name}</h3>
-        <p><strong>Original:</strong> ${site.name}</p>
-        <p class="price-tag">Price: $${site.price} / month</p>
-        <p><strong>Domain:</strong> ${site.domain || 'Not connected'}</p>
-        <button class="action" onclick="openModal(${index})">Manage Site</button>
+  if (id === "subscriptions") loadSubscriptions();
+  if (id === "manageSubscription") loadSubscriptionDetails();
+  if (id === "mySites") loadMySites();
+  if (id === "domains") loadDomainSection();
+  if (id === "settings") {
+    const userDetailsEl = document.getElementById("userDetails");
+    if (userDetailsEl) {
+      userDetailsEl.innerHTML = `
+        <p><strong>Name:</strong> ${user.name}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+        <p><strong>Phone:</strong> ${user.phone || 'Not provided'}</p>
       `;
-      container.appendChild(div);
-    });
-  }
-
-  function openModal(index) {
-    editingIndex = index;
-    const site = sites[index];
-    document.getElementById("renameInput").value = site.newName || "";
-    document.getElementById("domainInput").value = site.domain || "";
-    document.getElementById("siteModal").style.display = "block";
-  }
-
-  function closeModal() {
-    document.getElementById("siteModal").style.display = "none";
-    editingIndex = null;
-  }
-
-  function saveSiteChanges() {
-    if (editingIndex !== null) {
-      sites[editingIndex].newName = document.getElementById("renameInput").value;
-      sites[editingIndex].domain = document.getElementById("domainInput").value;
-      localStorage.setItem("mySites", JSON.stringify(sites));
-      renderSites();
-      closeModal();
     }
   }
 
-  function checkDomain() {
-    const input = document.getElementById("domainSearch").value.trim();
-    const result = document.getElementById("domainResult");
-    if (!input) return result.innerHTML = `<p style="color:red;">Please enter a name.</p>`;
-
-    const available = Math.random() > 0.3;
-    const domain = `${input}.iyonicorp.com`;
-
-    result.innerHTML = available 
-      ? `<p style="color:green;">✅ <strong>${domain}</strong> is available!</p><button class="action" onclick="copyToClipboard('${domain}')">Copy Domain</button>`
-      : `<p style="color:red;">❌ That name is already taken. Try another.</p>`;
-  }
-
-  function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => alert("Domain copied to clipboard!"));
-  }
-
-  function renderPayments() {
-  const container = document.getElementById("paymentList");
-  container.innerHTML = "";
-  const sites = JSON.parse(localStorage.getItem("mySites")) || [];
-
-  sites.forEach((site, index) => {
-    const total = site.price;
-    site.amountPaid = site.amountPaid || 0;
-    site.credit = site.credit || 0;
-    
-    const effectivePaid = site.amountPaid + site.credit;
-    const balance = Math.max(total - effectivePaid, 0).toFixed(2);
-    const domain = site.domain || "Not connected";
-
-    // Calculate flexible payments
-    const daily = +(total / 30).toFixed(2);
-    const weekly = +(total / 4).toFixed(2);
-    const monthly = total;
-
-    const siteDiv = document.createElement("div");
-    siteDiv.style.marginBottom = "20px";
-    siteDiv.style.border = "1px solid #ccc";
-    siteDiv.style.padding = "15px";
-    siteDiv.style.borderRadius = "8px";
-
-    siteDiv.innerHTML = `
-      <h3>${site.name}</h3>
-              <p><strong>New Name:</strong> ${site.newName || site.name}</p>
-      <p><strong>Domain:</strong> ${domain}</p>
-        <p class="price-tag">Price: $${site.price} / month</p>
-      <p><strong>Paid:</strong> $${site.amountPaid.toFixed(2)}</p>
-      <p><strong>Credit:</strong> $${site.credit.toFixed(2)}</p>
-      <p><strong>Balance:</strong> $${balance}</p>
-      <button onclick="payWithPaystack(${index}, ${daily})">Pay Daily ($${daily})</button>
-      <button onclick="payWithPaystack(${index}, ${weekly})">Pay Weekly ($${weekly})</button>
-      <button onclick="payWithPaystack(${index}, ${monthly})">Pay Monthly ($${monthly})</button>
-    `;
-
-    container.appendChild(siteDiv);
-  });
+  if (window.innerWidth < 768) toggleSidebar();
 }
-function payWithPaystack(siteIndex, amount) {
-  const sites = JSON.parse(localStorage.getItem("mySites")) || [];
-  const site = sites[siteIndex];
-  const total = site.price;
 
-  // Prompt user to enter their email address
-  const email = prompt("Please enter your email address to proceed with payment:");
+  
+    function loadSubscriptions() {
+  fetch(`https://iyonicweb.onrender.com/api/user-subscriptions?email=${user.email}`)
+    .then(res => res.json())
+    .then(subs => {
+      const container = document.getElementById("subscriptionsList");
 
-  // Basic email validation
-  if (!email || !email.includes("@") || !email.includes(".")) {
-    alert("Invalid email address. Payment cancelled.");
+      // Calculate total amount
+      const totalAmount = subs.reduce((sum, sub) => sum + parseFloat(sub.price || 0), 0);
+
+      // Build HTML
+      const summary = `
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4 rounded">
+          <p class="font-semibold">Total Subscriptions:</p>
+          <p class="text-lg font-bold">$${totalAmount.toFixed(2)}</p>
+        </div>
+      `;
+
+      const details = subs.map(sub => `
+  <div class="bg-white p-4 rounded shadow ${sub.suspended ? 'opacity-60' : ''}">
+    <p><strong>Template:</strong> ${sub.siteName}</p>
+    <p><strong>Custom Name:</strong> ${sub.customName || 'Not renamed'}</p>
+    <p><strong>Price:</strong> $${sub.price}</p>
+    <p><strong>Status:</strong> 
+      <span class="inline-block px-2 py-1 text-xs rounded font-medium ${
+        sub.suspended ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
+      }">${sub.suspended ? 'Suspended' : 'Active'}</span>
+    </p>
+    <p><strong>Date:</strong> ${new Date(sub.createdAt).toLocaleDateString()}</p>
+  </div>
+`).join("");
+      container.innerHTML = summary + details;
+    });
+}
+
+async function loadMySites() {
+  const container = document.getElementById("siteSettings");
+
+  // Get user subscriptions
+  const subsRes = await fetch(`https://iyonicweb.onrender.com/api/user-subscriptions?email=${user.email}`);
+  const subs = await subsRes.json();
+
+  // Get assigned custom domains
+  const domainRes = await fetch(`https://iyonicweb.onrender.com/api/custom-domains?email=${user.email}`);
+  const allDomains = await domainRes.json();
+
+  container.innerHTML = subs.map(sub => {
+    const assignedDomains = allDomains
+      .filter(d => d.siteId === sub._id)
+      .map(d => `<li class="text-sm text-gray-700">${d.domain} <span class="text-xs text-gray-500">(${d.setup})</span></li>`)
+      .join("");
+
+    return `
+      <form onsubmit="return saveSite(event, '${sub._id}')" class="bg-white p-4 rounded shadow space-y-3 ${sub.suspended ? 'opacity-60' : ''}">
+        <p><strong>Original Site:</strong> ${sub.siteName}</p>
+        <p><strong>Status:</strong> 
+          <span class="inline-block px-2 py-1 text-xs rounded font-medium ${
+            sub.suspended ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
+          }">${sub.suspended ? 'Suspended' : 'Active'}</span>
+        </p>
+
+        <input type="text" 
+               placeholder="Rename your template" 
+               value="${sub.customName || ''}" 
+               class="w-full border px-3 py-2 rounded" 
+               id="rename-${sub._id}" 
+               ${sub.suspended ? 'disabled' : ''}>
+
+        <input type="text" 
+               placeholder="yourdomain.com" 
+               value="${sub.domain || ''}" 
+               class="w-full border px-3 py-2 rounded" 
+               id="domain-${sub._id}"
+               ${sub.suspended ? 'disabled' : ''}>
+
+        <button type="submit" 
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                ${sub.suspended ? 'disabled class="bg-gray-300 cursor-not-allowed"' : ''}>
+          Save Changes
+        </button>
+
+        ${assignedDomains 
+          ? `<div class="mt-4 bg-gray-50 border border-gray-200 rounded p-3">
+              <p class="text-sm font-semibold text-gray-800 mb-1">🔗 Assigned Custom Domains:</p>
+              <ul class="list-disc list-inside">${assignedDomains}</ul>
+            </div>`
+          : ''
+        }
+      </form>
+    `;
+  }).join("");
+}
+
+    function saveSite(e, id) {
+      e.preventDefault();
+      const customName = document.getElementById(`rename-${id}`).value;
+      const domain = document.getElementById(`domain-${id}`).value;
+  
+      fetch("https://iyonicweb.onrender.com/api/site-settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, customName, domain })
+      })
+      .then(res => res.json())
+      .then(() => {
+        alert("Site updated!");
+        loadMySites();
+      });
+    }
+  
+    function loadSubscriptionDetails() {
+      fetch(`https://iyonicweb.onrender.com/api/user-subscriptions?email=${user.email}`)
+        .then(res => res.json())
+        .then(subs => {
+          const container = document.getElementById("subscriptionDetails");
+          container.innerHTML = subs.map(sub => {
+            const total = sub.price;
+            const plan = sub.planType || "monthly";
+            const paid = parseFloat(sub.totalPaid || 0);
+            const balance = Math.max(total - paid, 0);
+            const planRate = parseFloat(getPlanRate(plan, total));
+            const disabled = sub.suspended || balance <= 0 ? 'disabled class="bg-gray-400 cursor-not-allowed"' : '';
+  
+            return `
+              <div class="bg-white p-6 rounded shadow space-y-3">
+                <p><strong>Site:</strong> ${sub.customName || sub.siteName}</p>
+                <p><strong>Monthly Cost:</strong> $${total}</p>
+                <p><strong>Paid this month:</strong> $${paid.toFixed(2)}</p>
+                <p><strong>Credit:</strong> $${(sub.credit || 0).toFixed(2)}</p>
+                <p><strong>Remaining:</strong> $${balance.toFixed(2)}</p>
+                <p><strong>Time left in plan:</strong> <span id="countdown-${sub._id}">Calculating...</span></p>
+                 <span class="inline-block px-2 py-1 text-xs rounded font-medium ${
+    sub.suspended ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
+  }">${sub.suspended ? 'Suspended' : 'Active'}</span>
+</p>
+${sub.suspended ? '<p class="text-sm text-red-500">This site is currently suspended. Payment is temporarily disabled.</p>' : ''}
+  
+                <label class="block font-medium mb-1">Payment Plan:</label>
+                <select onchange="updatePlanType('${sub._id}', this.value)" class="w-full border px-3 py-2 rounded mb-2">
+                  <option value="daily" ${plan === 'daily' ? 'selected' : ''}>Daily - $${getPlanRate('daily', total)}</option>
+                  <option value="weekly" ${plan === 'weekly' ? 'selected' : ''}>Weekly - $${getPlanRate('weekly', total)}</option>
+                  <option value="monthly" ${plan === 'monthly' ? 'selected' : ''}>Monthly - $${getPlanRate('monthly', total)}</option>
+                </select>
+  
+                <div class="w-full bg-gray-200 h-2 rounded">
+                  <div class="bg-green-500 h-2 rounded" style="width: ${(paid / total) * 100}%;"></div>
+                </div>
+  
+                <button onclick="payWithPaystack('${user.email}', ${planRate}, '${sub._id}')"
+                  ${disabled}
+                  class="mt-3 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+                  Pay $${planRate.toFixed(2)} (${plan})
+                </button>
+              </div>
+            `;
+          }).join("");
+          subs.forEach(sub => {
+            startExpiryTimer(sub._id, sub.lastPaymentDate, sub.planType || "monthly");
+          });
+        });
+    }
+  
+    function getPlanRate(plan, monthlyTotal) {
+      if (plan === "daily") return (monthlyTotal / 30).toFixed(2);
+      if (plan === "weekly") return (monthlyTotal / 4).toFixed(2);
+      return monthlyTotal.toFixed(2);
+    }
+  
+    function getNextDueDate(lastPayment, plan) {
+      const msPer = {
+        daily: 86400000,
+        weekly: 7 * 86400000,
+        monthly: 30 * 86400000
+      };
+      const last = new Date(lastPayment || Date.now()).getTime();
+      return last + msPer[plan];
+    }
+  
+    function updateCountdowns() {
+      const now = Date.now();
+      document.querySelectorAll("[id^='countdown-']").forEach(el => {
+        const subId = el.id.replace("countdown-", "");
+        const nextDue = getNextDueDate(localStorage.getItem(`lastPayment-${subId}`), 'daily');
+        const diff = nextDue - now;
+  
+        const days = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000);
+        const mins = Math.floor((diff % 3600000) / 60000);
+  
+        el.textContent = `${days}d ${hours}h ${mins}m`;
+      });
+    }
+    setInterval(updateCountdowns, 60000);
+  
+    function payWithPaystack(email, amount, subscriptionId) {
+      let handler = PaystackPop.setup({
+        key: 'pk_test_232531a5c927ef2cc67ed1b85af3f26e3b8ed2f2',
+        email: email,
+        amount: Math.round(amount * 100),
+        currency: "USD",
+        callback: function (response) {
+          fetch("https://iyonicweb.onrender.com/api/record-payment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email,
+              amount,
+              subscriptionId,
+              reference: response.reference
+            })
+          })
+          .then(res => res.json())
+          .then(() => {
+            alert("Payment recorded!");
+            loadSubscriptionDetails();
+          });
+        },
+        onClose: function () {
+          alert("Payment window closed");
+        }
+      });
+  
+      handler.openIframe();
+    }
+  
+    function updatePlanType(subscriptionId, planType) {
+      fetch("https://iyonicweb.onrender.com/api/update-plan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subscriptionId, planType })
+      })
+      .then(res => res.json())
+      .then(() => loadSubscriptionDetails());
+    }
+  
+    async function loadDomainSection() {
+  const siteRes = await fetch(`https://iyonicweb.onrender.com/api/user-subscriptions?email=${user.email}`);
+  const sites = await siteRes.json();
+
+  if (!sites || sites.length === 0) {
+    document.getElementById("noSiteMessage").classList.remove("hidden");
+    document.getElementById("claimOptions").classList.add("hidden");
     return;
   }
 
-  let handler = PaystackPop.setup({
-    key: 'pk_live_7ab8e015626516d7d00210b2e7fe169805c226b8', // Replace with your actual public key
-    email: email,
-    amount: Math.round(amount * 100), // Convert to kobo
-    currency: 'USD',
-    metadata: {
-      custom_fields: [
-        {
-          display_name: "Site Name",
-          variable_name: "site_name",
-          value: site.name
-        }
-      ]
-    },
-    callback: function(response) {
-      site.amountPaid = site.amountPaid || 0;
-      site.credit = site.credit || 0;
+  document.getElementById("noSiteMessage").classList.add("hidden");
+  document.getElementById("claimOptions").classList.remove("hidden");
 
-      const totalSoFar = site.amountPaid + site.credit;
-      const balanceRemaining = total - totalSoFar;
+  const select = document.getElementById("siteSelect");
+  select.innerHTML = sites.map(site => `<option value="${site._id}">${site.customName || site.siteName}</option>`).join("");
 
-      if (amount <= balanceRemaining) {
-        site.amountPaid = +(site.amountPaid + amount).toFixed(2);
-      } else {
-        const overPayment = amount - balanceRemaining;
-        site.amountPaid = total;
-        site.credit = +(site.credit + overPayment).toFixed(2);
+  // Subdomain count
+  const subdomainRes = await fetch(`https://iyonicweb.onrender.com/api/user-subdomain-count?email=${user.email}`);
+  const subCountData = await subdomainRes.json();
+  const subCount = subCountData.count || 0;
+
+  const existingNote = document.getElementById("subUsageNote");
+  if (existingNote) existingNote.remove();
+
+  const note = document.createElement("div");
+  note.id = "subUsageNote";
+  note.className = "text-sm text-gray-600 bg-yellow-50 px-4 py-2 rounded border border-yellow-200";
+  note.textContent = `📦 You’ve used ${subCount}/5 free subdomains`;
+  document.getElementById("claimOptions").prepend(note);
+
+  const subdomainInput = document.getElementById("subdomainInput");
+  const claimBtn = document.querySelector("button[onclick='claimSubdomain()']");
+
+  if (subCount >= 5) {
+    subdomainInput.disabled = true;
+    claimBtn.disabled = true;
+    claimBtn.classList.add("bg-gray-300", "cursor-not-allowed");
+    claimBtn.classList.remove("bg-blue-600", "hover:bg-blue-700");
+    claimBtn.textContent = "Limit Reached (5/5)";
+  } else {
+    subdomainInput.disabled = false;
+    claimBtn.disabled = false;
+    claimBtn.classList.remove("bg-gray-300", "cursor-not-allowed");
+    claimBtn.classList.add("bg-blue-600", "hover:bg-blue-700");
+    claimBtn.textContent = "Claim Free Subdomain";
+  }
+
+// ✅ Fetch Custom Domains Again to Populate Assignment Dropdown
+const domRes = await fetch(`https://iyonicweb.onrender.com/api/custom-domains?email=${user.email}`);
+const customDomains = await domRes.json();
+
+const assignSection = document.getElementById("assignDomainSection");
+const domainSelect = document.getElementById("domainSelect");
+const siteSelect = document.getElementById("siteAssignSelect");
+
+if (Array.isArray(customDomains) && customDomains.length > 0) {
+  assignSection.classList.remove("hidden");
+  domainSelect.innerHTML = customDomains.map(d => `<option value="${d._id}">${d.domain}</option>`).join("");
+
+  // Populate user's sites again
+  const siteOptions = sites.map(site => `<option value="${site._id}">${site.customName || site.siteName}</option>`).join("");
+  siteSelect.innerHTML = siteOptions;
+} else {
+  assignSection.classList.add("hidden");
+}
+}
+function assignDomainToSite() {
+  const domainId = document.getElementById("domainSelect").value;
+  const siteId = document.getElementById("siteAssignSelect").value;
+  const statusEl = document.getElementById("assignDomainStatus");
+
+  if (!domainId || !siteId) {
+    return alert("Select both domain and site.");
+  }
+
+  fetch("https://iyonicweb.onrender.com/api/assign-domain", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ domainId, siteId })
+  })
+    .then(res => res.json())
+    .then(data => {
+      statusEl.textContent = "✅ Domain assigned successfully!";
+      statusEl.classList.remove("hidden");
+      setTimeout(() => statusEl.classList.add("hidden"), 4000);
+    })
+    .catch(() => {
+      statusEl.textContent = "❌ Failed to assign domain.";
+      statusEl.classList.remove("hidden");
+      statusEl.classList.add("text-red-600");
+    });
+}
+function claimSubdomain() {
+  const subdomain = document.getElementById("subdomainInput").value.trim();
+  const siteId = document.getElementById("siteSelect").value;
+
+  if (!subdomain) return alert("⚠️ Enter a valid subdomain name.");
+
+  fetch("https://iyonicweb.onrender.com/api/claim-subdomain", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: user.email, subdomain, siteId })
+  })
+    .then(async res => {
+      const data = await res.json();
+      const statusEl = document.getElementById("domainStatus");
+      statusEl.classList.remove("hidden");
+
+      if (!res.ok) {
+        statusEl.textContent = `❌ ${data.message || "Failed to claim domain"}`;
+        statusEl.className = "text-red-600 mt-2";
+        return;
       }
 
-      site.paid = site.amountPaid >= total;
+      statusEl.textContent = data.message || "✅ Domain claimed!";
+      statusEl.className = "text-green-600 mt-2";
+      loadDomainSection(); // refresh UI
+    })
+    .catch(() => {
+      const statusEl = document.getElementById("domainStatus");
+      statusEl.textContent = "❌ Network error.";
+      statusEl.className = "text-red-600 mt-2";
+    });
+}
 
-      sites[siteIndex] = site;
-      localStorage.setItem("mySites", JSON.stringify(sites));
-      renderPayments();
-    },
-    onClose: function() {
-      alert('Payment window closed.');
+let domainFields = [];
+
+function addMoreDomainField() {
+  const container = document.getElementById("customDomainsContainer");
+  const index = domainFields.length;
+
+  const field = document.createElement("input");
+  field.type = "text";
+  field.placeholder = "yourdomain.com";
+  field.className = "w-full border px-3 py-2 rounded";
+  field.id = `domain-${index}`;
+  domainFields.push(field);
+
+  container.appendChild(field);
+}
+
+function calculateAndShowDomainCost() {
+  const domains = domainFields.map(input => input.value.trim()).filter(val => val);
+  if (domains.length === 0) return alert("Enter at least one domain.");
+
+  const setup = document.getElementById("setupType").value;
+  const base = setup === "assisted" ? 5 : 2;
+  const discount = domains.length >= 3 ? 0.3 : 0;
+
+  const total = domains.length * base;
+  const discounted = (total * (1 - discount)).toFixed(2);
+
+  document.getElementById("customDomainCost").textContent = `Total: $${discounted} ${discount > 0 ? '(30% discount applied)' : ''}`;
+  document.getElementById("customDomainCost").classList.remove("hidden");
+  document.getElementById("payCustomDomainBtn").classList.remove("hidden");
+
+  // Show manual instructions
+  if (setup === "self") {
+    document.getElementById("manualInstructions").classList.remove("hidden");
+  } else {
+    document.getElementById("manualInstructions").classList.add("hidden");
+  }
+}
+// Fetch and show connected custom domains
+fetch(`https://iyonicweb.onrender.com/api/custom-domains?email=${user.email}`)
+  .then(res => res.json())
+  .then(domains => {
+    const container = document.getElementById("customDomainsContainer");
+
+    if (domains.length === 0) {
+      container.innerHTML += `<p class="text-gray-500 text-sm">You haven't added any custom domains yet.</p>`;
+      return;
     }
+
+    container.innerHTML += `
+      <div class="bg-white mt-4 p-4 rounded border border-gray-200">
+        <h3 class="text-lg font-semibold mb-2 text-gray-700">📄 Your Connected Custom Domains:</h3>
+        <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
+          ${domains.map(d => `<li>${d.domain} (${d.setup === 'assisted' ? 'Assisted' : 'Manual'})</li>`).join("")}
+        </ul>
+      </div>
+    `;
+  })
+  .catch(() => {
+    const container = document.getElementById("customDomainsContainer");
+    container.innerHTML += `<p class="text-red-600 text-sm">❌ Failed to load custom domains.</p>`;
   });
 
-  handler.openIframe();
+
+function payForDomains() {
+  const domains = domainFields.map(input => input.value.trim()).filter(val => val);
+  const setup = document.getElementById("setupType").value;
+  const base = setup === "assisted" ? 5 : 2;
+  const discount = domains.length >= 3 ? 0.3 : 0;
+  const total = Math.round(domains.length * base * (1 - discount) * 100); // cents
+
+  if (domains.length === 0) return alert("Enter domain(s) before payment.");
+
+  PaystackPop.setup({
+    key: 'pk_test_232531a5c927ef2cc67ed1b85af3f26e3b8ed2f2',
+    email: user.email,
+    amount: total,
+    currency: "USD",
+    callback: function () {
+      fetch("https://iyonicweb.onrender.com/api/custom-domain-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: user.email, domains, setup, siteId: document.getElementById("siteSelect").value })
+      })
+      .then(res => res.json())
+      .then(() => {
+        alert("🎉 Domain(s) submitted successfully!");
+        loadDomainSection();
+      });
+    }
+  }).openIframe();
 }
 
-  function switchToLogin() {
-    showPopup("login");
-  }
-
-  function switchToSignup() {
-    showPopup("signup");
-  }
-
-  function showPopup(type) {
-    document.getElementById("signupPopup").style.display = type === "signup" ? "flex" : "none";
-    document.getElementById("loginPopup").style.display = type === "login" ? "flex" : "none";
-  }
-
-  async function handleSignup() {
-  const email = document.getElementById("signupEmail").value;
-  const password = document.getElementById("signupPassword").value;
-
-  try {
-    const res = await fetch("https://iyonicweb.onrender.com/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (res.status === 409) {
-      throw new Error("An account with this email already exists.");
-    }
-
-    if (!res.ok) {
-      throw new Error("Failed to sign up. Please try again later.");
-    }
-
-    alert("Signup successful! Please log in.");
-    switchToLogin();
-  } catch (err) {
-    console.error("Error during signup:", err);
-    alert(err.message);
-  }
-}
-
-async function handleLogin() {
-  const email = document.getElementById("loginEmail").value.trim();
-  const password = document.getElementById("loginPassword").value.trim();
+    function startExpiryTimer(subId, lastPaymentDate, plan) {
+      const el = document.getElementById(`countdown-${subId}`);
+      if (!el || !lastPaymentDate) return;
   
-  if (!email || !password) return alert("Please fill out all fields.");
+      const planDays = {
+        daily: 1,
+        weekly: 7,
+        monthly: 30
+      }[plan] || 30;
+  
+      const endTime = new Date(lastPaymentDate).getTime() + planDays * 86400000;
+  
+      function updateTimer() {
+        const now = Date.now();
+        const diff = endTime - now;
+  
+        if (diff <= 0) {
+          el.textContent = "Expired";
+          clearInterval(timer);
+          return;
+        }
+  
+        const days = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000);
+        const minutes = Math.floor((diff % 3600000) / 60000);
+  
+        el.textContent = `${days}d ${hours}h ${minutes}m`;
+      }
+  
+      updateTimer();
+      const timer = setInterval(updateTimer, 60000);
+    }
+  
+    showSection("mySites");
+
+    function logout() {
+    localStorage.removeItem("user");
+    window.location.href = "../login";
+  }
+
+  document.getElementById("changePasswordForm").onsubmit = async function (e) {
+  e.preventDefault();
+
+  const res = await fetch("https://iyonicweb.onrender.com/api/auth/change-password", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: user.email,
+      oldPassword: document.getElementById("oldPassword").value,
+      newPassword: document.getElementById("newPassword").value,
+    }),
+  });
+
+  const data = await res.json();
+  const statusEl = document.getElementById("passwordStatus");
+  statusEl.classList.remove("hidden");
+
+  if (res.ok) {
+    statusEl.textContent = "Password updated successfully!";
+    statusEl.className = "text-green-600 mt-2";
+  } else {
+    statusEl.textContent = data.message || "Failed to update password.";
+    statusEl.className = "text-red-600 mt-2";
+  }
+};
+document.getElementById("domainSearchInput").addEventListener("input", function () {
+  const query = this.value.trim().replace(/\s+/g, "");
+  const searchLink = document.getElementById("namecheapLink");
+  if (query.length > 2) {
+    searchLink.href = `https://www.namecheap.com/domains/registration/results/?domain=${encodeURIComponent(query)}`;
+  }
+});
+
+function requestManagedDomain() {
+  const query = document.getElementById("domainSearchInput").value.trim();
+  if (!query) return alert("Please enter a domain name first.");
+
+  alert(`🎉 We've received your interest in "${query}".\nYou’ll get an email with next steps and payment instructions from Iyonicorp.`);
+  // Optionally, send data to your backend to log this interest
+  fetch("https://iyonicweb.onrender.com/api/request-managed-domain", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: user.email,
+      domainInterest: query
+    })
+  }).catch(() => {
+    alert("❌ Failed to notify server, but your interest was noted.");
+  });
+}
+(async function checkBanned() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const res = await fetch(`https://iyonicweb.onrender.com/api/user-status?email=${user.email}`);
+  const data = await res.json();
+
+  if (data.banned) {
+    alert("Your account has been restricted by the admin.");
+    localStorage.clear();
+    window.location.href = "../banned";
+  }
+})();
+
+// 🔄 Automatically check every 20 seconds
+setInterval(async () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user) return;
 
   try {
-    const response = await fetch('https://iyonicweb.onrender.com/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    });
+    const res = await fetch(`https://iyonicweb.onrender.com/api/user-status?email=${user.email}`);
+    const data = await res.json();
 
-    if (!response.ok) {
-      throw new Error('Failed to log in. Please try again later.');
+    if (data.banned) {
+      alert("Your account has been restricted by the admin.");
+      localStorage.clear();
+      window.location.href = "../banned";
     }
-
-    const data = await response.json();
-    console.log(data.message); // Handle login success
-
-    // Optionally, store session data in localStorage or cookies
-    localStorage.setItem("user", JSON.stringify({ email, password }));
-    localStorage.setItem("loggedIn", "true");
-
-    // Redirect to dashboard or another page
-    window.location.href = "https://iyonicorp.com/dashboard";
-  } catch (error) {
-    console.error('Error during login:', error);
-    alert('An error occurred during login: ' + error.message);
+  } catch (err) {
+    console.error("Failed to check ban status:", err);
   }
-}
+}, 20000); // 20000 ms = 20 seconds
 
-  function logout() {
-    localStorage.setItem("loggedIn", "false");
-    location.reload();
-  }
 
-  function showDashboard() {
-    document.querySelector('.main').style.display = "block";
-    document.querySelector('.sidebar').style.display = "block";
-    document.getElementById("logoutBtn").style.display = "block";
-    showSection('sitesSection');
-  }
-
-  function checkAuth() {
-    const loggedIn = localStorage.getItem("loggedIn");
-    const user = localStorage.getItem("user");
-    if (loggedIn === "true" && user) {
-      showDashboard();
-    } else if (user) {
-      showPopup("login");
-    } else {
-      showPopup("signup");
-    }
-  }
-
-  window.onload = checkAuth;
-</script>
-
+  </script>
+  
 </body>
 </html>
