@@ -629,7 +629,7 @@ function handlePlanChange(subId, total) {
   const amountToCharge = currency === "KES" ? usdAmount * exchangeRate : usdAmount;
 
   let handler = PaystackPop.setup({
-    key: 'pk_test_232531a5c927ef2cc67ed1b85af3f26e3b8ed2f2',
+    key: 'pk_live_7ab8e015626516d7d00210b2e7fe169805c226b8',
     email: email,
     amount: Math.round(amountToCharge * 100), // Paystack expects amount in cents
     currency: currency,
@@ -868,7 +868,7 @@ function payForDomains() {
   if (domains.length === 0) return alert("Enter domain(s) before payment.");
 
   PaystackPop.setup({
-    key: 'pk_test_232531a5c927ef2cc67ed1b85af3f26e3b8ed2f2',
+    key: 'pk_live_7ab8e015626516d7d00210b2e7fe169805c226b8',
     email: user.email,
     amount: total,
     currency: "USD",
