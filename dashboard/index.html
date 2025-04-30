@@ -343,16 +343,30 @@
 }
 
   
-    function loadSubscriptions() {
+function loadSubscriptions() {
   fetch(`https://iyonicweb.onrender.com/api/user-subscriptions?email=${user.email}`)
     .then(res => res.json())
     .then(subs => {
       const container = document.getElementById("subscriptionsList");
 
-      // Calculate total amount
+      // ✅ Fallback if user has no subscriptions
+      if (!subs || subs.length === 0) {
+        container.innerHTML = `
+          <div class="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 p-4 rounded shadow">
+            <p class="text-lg font-semibold mb-2">📭 No Subscriptions Found</p>
+            <p class="text-sm">You currently don’t have any active subscriptions.</p>
+            <a href="/templates" class="mt-3 inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+              🛍 Subscribe to a Website Template
+            </a>
+          </div>
+        `;
+        return;
+      }
+
+      // ✅ Calculate total subscription cost
       const totalAmount = subs.reduce((sum, sub) => sum + parseFloat(sub.price || 0), 0);
 
-      // Build HTML
+      // ✅ Subscription summary box
       const summary = `
         <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4 rounded">
           <p class="font-semibold">Total Subscriptions:</p>
@@ -360,19 +374,22 @@
         </div>
       `;
 
+      // ✅ List each subscription
       const details = subs.map(sub => `
-  <div class="bg-white p-4 rounded shadow ${sub.suspended ? 'opacity-60' : ''}">
-    <p><strong>Template:</strong> ${sub.siteName}</p>
-    <p><strong>Custom Name:</strong> ${sub.customName || 'Not renamed'}</p>
-    <p><strong>Price:</strong> $${sub.price}</p>
-    <p><strong>Status:</strong> 
-      <span class="inline-block px-2 py-1 text-xs rounded font-medium ${
-        sub.suspended ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
-      }">${sub.suspended ? 'Suspended' : 'Active'}</span>
-    </p>
-    <p><strong>Date:</strong> ${new Date(sub.createdAt).toLocaleDateString()}</p>
-  </div>
-`).join("");
+        <div class="bg-white p-4 rounded shadow ${sub.suspended ? 'opacity-60' : ''}">
+          <p><strong>Template:</strong> ${sub.siteName}</p>
+          <p><strong>Custom Name:</strong> ${sub.customName || 'Not renamed'}</p>
+          <p><strong>Price:</strong> $${sub.price}</p>
+          <p><strong>Status:</strong> 
+            <span class="inline-block px-2 py-1 text-xs rounded font-medium ${
+              sub.suspended ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
+            }">${sub.suspended ? 'Suspended' : 'Active'}</span>
+          </p>
+          <p><strong>Date:</strong> ${new Date(sub.createdAt).toLocaleDateString()}</p>
+        </div>
+      `).join("");
+
+      // ✅ Render full view
       container.innerHTML = summary + details;
     });
 }
@@ -383,6 +400,18 @@ async function loadMySites() {
   // Get user subscriptions
   const subsRes = await fetch(`https://iyonicweb.onrender.com/api/user-subscriptions?email=${user.email}`);
   const subs = await subsRes.json();
+
+  // If no subscriptions, show message
+  if (!subs || subs.length === 0) {
+    container.innerHTML = `
+      <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded shadow">
+        <p class="text-lg font-semibold mb-2">🚫 You don’t have any active site subscriptions.</p>
+        <p class="text-sm">Please subscribe to a website template to get started.</p>
+        <a href="/templates" class="inline-block mt-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">🛒 Browse Templates</a>
+      </div>
+    `;
+    return;
+  }
 
   // Get assigned custom domains
   const domainRes = await fetch(`https://iyonicweb.onrender.com/api/custom-domains?email=${user.email}`);
@@ -451,59 +480,111 @@ async function loadMySites() {
         loadMySites();
       });
     }
-  
+    
     function loadSubscriptionDetails() {
-      fetch(`https://iyonicweb.onrender.com/api/user-subscriptions?email=${user.email}`)
-        .then(res => res.json())
-        .then(subs => {
-          const container = document.getElementById("subscriptionDetails");
-          container.innerHTML = subs.map(sub => {
-            const total = sub.price;
-            const plan = sub.planType || "monthly";
-            const paid = parseFloat(sub.totalPaid || 0);
-            const balance = Math.max(total - paid, 0);
-            const planRate = parseFloat(getPlanRate(plan, total));
-            const disabled = sub.suspended || balance <= 0 ? 'disabled class="bg-gray-400 cursor-not-allowed"' : '';
-  
-            return `
-              <div class="bg-white p-6 rounded shadow space-y-3">
-                <p><strong>Site:</strong> ${sub.customName || sub.siteName}</p>
-                <p><strong>Monthly Cost:</strong> $${total}</p>
-                <p><strong>Paid this month:</strong> $${paid.toFixed(2)}</p>
-                <p><strong>Credit:</strong> $${(sub.credit || 0).toFixed(2)}</p>
-                <p><strong>Remaining:</strong> $${balance.toFixed(2)}</p>
-                <p><strong>Time left in plan:</strong> <span id="countdown-${sub._id}">Calculating...</span></p>
-                 <span class="inline-block px-2 py-1 text-xs rounded font-medium ${
-    sub.suspended ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
-  }">${sub.suspended ? 'Suspended' : 'Active'}</span>
-</p>
-${sub.suspended ? '<p class="text-sm text-red-500">This site is currently suspended. Payment is temporarily disabled.</p>' : ''}
-  
-                <label class="block font-medium mb-1">Payment Plan:</label>
-                <select onchange="updatePlanType('${sub._id}', this.value)" class="w-full border px-3 py-2 rounded mb-2">
-                  <option value="daily" ${plan === 'daily' ? 'selected' : ''}>Daily - $${getPlanRate('daily', total)}</option>
-                  <option value="weekly" ${plan === 'weekly' ? 'selected' : ''}>Weekly - $${getPlanRate('weekly', total)}</option>
-                  <option value="monthly" ${plan === 'monthly' ? 'selected' : ''}>Monthly - $${getPlanRate('monthly', total)}</option>
-                </select>
-  
-                <div class="w-full bg-gray-200 h-2 rounded">
-                  <div class="bg-green-500 h-2 rounded" style="width: ${(paid / total) * 100}%;"></div>
-                </div>
-  
-                <button onclick="payWithPaystack('${user.email}', ${planRate}, '${sub._id}')"
-                  ${disabled}
-                  class="mt-3 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
-                  Pay $${planRate.toFixed(2)} (${plan})
-                </button>
-              </div>
-            `;
-          }).join("");
-          subs.forEach(sub => {
-            startExpiryTimer(sub._id, sub.lastPaymentDate, sub.planType || "monthly");
-          });
-        });
-    }
-  
+  fetch(`https://iyonicweb.onrender.com/api/user-subscriptions?email=${user.email}`)
+    .then(res => res.json())
+    .then(subs => {
+      const container = document.getElementById("subscriptionDetails");
+
+      if (!subs || subs.length === 0) {
+        container.innerHTML = `
+          <div class="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 p-4 rounded shadow">
+            <p class="text-lg font-semibold mb-2">📭 No Subscription Plans Found</p>
+            <p class="text-sm">You have not subscribed to any website templates yet.</p>
+            <a href="/templates" class="mt-3 inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+              ➕ Subscribe to a Template Now
+            </a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = subs.map(sub => {
+        const total = sub.price;
+        const plan = sub.planType || "monthly";
+        const paid = parseFloat(sub.totalPaid || 0);
+        const balance = Math.max(total - paid, 0);
+        const planRate = parseFloat(getPlanRate(plan, total));
+
+        const isSuspended = sub.suspended;
+        const disabledAttr = isSuspended ? 'disabled class="bg-gray-300 text-gray-500 cursor-not-allowed"' : '';
+
+        return `
+          <div class="bg-white p-6 rounded shadow space-y-3">
+            <p><strong>Site:</strong> ${sub.customName || sub.siteName}</p>
+            <p><strong>Monthly Cost:</strong> $${total}</p>
+            <p><strong>Paid this month:</strong> $${paid.toFixed(2)}</p>
+            <p><strong>Credit:</strong> $${(sub.credit || 0).toFixed(2)}</p>
+            <p><strong>Remaining:</strong> $${balance.toFixed(2)}</p>
+            <p><strong>Time left in plan:</strong> <span id="countdown-${sub._id}">Calculating...</span></p>
+            <span class="inline-block px-2 py-1 text-xs rounded font-medium ${
+              isSuspended ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
+            }">${isSuspended ? 'Suspended' : 'Active'}</span>
+
+            ${isSuspended 
+              ? '<p class="text-sm text-red-500">This site is currently suspended. Payment is disabled.</p>' 
+              : ''}
+
+            <label class="block font-medium mb-1">Payment Plan:</label>
+            <select id="planType-${sub._id}" onchange="handlePlanChange('${sub._id}', ${total})" 
+                    class="w-full border px-3 py-2 rounded mb-2" ${isSuspended ? 'disabled' : ''}>
+              <option value="daily" ${plan === 'daily' ? 'selected' : ''}>Daily - $${getPlanRate('daily', total)}</option>
+              <option value="weekly" ${plan === 'weekly' ? 'selected' : ''}>Weekly - $${getPlanRate('weekly', total)}</option>
+              <option value="monthly" ${plan === 'monthly' ? 'selected' : ''}>Monthly - $${getPlanRate('monthly', total)}</option>
+            </select>
+
+            <div class="w-full bg-gray-200 h-2 rounded">
+              <div class="bg-green-500 h-2 rounded" style="width: ${(paid / total) * 100}%;"></div>
+            </div>
+
+            <div class="flex gap-4 mt-4">
+              <button id="usd-btn-${sub._id}" 
+                      onclick="payWithPaystack('${user.email}', ${planRate}, '${sub._id}', 'USD')"
+                      ${isSuspended ? disabledAttr : ''}
+                      class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full">
+                Pay in USD ($${planRate})
+              </button>
+
+              <button id="kes-btn-${sub._id}" 
+                      onclick="payWithPaystack('${user.email}', ${planRate}, '${sub._id}', 'KES')"
+                      ${isSuspended ? disabledAttr : ''}
+                      class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded w-full">
+                Pay in KES (KES ${(planRate * 130).toFixed(0)})
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      // ✅ Timer (force all to monthly)
+      subs.forEach(sub => {
+        startExpiryTimer(sub._id, sub.lastPaymentDate, "monthly"); // always monthly
+      });
+    });
+}
+
+function handlePlanChange(subId, total) {
+  const plan = document.getElementById(`planType-${subId}`).value;
+  const newRate = parseFloat(getPlanRate(plan, total));
+  const kes = (newRate * 130).toFixed(0);
+
+  // Update buttons
+  const usdBtn = document.getElementById(`usd-btn-${subId}`);
+  const kesBtn = document.getElementById(`kes-btn-${subId}`);
+
+  usdBtn.innerText = `Pay in USD ($${newRate})`;
+  kesBtn.innerText = `Pay in KES (KES ${kes})`;
+
+  // Update onclick events
+  usdBtn.setAttribute("onclick", `payWithPaystack('${user.email}', ${newRate}, '${subId}', 'USD')`);
+  kesBtn.setAttribute("onclick", `payWithPaystack('${user.email}', ${newRate}, '${subId}', 'KES')`);
+
+  // Update server plan
+  updatePlanType(subId, plan);
+}
+
+
     function getPlanRate(plan, monthlyTotal) {
       if (plan === "daily") return (monthlyTotal / 30).toFixed(2);
       if (plan === "weekly") return (monthlyTotal / 4).toFixed(2);
@@ -521,52 +602,63 @@ ${sub.suspended ? '<p class="text-sm text-red-500">This site is currently suspen
     }
   
     function updateCountdowns() {
-      const now = Date.now();
-      document.querySelectorAll("[id^='countdown-']").forEach(el => {
-        const subId = el.id.replace("countdown-", "");
-        const nextDue = getNextDueDate(localStorage.getItem(`lastPayment-${subId}`), 'daily');
-        const diff = nextDue - now;
-  
-        const days = Math.floor(diff / 86400000);
-        const hours = Math.floor((diff % 86400000) / 3600000);
-        const mins = Math.floor((diff % 3600000) / 60000);
-  
-        el.textContent = `${days}d ${hours}h ${mins}m`;
-      });
+  const now = Date.now();
+  document.querySelectorAll("[id^='countdown-']").forEach(el => {
+    const subId = el.id.replace("countdown-", "");
+
+    // Always use 'monthly'
+    const lastPayment = localStorage.getItem(`lastPayment-${subId}`);
+    const nextDue = getNextDueDate(lastPayment, 'monthly');
+    const diff = nextDue - now;
+
+    if (diff <= 0) {
+      el.textContent = "Expired";
+      return;
     }
-    setInterval(updateCountdowns, 60000);
-  
-    function payWithPaystack(email, amount, subscriptionId) {
-      let handler = PaystackPop.setup({
-        key: 'pk_test_232531a5c927ef2cc67ed1b85af3f26e3b8ed2f2',
-        email: email,
-        amount: Math.round(amount * 100),
-        currency: "USD",
-        callback: function (response) {
-          fetch("https://iyonicweb.onrender.com/api/record-payment", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email,
-              amount,
-              subscriptionId,
-              reference: response.reference
-            })
-          })
-          .then(res => res.json())
-          .then(() => {
-            alert("Payment recorded!");
-            loadSubscriptionDetails();
-          });
-        },
-        onClose: function () {
-          alert("Payment window closed");
-        }
+
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+
+    el.textContent = `${days}d ${hours}h ${mins}m`;
+  });
+}
+
+    function payWithPaystack(email, usdAmount, subscriptionId, currency = "USD") {
+  const exchangeRate = 130; // Example: 1 USD = 130 KES
+  const amountToCharge = currency === "KES" ? usdAmount * exchangeRate : usdAmount;
+
+  let handler = PaystackPop.setup({
+    key: 'pk_test_232531a5c927ef2cc67ed1b85af3f26e3b8ed2f2',
+    email: email,
+    amount: Math.round(amountToCharge * 100), // Paystack expects amount in cents
+    currency: currency,
+    callback: function (response) {
+      fetch("https://iyonicweb.onrender.com/api/record-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          amount: usdAmount, // Always store in USD
+          subscriptionId,
+          reference: response.reference,
+          paidCurrency: currency
+        })
+      })
+      .then(res => res.json())
+      .then(() => {
+        alert("✅ Payment recorded!");
+        loadSubscriptionDetails();
       });
-  
-      handler.openIframe();
+    },
+    onClose: function () {
+      alert("❌ Payment window closed.");
     }
-  
+  });
+
+  handler.openIframe();
+}
+
     function updatePlanType(subscriptionId, planType) {
       fetch("https://iyonicweb.onrender.com/api/update-plan", {
         method: "POST",
@@ -915,6 +1007,7 @@ setInterval(async () => {
     console.error("Failed to check ban status:", err);
   }
 }, 20000); // 20000 ms = 20 seconds
+
 
 
   </script>

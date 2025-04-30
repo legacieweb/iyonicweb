@@ -64,6 +64,26 @@
       <div id="usersTable" class="space-y-4">Loading users...</div>      
     </section>
 
+<!-- Admin Popup -->
+<div id="adminPopup" class="fixed top-5 right-5 z-50 hidden bg-blue-100 text-blue-800 border border-blue-300 px-4 py-3 rounded-lg shadow-lg transition-opacity duration-300">
+  <strong class="font-bold">🔔</strong>
+  <span id="adminPopupText" class="ml-2">Message</span>
+</div>
+
+<script>
+function showAdminPopup(message, type = "info") {
+  const popup = document.getElementById("adminPopup");
+  const text = document.getElementById("adminPopupText");
+
+  popup.className = `fixed top-5 right-5 z-50 bg-${type === "error" ? "red" : "blue"}-100 text-${type === "error" ? "red" : "blue"}-800 border border-${type === "error" ? "red" : "blue"}-300 px-4 py-3 rounded-lg shadow-lg transition-opacity duration-300`;
+  text.textContent = message;
+  popup.classList.remove("hidden");
+
+  setTimeout(() => popup.classList.add("hidden"), 4000);
+}
+</script>
+
+
   </main>
 
   <script>
@@ -108,7 +128,6 @@
         console.error("Stats error", err);
       }
     }
-
     async function loadUsers() {
   try {
     const res = await fetch(`${API_BASE}/users-with-sites`);
@@ -124,6 +143,7 @@
       userCard.setAttribute("data-email", (user.email || "").toLowerCase());
 
       const panelId = `panel-${user._id}`;
+      const banBtnId = `banBtn-${user._id}`;
 
       userCard.innerHTML = `
         <p><strong>Name:</strong> ${user.name || "N/A"}</p>
@@ -136,7 +156,7 @@
           </span>
         </p>
 
-        <button onclick="toggleBan('${user.email}', ${!user.banned})"
+        <button id="${banBtnId}" onclick="toggleBan('${user.email}', ${!user.banned}, '${banBtnId}')"
           class="mt-1 px-3 py-1 text-sm rounded ${
             user.banned
               ? 'bg-green-600 hover:bg-green-700 text-white'
@@ -156,6 +176,7 @@
             <ul class="space-y-2">
               ${user.sites.map((site, index) => {
                 const timerId = `countdown-${user._id}-${index}`;
+                const suspendBtnId = `suspendBtn-${site._id}`;
                 return `
                 <li class="border p-3 rounded bg-gray-50">
                   <p><strong>Original Site:</strong> ${site.siteName}</p>
@@ -170,7 +191,7 @@
                     }">${site.suspended ? "Suspended" : site.status}</span>
                   </p>
 
-                  <button onclick="toggleSuspend('${site._id}', ${!site.suspended})"
+                  <button id="${suspendBtnId}" onclick="toggleSuspend('${site._id}', ${!site.suspended}, '${suspendBtnId}')"
                     class="mt-2 px-3 py-1 text-sm rounded ${
                       site.suspended
                         ? 'bg-green-600 hover:bg-green-700 text-white'
@@ -201,24 +222,31 @@
   }
 }
 
-function toggleBan(email, ban) {
+function toggleBan(email, ban, btnId) {
+  const btn = document.getElementById(btnId);
+  if (!btn) return;
+
+  btn.disabled = true;
+  btn.textContent = ban ? "Banning..." : "Unbanning...";
+
   fetch("https://iyonicweb.onrender.com/api/admin/ban-user", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, banned: ban })
   })
     .then(res => res.json())
     .then(data => {
-      alert(data.message);
-      loadUsers(); // Refresh after action
+      showAdminPopup(data.message || "Ban status updated");
+      loadUsers(); // refresh UI
     })
     .catch(err => {
       console.error("Toggle ban error:", err);
-      alert("❌ Failed to toggle ban.");
+      showAdminPopup("❌ Failed to toggle ban.", "error");
+      btn.disabled = false;
+      btn.textContent = ban ? "Ban User" : "Unban User";
     });
 }
+
 
 function startExpiryTimer(elementId, lastPaymentDate, planType = "monthly") {
   const msPerPlan = {
@@ -276,22 +304,32 @@ function startExpiryTimer(elementId, lastPaymentDate, planType = "monthly") {
 
   </script>
 <script>
-  async function toggleSuspend(subscriptionId, suspend) {
-    try {
-      const res = await fetch("https://iyonicweb.onrender.com/api/admin/toggle-suspend", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ subscriptionId, suspend })
-      });
+function toggleSuspend(subscriptionId, suspend, btnId) {
+  const btn = document.getElementById(btnId);
+  if (!btn) return;
 
-      const data = await res.json();
-      alert(data.message);
-      loadUsers(); // refresh user list
-    } catch (err) {
+  btn.disabled = true;
+  btn.textContent = suspend ? "Suspending..." : "Unsuspending...";
+
+  fetch("https://iyonicweb.onrender.com/api/admin/toggle-suspend", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ subscriptionId, suspend })
+  })
+    .then(res => res.json())
+    .then(data => {
+      showAdminPopup(data.message || "Suspend status updated");
+      loadUsers();
+    })
+    .catch(err => {
       console.error("Suspend toggle error:", err);
-      alert("Failed to toggle suspend.");
-    }
-  }
+      showAdminPopup("❌ Failed to toggle suspend.", "error");
+      btn.disabled = false;
+      btn.textContent = suspend ? "Suspend" : "Unsuspend";
+    });
+}
+
+
   // ✅ Redirect to login if not authenticated
 if (!localStorage.getItem("admin")) {
   window.location.href = "../adminlogin";

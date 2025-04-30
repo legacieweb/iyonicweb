@@ -135,83 +135,129 @@
     </div>
   </main>
 
+<!-- Cool Notification Popup -->
+<div id="notifyPopup" class="fixed top-5 right-5 z-50 hidden bg-blue-100 text-blue-800 border border-blue-300 px-4 py-3 rounded-lg shadow-lg transition-opacity duration-300">
+  <strong class="font-bold">🔔</strong>
+  <span id="popupMessage" class="ml-2">Message here</span>
+</div>
+
   <!-- Footer -->
   <footer class="text-center py-4 bg-white text-sm text-black shadow-inner mt-10">
     &copy; <span id="year"></span> Iyonicorp. All rights reserved.
   </footer>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-    function toggleResetForm() {
-      const resetForm = document.getElementById("resetForm");
-      resetForm.classList.toggle("hidden");
-    }
-  </script>
+  const popup = document.getElementById("notifyPopup");
+  const popupMsg = document.getElementById("popupMessage");
 
-  <script>
-    document.getElementById("loginForm").onsubmit = async function (e) {
-      e.preventDefault();
+  function showPopup(message, type = "info") {
+    popupMsg.textContent = message;
+    popup.className = `fixed top-5 right-5 z-50 bg-${type === "error" ? 'red' : 'blue'}-100 text-${type === "error" ? 'red' : 'blue'}-800 border border-${type === "error" ? 'red' : 'blue'}-300 px-4 py-3 rounded-lg shadow-lg transition-opacity duration-300`;
+    popup.classList.remove("hidden");
+    setTimeout(() => popup.classList.add("hidden"), 4000);
+  }
+
+  function toggleResetForm() {
+    const form = document.getElementById("resetForm");
+    form.classList.toggle("hidden");
+  }
+
+  document.getElementById("loginForm").onsubmit = async function (e) {
+    e.preventDefault();
+    const loginBtn = e.target.querySelector("button[type='submit']");
+    loginBtn.disabled = true;
+    loginBtn.textContent = "Logging in...";
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
       const res = await fetch("https://iyonicweb.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: document.getElementById("email").value,
-          password: document.getElementById("password").value,
-        }),
+        body: JSON.stringify({ email, password }),
       });
+
       const data = await res.json();
+
       if (res.ok) {
         localStorage.setItem("user", JSON.stringify(data.user));
-        window.location.href = "../dashboard";
+        showPopup("✅ Login successful! Redirecting...");
+        setTimeout(() => window.location.href = "../dashboard", 1500);
       } else {
-        alert(data.message);
+        showPopup(data.message || "Login failed", "error");
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Login";
       }
-    };
+    } catch (err) {
+      showPopup("❌ Network error. Try again.", "error");
+      loginBtn.disabled = false;
+      loginBtn.textContent = "Login";
+    }
+  };
 
-    function toggleResetForm() {
-      const form = document.getElementById("resetForm");
-      form.classList.toggle("hidden");
+  async function sendResetCode() {
+    const email = document.getElementById("resetEmail").value;
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = "Sending...";
+
+    if (!email) {
+      showPopup("⚠️ Enter your email", "error");
+      btn.disabled = false;
+      btn.textContent = "Send Reset Code";
+      return;
     }
 
-    function sendResetCode() {
-      const email = document.getElementById("resetEmail").value;
-      if (!email) return alert("Enter your email");
-
-      fetch("https://iyonicweb.onrender.com/api/auth/send-reset-code", {
+    try {
+      const res = await fetch("https://iyonicweb.onrender.com/api/auth/send-reset-code", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email })
-      })
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("resetMessage").textContent = data.message;
-      })
-      .catch(() => {
-        document.getElementById("resetMessage").textContent = "Error sending reset code.";
       });
+      const data = await res.json();
+      showPopup(data.message || "Code sent!");
+    } catch {
+      showPopup("❌ Error sending reset code.", "error");
     }
 
-    function submitNewPassword() {
-      const email = document.getElementById("resetEmail").value;
-      const code = document.getElementById("resetCode").value;
-      const newPassword = document.getElementById("newPassword").value;
+    btn.disabled = false;
+    btn.textContent = "Send Reset Code";
+  }
 
-      if (!code || !newPassword) return alert("Please fill all reset fields");
+  async function submitNewPassword() {
+    const email = document.getElementById("resetEmail").value;
+    const code = document.getElementById("resetCode").value;
+    const newPassword = document.getElementById("newPassword").value;
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = "Updating...";
 
-      fetch("https://iyonicweb.onrender.com/api/auth/confirm-reset", {
+    if (!email || !code || !newPassword) {
+      showPopup("⚠️ Fill all fields.", "error");
+      btn.disabled = false;
+      btn.textContent = "Update Password";
+      return;
+    }
+
+    try {
+      const res = await fetch("https://iyonicweb.onrender.com/api/auth/confirm-reset", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, code, newPassword })
-      })
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("resetMessage").textContent = data.message;
-      })
-      .catch(() => {
-        document.getElementById("resetMessage").textContent = "Error updating password.";
       });
+      const data = await res.json();
+      showPopup(data.message || "✅ Password updated!");
+    } catch {
+      showPopup("❌ Error updating password.", "error");
     }
-  </script>
+
+    btn.disabled = false;
+    btn.textContent = "Update Password";
+  }
+</script>
+
 </body>
 </html>
