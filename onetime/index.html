@@ -225,6 +225,19 @@ nav::-webkit-scrollbar-track {
     color: #ffffff;
     text-decoration: underline;
 }
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
     </style>
 </head>
 <body>
@@ -238,10 +251,15 @@ nav::-webkit-scrollbar-track {
             <input type="text" id="searchBox" placeholder="Search templates..." onkeyup="searchTemplates()">
         </div>
     
-        <div class="nav-links">
+        <div class="nav-links" id="navButtons">
             <a href="https://iyonicorp.com/" class="home-btn">Home</a>
+            <a href="../login" class="home-btn" id="loginBtn">Login</a>
+            <a href="../signup" class="home-btn" id="signupBtn">Signup</a>
+            <a href="../dashboard" class="home-btn" id="dashboardBtn" style="display: none;">Dashboard</a>
+            <button onclick="logout()" class="home-btn" id="logoutBtn" style="display: none;">Logout</button>
         </div>
     </header>
+    
     
 
 <!-- Navigation for Categories -->
@@ -273,7 +291,8 @@ nav::-webkit-scrollbar-track {
             <p>$400</p>
             <button class="preview-btn" onclick="previewTemplate('portifolio.html')">Preview</button>
             <button class="details-btn" onclick="showDetails('Modern Portfolio', 'Welcome to my digital portfolio — a curated collection of my work as a creative web developer. Here you\'ll find projects that showcase my skills in front-end development, UI/UX design, and modern web technologies. Whether you\'re here to collaborate, hire, or get inspired, I\'m glad you stopped by. Let’s build something great together.', 2)">View Details</button>
-            <button class="rent-btn" onclick="buySite(this)">Buy Site - Lifetime Access</button>
+           <button class="rent-btn" onclick="showPaymentPlan(this)">View Payment Plan</button>
+
 
         </div>
 
@@ -283,7 +302,8 @@ nav::-webkit-scrollbar-track {
             <p>$1600</p>
             <button class="preview-btn" onclick="previewTemplate('bakerylandingpage.html')">Preview</button>
             <button class="details-btn" onclick="showDetails('Bakery Landing Page', 'A beautifully designed landing page for bakeries, showcasing your products, services, and contact information to attract customers.', 8)">View Details</button>
-            <button class="rent-btn" onclick="buySite(this)">Buy Site - Lifetime Access</button>
+           <button class="rent-btn" onclick="showPaymentPlan(this)">View Payment Plan</button>
+
 
         </div>
 
@@ -294,7 +314,18 @@ nav::-webkit-scrollbar-track {
             <button class="preview-btn" onclick="previewTemplate('https://shopright.iyonicorp.com/')">Preview</button>
             <button class="details-btn" onclick="showDetails('eCommerce Store', 'An online store.', 20)">View Details</button>
             <button onclick="previewAdmin('https://shopright.iyonicorp.com/admin')">View Admin</button>
-            <button class="rent-btn" onclick="buySite(this)">Buy Site - Lifetime Access</button>
+           <button class="rent-btn" onclick="showPaymentPlan(this)">View Payment Plan</button>
+
+        </div>
+
+        <div class="product" data-category="landing" data-price="3">
+            <img src="https://allcollectivenouns.com/wp-content/uploads/2024/12/33-11-1024x536.png" alt="Template 2">
+            <h3>Marketing agency</h3>
+            <p>$600</p>
+            <button class="preview-btn" onclick="previewTemplate('https://marketing.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Marketing agency', 'A modern and results-driven digital marketing site offering services like SEO, PPC, email marketing, and content strategy—ideal for businesses seeking growth-focused solutions.', 3)">View Details</button>
+           <button class="rent-btn" onclick="showPaymentPlan(this)">View Payment Plan</button>
+
         </div>
 
         <div class="product" data-category="blog" data-price="3">
@@ -303,7 +334,30 @@ nav::-webkit-scrollbar-track {
             <p>$600</p>
             <button class="preview-btn" onclick="previewTemplate('https://blog.iyonicorp.com/')">Preview</button>
             <button class="details-btn" onclick="showDetails('Blog Template', 'A modern and clean blog template designed for bloggers to share their stories, ideas, and updates.', 3)">View Details</button>
-            <button class="rent-btn" onclick="buySite(this)">Buy Site - Lifetime Access</button>
+           <button class="rent-btn" onclick="showPaymentPlan(this)">View Payment Plan</button>
+
+        </div>
+
+        <div class="product" data-category="ProfessionalServices" data-price="10">
+            <img src="https://i.imgur.com/2ogZ1dH.png" alt="Template 2">
+            <h3>Tranquil Essence Spa</h3>
+            <p>$2000</p>
+            <button class="preview-btn" onclick="previewTemplate('https://tranquil.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Tranquil Essence Spa', 'A serene and elegant website template designed for spas and wellness centers. Showcase your services, treatments, and contact information to attract clients.', 10)">View Details</button>
+            <button onclick="previewAdmin('https://tranquil.iyonicorp.com/admin')">View Admin</button>
+           <button class="rent-btn" onclick="showPaymentPlan(this)">View Payment Plan</button>
+
+        </div>
+
+        <div class="product" data-category="IT & Technology" data-price="40">
+            <img src="https://i.imgur.com/5pDv6pB.png" alt="Template 2">
+            <h3>Iyonic bots</h3>
+            <p>$8000</p>
+            <button class="preview-btn" onclick="previewTemplate('https://iyonicbots.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Iyonic Bots', 'Explore the cutting-edge world of Iyonic Bots — a platform designed to revolutionize automation and AI-driven solutions for businesses. From chatbots to process automation, this site showcases the future of intelligent technology.', 40)">View Details</button>
+            <button onclick="previewAdmin('https://iyonicbots.iyonicorp.com/admin')">View Admin</button>
+           <button class="rent-btn" onclick="showPaymentPlan(this)">View Payment Plan</button>
+
         </div>
 
         <div class="product" data-category="ecommerce" data-price="2">
@@ -312,7 +366,8 @@ nav::-webkit-scrollbar-track {
             <p>$400</p>
             <button class="preview-btn" onclick="previewTemplate('https://iyonicfashion.iyonicorp.com/')">Preview</button>
             <button class="details-btn" onclick="showDetails('Modern Fashion & Apparel', 'Welcome to my digital Fashion & Apparel — a curated collection of my work as a creative web developer. Here you\'ll find projects that showcase my skills in front-end development, UI/UX design, and modern web technologies. Whether you\'re here to collaborate, hire, or get inspired, I\'m glad you stopped by. Let’s build something great together.', 2)">View Details</button>
-            <button class="rent-btn" onclick="buySite(this)">Buy Site - Lifetime Access</button>
+           <button class="rent-btn" onclick="showPaymentPlan(this)">View Payment Plan</button>
+
         </div>
     </div>
 </div>
@@ -360,28 +415,41 @@ function previewAdmin(templateUrl) {
 
 
 
-    function showDetails(title, description, price, templateUrl) {
-    let detailsPopup = document.createElement("div");
-    detailsPopup.style.position = "fixed";
-    detailsPopup.style.top = "50%";
-    detailsPopup.style.left = "50%";
-    detailsPopup.style.transform = "translate(-50%, -50%)";
-    detailsPopup.style.background = "white";
-    detailsPopup.style.padding = "20px";
-    detailsPopup.style.boxShadow = "0px 0px 10px rgba(0,0,0,0.3)";
-    detailsPopup.style.zIndex = "2000";
-    detailsPopup.style.borderRadius = "8px";
-    detailsPopup.innerHTML = `
-        <h2>${title}</h2>
-        <p>${description}</p>
-        <button onclick="document.body.removeChild(this.parentElement)" 
-                style="background:red; color:white; padding:10px; border:none; cursor:pointer;">
-            Close
-        </button>
-    `;
-    document.body.appendChild(detailsPopup);
-}
+    function showDetails(title, description, price) {
+    const popup = document.createElement("div");
+    popup.id = "detailsPopup";
+    popup.style.position = "fixed";
+    popup.style.top = "50%";
+    popup.style.left = "50%";
+    popup.style.transform = "translate(-50%, -50%) scale(1)";
+    popup.style.background = "rgba(255, 255, 255, 0.95)";
+    popup.style.backdropFilter = "blur(10px)";
+    popup.style.padding = "30px 25px";
+    popup.style.boxShadow = "0 8px 25px rgba(0, 0, 0, 0.2)";
+    popup.style.zIndex = "5000";
+    popup.style.borderRadius = "12px";
+    popup.style.maxWidth = "500px";
+    popup.style.width = "90%";
+    popup.style.color = "#333";
+    popup.style.fontFamily = "'Segoe UI', sans-serif";
+    popup.style.animation = "fadeIn 0.3s ease-in-out";
 
+    popup.innerHTML = `
+        <div style="text-align:right;">
+            <button onclick="document.body.removeChild(this.parentElement.parentElement)" 
+                style="background: none; border: none; font-size: 22px; cursor: pointer; color: #999;" 
+                onmouseover="this.style.color='#e74c3c'" 
+                onmouseout="this.style.color='#999'">
+                &times;
+            </button>
+        </div>
+        <h2 style="margin-top: 0; color: #222;">${title}</h2>
+        <p style="font-size: 16px; line-height: 1.6; margin: 10px 0 20px;">${description}</p>
+        <p style="font-size: 18px; font-weight: bold; color: #555;">Base Price: $${(price * 200).toLocaleString()}</p>
+    `;
+
+    document.body.appendChild(popup);
+}
 
 function buySite(button) {
     const product = button.closest('.product');
@@ -410,6 +478,128 @@ function buySite(button) {
         </button>
     `;
     document.body.appendChild(popup);
+}
+function showPaymentPlan(button) {
+    const product = button.closest('.product');
+    const title = product.querySelector('h3').innerText;
+    const basePrice = parseFloat(product.getAttribute('data-price'));
+    const totalPrice = (basePrice * 200).toFixed(2);
+
+    const popup = document.createElement("div");
+    popup.style.position = "fixed";
+    popup.style.top = "50%";
+    popup.style.left = "50%";
+    popup.style.transform = "translate(-50%, -50%)";
+    popup.style.background = "#fff";
+    popup.style.padding = "25px";
+    popup.style.boxShadow = "0 0 15px rgba(0,0,0,0.4)";
+    popup.style.zIndex = "4000";
+    popup.style.borderRadius = "10px";
+    popup.style.maxWidth = "400px";
+    popup.style.textAlign = "center";
+
+    // Inject HTML
+    popup.innerHTML = `
+        <h2>${title}</h2>
+        <p><strong>Total Price:</strong> $<span id="totalAmount">${totalPrice}</span></p>
+        
+        <label for="installmentSelect">Choose payment plan:</label>
+        <select id="installmentSelect" onchange="updateInstallment()"
+            style="margin: 10px 0; padding: 8px; width: 100%; font-size: 16px; border-radius: 5px;">
+            ${[1,2,3,6,12,18,24].map(m => `<option value="${m}">${m === 1 ? 'Pay Once' : `Pay in ${m} months`}</option>`).join('')}
+        </select>
+
+        <p><strong>Monthly Payment:</strong> $<span id="monthlyAmount">${totalPrice}</span></p>
+
+        <button id="startPlanBtn"
+            onclick="disableAndSubscribe(this, '${title}', ${totalPrice})"
+            style="margin: 10px 0; background: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+            Start Plan
+        </button>
+
+        <br/>
+        <button onclick="document.body.removeChild(this.parentElement)" 
+            style="background: #ccc; color: black; padding: 8px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">
+            Cancel
+        </button>
+    `;
+
+    document.body.appendChild(popup);
+
+    // Store for global use
+    window.currentTotalPrice = totalPrice;
+}
+
+function updateInstallment() {
+    const months = parseInt(document.getElementById("installmentSelect").value);
+    const total = parseFloat(window.currentTotalPrice);
+    const monthly = (total / months).toFixed(2);
+
+    document.getElementById("monthlyAmount").innerText = monthly;
+
+    // Update subscribe button onclick with correct values
+    const title = document.querySelector("#startPlanBtn").getAttribute("onclick").split(",")[1].trim().replace(/'/g, "");
+    document.getElementById("startPlanBtn").setAttribute("onclick", `disableAndSubscribe(this, '${title}', ${monthly})`);
+}
+
+function subscribeTemplate(name, price) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+        alert("Please log in to subscribe.");
+        return window.location.href = "../login";
+    }
+
+    // Disable all subscribe buttons to prevent multiple clicks
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach(btn => btn.disabled = true);
+
+    fetch("https://iyonicweb.onrender.com/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: user.email, siteName: name, price: price })
+    })
+    .then(res => res.json())
+    .then(() => {
+        alert("Subscription successful!");
+        window.location.href = "../dashboard";
+    })
+    .catch(() => {
+        alert("Error during subscription");
+        // Re-enable buttons in case of failure
+        buttons.forEach(btn => btn.disabled = false);
+    });
+}
+
+function disableAndSubscribe(button, name, price) {
+    button.disabled = true;
+    button.textContent = "Processing...";
+    subscribeTemplate(name, price);
+}
+document.addEventListener("DOMContentLoaded", () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    
+    const loginBtn = document.getElementById("loginBtn");
+    const signupBtn = document.getElementById("signupBtn");
+    const dashboardBtn = document.getElementById("dashboardBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    if (user) {
+        loginBtn.style.display = "none";
+        signupBtn.style.display = "none";
+        dashboardBtn.style.display = "inline-block";
+        logoutBtn.style.display = "inline-block";
+    } else {
+        loginBtn.style.display = "inline-block";
+        signupBtn.style.display = "inline-block";
+        dashboardBtn.style.display = "none";
+        logoutBtn.style.display = "none";
+    }
+});
+
+function logout() {
+    localStorage.removeItem("user");
+    alert("You have been logged out.");
+    window.location.reload();
 }
 
 

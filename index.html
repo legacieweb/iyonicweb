@@ -3,6 +3,7 @@
 <head>
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S3EZXJKT7H"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -381,6 +382,21 @@ footer {
 .footer-link:hover {
     color: #fff;
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeInUp {
+  animation: fadeInUp 1s ease-out;
+}
+
     </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
@@ -436,127 +452,369 @@ footer {
     </div>
 </section>
 
-<section id="pricing" class="py-20 bg-gray-200 fade-in">
-    <div class="container mx-auto text-center">
-      <h2 class="text-3xl font-bold text-blue-600">Website Plans for Every Need</h2>
-      <div class="grid md:grid-cols-2 grid-cols-1 gap-8 mt-8">
+<!-- Responsive & Clean Pricing Section -->
+<section id="pricing" class="py-20 bg-gradient-to-b from-gray-100 via-white to-gray-100">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-extrabold text-slate-800">Website Plans Tailored for You</h2>
+      <p class="text-lg text-slate-600 mt-3">From powerful eCommerce setups to flexible payment ownership — choose what works best for your business.</p>
+  
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
         
-        <!-- eCommerce websites -->
-        <div class="p-6 bg-white shadow-lg rounded-lg scale-hover border-2 border-blue-500">
-          <h3 class="text-xl font-bold text-blue-700">eCommerce websites</h3>
-          <p class="text-md text-red-500">Perfect for Online Stores</p>
-          <p class="text-md">Launch your online business quickly with professional, high-converting websites.</p>
-          <ul class="text-left mt-2 text-gray-600 list-disc list-inside">
+        <!-- eCommerce Plan -->
+        <div class="bg-white rounded-xl shadow-lg border-t-4 border-blue-600 p-8 hover:shadow-xl transition">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="text-blue-600 text-3xl">
+              <i class="fas fa-shopping-bag"></i>
+            </div>
+            <h3 class="text-2xl font-semibold text-blue-700">eCommerce Websites</h3>
+          </div>
+          <p class="text-sm text-red-500 font-medium mb-2">Optimized for online stores</p>
+          <p class="text-slate-700 text-base mb-4">Launch a sleek, high-converting online store with all the tools you need to grow sales and manage orders.</p>
+          <ul class="list-disc list-inside text-gray-600 space-y-1 text-left">
             <li>Modern product galleries</li>
-            <li>Integrated shopping cart & checkout</li>
-            <li>Secure payment options</li>
-            <li>Optimized for fashion, electronics, beauty, food, and more</li>
+            <li>Secure cart + checkout integration</li>
+            <li>Mobile-first, SEO-ready</li>
+            <li>Perfect for fashion, food, tech, and more</li>
           </ul>
-          <a href="ecommerce/" class="mt-4 inline-block bg-blue-600 text-white py-2 px-6 rounded button-effect">View eCommerce Designs</a>
+          <a href="ecommerce/" class="mt-6 inline-block w-full text-center bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition">View eCommerce Designs</a>
         </div>
-        
-        <!-- One-Time Payment Sites -->
-        <div class="p-6 bg-white shadow-lg rounded-lg scale-hover">
-          <h3 class="text-xl font-bold">Buy a Site Once</h3>
-          <p class="text-md text-red-500">One-Time Payment</p>
-          <p class="text-md">Own your site forever — no recurring fees.</p>
-          <p class="mt-2 text-gray-600">Great for business sites, blogs, landing pages, and niche concepts with tailored features.</p>
-          <a href="onetime/" class="mt-4 inline-block bg-blue-600 text-white py-2 px-6 rounded button-effect">Explore One-Time Sites</a>
+  
+        <!-- Flexible Ownership Plan -->
+        <div class="bg-white rounded-xl shadow-lg border-t-4 border-indigo-600 p-8 hover:shadow-xl transition">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="text-indigo-600 text-3xl">
+              <i class="fas fa-layer-group"></i>
+            </div>
+            <h3 class="text-2xl font-semibold text-indigo-700">Flexible Ownership Plans</h3>
+          </div>
+          <p class="text-sm text-purple-600 font-medium mb-2">Pay once or in easy installments</p>
+          <p class="text-slate-700 text-base mb-4">No subscriptions. You own your site for life — pay in full or split across 2–24 months. Ideal for service providers, creatives, and brands.</p>
+          <ul class="list-disc list-inside text-gray-600 space-y-1 text-left">
+            <li>Admin dashboard access</li>
+            <li>Fully custom site ownership</li>
+            <li>Launch-ready designs (blog, business, landing)</li>
+            <li>Zero monthly fees, hire-purchase option available</li>
+          </ul>
+          <a href="onetime/" class="mt-6 inline-block w-full text-center bg-indigo-600 text-white py-2 px-6 rounded-md hover:bg-indigo-700 transition">Explore Flexible Plans</a>
         </div>
   
       </div>
     </div>
   </section>
+<!-- Top Website Designs Section -->
+<section id="top-designs" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-extrabold text-slate-800">Top Website Designs</h2>
+      <p class="text-lg text-slate-600 mt-2 mb-10">Handpicked templates that combine elegance, performance, and function.</p>
   
-<!-- Services Section -->
-<section id="services" class="py-20 bg-white">
-    <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold text-black">Our Exceptional Web Services</h2>
-        <p class="mt-4 text-xl text-black opacity-75">We bring your vision to life with expert web solutions!</p>
-        <div class="grid md:grid-cols-3 grid-cols-2 gap-8 mt-8">
-            <!-- Web Creation -->
-            <div class="service-card p-8 bg-white shadow-xl rounded-lg transform transition-all">
-                <h3 class="text-2xl font-bold text-blue-600">Custom Websites</h3>
-                <p class="mt-2 text-lg text-gray-700">We design and build websites tailored to your needs, ensuring a flawless experience.</p>
+      <!-- Scrollable Container for Small Screens -->
+      <div class="overflow-x-auto">
+        <div class="flex md:grid md:grid-cols-3 gap-6 md:gap-10 min-w-[750px] md:min-w-0">
+  
+          <!-- Repeatable Design Card Component -->
+          <!-- Design 1 -->
+          <div class="bg-gray-50 rounded-xl shadow-md hover:shadow-lg min-w-[300px] md:w-full transition duration-300">
+            <img src="https://i.imgur.com/OZdyiJb.png" alt="Shopright" class="w-full h-48 object-cover">
+            <div class="p-5 text-left">
+              <h3 class="text-xl font-semibold text-slate-800">Shopright</h3>
+              <p class="text-sm text-gray-500 mb-3">eCommerce</p>
+              <p class="text-sm text-gray-600 mb-4">A bold, modern store design with full checkout integration, ideal for online retail.</p>
+              <button onclick="previewDesign('https://shopright.iyonicorp.com')" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Preview</button>
+              <button onclick="showDesignDetails('Shopright', 'A modern eCommerce platform with intuitive product galleries and secure payment flows.', '', 'ecommerce')" class="block mt-3 text-blue-600 hover:underline">Read More</button>
             </div>
-            <!-- Website Customization -->
-            <div class="service-card p-8 bg-white shadow-xl rounded-lg transform transition-all">
-                <h3 class="text-2xl font-bold text-green-600">Customize your website</h3>
-                <p class="mt-2 text-lg text-gray-700">Take your website to the next level with advanced customization options.</p>
+          </div>
+  
+          <!-- Design 2 -->
+          <div class="bg-gray-50 rounded-xl shadow-md hover:shadow-lg min-w-[300px] md:w-full transition duration-300">
+            <img src="https://allcollectivenouns.com/wp-content/uploads/2024/12/33-11-1024x536.png" alt="Marketing Agency" class="w-full h-48 object-cover">
+            <div class="p-5 text-left">
+              <h3 class="text-xl font-semibold text-slate-800">Marketing Agency</h3>
+              <p class="text-sm text-gray-500 mb-3">Landing Page</p>
+              <p class="text-sm text-gray-600 mb-4">Sleek, CTA-focused design for modern marketing teams and creative agencies.</p>
+              <button onclick="previewDesign('https://marketing.iyonicorp.com')" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Preview</button>
+              <button onclick="showDesignDetails('Marketing Agency', 'Perfect for digital agencies and marketers. Combines testimonials, services, and calls to action.', '', 'onetime')" class="block mt-3 text-blue-600 hover:underline">Read More</button>
             </div>
-            <!-- Front & Backend Development -->
-            <div class="service-card p-8 bg-white shadow-xl rounded-lg transform transition-all">
-                <h3 class="text-2xl font-bold text-purple-600">Full stack Development</h3>
-                <p class="mt-2 text-lg text-gray-700">Create a robust, scalable solution for your business with our top-notch development services.</p>
+          </div>
+  
+          <!-- Design 3 -->
+          <div class="bg-gray-50 rounded-xl shadow-md hover:shadow-lg min-w-[300px] md:w-full transition duration-300">
+            <img src="https://i.imgur.com/2ogZ1dH.png" alt="Tranquil Spa" class="w-full h-48 object-cover">
+            <div class="p-5 text-left">
+              <h3 class="text-xl font-semibold text-slate-800">Tranquil Essence Spa</h3>
+              <p class="text-sm text-gray-500 mb-3">Professional Services</p>
+              <p class="text-sm text-gray-600 mb-4">Elegant design for wellness brands, with service highlights and booking integration.</p>
+              <button onclick="previewDesign('https://tranquil.iyonicorp.com')" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Preview</button>
+              <button onclick="showDesignDetails('Tranquil Essence Spa', 'Ideal for spas, wellness centers, and personal care businesses.', '', 'onetime')" class="block mt-3 text-blue-600 hover:underline">Read More</button>
             </div>
+          </div>
+  
+          <!-- Design 4 -->
+          <div class="bg-gray-50 rounded-xl shadow-md hover:shadow-lg min-w-[300px] md:w-full transition duration-300">
+            <img src="https://i.imgur.com/5pDv6pB.png" alt="Iyonic Bots" class="w-full h-48 object-cover">
+            <div class="p-5 text-left">
+              <h3 class="text-xl font-semibold text-slate-800">Iyonic Bots</h3>
+              <p class="text-sm text-gray-500 mb-3">AI Automation</p>
+              <p class="text-sm text-gray-600 mb-4">Cutting-edge AI bot platform for automated business workflows and chatbot interactions.</p>
+              <button onclick="previewDesign('https://iyonicbots.iyonicorp.com')" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Preview</button>
+              <button onclick="showDesignDetails('Iyonic Bots', 'Ideal for tech startups and AI platforms needing dashboards, APIs, and automation flows.', '', 'ecommerce')" class="block mt-3 text-blue-600 hover:underline">Read More</button>
+            </div>
+          </div>
+  
+          <!-- Design 5 -->
+          <div class="bg-gray-50 rounded-xl shadow-md hover:shadow-lg min-w-[300px] md:w-full transition duration-300">
+            <img src="https://media.macphun.com/img/uploads/macphun/blog/2107/brian-wangenheim-yG4PhU9bdA4-unsplash.jpg?q=85&w=1178&h=625&resize=cover" alt="Modern Apparel" class="w-full h-48 object-cover">
+            <div class="p-5 text-left">
+              <h3 class="text-xl font-semibold text-slate-800">Modern Apparel</h3>
+              <p class="text-sm text-gray-500 mb-3">eCommerce Fashion</p>
+              <p class="text-sm text-gray-600 mb-4">Trendy design for fashion stores with high-res visuals, filters, and size guides.</p>
+              <button onclick="previewDesign('https://iyonicfashion.iyonicorp.com')" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Preview</button>
+              <button onclick="showDesignDetails('Modern Apparel', 'Optimized for fashion brands — includes cart, size selection, product reviews.', '', 'ecommerce')" class="block mt-3 text-blue-600 hover:underline">Read More</button>
+            </div>
+          </div>
+  
+          <!-- Design 6 -->
+          <div class="bg-gray-50 rounded-xl shadow-md hover:shadow-lg min-w-[300px] md:w-full transition duration-300">
+            <img src="https://contenthub-static.grammarly.com/blog/wp-content/uploads/2017/11/how-to-write-a-blog-post-760x406.jpeg" alt="Custom Blog" class="w-full h-48 object-cover">
+            <div class="p-5 text-left">
+              <h3 class="text-xl font-semibold text-slate-800">Custom Blog</h3>
+              <p class="text-sm text-gray-500 mb-3">Personal Blogging</p>
+              <p class="text-sm text-gray-600 mb-4">Minimalist and clean blog layout for personal storytelling, portfolios, and thought pieces.</p>
+              <button onclick="previewDesign('https://blog.iyonicorp.com')" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Preview</button>
+              <button onclick="showDesignDetails('Custom Blog', 'Ideal for bloggers and creators wanting speed, clarity, and content-first layout.', '', 'onetime')" class="block mt-3 text-blue-600 hover:underline">Read More</button>
+            </div>
+          </div>
+  
         </div>
-        <div class="grid md:grid-cols-2 grid-cols-1 gap-8 mt-12">
-            <!-- Website Restructure -->
-            <div class="service-card p-8 bg-white shadow-xl rounded-lg transform transition-all">
-                <h3 class="text-2xl font-bold text-orange-600">Website Restructure</h3>
-                <p class="mt-2 text-lg text-gray-700">Need a fresh look? We’ll help you redesign your website to match the latest trends.</p>
-            </div>
-            <!-- Website Updates -->
-            <div class="service-card p-8 bg-white shadow-xl rounded-lg transform transition-all">
-                <h3 class="text-2xl font-bold text-yellow-600">Regular Website Updates</h3>
-                <p class="mt-2 text-lg text-gray-700">Keep your website up-to-date with the latest content, security patches, and features.</p>
-            </div>
-        </div>
-        <div class="grid md:grid-cols-2 grid-cols-1 gap-8 mt-12">
-            <!-- Website Animations -->
-            <div class="service-card p-8 bg-white shadow-xl rounded-lg transform transition-all">
-                <h3 class="text-2xl font-bold text-pink-600">Website Animations</h3>
-                <p class="mt-2 text-lg text-gray-700">Enhance user experience with interactive animations and visual effects.</p>
-            </div>
-            <!-- Imagination -->
-            <div class="service-card p-8 bg-white shadow-xl rounded-lg transform transition-all">
-                <h3 class="text-2xl font-bold text-teal-600">Bring Your Imagination to Life</h3>
-                <p class="mt-2 text-lg text-gray-700">Have a unique idea? Let’s turn it into reality with creativity and innovation.</p>
-            </div>
-        </div>
+      </div>
     </div>
-</section>
+  </section>
+  
+  
+  <!-- Full-Screen Preview -->
+  <div id="designPreviewSection" class="fixed top-0 left-0 w-full h-screen bg-white z-[9999] hidden">
+    <button class="absolute top-5 right-6 bg-red-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-700 z-50" onclick="closeDesignPreview()">Close</button>
+    <iframe id="designPreviewFrame" class="w-full h-full border-0"></iframe>
+  </div>
+  
+<!-- Design Detail Popup -->
+<div id="designDetailPopup" class="fixed top-0 left-0 w-full h-screen bg-black bg-opacity-40 z-[9998] hidden items-center justify-center">
+    <div class="bg-white w-full max-w-md mx-auto p-6 rounded-lg shadow-xl relative z-50 text-center">
+      <button onclick="closeDesignDetails()" class="absolute top-2 right-3 text-red-600 font-bold text-xl">&times;</button>
+      <h3 id="designTitle" class="text-2xl font-bold text-slate-800 mb-3"></h3>
+      <p id="designDescription" class="text-gray-700 mb-4"></p>
+      <p class="text-sm text-gray-600 italic mb-6">To explore this template, click below and search for "<span id="searchName" class="font-semibold text-indigo-600"></span>" on the next page.</p>
+      <a id="categoryLink" href="#" class="inline-block bg-indigo-600 text-white py-2 px-6 rounded-md hover:bg-indigo-700 transition">Go to Template Page</a>
+    </div>
+  </div>
+  
+  
+  <!-- Script -->
+  <script>
+  function previewDesign(templateUrl) {
+    document.getElementById("designPreviewFrame").src = templateUrl;
+    document.getElementById("designPreviewSection").style.display = "block";
+    document.body.style.overflow = "hidden";
+  }
+  
+  function closeDesignPreview() {
+    document.getElementById("designPreviewSection").style.display = "none";
+    document.getElementById("designPreviewFrame").src = "";
+    document.body.style.overflow = "auto";
+  }
+  
+  function showDesignDetails(title, description, siteLink, category) {
+  document.getElementById('designTitle').innerText = title;
+  document.getElementById('designDescription').innerText = description;
+  document.getElementById('searchName').innerText = title;
+
+  const categoryHref = category === "ecommerce"
+    ? "/ecommerce/"
+    : category === "onetime"
+    ? "/onetime/"
+    : `/${category}/`;
+
+  document.getElementById('categoryLink').href = categoryHref;
+
+  document.getElementById('designDetailPopup').style.display = 'flex';
+}
+
+function closeDesignDetails() {
+  document.getElementById('designDetailPopup').style.display = 'none';
+}
+  </script>
+  
+    
+  
+<!-- Enhanced Services Section -->
+<section id="services" class="py-24 bg-gradient-to-b from-white via-slate-50 to-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-slate-800">Next-Level Web Services</h2>
+      <p class="mt-4 text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">Empowering brands through stunning digital craftsmanship, tailored functionality, and relentless innovation.</p>
+  
+      <div class="grid gap-10 mt-16 md:grid-cols-3 sm:grid-cols-2">
+        <!-- 1 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+          <div class="text-blue-600 text-4xl mb-4">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Custom Website Design</h3>
+          <p class="text-gray-600">Fully responsive, SEO-optimized websites crafted to match your brand's personality and purpose.</p>
+        </div>
+  
+        <!-- 2 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+          <div class="text-green-500 text-4xl mb-4">
+            <i class="fas fa-tools"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Advanced Customization</h3>
+          <p class="text-gray-600">Tweak, tailor, and enhance your site to reflect evolving goals and features.</p>
+        </div>
+  
+        <!-- 3 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+          <div class="text-purple-600 text-4xl mb-4">
+            <i class="fas fa-code-branch"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Full Stack Development</h3>
+          <p class="text-gray-600">End-to-end development from UI design to powerful backend architecture.</p>
+        </div>
+  
+        <!-- 4 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+          <div class="text-orange-500 text-4xl mb-4">
+            <i class="fas fa-sync-alt"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Website Redesign</h3>
+          <p class="text-gray-600">Modernize outdated designs for improved performance, appeal, and engagement.</p>
+        </div>
+  
+        <!-- 5 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+          <div class="text-yellow-500 text-4xl mb-4">
+            <i class="fas fa-sync"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Ongoing Maintenance</h3>
+          <p class="text-gray-600">Regular content updates, security patches, and version control to keep you future-proof.</p>
+        </div>
+  
+        <!-- 6 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+          <div class="text-pink-500 text-4xl mb-4">
+            <i class="fas fa-magic"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Interactive Animation</h3>
+          <p class="text-gray-600">Bring interfaces to life with motion effects, microinteractions, and creative visuals.</p>
+        </div>
+      </div>
+  
+      <div class="mt-16 text-center">
+        <h3 class="text-2xl font-semibold text-teal-600 mb-4">Got a Big Idea?</h3>
+        <p class="text-gray-700 max-w-xl mx-auto">Let’s push boundaries together. If you can dream it — we can build it.</p>
+      </div>
+    </div>
+  </section>
+  
 
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <!-- Swiper Testimonials Section -->
-<section id="testimonials" class="bg-gray-100 py-12">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-        <h2 class="text-3xl font-bold text-gray-800">What Our Clients Say</h2>
-        <p class="text-gray-600 mt-2">See what our happy customers have to say about Iyonicorp.</p>
-
-        <div class="swiper mySwiper mt-10">
-            <div class="swiper-wrapper">
-                <!-- Testimonial 1 -->
-                <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="mx-auto w-12 h-12 rounded-full">
-                    <h3 class="text-lg font-semibold mt-3 text-gray-800">James Carter</h3>
-                    <p class="text-sm text-gray-600">Web Developer</p>
-                    <p class="text-gray-700 mt-3">"Iyonicorp helped me enhance my website’s UI with custom animations and effects. Highly recommended!"</p>
-                </div>
-
-                <!-- Testimonial 2 -->
-                <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
-                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="User" class="mx-auto w-12 h-12 rounded-full">
-                    <h3 class="text-lg font-semibold mt-3 text-gray-800">Sophia Martinez</h3>
-                    <p class="text-sm text-gray-600">Startup Founder</p>
-                    <p class="text-gray-700 mt-3">"A game-changer for our startup! Their custom functions and designs made our website stand out."</p>
-                </div>
-
-                <!-- Testimonial 3 -->
-                <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
-                    <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="User" class="mx-auto w-12 h-12 rounded-full">
-                    <h3 class="text-lg font-semibold mt-3 text-gray-800">Michael Johnson</h3>
-                    <p class="text-sm text-gray-600">E-commerce Owner</p>
-                    <p class="text-gray-700 mt-3">"Their buttons and animations transformed my e-commerce store. Now my site looks super professional!"</p>
-                </div>
-            </div>
-
-            <!-- Swiper Pagination -->
-            <div class="swiper-pagination"></div>
+<!-- Swiper Testimonials Section -->
+<section id="testimonials" class="bg-gray-100 py-16">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold text-gray-800">What Our Clients Say</h2>
+      <p class="text-gray-600 mt-2">Over 10,000 clients trust Iyonicorp. Here’s why:</p>
+  
+      <div class="swiper mySwiper mt-10">
+        <div class="swiper-wrapper">
+  
+          <!-- Testimonial 1 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="mx-auto w-12 h-12 rounded-full">
+            <h3 class="text-lg font-semibold mt-3 text-gray-800">James Carter</h3>
+            <p class="text-sm text-gray-600">Web Developer</p>
+            <p class="text-gray-700 mt-3">"Iyonicorp helped me enhance my website’s UI with custom animations and effects. Highly recommended!"</p>
+          </div>
+  
+          <!-- Testimonial 2 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="User" class="mx-auto w-12 h-12 rounded-full">
+            <h3 class="text-lg font-semibold mt-3 text-gray-800">Sophia Martinez</h3>
+            <p class="text-sm text-gray-600">Startup Founder</p>
+            <p class="text-gray-700 mt-3">"A game-changer for our startup! Their custom functions and designs made our website stand out."</p>
+          </div>
+  
+          <!-- Testimonial 3 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="User" class="mx-auto w-12 h-12 rounded-full">
+            <h3 class="text-lg font-semibold mt-3 text-gray-800">Michael Johnson</h3>
+            <p class="text-sm text-gray-600">E-commerce Owner</p>
+            <p class="text-gray-700 mt-3">"Their buttons and animations transformed my e-commerce store. Now my site looks super professional!"</p>
+          </div>
+  
+          <!-- Testimonial 4 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="mx-auto w-12 h-12 rounded-full">
+            <h3 class="text-lg font-semibold mt-3 text-gray-800">Aisha Bello</h3>
+            <p class="text-sm text-gray-600">Brand Strategist</p>
+            <p class="text-gray-700 mt-3">"The Iyonicorp team exceeded my expectations. Our site traffic and engagement doubled in a month!"</p>
+          </div>
+  
+          <!-- Testimonial 5 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="User" class="mx-auto w-12 h-12 rounded-full">
+            <h3 class="text-lg font-semibold mt-3 text-gray-800">David Kim</h3>
+            <p class="text-sm text-gray-600">Tech Consultant</p>
+            <p class="text-gray-700 mt-3">"Clean code, fast delivery, and amazing support — Iyonicorp is the go-to for any serious web project."</p>
+          </div>
+  
+          <!-- Testimonial 6 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <img src="https://randomuser.me/api/portraits/women/10.jpg" alt="User" class="mx-auto w-12 h-12 rounded-full">
+            <h3 class="text-lg font-semibold mt-3 text-gray-800">Chloe Adams</h3>
+            <p class="text-sm text-gray-600">Marketing Manager</p>
+            <p class="text-gray-700 mt-3">"Their SEO-friendly designs helped us rank higher and attract more customers. I’m beyond impressed!"</p>
+          </div>
+  
+          <!-- Testimonial 7 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="User" class="mx-auto w-12 h-12 rounded-full">
+            <h3 class="text-lg font-semibold mt-3 text-gray-800">Carlos Reyes</h3>
+            <p class="text-sm text-gray-600">App Founder</p>
+            <p class="text-gray-700 mt-3">"The speed and precision of their team is unmatched. They nailed our backend integration in days."</p>
+          </div>
+  
+          <!-- Testimonial 8 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="User" class="mx-auto w-12 h-12 rounded-full">
+            <h3 class="text-lg font-semibold mt-3 text-gray-800">Hannah Liu</h3>
+            <p class="text-sm text-gray-600">Creative Director</p>
+            <p class="text-gray-700 mt-3">"Iyonicorp translated our creative vision into a pixel-perfect site. Clients love the aesthetic!"</p>
+          </div>
+  
+          <!-- Testimonial 9 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <img src="https://randomuser.me/api/portraits/men/81.jpg" alt="User" class="mx-auto w-12 h-12 rounded-full">
+            <h3 class="text-lg font-semibold mt-3 text-gray-800">Liam Thompson</h3>
+            <p class="text-sm text-gray-600">Digital Consultant</p>
+            <p class="text-gray-700 mt-3">"Professional, communicative, and innovative — exactly what I needed in a web partner."</p>
+          </div>
+  
+          <!-- Testimonial 10 -->
+          <div class="swiper-slide bg-white p-6 rounded-lg shadow-md">
+            <img src="https://randomuser.me/api/portraits/women/37.jpg" alt="User" class="mx-auto w-12 h-12 rounded-full">
+            <h3 class="text-lg font-semibold mt-3 text-gray-800">Emma Wallace</h3>
+            <p class="text-sm text-gray-600">Blog Creator</p>
+            <p class="text-gray-700 mt-3">"From layout to speed optimization, everything was done right. My blog now loads in under a second!"</p>
+          </div>
+  
         </div>
+  
+        <!-- Swiper Pagination -->
+        <div class="swiper-pagination mt-6"></div>
+      </div>
     </div>
-</section>
+  </section>
+  
 
 <!-- Swiper Script -->
 <script>
@@ -575,34 +833,70 @@ footer {
 
 
 
-<!-- Let’s Talk Section -->
-<section id="contact" class="py-20 bg-gray-100 text-center">
-    <div class="container mx-auto">
-        <h2 class="text-3xl font-bold text-blue-600">Let’s Talk About Your Project!</h2>
-        <p class="mt-4 text-xl text-gray-700">We’d love to hear from you and bring your ideas to life. Reach out to us today!</p>
-        <a href="contact/" class="mt-6 inline-block bg-blue-600 text-white py-3 px-8 rounded-lg transition-transform transform hover:scale-105">
-            Contact Us Now
-        </a>
+<!-- Custom Design CTA Section -->
+<section id="contact" class="py-24 bg-gradient-to-b from-gray-100 via-white to-gray-100 text-center">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-4xl font-extrabold text-slate-800">Didn't Find the Perfect Template?</h2>
+      <p class="mt-4 text-lg text-gray-700">No worries — we specialize in building <span class="text-indigo-600 font-medium">custom websites</span> tailored exactly to your idea, brand, and vision.</p>
+      <p class="mt-2 text-gray-600 text-base">Just tell us what you have in mind. From bold startups to personal portfolios — we’ll design it from scratch, just for you.</p>
+      <a href="/contact/" class="mt-6 inline-block bg-indigo-600 text-white py-3 px-8 rounded-lg hover:bg-indigo-700 transition-transform transform hover:scale-105 shadow-md">
+        Let's Build Your Custom Website
+      </a>
+      <p class="mt-3 text-sm text-gray-500 italic">We're just one message away.</p>
     </div>
-</section>
+  </section>
+  
 
 <!-- Footer -->
-<footer class="bg-gray-900 text-white text-center py-3 fade-in">
-    <div class="container mx-auto flex flex-col items-center px-6">
-        
-        <!-- Footer Navigation Links -->
-        <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 text-gray-400">
-            <a href="about/" class="footer-link">About Us</a>
-            <a href="terms/" class="footer-link">Terms & Conditions</a>
-            <a href="privacy/" class="footer-link">privacy policy</a>
-            <a href="refunds/" class="footer-link">Refund policy</a>
+<footer class="bg-gray-900 text-white pt-10 pb-6 animate-fadeInUp">
+    <div class="max-w-6xl mx-auto px-6">
+  
+      <!-- Footer Links -->
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6 border-b border-gray-700 pb-6">
+        <div class="text-center md:text-left">
+          <h3 class="text-xl font-semibold text-white">Iyonicorp</h3>
+          <p class="text-gray-400 text-sm mt-2">Powering the web, one idea at a time.</p>
         </div>
-
-        <!-- Copyright -->
-        <p class="text-gray-500 text-sm mt-2">© 2025 Iyonicorp. All Rights Reserved.</p>
-
+  
+        <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-400">
+          <a href="about/" class="hover:text-white transition">About Us</a>
+          <a href="terms/" class="hover:text-white transition">Terms</a>
+          <a href="privacy/" class="hover:text-white transition">Privacy</a>
+          <a href="refunds/" class="hover:text-white transition">Refunds</a>
+          <a href="contact/" class="hover:text-white transition">Contact</a>
+        </div>
+      </div>
+  
+      <!-- Social Media Icons -->
+      <div class="mt-6 flex justify-center gap-6 text-gray-400 text-xl">
+        <a href="https://www.tiktok.com/@iyonicorp" target="_blank" class="hover:text-white transition" aria-label="TikTok">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://www.instagram.com/iyonicorp" target="_blank" class="hover:text-white transition" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.twitter.com/iyonicorp" target="_blank" class="hover:text-white transition" aria-label="Twitter">
+          <i class="fab fa-x-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/iyoni-corp-ab9b06354" target="_blank" class="hover:text-white transition" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://www.facebook.com/iyonicweb" target="_blank" class="hover:text-white transition" aria-label="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://www.youtube.com/@iyonicorp" target="_blank" class="hover:text-white transition" aria-label="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>
+  
+      <!-- Copyright -->
+      <div class="text-center text-gray-500 text-sm mt-6">
+        © 2025 Iyonicorp. All Rights Reserved.
+      </div>
+  
     </div>
-</footer>
+  </footer>
+  
 
     <!-- Dropdown Script -->
     <script>
