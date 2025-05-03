@@ -372,16 +372,7 @@ footer {
     20%, 40%, 60%, 80% { transform: rotate(2deg); }
 }
 
-/* Footer Links */
-.footer-link {
-    text-decoration: none;
-    transition: color 0.3s ease-in-out;
-    font-size: 14px;
-}
 
-.footer-link:hover {
-    color: #fff;
-}
 
 @keyframes fadeInUp {
   from {
@@ -396,6 +387,40 @@ footer {
 .animate-fadeInUp {
   animation: fadeInUp 1s ease-out;
 }
+.scroll-snap-align-start {
+  scroll-snap-align: start;
+}
+.btn-blue {
+  background-color: #2563eb;
+  color: #fff;
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600;
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-blue:hover {
+  background-color: #1e40af; /* deeper blue */
+  transform: translateY(-1px);
+}
+
+.btn-link {
+  color: #2563eb;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.375rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-link:hover {
+  background-color: rgba(37, 99, 235, 0.05); /* subtle blue tint */
+  color: #1e40af;
+  text-decoration: none;
+}
+
 
     </style>
 </head>
@@ -452,143 +477,574 @@ footer {
     </div>
 </section>
 
-<!-- Responsive & Clean Pricing Section -->
-<section id="pricing" class="py-20 bg-gradient-to-b from-gray-100 via-white to-gray-100">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-extrabold text-slate-800">Website Plans Tailored for You</h2>
-      <p class="text-lg text-slate-600 mt-3">From powerful eCommerce setups to flexible payment ownership — choose what works best for your business.</p>
-  
-      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        <!-- eCommerce Plan -->
-        <div class="bg-white rounded-xl shadow-lg border-t-4 border-blue-600 p-8 hover:shadow-xl transition">
-          <div class="flex items-center gap-4 mb-4">
-            <div class="text-blue-600 text-3xl">
-              <i class="fas fa-shopping-bag"></i>
-            </div>
-            <h3 class="text-2xl font-semibold text-blue-700">eCommerce Websites</h3>
-          </div>
-          <p class="text-sm text-red-500 font-medium mb-2">Optimized for online stores</p>
-          <p class="text-slate-700 text-base mb-4">Launch a sleek, high-converting online store with all the tools you need to grow sales and manage orders.</p>
-          <ul class="list-disc list-inside text-gray-600 space-y-1 text-left">
-            <li>Modern product galleries</li>
-            <li>Secure cart + checkout integration</li>
-            <li>Mobile-first, SEO-ready</li>
-            <li>Perfect for fashion, food, tech, and more</li>
-          </ul>
-          <a href="ecommerce/" class="mt-6 inline-block w-full text-center bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition">View eCommerce Designs</a>
-        </div>
-  
-        <!-- Flexible Ownership Plan -->
-        <div class="bg-white rounded-xl shadow-lg border-t-4 border-indigo-600 p-8 hover:shadow-xl transition">
-          <div class="flex items-center gap-4 mb-4">
-            <div class="text-indigo-600 text-3xl">
-              <i class="fas fa-layer-group"></i>
-            </div>
-            <h3 class="text-2xl font-semibold text-indigo-700">Flexible Ownership Plans</h3>
-          </div>
-          <p class="text-sm text-purple-600 font-medium mb-2">Pay once or in easy installments</p>
-          <p class="text-slate-700 text-base mb-4">No subscriptions. You own your site for life — pay in full or split across 2–24 months. Ideal for service providers, creatives, and brands.</p>
-          <ul class="list-disc list-inside text-gray-600 space-y-1 text-left">
-            <li>Admin dashboard access</li>
-            <li>Fully custom site ownership</li>
-            <li>Launch-ready designs (blog, business, landing)</li>
-            <li>Zero monthly fees, hire-purchase option available</li>
-          </ul>
-          <a href="onetime/" class="mt-6 inline-block w-full text-center bg-indigo-600 text-white py-2 px-6 rounded-md hover:bg-indigo-700 transition">Explore Flexible Plans</a>
-        </div>
-  
-      </div>
+
+
+
+<!-- Glassmorphic Welcome Popup -->
+<div id="welcome-popup" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-500 opacity-0 pointer-events-none">
+
+  <!-- Popup Box -->
+  <div class="popup-box relative w-full max-w-lg mx-auto bg-white/10 rounded-3xl p-6 shadow-2xl border border-white/20 overflow-hidden animate-popupEnter backdrop-blur-xl">
+
+    <!-- Background image -->
+    <div class="absolute inset-0 z-0 bg-cover bg-center opacity-20 blur-sm" style="background-image: url('https://iyonicorp.com/Unique%20color%20cabinets.jpeg');"></div>
+
+    <!-- Gradient Aura -->
+    <div class="absolute -inset-1 z-0 bg-gradient-to-tr from-purple-500 via-blue-500 to-indigo-600 opacity-20 blur-2xl rounded-3xl animate-pulse"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 text-center text-white">
+      <!-- Logo -->
+      <img src="ecommerce/logo.png" alt="Iyoni Logo" class="mx-auto h-14 mb-4 drop-shadow-lg">
+
+      <h2 class="text-3xl font-bold tracking-wide mb-3 uppercase">Welcome to Iyoni Corp</h2>
+      <p class="text-base font-medium mb-2 text-gray-100">
+        We don’t use templates. Every website we build is crafted from the ground up to match your brand, your goals, and your vision.
+      </p>
+      <p class="text-base font-medium mb-2 text-gray-100">
+        From AI-powered assistants to private communities, NFT stores, and immersive virtual event platforms—we’re redefining what’s possible online.
+      </p>
+      <p class="text-base font-medium text-gray-100">
+        If you can imagine it, we’ll design it, build it, and help you launch it with unmatched precision and flair.
+      </p>
     </div>
-  </section>
+
+    <!-- Close Button -->
+    <button id="close-popup" class="absolute top-4 right-4 text-white text-2xl hover:scale-110 transition">&times;</button>
+  </div>
+</div>
+
+<!-- Animation Styles -->
+<style>
+@keyframes popupEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.animate-popupEnter {
+  animation: popupEnter 0.6s ease-out forwards;
+}
+</style>
+
+<!-- JavaScript Logic (Show only once + click outside + timer) -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const popup = document.getElementById('welcome-popup');
+    const popupBox = document.querySelector('.popup-box');
+    const closeBtn = document.getElementById('close-popup');
+
+    const closePopup = () => {
+      popup.classList.add('opacity-0', 'pointer-events-none');
+    };
+
+    // Only show if not previously seen
+    if (!localStorage.getItem('hasSeenPopup')) {
+      popup.classList.remove('opacity-0', 'pointer-events-none');
+      localStorage.setItem('hasSeenPopup', 'true');
+
+      // Auto-dismiss after 30 seconds
+      setTimeout(closePopup, 30000);
+
+      // Close on button click
+      closeBtn.addEventListener('click', closePopup);
+
+      // Close on outside click
+      popup.addEventListener('click', (e) => {
+        if (!popupBox.contains(e.target)) {
+          closePopup();
+        }
+      });
+    }
+  });
+</script>
+
+
 <!-- Top Website Designs Section -->
 <section id="top-designs" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-extrabold text-slate-800">Top Website Designs</h2>
-      <p class="text-lg text-slate-600 mt-2 mb-10">Handpicked templates that combine elegance, performance, and function.</p>
-  
-      <!-- Scrollable Container for Small Screens -->
-      <div class="overflow-x-auto">
-        <div class="flex md:grid md:grid-cols-3 gap-6 md:gap-10 min-w-[750px] md:min-w-0">
-  
-          <!-- Repeatable Design Card Component -->
-          <!-- Design 1 -->
-          <div class="bg-gray-50 rounded-xl shadow-md hover:shadow-lg min-w-[300px] md:w-full transition duration-300">
-            <img src="https://i.imgur.com/OZdyiJb.png" alt="Shopright" class="w-full h-48 object-cover">
-            <div class="p-5 text-left">
-              <h3 class="text-xl font-semibold text-slate-800">Shopright</h3>
-              <p class="text-sm text-gray-500 mb-3">eCommerce</p>
-              <p class="text-sm text-gray-600 mb-4">A bold, modern store design with full checkout integration, ideal for online retail.</p>
-              <button onclick="previewDesign('https://shopright.iyonicorp.com')" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Preview</button>
-              <button onclick="showDesignDetails('Shopright', 'A modern eCommerce platform with intuitive product galleries and secure payment flows.', '', 'ecommerce')" class="block mt-3 text-blue-600 hover:underline">Read More</button>
+  <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Featured Brochure</h2>
+    <p class="text-base sm:text-lg text-gray-600">
+      A curated selection of templates perfect for portfolios, blogs, landing pages, service businesses, agencies, events, and personal brands—built for beauty, speed, and clarity.
+    </p>
+  </div>
+
+    <!-- Scrollable container with marg</ul>in -->
+    <div class="overflow-hidden relative px-6">
+      <div id="scrollWrapper" class="flex gap-6 scroll-snap-x whitespace-nowrap overflow-x-auto hide-scrollbar">
+        
+        <!-- Marketing Agency -->
+        <div class="design-card">
+          <img src="https://allcollectivenouns.com/wp-content/uploads/2024/12/33-11-1024x536.png" alt="Marketing Agency" class="design-img">
+          <div class="p-5 text-left">
+            <h3 class="text-xl font-semibold text-slate-800">Marketing Agency</h3>
+            <p class="text-sm text-gray-500 mb-2">Landing Page</p>
+            <p class="text-sm text-gray-600">CTA-driven layout for creative agencies.</p>
+            <div class="design-buttons">
+              <button onclick="previewDesign('https://marketing.iyonicorp.com')" class="btn-blue">Preview</button>
+              <button onclick="showDesignDetails('Marketing Agency', 'Service layout with modern CTA flow.', '', 'onetime')" class="btn-link">Read More →</button>
             </div>
           </div>
-  
-          <!-- Design 2 -->
-          <div class="bg-gray-50 rounded-xl shadow-md hover:shadow-lg min-w-[300px] md:w-full transition duration-300">
-            <img src="https://allcollectivenouns.com/wp-content/uploads/2024/12/33-11-1024x536.png" alt="Marketing Agency" class="w-full h-48 object-cover">
-            <div class="p-5 text-left">
-              <h3 class="text-xl font-semibold text-slate-800">Marketing Agency</h3>
-              <p class="text-sm text-gray-500 mb-3">Landing Page</p>
-              <p class="text-sm text-gray-600 mb-4">Sleek, CTA-focused design for modern marketing teams and creative agencies.</p>
-              <button onclick="previewDesign('https://marketing.iyonicorp.com')" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Preview</button>
-              <button onclick="showDesignDetails('Marketing Agency', 'Perfect for digital agencies and marketers. Combines testimonials, services, and calls to action.', '', 'onetime')" class="block mt-3 text-blue-600 hover:underline">Read More</button>
-            </div>
-          </div>
-  
-          <!-- Design 3 -->
-          <div class="bg-gray-50 rounded-xl shadow-md hover:shadow-lg min-w-[300px] md:w-full transition duration-300">
-            <img src="https://i.imgur.com/2ogZ1dH.png" alt="Tranquil Spa" class="w-full h-48 object-cover">
-            <div class="p-5 text-left">
-              <h3 class="text-xl font-semibold text-slate-800">Tranquil Essence Spa</h3>
-              <p class="text-sm text-gray-500 mb-3">Professional Services</p>
-              <p class="text-sm text-gray-600 mb-4">Elegant design for wellness brands, with service highlights and booking integration.</p>
-              <button onclick="previewDesign('https://tranquil.iyonicorp.com')" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Preview</button>
-              <button onclick="showDesignDetails('Tranquil Essence Spa', 'Ideal for spas, wellness centers, and personal care businesses.', '', 'onetime')" class="block mt-3 text-blue-600 hover:underline">Read More</button>
-            </div>
-          </div>
-  
-          <!-- Design 4 -->
-          <div class="bg-gray-50 rounded-xl shadow-md hover:shadow-lg min-w-[300px] md:w-full transition duration-300">
-            <img src="https://i.imgur.com/5pDv6pB.png" alt="Iyonic Bots" class="w-full h-48 object-cover">
-            <div class="p-5 text-left">
-              <h3 class="text-xl font-semibold text-slate-800">Iyonic Bots</h3>
-              <p class="text-sm text-gray-500 mb-3">AI Automation</p>
-              <p class="text-sm text-gray-600 mb-4">Cutting-edge AI bot platform for automated business workflows and chatbot interactions.</p>
-              <button onclick="previewDesign('https://iyonicbots.iyonicorp.com')" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Preview</button>
-              <button onclick="showDesignDetails('Iyonic Bots', 'Ideal for tech startups and AI platforms needing dashboards, APIs, and automation flows.', '', 'ecommerce')" class="block mt-3 text-blue-600 hover:underline">Read More</button>
-            </div>
-          </div>
-  
-          <!-- Design 5 -->
-          <div class="bg-gray-50 rounded-xl shadow-md hover:shadow-lg min-w-[300px] md:w-full transition duration-300">
-            <img src="https://media.macphun.com/img/uploads/macphun/blog/2107/brian-wangenheim-yG4PhU9bdA4-unsplash.jpg?q=85&w=1178&h=625&resize=cover" alt="Modern Apparel" class="w-full h-48 object-cover">
-            <div class="p-5 text-left">
-              <h3 class="text-xl font-semibold text-slate-800">Modern Apparel</h3>
-              <p class="text-sm text-gray-500 mb-3">eCommerce Fashion</p>
-              <p class="text-sm text-gray-600 mb-4">Trendy design for fashion stores with high-res visuals, filters, and size guides.</p>
-              <button onclick="previewDesign('https://iyonicfashion.iyonicorp.com')" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Preview</button>
-              <button onclick="showDesignDetails('Modern Apparel', 'Optimized for fashion brands — includes cart, size selection, product reviews.', '', 'ecommerce')" class="block mt-3 text-blue-600 hover:underline">Read More</button>
-            </div>
-          </div>
-  
-          <!-- Design 6 -->
-          <div class="bg-gray-50 rounded-xl shadow-md hover:shadow-lg min-w-[300px] md:w-full transition duration-300">
-            <img src="https://contenthub-static.grammarly.com/blog/wp-content/uploads/2017/11/how-to-write-a-blog-post-760x406.jpeg" alt="Custom Blog" class="w-full h-48 object-cover">
-            <div class="p-5 text-left">
-              <h3 class="text-xl font-semibold text-slate-800">Custom Blog</h3>
-              <p class="text-sm text-gray-500 mb-3">Personal Blogging</p>
-              <p class="text-sm text-gray-600 mb-4">Minimalist and clean blog layout for personal storytelling, portfolios, and thought pieces.</p>
-              <button onclick="previewDesign('https://blog.iyonicorp.com')" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Preview</button>
-              <button onclick="showDesignDetails('Custom Blog', 'Ideal for bloggers and creators wanting speed, clarity, and content-first layout.', '', 'onetime')" class="block mt-3 text-blue-600 hover:underline">Read More</button>
-            </div>
-          </div>
-  
         </div>
+
+
+        <div class="design-card">
+          <img src="https://i.imgur.com/2ogZ1dH.png" alt="Tranquil Spa" class="design-img">
+          <div class="p-5 text-left">
+            <h3 class="text-xl font-semibold text-slate-800">Tranquil Spa</h3>
+            <p class="text-sm text-gray-500 mb-2">Professional Services</p>
+            <p class="text-sm text-gray-600">Elegant design for spas, wellness, and bookings.</p>
+            <div class="design-buttons">
+              <button onclick="previewDesign('https://tranquil.iyonicorp.com')" class="btn-blue">Preview</button>
+              <button onclick="showDesignDetails('Tranquil Spa', 'Wellness-focused layout with booking options.', '', 'onetime')" class="btn-link">Read More →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="design-card">
+          <img src="https://i.imgur.com/5pDv6pB.png" alt="Iyonic Bots" class="design-img">
+          <div class="p-5 text-left">
+            <h3 class="text-xl font-semibold text-slate-800">Iyonic Bots</h3>
+            <p class="text-sm text-gray-500 mb-2">AI & Automation</p>
+            <p class="text-sm text-gray-600">Smart interface for bot-driven automation & workflows.</p>
+            <div class="design-buttons">
+              <button onclick="previewDesign('https://iyonicbots.iyonicorp.com')" class="btn-blue">Preview</button>
+              <button onclick="showDesignDetails('Iyonic Bots', 'Automation dashboards for smart workflows.', '', 'onetime')" class="btn-link">Read More →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="design-card">
+          <img src="https://media.licdn.com/dms/image/v2/D4D12AQEZths38-N2dg/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1709734306401?e=2147483647&v=beta&t=1jTFDzeGhbuP_0s8Eq1LgEJDUxMVBLPLqugeOMw1an0" alt="portfolio" class="design-img">
+          <div class="p-5 text-left">
+            <h3 class="text-xl font-semibold text-slate-800">Modern Portfolio</h3>
+            <p class="text-sm text-gray-500 mb-2">Portfolio</p>
+            <p class="text-sm text-gray-600">Trendy layout built for lifestyle and apparel shops.</p>
+            <div class="design-buttons">
+              <button onclick="previewDesign('https://iyonicfashion.iyonicorp.com')" class="btn-blue">Preview</button>
+              <button onclick="showDesignDetails('Modern Portfolio', 'Welcome to my digital portfolio — a curated collection of my work as a creative web developer. Here you\'ll find projects that showcase my skills in front-end development, UI/UX design, and modern web technologies. Whether you\'re here to collaborate, hire, or get inspired, I\'m glad you stopped by. Let’s build something great together.', '', 'onetime')" class="btn-link">Read More →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="design-card">
+          <img src="https://contenthub-static.grammarly.com/blog/wp-content/uploads/2017/11/how-to-write-a-blog-post-760x406.jpeg" alt="Custom Blog" class="design-img">
+          <div class="p-5 text-left">
+            <h3 class="text-xl font-semibold text-slate-800">Custom Blog</h3>
+            <p class="text-sm text-gray-500 mb-2">Personal Blogging</p>
+            <p class="text-sm text-gray-600">Minimalist and fast blog design for content creators.</p>
+            <div class="design-buttons">
+              <button onclick="previewDesign('https://blog.iyonicorp.com')" class="btn-blue">Preview</button>
+              <button onclick="showDesignDetails('Custom Blog', 'Clean and fast-loading blog for writers.', '', 'onetime')" class="btn-link">Read More →</button>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>
+
+<script>
+  const brochureScroll = document.getElementById('scrollWrapper'); // make sure this is UNIQUE
+  let brochureDirection = 1;
+  let brochureInterval;
+
+  function startBrochureScroll() {
+    brochureInterval = setInterval(() => {
+      brochureScroll.scrollLeft += 1 * brochureDirection;
+
+      const maxLeft = brochureScroll.scrollWidth - brochureScroll.clientWidth;
+
+      if (brochureScroll.scrollLeft >= maxLeft) {
+        brochureDirection = -1;
+      } else if (brochureScroll.scrollLeft <= 0) {
+        brochureDirection = 1;
+      }
+    }, 20); // speed
+  }
+
+  function stopBrochureScroll() {
+    clearInterval(brochureInterval);
+  }
+
+  brochureScroll.addEventListener('mouseenter', stopBrochureScroll);
+  brochureScroll.addEventListener('mouseleave', startBrochureScroll);
+
+  startBrochureScroll();
+</script>
+
+
+<!-- Featured eCommerce Sites -->
+<section id="featured-ecommerce" class="py-20 bg-gray-50">
+  <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Featured eCommerce</h2>
+    <p class="text-base sm:text-lg text-gray-600">
+      From bold fashion stores to smart AI-powered shops — these are crafted for growth and speed.
+    </p>
+  </div>
+
+  <div class="overflow-hidden relative px-6 mt-10">
+    <div id="ecomScroll" class="flex gap-6 scroll-snap-x whitespace-nowrap overflow-x-auto hide-scrollbar">
+      
+      <!-- 1. Shopright -->
+      <div class="design-card ecom-car">
+        <img src="https://i.imgur.com/OZdyiJb.png" alt="Shopright" class="design-img">
+        <div class="p-5 text-left">
+          <h3 class="text-xl font-semibold text-slate-800">Shopright</h3>
+          <p class="text-sm text-gray-500 mb-2">Online Supermarket</p>
+          <p class="text-sm text-gray-600">Seamless shopping, advanced admin, and checkout integrations.</p>
+          <div class="design-buttons">
+            <button onclick="previewDesign('https://shopright.iyonicorp.com')" class="btn-blue">Preview</button>
+            <button onclick="showDesignDetails('Shopright', 'Grocery-focused eCommerce with intuitive cart and admin features.', '', 'ecommerce')" class="btn-link">Read More →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Modern Apparel -->
+      <div class="design-card ecom-car">
+        <img src="https://media.macphun.com/img/uploads/macphun/blog/2107/brian-wangenheim-yG4PhU9bdA4-unsplash.jpg?q=85&w=1178&h=625&resize=cover" alt="Modern Apparel" class="design-img">
+        <div class="p-5 text-left">
+          <h3 class="text-xl font-semibold text-slate-800">Modern Apparel</h3>
+          <p class="text-sm text-gray-500 mb-2">Fashion Store</p>
+          <p class="text-sm text-gray-600">Beautiful, fast, and built for trend-setting fashion drops.</p>
+          <div class="design-buttons">
+            <button onclick="previewDesign('https://iyonicfashion.iyonicorp.com')" class="btn-blue">Preview</button>
+            <button onclick="showDesignDetails('Modern Apparel', 'Trendy, mobile-first eCommerce for lifestyle brands.', '', 'ecommerce')" class="btn-link">Read More →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Weed Selling Site -->
+      <div class="design-card ecom-car">
+        <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/i_7_0A1P.H6o/v0/1200x700.webp" alt="Weed" class="design-img">
+        <div class="p-5 text-left">
+          <h3 class="text-xl font-semibold text-slate-800">plugin</h3>
+          <p class="text-sm text-gray-500 mb-2">Cannabis Shop</p>
+          <p class="text-sm text-gray-600">A sleek, compliant platform for selling cannabis products online.</p>
+          <div class="design-buttons">
+            <button onclick="previewDesign('https://plugin.iyonicorp.com')" class="btn-blue">Preview</button>
+            <button onclick="showDesignDetails('plugin', 'Fully styled, ready-to-launch weed eCommerce platform.', '', 'ecommerce')" class="btn-link">Read More →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Iyonic Bots -->
+      <div class="design-card ecom-car">
+        <img src="https://www.fooodlove.com/images/jcogs_img/cache/012-close-up-view-of-freshly-baked-bakery_-_28de80_-_8782e36ca3e8764a9e4719edc333d3a48e3f4ae7_1110w.webp" alt="bakery" class="design-img">
+        <div class="p-5 text-left">
+          <h3 class="text-xl font-semibold text-slate-800">bakerylandingpage</h3>
+          <p class="text-sm text-gray-500 mb-2">eCommerce</p>
+            <p class="text-sm text-gray-600">Showcase your bakery's finest creations with a warm, inviting design.</p>
+          <div class="design-buttons">
+            <button onclick="previewDesign('ecommerce/bakerylandingpage.html')" class="btn-blue">Preview</button>
+            <button onclick="showDesignDetails('bakerylandingpage', 'BakeryLandingPage is a beautifully crafted and ready-to-launch e-commerce website tailored for bakeries and pastry shops. It features a warm, inviting design optimized for showcasing baked goods and driving sales.\n\n🔹 Built for: Selling cakes, pastries, bread, and other baked delights\n🔹 Design: Mobile-friendly, visually appealing, and easy to navigate\n🔹 Functionality: Includes product pages, featured collections, cart system, and admin panel\n🔹 Perfect for: Bakery owners, pastry chefs, or anyone looking to sell baked goods online\n\n💡 Just plug in your products, connect payment, and start selling!', '', 'ecommerce')" class="btn-link">Read More →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Auto scroll JS -->
+<script>
+  const ecomScroll = document.getElementById('ecomScroll');
+  let direction = 1;
+  let autoScroll = setInterval(() => {
+    ecomScroll.scrollLeft += 1 * direction;
+    if (
+      ecomScroll.scrollLeft + ecomScroll.clientWidth >= ecomScroll.scrollWidth ||
+      ecomScroll.scrollLeft <= 0
+    ) {
+      direction *= -1;
+    }
+  }, 20);
+
+  ecomScroll.addEventListener('mouseenter', () => clearInterval(autoScroll));
+  ecomScroll.addEventListener('mouseleave', () => {
+    autoScroll = setInterval(() => {
+      ecomScroll.scrollLeft += 1 * direction;
+      if (
+        ecomScroll.scrollLeft + ecomScroll.clientWidth >= ecomScroll.scrollWidth ||
+        ecomScroll.scrollLeft <= 0
+      ) {
+        direction *= -1;
+      }
+    }, 20);
+  });
+</script>
+
+<!-- Drop Animation Styles -->
+<style>
+  @keyframes dropFade {
+    from {
+      transform: translateY(-40px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .ecom-card {
+  background-color: #f9fafb;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  min-width: 320px;
+  max-width: 320px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  animation: dropFade 0.8s ease forwards;
+  opacity: 0;
+}
+
+.ecom-card:nth-child(1) { animation-delay: 0.1s; }
+.ecom-card:nth-child(2) { animation-delay: 0.2s; }
+.ecom-card:nth-child(3) { animation-delay: 0.3s; }
+.ecom-card:nth-child(4) { animation-delay: 0.4s; }
+
+  .design-img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+  }
+
+  .btn-blue {
+    background-color: #2563eb;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.375rem;
+    transition: background 0.3s ease;
+  }
+
+  .btn-blue:hover {
+    background-color: #1d4ed8;
+  }
+
+  .btn-link {
+    color: #2563eb;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .btn-link:hover {
+    text-decoration: underline;
+  }
+
+  .design-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scroll-snap-x {
+    scroll-snap-type: x mandatory;
+  }
+</style>
+
+
+<!-- Responsive & Clean Pricing Section -->
+<section id="pricing" class="py-20 bg-gradient-to-b from-gray-100 via-white to-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-4xl font-extrabold text-slate-800">Website Plans Tailored for You</h2>
+    <p class="text-lg text-slate-600 mt-3">From powerful eCommerce setups to flexible ownership — choose what fits your goals.</p>
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <!-- eCommerce Plan -->
+      <div class="bg-white rounded-xl shadow-lg border-t-4 border-blue-600 p-8 hover:shadow-xl transition">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="text-blue-600 text-3xl"><i class="fas fa-shopping-bag"></i></div>
+          <h3 class="text-2xl font-semibold text-blue-700">eCommerce Websites</h3>
+        </div>
+        <p class="text-sm text-red-500 font-medium mb-2">Optimized for online stores</p>
+        <p class="text-slate-700 text-base mb-4">Launch a high-converting store with tools to grow sales and manage orders.</p>
+        <ul class="list-disc list-inside text-gray-600 space-y-1 text-left">
+          <li>Modern product galleries</li>
+          <li>Secure checkout & cart</li>
+          <li>Mobile-first, SEO-ready</li>
+          <li>Perfect for fashion, food, tech, more</li>
+        </ul>
+        <a href="ecommerce/" class="mt-6 inline-block w-full text-center bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition">View eCommerce Designs</a>
+      </div>
+
+      <!-- Flexible Ownership Plan -->
+      <div class="bg-white rounded-xl shadow-lg border-t-4 border-indigo-600 p-8 hover:shadow-xl transition">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="text-indigo-600 text-3xl"><i class="fas fa-layer-group"></i></div>
+          <h3 class="text-2xl font-semibold text-indigo-700">Flexible Ownership</h3>
+        </div>
+        <p class="text-sm text-purple-600 font-medium mb-2">Pay once or in easy installments</p>
+        <p class="text-slate-700 text-base mb-4">No subscriptions. Own your site for life — pay in full or split over 2–24 months.</p>
+        <ul class="list-disc list-inside text-gray-600 space-y-1 text-left">
+          <li>Admin dashboard access</li>
+          <li>Fully owned website</li>
+          <li>Launch-ready designs</li>
+          <li>No monthly fees</li>
+        </ul>
+        <a href="onetime/" class="mt-6 inline-block w-full text-center bg-indigo-600 text-white py-2 px-6 rounded-md hover:bg-indigo-700 transition">Explore Flexible Plans</a>
+      </div>
+
+      <!-- Coming Soon -->
+      <div class="bg-white rounded-xl shadow-lg border-t-4 border-yellow-500 p-8 hover:shadow-xl transition">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="text-yellow-500 text-3xl"><i class="fas fa-hourglass-half"></i></div>
+          <h3 class="text-2xl font-semibold text-yellow-600">Pay While You Earn</h3>
+        </div>
+        <p class="text-sm text-yellow-500 font-medium mb-2">Coming soon...</p>
+        <p class="text-slate-700 text-base mb-4">Launch now, pay later. Designed for new creators and startups with performance-based billing.</p>
+        <ul class="list-disc list-inside text-gray-600 space-y-1 text-left">
+          <li>Revenue-share model</li>
+          <li>Launch with $0 upfront</li>
+          <li>Fully managed & hosted</li>
+          <li>Great for influencers, micro-brands</li>
+        </ul>
+        <button class="mt-6 w-full text-center bg-yellow-500 text-white py-2 px-6 rounded-md cursor-not-allowed opacity-80">Coming Soon</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="upcoming-sites" class="py-20 bg-gray-100 text-black relative z-10">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-extrabold mb-4 tracking-wide text-black uppercase">Upcoming Website Categories</h2>
+    <p class="text-lg text-gray-900 mb-12 max-w-3xl mx-auto">
+      These are bold builds that don’t exist on Shopify, Wix, or any template platform. We’re custom-coding these right now—and if you want one before launch, let’s talk.
+    </p>
+
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+
+      <!-- Betting -->
+      <div class="site-tile group">
+        <div class="tile-image" style="background-image: url('https://i2-prod.football.london/special-features/article26567978.ece/ALTERNATES/s810/0_online-betting-sites.jpg');"></div>
+        <div class="tile-info">
+          <h3 class="tile-title text-yellow-600">Betting Sites</h3>
+          <p class="tile-text">Sportsbooks, fantasy leagues, aviators, and crypto-friendly pools. Fully tailored for your betting concept.</p>
+        </div>
+      </div>
+
+      <!-- Dating -->
+      <div class="site-tile group">
+        <div class="tile-image" style="background-image: url('https://cdn.mos.cms.futurecdn.net/VDSNEP2rmGSF6rD9rbvNFW-1024-80.jpg.webp');"></div>
+        <div class="tile-info">
+          <h3 class="tile-title text-pink-600">Dating Sites</h3>
+          <p class="tile-text">Private platforms built for real people and serious connections—no algorithms, no noise.</p>
+        </div>
+      </div>
+
+      <!-- Events -->
+      <div class="site-tile group">
+        <div class="tile-image" style="background-image: url('https://www.vfairs.com/wp-content/uploads/2024/03/Virtual-Event-Platform-img2.webp');"></div>
+        <div class="tile-info">
+          <h3 class="tile-title text-indigo-600">Virtual Event Sites</h3>
+          <p class="tile-text">Immersive, interactive websites for online conferences, launches, and exhibitions.</p>
+        </div>
+      </div>
+
+      <!-- Community -->
+      <div class="site-tile group">
+        <div class="tile-image" style="background-image: url('https://cdn.prod.website-files.com/60ffdd9e3c66d71b667eba0b/659c0bfad6c71b547ed9bc02_Online%20Community%20Platform_Hero-min-p-1600.png');"></div>
+        <div class="tile-info">
+          <h3 class="tile-title text-emerald-600">Community Platforms</h3>
+          <p class="tile-text">Create secure online groups for private discussions, coaching, memberships, and more.</p>
+        </div>
+      </div>
+
+      <!-- AI -->
+      <div class="site-tile group">
+        <div class="tile-image" style="background-image: url('https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2025/01/marquee-agentforce-ai-assistant.jpg?resize=1536,864');"></div>
+        <div class="tile-info">
+          <h3 class="tile-title text-purple-700">AI Assistant Sites</h3>
+          <p class="tile-text">Sites that manage your calendar, respond to emails, and even write content—powered by AI.</p>
+        </div>
+      </div>
+
+      <!-- NFT -->
+      <div class="site-tile group">
+        <div class="tile-image" style="background-image: url('https://www.addevice.io/storage/ckeditor/uploads/images/6388675271381_how.to.create.an.nft.marketplace.png');"></div>
+        <div class="tile-info">
+          <h3 class="tile-title text-sky-800">NFT & Digital Stores</h3>
+          <p class="tile-text">Exclusive drop sites for NFTs, digital goods, memberships, and token-access content.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-16 text-center max-w-2xl mx-auto">
+      <p class="text-md text-gray-700">
+        These sites are currently in development—but we can start yours now. If you want a version of any of these tailored to you ASAP, hit us up.
+      </p>
+      <p class="mt-2 text-lg font-semibold text-blue-700">Priority builds available by request.</p>
+      <a href="https://iyonicorp.com/contact/" class="mt-4 inline-block px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold tracking-wide hover:scale-105 transition">Request Yours Now →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.site-tile {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  transition: transform 0.5s ease;
+  animation: floaty 6s ease-in-out infinite;
+}
+
+.site-tile:hover {
+  transform: scale(1.02);
+}
+
+.tile-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.tile-info {
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.tile-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.tile-text {
+  font-size: 0.875rem;
+  color: #333;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+</style>
+
   
   <!-- Full-Screen Preview -->
   <div id="designPreviewSection" class="fixed top-0 left-0 w-full h-screen bg-white z-[9999] hidden">
@@ -628,9 +1084,9 @@ footer {
   document.getElementById('searchName').innerText = title;
 
   const categoryHref = category === "ecommerce"
-    ? "/ecommerce/"
+    ? "https://iyonicorp.com/ecommerce/"
     : category === "onetime"
-    ? "/onetime/"
+    ? "https://iyonicorp.com/onetime/"
     : `/${category}/`;
 
   document.getElementById('categoryLink').href = categoryHref;
@@ -713,6 +1169,8 @@ function closeDesignDetails() {
       </div>
     </div>
   </section>
+  
+
   
 
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
@@ -839,7 +1297,7 @@ function closeDesignDetails() {
       <h2 class="text-4xl font-extrabold text-slate-800">Didn't Find the Perfect Template?</h2>
       <p class="mt-4 text-lg text-gray-700">No worries — we specialize in building <span class="text-indigo-600 font-medium">custom websites</span> tailored exactly to your idea, brand, and vision.</p>
       <p class="mt-2 text-gray-600 text-base">Just tell us what you have in mind. From bold startups to personal portfolios — we’ll design it from scratch, just for you.</p>
-      <a href="/contact/" class="mt-6 inline-block bg-indigo-600 text-white py-3 px-8 rounded-lg hover:bg-indigo-700 transition-transform transform hover:scale-105 shadow-md">
+      <a href="https://iyonicorp.com/contact/" class="mt-6 inline-block bg-indigo-600 text-white py-3 px-8 rounded-lg hover:bg-indigo-700 transition-transform transform hover:scale-105 shadow-md">
         Let's Build Your Custom Website
       </a>
       <p class="mt-3 text-sm text-gray-500 italic">We're just one message away.</p>
@@ -956,73 +1414,7 @@ document.addEventListener("DOMContentLoaded", function() {
       console.log("%c", devtools);
     })();
   </script>
-<script>
- (function() {
-    // 🔥 Disable Right-Click
-    document.addEventListener("contextmenu", function(event) {
-      event.preventDefault();
-    });
 
-    // 🔒 Block F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-    document.addEventListener("keydown", function(event) {
-      if (event.keyCode == 123) { // F12
-        event.preventDefault();
-      }
-      if (event.ctrlKey && event.shiftKey && (event.keyCode == 73 || event.keyCode == 74)) { // Ctrl+Shift+I / J
-        event.preventDefault();
-      }
-      if (event.ctrlKey && event.keyCode == 85) { // Ctrl+U
-        event.preventDefault();
-      }
-    });
-
-    // 🚨 Detect DevTools Opened
-    function detectDevTools() {
-      let devtoolsOpen = false;
-
-      const before = new Date();
-      debugger;
-      const after = new Date();
-
-      if (after - before > 100) {
-        devtoolsOpen = true;
-      }
-
-      if (devtoolsOpen) {
-        document.body.innerHTML = `<div style="text-align:center; font-size:24px; font-weight:bold; color:red; margin-top:50px;">
-          🚨 ERROR: DevTools Detected! Please close DevTools to access this website. 🚨
-        </div>`;
-      }
-    }
-
-    setInterval(detectDevTools, 1000);
-        // ❌ Prevent XSS Attacks (Sanitize Input Fields)
-        document.querySelectorAll("input, textarea").forEach((element) => {
-      element.addEventListener("input", function() {
-        this.value = this.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-      });
-    });
-
-    // 🌍 Detect VPN or Proxy Usage
-    async function detectVPN() {
-      try {
-        const response = await fetch("https://vpnapi.io/api/?key=564239f58fd7438d8cbbbb1c0960ff07");
-        const data = await response.json();
-
-        if (data.security.vpn || data.security.proxy || data.security.tor) {
-          document.body.innerHTML = `<div style="text-align:center; font-size:24px; font-weight:bold; color:red; margin-top:50px;">
-            🚨 ERROR: VPN/Proxy Detected! Please disable VPN to access this website. 🚨
-          </div>`;
-        }
-      } catch (error) {
-        console.log("VPN detection error:", error);
-      }
-    }
-
-    detectVPN();
-
-  })();
-</script>
   
 
 </body>
