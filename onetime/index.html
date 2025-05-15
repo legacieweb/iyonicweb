@@ -296,24 +296,23 @@ nav::-webkit-scrollbar-track {
 
         </div>
 
-        <div class="product" data-category="landing" data-price="8">
+        <div class="product" data-category="landing" data-price="0.5">
             <img src="https://www.fooodlove.com/images/jcogs_img/cache/012-close-up-view-of-freshly-baked-bakery_-_28de80_-_8782e36ca3e8764a9e4719edc333d3a48e3f4ae7_1110w.webp" alt="Template 2">
             <h3>Bakery Landing Page</h3>
-            <p>$1600</p>
+            <p>$100</p>
             <button class="preview-btn" onclick="previewTemplate('bakerylandingpage.html')">Preview</button>
-            <button class="details-btn" onclick="showDetails('Bakery Landing Page', 'A beautifully designed landing page for bakeries, showcasing your products, services, and contact information to attract customers.', 8)">View Details</button>
+            <button class="details-btn" onclick="showDetails('Bakery Landing Page', 'A beautifully designed landing page for bakeries, showcasing your products, services, and contact information to attract customers.', 0.5)">View Details</button>
            <button class="rent-btn" onclick="showPaymentPlan(this)">View Payment Plan</button>
 
 
         </div>
 
-        <div class="product" data-category="ecommerce" data-price="20">
-            <img src="https://i.imgur.com/OZdyiJb.png" alt="Template 3">
-            <h3>Shopright</h3>
-            <p>$4000</p>
-            <button class="preview-btn" onclick="previewTemplate('https://shopright.iyonicorp.com/')">Preview</button>
-            <button class="details-btn" onclick="showDetails('eCommerce Store', 'An online store.', 20)">View Details</button>
-            <button onclick="previewAdmin('https://shopright.iyonicorp.com/admin')">View Admin</button>
+        <div class="product" data-category="Healthcare & Wellness" data-price="2">
+            <img src="https://i.imgur.com/EDynpug.jpeg" alt="Template 3">
+            <h3>HealthCare Plus</h3>
+            <p>$400</p>
+            <button class="preview-btn" onclick="previewTemplate('https://health.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('HealthCare Clinic', 'A modern and responsive website template for clinics, hospitals, and medical centers. Features include service booking, consultation fee system, dynamic contact forms, and email integration with Nodemailer.', 2)">View Details</button>
            <button class="rent-btn" onclick="showPaymentPlan(this)">View Payment Plan</button>
 
         </div>
@@ -349,12 +348,12 @@ nav::-webkit-scrollbar-track {
 
         </div>
 
-        <div class="product" data-category="IT & Technology" data-price="40">
+        <div class="product" data-category="IT & Technology" data-price="5">
             <img src="https://i.imgur.com/5pDv6pB.png" alt="Template 2">
             <h3>Iyonic bots</h3>
-            <p>$8000</p>
+            <p>$1000</p>
             <button class="preview-btn" onclick="previewTemplate('https://iyonicbots.iyonicorp.com/')">Preview</button>
-            <button class="details-btn" onclick="showDetails('Iyonic Bots', 'Explore the cutting-edge world of Iyonic Bots — a platform designed to revolutionize automation and AI-driven solutions for businesses. From chatbots to process automation, this site showcases the future of intelligent technology.', 40)">View Details</button>
+            <button class="details-btn" onclick="showDetails('Iyonic Bots', 'Explore the cutting-edge world of Iyonic Bots — a platform designed to revolutionize automation and AI-driven solutions for businesses. From chatbots to process automation, this site showcases the future of intelligent technology.', 5)">View Details</button>
             <button onclick="previewAdmin('https://iyonicbots.iyonicorp.com/admin')">View Admin</button>
            <button class="rent-btn" onclick="showPaymentPlan(this)">View Payment Plan</button>
 
@@ -506,7 +505,7 @@ function showPaymentPlan(button) {
         <label for="installmentSelect">Choose payment plan:</label>
         <select id="installmentSelect" onchange="updateInstallment()"
             style="margin: 10px 0; padding: 8px; width: 100%; font-size: 16px; border-radius: 5px;">
-            ${[1,2,3,6,12,18,24].map(m => `<option value="${m}">${m === 1 ? 'Pay Once' : `Pay in ${m} months`}</option>`).join('')}
+            ${[1,2,3,6,12].map(m => `<option value="${m}">${m === 1 ? 'Pay Once' : `Pay in ${m} months`}</option>`).join('')}
         </select>
 
         <p><strong>Monthly Payment:</strong> $<span id="monthlyAmount">${totalPrice}</span></p>
