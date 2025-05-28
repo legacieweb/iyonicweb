@@ -484,7 +484,7 @@ footer {
 <div id="welcome-popup" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-500 opacity-0 pointer-events-none">
 
   <!-- Popup Box -->
-  <div class="popup-box relative w-full max-w-lg mx-auto bg-white/10 rounded-3xl p-6 shadow-2xl border border-white/20 overflow-hidden animate-popupEnter backdrop-blur-xl">
+  <div class="welcome-popup-box relative w-full max-w-lg mx-auto bg-white/10 rounded-3xl p-6 shadow-2xl border border-white/20 overflow-hidden animate-popupEnter backdrop-blur-xl">
 
     <!-- Background image -->
     <div class="absolute inset-0 z-0 bg-cover bg-center opacity-20 blur-sm" style="background-image: url('https://iyonicorp.com/Unique%20color%20cabinets.jpeg');"></div>
@@ -510,11 +510,23 @@ footer {
     </div>
 
     <!-- Close Button -->
-    <button id="close-popup" class="absolute top-4 right-4 text-white text-2xl hover:scale-110 transition">&times;</button>
+    <button id="welcome-close-btn" 
+      class="absolute top-4 right-4 text-white text-3xl w-11 h-11 flex items-center justify-center 
+             rounded-full bg-white/10 backdrop-blur-md border border-white/30 shadow-lg
+             hover:scale-110 hover:bg-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)]
+             transition-all duration-300 ease-in-out hover:ring-4 hover:ring-purple-400/30 z-20">
+      &times;
+    </button>
   </div>
 </div>
 
-<!-- Animation Styles -->
+<!-- Audio -->
+<audio id="intro-audio">
+  <source src="assets/audio/invideo-ai-1080 Welcome to Iyonicorp_ Your Digital Launc 2025-05-28.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<!-- Animation + Button Styles -->
 <style>
 @keyframes popupEnter {
   0% {
@@ -529,39 +541,78 @@ footer {
 .animate-popupEnter {
   animation: popupEnter 0.6s ease-out forwards;
 }
+
+/* Close button hover animation (scoped) */
+#welcome-close-btn:hover {
+  animation: welcomeBtnPulse 0.8s ease-in-out infinite alternate;
+}
+@keyframes welcomeBtnPulse {
+  from {
+    transform: scale(1);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+  }
+  to {
+    transform: scale(1.08);
+    box-shadow: 0 0 22px rgba(255, 255, 255, 0.35);
+  }
+}
 </style>
 
 <!-- JavaScript Logic (Show only once + click outside + timer) -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const popup = document.getElementById('welcome-popup');
-    const popupBox = document.querySelector('.popup-box');
-    const closeBtn = document.getElementById('close-popup');
+    const popupBox = document.querySelector('.welcome-popup-box');
+    const closeBtn = document.getElementById('welcome-close-btn');
+    const audio = document.getElementById('intro-audio');
 
     const closePopup = () => {
       popup.classList.add('opacity-0', 'pointer-events-none');
     };
 
-    // Only show if not previously seen
-    if (!localStorage.getItem('hasSeenPopup')) {
+    const showPopup = () => {
       popup.classList.remove('opacity-0', 'pointer-events-none');
       localStorage.setItem('hasSeenPopup', 'true');
 
       // Auto-dismiss after 30 seconds
       setTimeout(closePopup, 30000);
+    };
+
+    const tryPlayAudio = () => {
+      audio.volume = 0.8;
+      audio.play().catch((err) => {
+        console.log("Audio autoplay blocked:", err.message);
+      });
+    };
+
+    // Show only if not seen
+    if (!localStorage.getItem('hasSeenPopup')) {
+      showPopup();
+
+      // Require user interaction to start audio
+      const allowAudioPlay = () => {
+        tryPlayAudio();
+        document.removeEventListener('pointerdown', allowAudioPlay);
+      };
+      document.addEventListener('pointerdown', allowAudioPlay);
 
       // Close on button click
-      closeBtn.addEventListener('click', closePopup);
+      closeBtn.addEventListener('click', () => {
+        closePopup();
+        tryPlayAudio(); // Also play audio if user closes
+      });
 
       // Close on outside click
       popup.addEventListener('click', (e) => {
         if (!popupBox.contains(e.target)) {
           closePopup();
+          tryPlayAudio(); // Also play audio if user clicks outside
         }
       });
     }
   });
 </script>
+
 
 
 <!-- Top Website Designs Section -->
@@ -625,7 +676,7 @@ footer {
             <p class="text-sm text-gray-500 mb-2">Portfolio</p>
             <p class="text-sm text-gray-600">Trendy layout built for lifestyle and apparel shops.</p>
             <div class="design-buttons">
-              <button onclick="previewDesign('https://iyonicfashion.iyonicorp.com')" class="btn-blue">Preview</button>
+              <button onclick="previewDesign('onetime/portifolio.html')" class="btn-blue">Preview</button>
               <button onclick="showDesignDetails('Modern Portfolio', 'Welcome to my digital portfolio — a curated collection of my work as a creative web developer. Here you\'ll find projects that showcase my skills in front-end development, UI/UX design, and modern web technologies. Whether you\'re here to collaborate, hire, or get inspired, I\'m glad you stopped by. Let’s build something great together.', '', 'onetime')" class="btn-link">Read More →</button>
             </div>
           </div>
@@ -693,9 +744,23 @@ footer {
     <div id="ecomScroll" class="flex gap-6 scroll-snap-x whitespace-nowrap overflow-x-auto hide-scrollbar">
       
 
+            <!-- 2. PhoneMart -->
+            <div class="design-card ecom-car">
+              <img src="https://i.imgur.com/6tidRGo.png" alt="PhoneMart" class="design-img">
+              <div class="p-5 text-left">
+                <h3 class="text-xl font-semibold text-slate-800">PhoneMart</h3>
+                <p class="text-sm text-gray-500 mb-2">Electronics Store</p>
+                <p class="text-sm text-gray-600">Sleek, modern eCommerce for smartphones, gadgets, and accessories.</p>
+                <div class="design-buttons">
+              <button onclick="previewDesign('https://phone.iyonicorp.com')" class="btn-blue">Preview</button>
+              <button onclick="showDesignDetails('PhoneMart', 'A high-converting electronics eCommerce template for selling phones and tech accessories.', '', 'ecommerce')" class="btn-link">Read More →</button>
+                </div>
+              </div>
+            </div>
+
       <!-- 2. Modern Apparel -->
       <div class="design-card ecom-car">
-        <img src="https://media.macphun.com/img/uploads/macphun/blog/2107/brian-wangenheim-yG4PhU9bdA4-unsplash.jpg?q=85&w=1178&h=625&resize=cover" alt="Modern Apparel" class="design-img">
+        <img src="https://i.imgur.com/rlyZ8bw.png" alt="Modern Apparel" class="design-img">
         <div class="p-5 text-left">
           <h3 class="text-xl font-semibold text-slate-800">Modern Apparel</h3>
           <p class="text-sm text-gray-500 mb-2">Fashion Store</p>
@@ -852,67 +917,199 @@ footer {
 </style>
 
 
-<!-- Responsive & Clean Pricing Section -->
-<section id="pricing" class="py-20 bg-gradient-to-b from-gray-100 via-white to-gray-100">
+<!-- Launch Paths Section -->
+<section id="launch-paths" class="py-20 bg-gradient-to-b from-gray-100 via-white to-gray-100">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-4xl font-extrabold text-slate-800">Website Plans Tailored for You</h2>
-    <p class="text-lg text-slate-600 mt-3">From powerful eCommerce setups to flexible ownership — choose what fits your goals.</p>
+    <h2 class="text-4xl font-extrabold text-slate-800">Your Website, Your Way</h2>
+    <p class="text-lg text-slate-600 mt-3">Launch confidently with solutions tailored to your goals — from eCommerce empires to fully owned websites.</p>
 
     <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
 
-      <!-- eCommerce Plan -->
-      <div class="bg-white rounded-xl shadow-lg border-t-4 border-blue-600 p-8 hover:shadow-xl transition">
+      <!-- eCommerce Launch Path -->
+      <div class="bg-white rounded-xl shadow-lg border-t-4 border-blue-600 p-8 hover:shadow-xl transition group text-left">
         <div class="flex items-center gap-4 mb-4">
-          <div class="text-blue-600 text-3xl"><i class="fas fa-shopping-bag"></i></div>
-          <h3 class="text-2xl font-semibold text-blue-700">eCommerce Websites</h3>
+          <div class="text-blue-600 text-3xl group-hover:scale-110 transition"><i class="fas fa-shopping-bag"></i></div>
+          <h3 class="text-2xl font-semibold text-blue-700">eCommerce Launch</h3>
         </div>
-        <p class="text-sm text-red-500 font-medium mb-2">Optimized for online stores</p>
-        <p class="text-slate-700 text-base mb-4">Launch a high-converting store with tools to grow sales and manage orders.</p>
-        <ul class="list-disc list-inside text-gray-600 space-y-1 text-left">
-          <li>Modern product galleries</li>
-          <li>Secure checkout & cart</li>
-          <li>Mobile-first, SEO-ready</li>
-          <li>Perfect for fashion, food, tech, more</li>
+        <p class="text-sm text-blue-600 font-semibold mb-2">Just $9/month</p>
+        <p class="text-slate-700 text-base mb-4">Your own online store starter.</p>
+        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4">
+          <li>All, Fashion, Electronics, Beauty</li>
         </ul>
-        <a href="ecommerce/" class="mt-6 inline-block w-full text-center bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition">View eCommerce Designs</a>
+
+        <!-- Hidden details -->
+        <div class="hidden text-gray-600 space-y-1 mb-4 details">
+          <p>Everything you need to run and grow your online store — with your own dedicated account manager.</p>
+          <ul class="list-disc list-inside">
+            <li>Modern product galleries</li>
+            <li>Secure checkout & cart</li>
+            <li>Mobile-first, SEO-optimized</li>
+            <li>Includes Dedicated Account Manager</li>
+          </ul>
+        </div>
+
+        <!-- Show More link -->
+        <a href="#" class="text-blue-600 underline cursor-pointer show-more-link">Show More</a>
+
+        <!-- Main action button -->
+        <a href="ecommerce/" class="mt-6 block w-full text-center bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition">
+          View eCommerce Designs
+        </a>
       </div>
 
-      <!-- Flexible Ownership Plan -->
-      <div class="bg-white rounded-xl shadow-lg border-t-4 border-indigo-600 p-8 hover:shadow-xl transition">
+      <!-- Flexible Ownership Path -->
+      <div class="bg-white rounded-xl shadow-lg border-t-4 border-indigo-600 p-8 hover:shadow-xl transition group text-left">
         <div class="flex items-center gap-4 mb-4">
-          <div class="text-indigo-600 text-3xl"><i class="fas fa-layer-group"></i></div>
-          <h3 class="text-2xl font-semibold text-indigo-700">Flexible Ownership</h3>
+          <div class="text-indigo-600 text-3xl group-hover:scale-110 transition"><i class="fas fa-layer-group"></i></div>
+          <h3 class="text-2xl font-semibold text-indigo-700">Own It Outright</h3>
         </div>
-        <p class="text-sm text-purple-600 font-medium mb-2">Pay once or in easy installments</p>
-        <p class="text-slate-700 text-base mb-4">No subscriptions. Own your site for life — pay in full or split over 2–24 months.</p>
-        <ul class="list-disc list-inside text-gray-600 space-y-1 text-left">
-          <li>Admin dashboard access</li>
-          <li>Fully owned website</li>
-          <li>Launch-ready designs</li>
-          <li>No monthly fees</li>
+        <p class="text-sm text-indigo-600 font-semibold mb-2">One-time or split payment</p>
+        <p class="text-slate-700 text-base mb-4">Full ownership option.</p>
+        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4">
+          <li>Blogs, portifolio, Real estates, etc</li>
         </ul>
-        <a href="onetime/" class="mt-6 inline-block w-full text-center bg-indigo-600 text-white py-2 px-6 rounded-md hover:bg-indigo-700 transition">Explore Flexible Plans</a>
+
+        <div class="hidden text-gray-600 space-y-1 mb-4 details">
+          <p>No subscriptions. Pay once or split, launch with a guide.</p>
+          <ul class="list-disc list-inside">
+            <li>Admin dashboard access</li>
+            <li>100% owned by you</li>
+            <li>2–12 month payment options</li>
+            <li>Includes Dedicated Account Manager</li>
+          </ul>
+        </div>
+
+        <a href="#" class="text-indigo-600 underline cursor-pointer show-more-link">Show More</a>
+
+        <a href="onetime/" class="mt-6 block w-full text-center bg-indigo-600 text-white py-2 px-6 rounded-md hover:bg-indigo-700 transition">
+          View One-Time Sites
+        </a>
       </div>
 
-      <!-- Coming Soon -->
-      <div class="bg-white rounded-xl shadow-lg border-t-4 border-yellow-500 p-8 hover:shadow-xl transition">
+      <!-- Premium Website Plan -->
+      <div class="bg-white rounded-xl shadow-lg border-t-4 border-indigo-600 p-8 hover:shadow-xl transition group text-left">
         <div class="flex items-center gap-4 mb-4">
-          <div class="text-yellow-500 text-3xl"><i class="fas fa-hourglass-half"></i></div>
-          <h3 class="text-2xl font-semibold text-yellow-600">Pay While You Earn</h3>
+          <div class="text-indigo-600 text-3xl group-hover:scale-110 transition"><i class="fas fa-star"></i></div>
+          <h3 class="text-2xl font-semibold text-indigo-700">Premium Sites</h3>
         </div>
-        <p class="text-sm text-yellow-500 font-medium mb-2">Coming soon...</p>
-        <p class="text-slate-700 text-base mb-4">Launch now, pay later. Designed for new creators and startups with performance-based billing.</p>
-        <ul class="list-disc list-inside text-gray-600 space-y-1 text-left">
-          <li>Revenue-share model</li>
-          <li>Launch with $0 upfront</li>
-          <li>Fully managed & hosted</li>
-          <li>Great for influencers, micro-brands</li>
+        <p class="text-sm text-indigo-600 font-semibold mb-2">Exclusive sites — $59/month</p>
+        <p class="text-slate-700 text-base mb-4">Premium features & priority support.</p>
+        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4">
+          <li>Betting, NFTs, dating, etc</li>
         </ul>
-        <button class="mt-6 w-full text-center bg-yellow-500 text-white py-2 px-6 rounded-md cursor-not-allowed opacity-80">Coming Soon</button>
-      </div>
 
+        <div class="hidden text-gray-600 space-y-1 mb-4 details">
+          <p>Launch premium websites not listed anywhere else.</p>
+          <ul class="list-disc list-inside">
+            <li>Sites NOT listed on other ecommerce platforms</li>
+            <li>Best priority customer support</li>
+            <li>Custom domain support included</li>
+            <li>Advanced design templates with full customization</li>
+            <li>Unlimited pages and storage</li>
+            <li>High bandwidth allowance</li>
+            <li>Ad-free experience</li>
+          </ul>
+        </div>
+
+        <a href="#" class="text-indigo-600 underline cursor-pointer show-more-link">Show More</a>
+
+<div class="mt-6">
+  <button onclick="document.getElementById('upcoming-sites').scrollIntoView({ behavior: 'smooth' });"
+          class="w-full bg-indigo-600 text-white py-2 px-6 rounded-md hover:bg-indigo-700 transition cursor-pointer">
+    Subscribe for $59/month
+  </button>
+</div>
+
+
+      </div>
+  
     </div>
   </div>
+</section>
+
+<script>
+  document.querySelectorAll('.show-more-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const details = link.previousElementSibling;
+      if (details.classList.contains('hidden')) {
+        details.classList.remove('hidden');
+        link.textContent = 'Show Less';
+      } else {
+        details.classList.add('hidden');
+        link.textContent = 'Show More';
+      }
+    });
+  });
+</script>
+
+<!-- Dedicated Account Manager Section -->
+<section class="py-20 bg-gradient-to-br from-indigo-50 via-white to-indigo-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      
+      <!-- Text Content -->
+      <div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-800 mb-4">
+          You Get a Free Dedicated Account Manager
+        </h2>
+        <p class="text-base sm:text-lg text-slate-600 mb-6">
+          Launching and managing your site has never been this easy. We assign you a personal expert who will handle <strong>everything</strong>:
+        </p>
+        <ul class="space-y-3 text-slate-700 text-sm sm:text-base">
+          <li class="flex items-start gap-2"><i class="fas fa-paint-brush text-indigo-600 mt-1"></i> Full site customization based on your preferences</li>
+          <li class="flex items-start gap-2"><i class="fas fa-sync text-indigo-600 mt-1"></i> Regular updates and improvements</li>
+          <li class="flex items-start gap-2"><i class="fas fa-chart-line text-indigo-600 mt-1"></i> Performance analytics & growth tracking</li>
+          <li class="flex items-start gap-2"><i class="fas fa-comments text-indigo-600 mt-1"></i> Personalized feedback and strategic advice</li>
+        </ul>
+        <p class="mt-6 text-sm sm:text-md text-slate-600">
+          Let us do the heavy lifting while you focus on what matters most — your brand and business.
+        </p>
+     <button id="scrollToLaunchPaths"
+        class="mt-8 inline-block bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition text-center">
+  Get a Dedicated Manager
+</button>
+      </div>
+<script>
+  document.getElementById('scrollToLaunchPaths').addEventListener('click', function () {
+    const target = document.getElementById('launch-paths');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+</script>
+
+      <!-- Animated "Hanging Note" Image -->
+      <div class="relative w-full flex justify-center md:justify-end">
+        <div class="relative w-[90%] max-w-md rounded-xl shadow-lg transform rotate-2 animate-sway bg-white overflow-hidden">
+          <img 
+            src="https://images.pexels.com/photos/5668767/pexels-photo-5668767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+            alt="Dedicated Manager working"
+            class="w-full h-auto object-cover"
+          />
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-yellow-400 rounded-full shadow-md z-10"></div>
+          <div class="absolute bottom-4 left-4 bg-white px-4 py-2 rounded-lg shadow text-sm text-gray-700">
+            Real people. Real results.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animation Keyframes -->
+  <style>
+    @keyframes sway {
+      0%, 100% {
+        transform: rotate(2deg);
+      }
+      50% {
+        transform: rotate(-2deg);
+      }
+    }
+    .animate-sway {
+      animation: sway 3s ease-in-out infinite;
+    }
+  </style>
 </section>
 
 <section id="upcoming-sites" class="py-20 bg-gray-100 text-black relative z-10">
@@ -1389,6 +1586,7 @@ document.addEventListener("DOMContentLoaded", function() {
   gtag('config', 'G-8TDD56RPJC');
   
 </script>
+
 <script>
     setInterval(() => {
       console.clear();
@@ -1472,6 +1670,7 @@ document.addEventListener("DOMContentLoaded", function() {
  
    })();
  </script>
+
 
 </body>
 </html>

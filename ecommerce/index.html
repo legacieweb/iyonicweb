@@ -122,6 +122,86 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
+
+  <!-- Hero Section -->
+<section id="hero" class="relative bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white min-h-[400px] flex items-center justify-center px-6">
+  <div class="max-w-5xl text-center">
+    <h1 class="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight animate-fadeInDown">
+      Get Your Site for <span class="text-indigo-500 animate-pulse">$9 per Month</span>
+    </h1>
+    <p class="text-lg md:text-xl mb-8 text-gray-300 animate-fadeInUp delay-200">
+      Rent fully-built, stunning eCommerce websites instantly. Professional. Fast. Affordable.
+    </p>
+  </div>
+
+  <!-- Background subtle animated shapes -->
+  <div class="absolute inset-0 overflow-hidden -z-10">
+    <div class="absolute w-72 h-72 bg-indigo-700 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000 top-10 left-10"></div>
+    <div class="absolute w-72 h-72 bg-pink-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000 bottom-20 right-10"></div>
+    <div class="absolute w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-25 animate-blob animation-delay-6000 top-1/2 right-1/3"></div>
+  </div>
+</section>
+
+<style>
+  /* Animations */
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fadeInDown {
+    animation: fadeInDown 1s ease forwards;
+  }
+  .animate-fadeInUp {
+    animation: fadeInUp 1s ease forwards;
+  }
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  /* Blob animation */
+  @keyframes blob {
+    0%, 100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+  }
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+  .animation-delay-6000 {
+    animation-delay: 6s;
+  }
+</style>
+
+
+
 <!-- Stylish Centered Category Nav -->
 <nav class="bg-white shadow-sm sticky top-0 z-30 border-b border-gray-200">
     <div class="max-w-6xl mx-auto px-4">
@@ -163,7 +243,9 @@
       scrollbar-width: none;
     }
   </style>
-<!-- Filter by Price -->
+
+
+
 <!-- 🔍 Cool Search & Price Filter Section -->
 <section class="bg-white py-4 shadow-sm border-b border-gray-200">
     <div class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-between gap-4">
@@ -201,23 +283,21 @@
       <div class="bg-white rounded shadow p-4 text-center" data-category="Health" data-price="25">
         <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/i_7_0A1P.H6o/v0/1200x700.webp" class="rounded mb-4">
         <h3 class="text-lg font-semibold">plugin</h3>
-        <p class="text-sm text-gray-600">$25 / month</p>
         <div class="mt-4 space-y-2">
           <button onclick="previewTemplate('https://plugin.iyonicorp.com/')" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">Preview</button>
-            <button onclick="showDetails('plugin', 'plugin is a fully designed and ready-to-launch e-commerce website built for selling weed, cannabis, and other marijuana products. It features a clean, modern layout optimized for user experience and conversions.\n\n🔹 Built for: Selling marijuana, edibles, oils, and related products\n🔹 Design: Mobile-friendly, fast, and professionally styled\n🔹 Functionality: Includes product pages, featured collections, cart system, and admin panel\n🔹 Perfect for: Entrepreneurs or dispensaries looking to get started instantly\n\n💡 Just plug in your products, connect payment, and start selling!\n\n🔑 Admin password: 2823', 25)" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">View Details</button>
+            <button onclick="showDetails('plugin', 'plugin is a fully designed and ready-to-launch e-commerce website built for selling weed, cannabis, and other marijuana products. It features a clean, modern layout optimized for user experience and conversions.\n\n🔹 Built for: Selling marijuana, edibles, oils, and related products\n🔹 Design: Mobile-friendly, fast, and professionally styled\n🔹 Functionality: Includes product pages, featured collections, cart system, and admin panel\n🔹 Perfect for: Entrepreneurs or dispensaries looking to get started instantly\n\n💡 Just plug in your products, connect payment, and start selling!\n\n🔑 Admin password: 2823', 9)" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">View Details</button>
           <button onclick="previewAdmin('https://plugin.iyonicorp.com/admin')" class="w-full bg-black text-white py-2 rounded hover:bg-red-700">Preview Admin</button>
-          <button onclick="subscribeTemplate('plugin', 25)" class="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600">Subscribe</button>
+          <button onclick="subscribeTemplate('plugin', 9)" class="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600">Subscribe</button>
         </div>
       </div>
 
       <div class="bg-white rounded shadow p-4 text-center" data-category="Bakery" data-price="3">
         <img src="https://www.fooodlove.com/images/jcogs_img/cache/012-close-up-view-of-freshly-baked-bakery_-_28de80_-_8782e36ca3e8764a9e4719edc333d3a48e3f4ae7_1110w.webp" class="rounded mb-4">
         <h3 class="text-lg font-semibold">bakerylandingpage</h3>
-        <p class="text-sm text-gray-600">$3 / month</p>
         <div class="mt-4 space-y-2">
           <button onclick="previewTemplate('bakerylandingpage.html')" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">Preview</button>
-            <button onclick="showDetails('bakerylandingpage', 'BakeryLandingPage is a beautifully crafted and ready-to-launch e-commerce website tailored for bakeries and pastry shops. It features a warm, inviting design optimized for showcasing baked goods and driving sales.\n\n🔹 Built for: Selling cakes, pastries, bread, and other baked delights\n🔹 Design: Mobile-friendly, visually appealing, and easy to navigate\n🔹 Functionality: Includes product pages, featured collections, cart system, and admin panel\n🔹 Perfect for: Bakery owners, pastry chefs, or anyone looking to sell baked goods online\n\n💡 Just plug in your products, connect payment, and start selling!', 3)" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">View Details</button>
-          <button onclick="subscribeTemplate('bakerylandingpage', 3)" class="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600">Subscribe</button>
+            <button onclick="showDetails('bakerylandingpage', 'BakeryLandingPage is a beautifully crafted and ready-to-launch e-commerce website tailored for bakeries and pastry shops. It features a warm, inviting design optimized for showcasing baked goods and driving sales.\n\n🔹 Built for: Selling cakes, pastries, bread, and other baked delights\n🔹 Design: Mobile-friendly, visually appealing, and easy to navigate\n🔹 Functionality: Includes product pages, featured collections, cart system, and admin panel\n🔹 Perfect for: Bakery owners, pastry chefs, or anyone looking to sell baked goods online\n\n💡 Just plug in your products, connect payment, and start selling!', 9)" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">View Details</button>
+          <button onclick="subscribeTemplate('bakerylandingpage', 9)" class="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600">Subscribe</button>
         </div>
       </div>
 
@@ -225,13 +305,25 @@
       <div class="bg-white rounded shadow p-4 text-center" data-category="Fashion" data-price="11">
         <img src="https://www.rollingstone.com/wp-content/uploads/2024/01/Best-Sites-for-Womenswear-15-Gap-1.jpg?w=1581&h=1054&crop=1" class="rounded mb-4">
         <h3 class="text-lg font-semibold">iyonicfashion</h3>
-        <p class="text-sm text-gray-600">$11 / month</p>
         <div class="mt-4 space-y-2">
             <button onclick="previewTemplate('https://iyonicfashion.iyonicorp.com/')" class="w-full bg-gradient-to-r from-green-500 to-green-700 text-white py-2 rounded shadow-lg hover:from-green-600 hover:to-green-800 transform hover:scale-105 transition duration-300">Preview</button>
-            <button onclick="showDetails('IyonicFashion', 'IyonicFashion is the ultimate platform for selling fashion and apparel. With a sleek, modern design and user-friendly interface, it is tailored for showcasing clothing, accessories, and footwear.\n\n✨ Features:\n🔹 Stunning product galleries to highlight your collections\n🔹 Mobile-friendly design for seamless shopping on any device\n🔹 Integrated cart and checkout system\n🔹 Perfect for boutique owners, fashion entrepreneurs, and apparel retailers\n\n💡 Get started today and elevate your fashion brand online!', 11)" class="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-2 rounded shadow-lg hover:from-blue-600 hover:to-blue-800 transform hover:scale-105 transition duration-300">View Details</button>
-          <button onclick="subscribeTemplate('iyonicfashion', 11)" class="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600">Subscribe</button>
+            <button onclick="showDetails('IyonicFashion', 'IyonicFashion is the ultimate platform for selling fashion and apparel. With a sleek, modern design and user-friendly interface, it is tailored for showcasing clothing, accessories, and footwear.\n\n✨ Features:\n🔹 Stunning product galleries to highlight your collections\n🔹 Mobile-friendly design for seamless shopping on any device\n🔹 Integrated cart and checkout system\n🔹 Perfect for boutique owners, fashion entrepreneurs, and apparel retailers\n\n💡 Get started today and elevate your fashion brand online!', 9)" class="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-2 rounded shadow-lg hover:from-blue-600 hover:to-blue-800 transform hover:scale-105 transition duration-300">View Details</button>
+          <button onclick="subscribeTemplate('iyonicfashion', 9)" class="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600">Subscribe</button>
         </div>
       </div>
+
+
+      <div class="bg-white rounded shadow p-4 text-center" data-category="Electronics" data-price="15">
+        <img src="https://i.imgur.com/6tidRGo.png" class="rounded mb-4" alt="Phonemart Template Preview">
+        <h3 class="text-lg font-semibold">phonemart</h3>
+        <div class="mt-4 space-y-2">
+          <button onclick="previewTemplate('https://phone.iyonicorp.com/')" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">Preview</button>
+          <button onclick="showDetails('phonemart', 'Phonemart is a modern, ready-to-launch e-commerce template designed for selling smartphones, gadgets, and electronics. It features a sleek, tech-inspired layout, fast performance, and mobile-first design.\n\n🔹 Built for: Mobile phones, tablets, accessories, and electronics\n🔹 Design: Clean, professional, and conversion-focused\n🔹 Functionality: Product pages, featured deals, shopping cart, and admin panel\n🔹 Perfect for: Electronics retailers, phone shops, and gadget resellers\n\n💡 Add your products, set your prices, and start selling instantly!', 9)" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">View Details</button>
+          <button onclick="previewAdmin('https://phone.iyonicorp.com/admin')" class="w-full bg-black text-white py-2 rounded hover:bg-red-700">Preview Admin</button>
+          <button onclick="subscribeTemplate('phonemart', 9)" class="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600">Subscribe</button>
+        </div>
+      </div>
+
     </div>
   </main>
 
