@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>John Doe | Web Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0077ff;
+      --accent: #4ea8de;
+      --bg: #f7fafd;
+      --card-bg: #fff;
+      --text: #222;
+      --muted: #555;
+      --shadow: 0 8px 32px rgba(0,0,0,0.12);
+      --radius: 18px;
+      --transition: 0.3s cubic-bezier(.4,2,.6,1);
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', 'Segoe UI', sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+    header {
+      background: linear-gradient(120deg, #0077ff 60%, #4ea8de 100%);
+      color: #fff;
+      text-align: center;
+      padding: 7rem 1rem 5rem 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      left: -80px;
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 50%;
+      z-index: 0;
+      filter: blur(2px);
+    }
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3.2rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+      font-weight: 700;
+      z-index: 1;
+      position: relative;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+    header p {
+      font-size: 1.4rem;
+      font-weight: 500;
+      z-index: 1;
+      position: relative;
+      opacity: 0.95;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(0,119,255,0.06);
+      padding: 1.1rem 0;
+      gap: 2.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 2px solid #eaf3fa;
+    }
+    nav a {
+      color: var(--primary);
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1.08rem;
+      letter-spacing: 1px;
+      position: relative;
+      transition: color var(--transition);
+    }
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width var(--transition);
+      margin: 0 auto;
+      border-radius: 2px;
+    }
+    nav a:hover, nav a:focus {
+      color: var(--accent);
+    }
+    nav a:hover::after, nav a:focus::after {
+      width: 100%;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 2.5rem 1.2rem;
+    }
+    /* About Section */
+    .about-section {
+      background: linear-gradient(100deg, #f9fafc 60%, #eaf3fa 100%);
+      padding: 4.5rem 1rem 3.5rem 1rem;
+      display: flex;
+      justify-content: center;
+      border-radius: var(--radius);
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+    .about-card {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      max-width: 900px;
+      background: var(--card-bg);
+      box-shadow: 0 8px 32px rgba(0,119,255,0.08);
+      border-radius: 22px;
+      padding: 2.5rem 2rem;
+      align-items: center;
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    .about-card:hover {
+      transform: scale(1.012);
+      box-shadow: 0 12px 40px rgba(0,119,255,0.13);
+    }
+    .profile-pic {
+      width: 220px;
+      border-radius: 50%;
+      border: 6px solid #0077ff30;
+      box-shadow: 0 6px 32px rgba(0, 119, 255, 0.13);
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .about-card:hover .profile-pic {
+      box-shadow: 0 12px 48px rgba(0,119,255,0.18);
+      transform: scale(1.03) rotate(-2deg);
+    }
+    .about-content {
+      flex: 1;
+      min-width: 250px;
+    }
+    .about-content h2 {
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 1.1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .about-content p {
+      font-size: 1.13rem;
+      margin-bottom: 1.1rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    /* Skills Section */
+    .section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .skills {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .skill {
+      background: linear-gradient(90deg, #eaf3fa 60%, #f7fafd 100%);
+      padding: 0.7rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      color: var(--primary);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.07rem;
+      box-shadow: 0 2px 8px rgba(0,119,255,0.07);
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+      cursor: pointer;
+    }
+    .skill:hover {
+      background: linear-gradient(90deg, #0077ff 60%, #4ea8de 100%);
+      color: #fff;
+      transform: translateY(-3px) scale(1.05);
+    }
+    /* Projects Section */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.2rem;
+      margin-top: 2.2rem;
+    }
+    .project {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .project:hover {
+      transform: translateY(-6px) scale(1.025);
+      box-shadow: 0 16px 48px rgba(0,119,255,0.13);
+    }
+    .project img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      filter: brightness(0.98) saturate(1.1);
+      transition: filter var(--transition);
+    }
+    .project:hover img {
+      filter: brightness(1.03) saturate(1.2);
+    }
+    .project-content {
+      padding: 1.3rem 1.2rem 1.2rem 1.2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .project-content h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: var(--primary);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+    }
+    .project-content p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+    /* Contact Section */
+    .contact {
+      background: linear-gradient(90deg, #eaf3fa 60%, #f7fafd 100%);
+      padding: 3.5rem 1rem 3rem 1rem;
+      text-align: center;
+      border-radius: var(--radius);
+      margin: 3rem auto 2rem auto;
+      max-width: 900px;
+      box-shadow: 0 4px 24px rgba(0,119,255,0.07);
+    }
+    .contact h2 {
+      color: var(--primary);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1.1rem;
+      font-weight: 700;
+    }
+    .contact p {
+      color: var(--muted);
+      font-size: 1.13rem;
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+    .socials {
+      margin-top: 1.2rem;
+    }
+    .socials a {
+      margin: 0 1.1rem;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      transition: color var(--transition), text-shadow var(--transition);
+      position: relative;
+    }
+    .socials a:hover {
+      color: var(--accent);
+      text-shadow: 0 2px 12px #4ea8de33;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      background: linear-gradient(90deg, #222 60%, #2d3a4a 100%);
+      color: #fff;
+      padding: 2rem 1rem 1.2rem 1rem;
+      font-size: 1rem;
+      border-top-left-radius: 22px;
+      border-top-right-radius: 22px;
+      margin-top: 2rem;
+      box-shadow: 0 -2px 16px rgba(0,119,255,0.07);
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color var(--transition);
+    }
+    footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .about-section, .contact {
+        padding: 2.5rem 0.5rem;
+      }
+      .about-card {
+        padding: 1.5rem 1rem;
+      }
+      .container {
+        padding: 1.5rem 0.5rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .about-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+      }
+      .profile-pic {
+        margin-bottom: 1rem;
+      }
+      nav {
+        gap: 1.2rem;
+        font-size: 0.98rem;
+      }
+      .projects {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 500px) {
+      header h1 {
+        font-size: 2.1rem;
+      }
+      .about-content h2, .section h2, .contact h2 {
+        font-size: 1.3rem;
+      }
+      .profile-pic {
+        width: 140px;
+      }
+      .about-section, .contact {
+        padding: 1.2rem 0.2rem;
+      }
+      .container {
+        padding: 0.7rem 0.2rem;
+      }
+      footer {
+        font-size: 0.93rem;
+        padding: 1.2rem 0.2rem;
+      }
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Cool scrollbars */
+    ::-webkit-scrollbar {
+      width: 10px;
+      background: #eaf3fa;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #b3d6f7;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://i.pravatar.cc/180?img=10" alt="John Doe" style="width:120px;height:120px;border-radius:50%;border:5px solid #fff;box-shadow:0 4px 24px #0077ff22;object-fit:cover;margin-bottom:1.5rem;position:relative;z-index:2;">
+    <h1>
+      <span style="font-size:2.2rem;display:block;">👋 Hi, I'm</span>
+      John Doe
+    </h1>
+    <p style="font-size:1.5rem;margin-bottom:1.2rem;"></p>
+      <span style="color:#fff;background:linear-gradient(90deg,#4ea8de 40%,#0077ff 100%);padding:0.2em 0.7em;border-radius:1em;box-shadow:0 2px 12px #0077ff22;">
+        Creative Web Developer &amp; Designer
+      </span>
+    </p>
+    <p style="font-size:1.15rem;max-width:540px;margin:0 auto 0.7rem auto;opacity:0.93;"></p>
+      I craft beautiful, fast, and accessible websites with a passion for clean code and delightful user experiences.<br>
+      <span style="color:#eaf3fa;font-size:1.05rem;">Let’s build something amazing together!</span>
+    </p>
+    <div style="margin-top:2.2rem;"></div>
+      <a href="#projects" style="display:inline-block;background:#fff;color:#0077ff;font-weight:700;font-family:'Montserrat',sans-serif;padding:0.8em 2.1em;border-radius:2em;font-size:1.13rem;box-shadow:0 4px 24px #0077ff22;text-decoration:none;transition:background 0.3s,color 0.3s,transform 0.3s;">
+        View My Work
+      </a>
+    </div>
+    <svg width="100%" height="60" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:0;left:0;z-index:1;">
+      <path d="M0,30 C360,90 1080,-30 1440,30 L1440,60 L0,60 Z" fill="#fff" fill-opacity="0.95"/>
+    </svg>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="container">
+    <section id="about" class="about-section">
+      <div class="about-card">
+        <img src="https://i.pravatar.cc/220?img=10" alt="John Doe" class="profile-pic">
+        <div class="about-content">
+          <h2>👋 About Me</h2>
+          <p>
+            I'm <strong>John Doe</strong>, a web developer with 5+ years of experience building interactive, user-focused websites and web apps. I specialize in modern JavaScript frameworks, responsive design, and performance optimization.
+          </p>
+          <p>
+            My journey started with curiosity for how things work on the web, and now I enjoy turning complex problems into simple, elegant solutions. I thrive in collaborative teams and love learning new technologies.
+          </p>
+          <ul style="color:#0077ff;font-weight:600;list-style:square inside;margin:1.2em 0 0 0;padding:0;">
+            <li>Based in New York, USA</li>
+            <li>BSc in Computer Science</li>
+            <li>Open-source contributor & tech blogger</li>
+            <li>Hobbies: photography, hiking, and digital art</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">React</div>
+        <div class="skill">Node.js</div>
+        <div class="skill">Figma</div>
+        <div class="skill">Git & GitHub</div>
+      </div>
+    </section>
+
+      <section id="projects" class="section">
+        <h2>Featured Projects</h2>
+        <div class="projects">
+        <div class="project">
+          <img src="https://cdn.prod.website-files.com/606a802fcaa89bc357508cad/61701b4e166c837543d8f0ce_2_How%20To%20a%20Create%20Personal%20Portfolio%20Website-p-800.png" alt="Project 1">
+          <div class="project-content">
+          <h3>Portfolio Website</h3>
+          <p>A sleek, responsive personal portfolio showcasing my work, blog, and resume.</p>
+          </div>
+        </div>
+        <div class="project">
+          <img src="https://devtorium.com/wp-content/webp-express/webp-images/uploads/2021/08/blog_internal-image_-_10_Best_eCommerce_Platforms-5-2048x1024.png.webp" alt="Project 2">
+          <div class="project-content">
+          <h3>E-commerce Platform</h3>
+          <p>An online store with cart functionality, user authentication, and payment gateway.</p>
+          </div>
+        </div>
+        <div class="project">
+          <img src="https://images.ui8.net/uploads/frest-light_1570769107920.jpg" alt="Project 3">
+          <div class="project-content">
+          <h3>Admin Dashboard</h3>
+          <p>Dynamic dashboard for managing users, analytics, and content with charts and graphs.</p>
+          </div>
+        </div>
+        <!-- New Cool Project 1 -->
+        <div class="project">
+          <img src="https://cdn.mos.cms.futurecdn.net/EZp7RbvdSVkW3qn2Kt8SMf-650-80.jpg.webp" alt="Music App">
+          <div class="project-content">
+          <h3>Music Streaming App</h3>
+          <p>Modern music app with playlists, search, and real-time audio visualizations.</p>
+          </div>
+        </div>
+        <!-- New Cool Project 2 -->
+        <div class="project">
+          <img src="https://www.joomunited.com/images/com_droppics/266/full/preview-gallery-addon.jpg" alt="Media Gallery">
+          <div class="project-content">
+          <h3>Media Gallery</h3>
+          <p>Interactive gallery for photos and videos with smooth animations and filtering.</p>
+          </div>
+        </div>
+        <!-- New Cool Project 3 -->
+        <div class="project">
+          <img src="https://www.moneypatrol.com/moneytalk/wp-content/uploads/2023/06/budget185.png" alt="Finance Tracker">
+          <div class="project-content">
+          <h3>Finance Tracker</h3>
+          <p>Personal finance tracker with budgeting tools, charts, and expense analytics.</p>
+          </div>
+        </div>
+        </div>
+        <!-- Cool Call-to-Action -->
+        <div style="text-align:center;margin-top:2.5rem;">
+        <a href="https://iyonicorp.com/" target="_blank" style="display:inline-block;background:linear-gradient(90deg,#0077ff 60%,#4ea8de 100%);color:#fff;font-weight:700;font-family:'Montserrat',sans-serif;padding:0.8em 2.1em;border-radius:2em;font-size:1.13rem;box-shadow:0 4px 24px #0077ff22;text-decoration:none;transition:background 0.3s,color 0.3s,transform 0.3s;">
+          See More Projects on Iyonicorp
+        </a>
+        </div>
+      </section>
+
+      <!-- Cool Fun Facts Section -->
+      <section class="section" style="margin-top:3.5rem;">
+        <h2>Fun Facts</h2>
+        <ul style="max-width:700px;margin:0 auto 0 auto;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+          <li style="background:#fff;border-radius:16px;box-shadow:0 2px 12px #0077ff11;padding:1.2em 1em;font-weight:600;color:#0077ff;display:flex;align-items:center;gap:0.7em;">
+         Designed 20+ unique UI themes
+          </li>
+          <li style="background:#fff;border-radius:16px;box-shadow:0 2px 12px #0077ff11;padding:1.2em 1em;font-weight:600;color:#0077ff;display:flex;align-items:center;gap:0.7em;">
+        Worked with clients in 8+ countries
+          </li>
+          <li style="background:#fff;border-radius:16px;box-shadow:0 2px 12px #0077ff11;padding:1.2em 1em;font-weight:600;color:#0077ff;display:flex;align-items:center;gap:0.7em;">
+         Launched 15+ web apps
+          </li>
+          <li style="background:#fff;border-radius:16px;box-shadow:0 2px 12px #0077ff11;padding:1.2em 1em;font-weight:600;color:#0077ff;display:flex;align-items:center;gap:0.7em;">
+         Hackathon winner (x2)
+          </li>
+          <li style="background:#fff;border-radius:16px;box-shadow:0 2px 12px #0077ff11;padding:1.2em 1em;font-weight:600;color:#0077ff;display:flex;align-items:center;gap:0.7em;">
+         Consumed 1000+ cups of coffee coding
+          </li>
+          <li style="background:#fff;border-radius:16px;box-shadow:0 2px 12px #0077ff11;padding:1.2em 1em;font-weight:600;color:#0077ff;display:flex;align-items:center;gap:0.7em;">
+         Linux enthusiast & open-source advocate
+          </li>
+          <li style="background:#fff;border-radius:16px;box-shadow:0 2px 12px #0077ff11;padding:1.2em 1em;font-weight:600;color:#0077ff;display:flex;align-items:center;gap:0.7em;">
+         Plays guitar to unwind after coding
+          </li>
+          <li style="background:#fff;border-radius:16px;box-shadow:0 2px 12px #0077ff11;padding:1.2em 1em;font-weight:600;color:#0077ff;display:flex;align-items:center;gap:0.7em;">
+         Solves Rubik’s cubes in under 1 minute
+          </li>
+        </ul>
+        <div style="text-align:center;margin-top:2rem;">
+          <span style="display:inline-block;background:linear-gradient(90deg,#0077ff 60%,#4ea8de 100%);color:#fff;font-weight:700;font-family:'Montserrat',sans-serif;padding:0.6em 1.7em;border-radius:2em;font-size:1.05rem;box-shadow:0 2px 12px #0077ff22;">
+        Always up for a new challenge! 
+          </span>
+        </div>
+      </section>
+
+      <!-- Cool & Enhanced Testimonials Section -->
+      <section class="section" style="margin-top:3.5rem;">
+        <h2 style="text-align:center;position:relative;">
+          <span style="font-size:2.2rem;vertical-align:middle;">🌟</span> Testimonials
+        </h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem;max-width:1000px;margin:0 auto;">
+          <!-- Testimonial 1 -->
+          <blockquote style="background:linear-gradient(100deg,#f9fafc 60%,#eaf3fa 100%);border-radius:20px;box-shadow:0 4px 24px #0077ff13;padding:2em 1.5em 2.5em 1.5em;font-style:italic;position:relative;overflow:hidden;">
+        <span style="font-size:3.5rem;position:absolute;left:1.1em;top:0.2em;color:#4ea8de;opacity:0.13;z-index:0;">“</span>
+        <div style="position:relative;z-index:1;">
+          <p style="font-size:1.18rem;margin-bottom:1.2em;">
+            John is a creative problem solver and a joy to work with. Our website traffic doubled after his redesign!
+          </p>
+          <div style="display:flex;align-items:center;gap:0.8em;">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah L." style="width:48px;height:48px;border-radius:50%;border:3px solid #4ea8de33;object-fit:cover;">
+            <footer style="font-weight:700;color:#0077ff;">
+          Sarah L.<br>
+          <span style="font-weight:500;color:#4ea8de;font-size:0.98em;">Product Manager</span>
+            </footer>
+          </div>
+        </div>
+          </blockquote>
+          <!-- Testimonial 2 -->
+          <blockquote style="background:linear-gradient(100deg,#f9fafc 60%,#eaf3fa 100%);border-radius:20px;box-shadow:0 4px 24px #0077ff13;padding:2em 1.5em 2.5em 1.5em;font-style:italic;position:relative;overflow:hidden;">
+        <span style="font-size:3.5rem;position:absolute;left:1.1em;top:0.2em;color:#4ea8de;opacity:0.13;z-index:0;">“</span>
+        <div style="position:relative;z-index:1;">
+          <p style="font-size:1.18rem;margin-bottom:1.2em;">
+            Fast, reliable, and always delivers pixel-perfect results. Highly recommended for any web project!
+          </p>
+          <div style="display:flex;align-items:center;gap:0.8em;">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mike D." style="width:48px;height:48px;border-radius:50%;border:3px solid #4ea8de33;object-fit:cover;">
+            <footer style="font-weight:700;color:#0077ff;">
+          Mike D.<br>
+          <span style="font-weight:500;color:#4ea8de;font-size:0.98em;">Startup Founder</span>
+            </footer>
+          </div>
+        </div>
+          </blockquote>
+          <!-- Testimonial 3 -->
+          <blockquote style="background:linear-gradient(100deg,#f9fafc 60%,#eaf3fa 100%);border-radius:20px;box-shadow:0 4px 24px #0077ff13;padding:2em 1.5em 2.5em 1.5em;font-style:italic;position:relative;overflow:hidden;">
+        <span style="font-size:3.5rem;position:absolute;left:1.1em;top:0.2em;color:#4ea8de;opacity:0.13;z-index:0;">“</span>
+        <div style="position:relative;z-index:1;">
+          <p style="font-size:1.18rem;margin-bottom:1.2em;">
+            Working with John was a game-changer. He turned our vision into reality and exceeded expectations!
+          </p>
+          <div style="display:flex;align-items:center;gap:0.8em;">
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya S." style="width:48px;height:48px;border-radius:50%;border:3px solid #4ea8de33;object-fit:cover;">
+            <footer style="font-weight:700;color:#0077ff;">
+          Priya S.<br>
+          <span style="font-weight:500;color:#4ea8de;font-size:0.98em;">UX Lead</span>
+            </footer>
+          </div>
+        </div>
+          </blockquote>
+          <!-- Testimonial 4 -->
+          <blockquote style="background:linear-gradient(100deg,#f9fafc 60%,#eaf3fa 100%);border-radius:20px;box-shadow:0 4px 24px #0077ff13;padding:2em 1.5em 2.5em 1.5em;font-style:italic;position:relative;overflow:hidden;">
+        <span style="font-size:3.5rem;position:absolute;left:1.1em;top:0.2em;color:#4ea8de;opacity:0.13;z-index:0;">“</span>
+        <div style="position:relative;z-index:1;">
+          <p style="font-size:1.18rem;margin-bottom:1.2em;">
+            John’s attention to detail and passion for clean code is unmatched. Our app runs smoother than ever!
+          </p>
+          <div style="display:flex;align-items:center;gap:0.8em;">
+            <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Carlos M." style="width:48px;height:48px;border-radius:50%;border:3px solid #4ea8de33;object-fit:cover;">
+            <footer style="font-weight:700;color:#0077ff;">
+          Carlos M.<br>
+          <span style="font-weight:500;color:#4ea8de;font-size:0.98em;">CTO, FinTech</span>
+            </footer>
+          </div>
+        </div>
+          </blockquote>
+        </div>
+        <div style="text-align:center;margin-top:2.5rem;">
+          <span style="display:inline-block;background:linear-gradient(90deg,#0077ff 60%,#4ea8de 100%);color:#fff;font-weight:700;font-family:'Montserrat',sans-serif;padding:0.7em 2.2em;border-radius:2em;font-size:1.13rem;box-shadow:0 2px 12px #0077ff22;">
+        Want to see your feedback here? <a href="#contact" style="color:#fff;text-decoration:underline;font-weight:700;">Let’s connect!</a>
+          </span>
+        </div>
+      </section></div></p></div>
+  </div>
+
+  <section id="contact" class="contact">
+    <h2>
+      <span style="font-size:2rem;vertical-align:middle;">📬</span> Contact Me
+    </h2>
+    <p style="font-size:1.18rem;">
+      Let’s <span style="color:#0077ff;font-weight:700;">collaborate</span> or just say <span style="color:#4ea8de;font-weight:700;">hello</span>!
+    </p>
+    <form action="mailto:john@example.com" method="POST" enctype="text/plain" style="max-width:420px;margin:2rem auto 1.5rem auto;text-align:left;background:#fff;border-radius:16px;box-shadow:0 2px 12px #0077ff11;padding:2em 1.5em;">
+      <label for="name" style="font-weight:600;color:#0077ff;">Name</label>
+      <input id="name" name="name" type="text" required style="width:100%;margin-bottom:1em;padding:0.7em 1em;border-radius:8px;border:1px solid #eaf3fa;font-size:1rem;">
+      <label for="email" style="font-weight:600;color:#0077ff;">Email</label>
+      <input id="email" name="email" type="email" required style="width:100%;margin-bottom:1em;padding:0.7em 1em;border-radius:8px;border:1px solid #eaf3fa;font-size:1rem;">
+      <label for="message" style="font-weight:600;color:#0077ff;">Message</label>
+      <textarea id="message" name="message" rows="4" required style="width:100%;margin-bottom:1.3em;padding:0.7em 1em;border-radius:8px;border:1px solid #eaf3fa;font-size:1rem;resize:vertical;"></textarea>
+      <button type="submit" style="display:block;width:100%;background:linear-gradient(90deg,#0077ff 60%,#4ea8de 100%);color:#fff;font-weight:700;font-family:'Montserrat',sans-serif;padding:0.9em 0;border-radius:2em;font-size:1.13rem;box-shadow:0 2px 12px #0077ff22;border:none;cursor:pointer;transition:background 0.3s,transform 0.3s;">Send Message 🚀</button>
+    </form>
+    <div style="margin:1.5rem 0 0 0;">
+      <span style="display:inline-block;background:linear-gradient(90deg,#0077ff 60%,#4ea8de 100%);color:#fff;font-weight:700;font-family:'Montserrat',sans-serif;padding:0.5em 1.5em;border-radius:2em;font-size:1.05rem;box-shadow:0 2px 12px #0077ff22;">
+        Or email me directly: <a href="mailto:john@example.com" style="color:#fff;text-decoration:underline;">john@example.com</a>
+      </span>
+    </div>
+    <div class="socials" style="margin-top:2rem;">
+      <a href="https://github.com/" target="_blank" title="GitHub" style="font-size:1.4rem;vertical-align:middle;">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="width:28px;height:28px;vertical-align:middle;margin-right:0.4em;">GitHub
+      </a>
+      <a href="https://linkedin.com/" target="_blank" title="LinkedIn" style="font-size:1.4rem;vertical-align:middle;">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" style="width:28px;height:28px;vertical-align:middle;margin-right:0.4em;">LinkedIn
+      </a>
+      <a href="https://twitter.com/" target="_blank" title="Twitter" style="font-size:1.4rem;vertical-align:middle;">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" alt="Twitter" style="width:28px;height:28px;vertical-align:middle;margin-right:0.4em;">Twitter
+      </a>
+    </div>
+  </section>
+  <footer>
+    <div style="max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem;">
+      <div style="flex:1;min-width:220px;text-align:left;">
+        <p style="margin:0 0 0.5em 0;font-size:1.08rem;">
+          &copy; 2025 John Doe. All rights reserved.
+        </p>
+        <p style="margin:0;font-size:0.98rem;">
+          Powered by 
+          <a href="https://iyonicorp.com" target="_blank" style="color:#4ea8de;text-decoration:none;font-weight:bold;">
+            Iyonicorp
+          </a>
+        </p>
+      </div>
+      <div style="flex:1;min-width:220px;text-align:right;">
+        <span style="font-size:1.13rem;font-weight:600;color:#eaf3fa;">
+          <span style="vertical-align:middle;font-size:1.3em;">🚀</span>
+          Let’s connect:
+        </span>
+        <a href="mailto:john@example.com" title="Email" style="margin:0 0.5em;vertical-align:middle;">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Email" style="width:26px;height:26px;vertical-align:middle;">
+        </a>
+        <a href="https://github.com/" target="_blank" title="GitHub" style="margin:0 0.5em;vertical-align:middle;">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="width:26px;height:26px;vertical-align:middle;">
+        </a>
+        <a href="https://linkedin.com/" target="_blank" title="LinkedIn" style="margin:0 0.5em;vertical-align:middle;">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" style="width:26px;height:26px;vertical-align:middle;">
+        </a>
+        <a href="https://twitter.com/" target="_blank" title="Twitter" style="margin:0 0.5em;vertical-align:middle;">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" alt="Twitter" style="width:26px;height:26px;vertical-align:middle;">
+        </a>
+      </div>
+    </div>
+    <div style="margin-top:2rem;text-align:center;">
+      <span style="display:inline-block;background:linear-gradient(90deg,#0077ff 60%,#4ea8de 100%);color:#fff;font-weight:700;font-family:'Montserrat',sans-serif;padding:0.6em 1.7em;border-radius:2em;font-size:1.05rem;box-shadow:0 2px 12px #0077ff22;">
+        <span style="font-size:1.2em;vertical-align:middle;">✨</span>
+        Fun Fact: This site was coded with <span style="color:#ffe066;">love</span> and <span style="color:#4ea8de;">coffee</span>!
+      </span>
+    </div>
+    <div style="margin-top:1.5rem;text-align:center;font-size:0.98rem;color:#eaf3fa88;">
+      <span>
+        <span style="font-size:1.1em;vertical-align:middle;">🕒</span>
+        Last updated: June 2025
+      </span>
+      &nbsp;|&nbsp;
+      <a href="#top" style="color:#4ea8de;text-decoration:underline;font-weight:600;">Back to Top ↑</a>
+    </div>
+  </footer>
+</body>
+</html>
