@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) primary -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S3EZXJKT7H"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6JSC6HT7EC"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', 'G-S3EZXJKT7H');
+    gtag('config', 'G-6JSC6HT7EC');
   </script>
 
   <!-- Base Meta -->
@@ -99,7 +99,7 @@
     }
 
     .glass {
-      background: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12);
       box-shadow: 0 8px 30px rgba(0,0,0,0.25);
       backdrop-filter: blur(10px);
@@ -141,13 +141,6 @@
 
     /* Footer */
     footer { background: #0d1222; }
-    
-    /* Sticky image for services section */
-    .sticky-service-image {
-      position: sticky;
-      top: 120px;
-      align-self: flex-start;
-    }
   </style>
 </head>
 <body class="antialiased selection:bg-indigo-500/30 selection:text-white">
@@ -628,140 +621,130 @@
     </div>
   </section>
 
-  <!-- Services (Parallax Scrollytelling) -->
+  <!-- Services Interactive Carousel -->
 <section id="services" class="py-24">
-  <div class="mx-auto max-w-7xl px-4 grid md:grid-cols-2 gap-10 items-start">
-    <!-- Sticky image on the left -->
-    <div class="sticky-service-image reveal">
-      <div class="glass rounded-3xl overflow-hidden neon-border">
-        <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Our Services" class="w-full h-auto object-cover">
-      </div>
-    </div>
+ <div class="mx-auto max-w-7xl px-4 text-center">
+   <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Our Services</h2>
+   <p class="text-slate-300 mb-10">Explore our comprehensive web solutions with interactive cards.</p>
 
-    <!-- Interactive feature cards -->
-    <div class="space-y-6">
-      <div class="feature-step glass p-6 md:p-8 rounded-2xl neon-border reveal" data-step="1">
-        <div class="flex items-start gap-4">
-          <div class="text-indigo-300 text-3xl shrink-0"><i class="fas fa-cart-shopping"></i></div>
-          <div>
-            <h3 class="text-2xl md:text-3xl font-bold">eCommerce Power</h3>
-            <p class="mt-2 text-slate-300">Seamless product pages, secure checkout, and conversion-first funnels — engineered to sell 24/7.</p>
-            <div class="mt-4 h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-              <div class="h-full w-0 bg-gradient-to-r from-indigo-400 via-purple-400 to-emerald-400 feature-meter"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+   <div class="swiper mySwiperServices">
+     <div class="swiper-wrapper">
+       <div class="swiper-slide">
+         <div class="feature-step glass p-6 md:p-8 rounded-2xl reveal" data-step="1">
+           <div class="flex flex-col items-center text-center gap-4">
+             <div class="text-indigo-300 text-4xl"><i class="fas fa-cart-shopping"></i></div>
+             <h3 class="text-2xl md:text-3xl font-bold text-white">eCommerce Power</h3>
+             <p class="text-white">Seamless product pages, secure checkout, and conversion-first funnels — engineered to sell 24/7.</p>
+             <div class="mt-4 h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+               <div class="h-full w-0 bg-gradient-to-r from-indigo-400 via-purple-400 to-emerald-400 feature-meter"></div>
+             </div>
+           </div>
+         </div>
+       </div>
 
-      <div class="feature-step glass p-6 md:p-8 rounded-2xl neon-border reveal" data-step="2">
-        <div class="flex items-start gap-4">
-          <div class="text-emerald-300 text-3xl shrink-0"><i class="fas fa-briefcase"></i></div>
-          <div>
-            <h3 class="text-2xl md:text-3xl font-bold">Service Site Optimization</h3>
-            <p class="mt-2 text-slate-300">Drive more inquiries and bookings with refined CTAs, frictionless forms, and trust-rich content blocks.</p>
-            <div class="mt-4 h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-              <div class="h-full w-0 bg-gradient-to-r from-emerald-400 via-teal-400 to-sky-400 feature-meter"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+       <div class="swiper-slide">
+         <div class="feature-step glass p-6 md:p-8 rounded-2xl reveal" data-step="2">
+           <div class="flex flex-col items-center text-center gap-4">
+             <div class="text-emerald-300 text-4xl"><i class="fas fa-briefcase"></i></div>
+             <h3 class="text-2xl md:text-3xl font-bold text-white">Service Site Optimization</h3>
+             <p class="text-white">Drive more inquiries and bookings with refined CTAs, frictionless forms, and trust-rich content blocks.</p>
+             <div class="mt-4 h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+               <div class="h-full w-0 bg-gradient-to-r from-emerald-400 via-teal-400 to-sky-400 feature-meter"></div>
+             </div>
+           </div>
+         </div>
+       </div>
 
-      <div class="feature-step glass p-6 md:p-8 rounded-2xl neon-border reveal" data-step="3">
-        <div class="flex items-start gap-4">
-          <div class="text-purple-300 text-3xl shrink-0"><i class="fas fa-chart-line"></i></div>
-          <div>
-            <h3 class="text-2xl md:text-3xl font-bold">Built for Growth</h3>
-            <p class="mt-2 text-slate-300">SEO best practices, analytics integrations, and performance tuning built-in from day one.</p>
-            <div class="mt-4 h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-              <div class="h-full w-0 bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400 feature-meter"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+       <div class="swiper-slide">
+         <div class="feature-step glass p-6 md:p-8 rounded-2xl reveal" data-step="3">
+           <div class="flex flex-col items-center text-center gap-4">
+             <div class="text-purple-300 text-4xl"><i class="fas fa-chart-line"></i></div>
+             <h3 class="text-2xl md:text-3xl font-bold text-white">Built for Growth</h3>
+             <p class="text-white">SEO best practices, analytics integrations, and performance tuning built-in from day one.</p>
+             <div class="mt-4 h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+               <div class="h-full w-0 bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400 feature-meter"></div>
+             </div>
+           </div>
+         </div>
+       </div>
 
-      <div class="feature-step glass p-6 md:p-8 rounded-2xl neon-border reveal" data-step="4">
-        <div class="flex items-start gap-4">
-          <div class="text-orange-300 text-3xl shrink-0"><i class="fas fa-sync-alt"></i></div>
-          <div>
-            <h3 class="text-2xl md:text-3xl font-bold">Website Redesigns</h3>
-            <p class="mt-2 text-slate-300">Modern visuals, faster loads, stronger conversions — transform your current site without losing brand essence.</p>
-            <div class="mt-4 h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-              <div class="h-full w-0 bg-gradient-to-r from-amber-400 via-orange-400 to-red-400 feature-meter"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+       <div class="swiper-slide">
+         <div class="feature-step glass p-6 md:p-8 rounded-2xl reveal" data-step="4">
+           <div class="flex flex-col items-center text-center gap-4">
+             <div class="text-orange-300 text-4xl"><i class="fas fa-sync-alt"></i></div>
+             <h3 class="text-2xl md:text-3xl font-bold text-white">Website Redesigns</h3>
+             <p class="text-white">Modern visuals, faster loads, stronger conversions — transform your current site without losing brand essence.</p>
+             <div class="mt-4 h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+               <div class="h-full w-0 bg-gradient-to-r from-amber-400 via-orange-400 to-red-400 feature-meter"></div>
+             </div>
+           </div>
+         </div>
+       </div>
 
-      <div class="feature-step glass p-6 md:p-8 rounded-2xl neon-border reveal" data-step="5">
-        <div class="flex items-start gap-4">
-          <div class="text-yellow-300 text-3xl shrink-0"><i class="fas fa-life-ring"></i></div>
-          <div>
-            <h3 class="text-2xl md:text-3xl font-bold">Ongoing Support</h3>
-            <p class="mt-2 text-slate-300">Continuous maintenance, updates, and security — keep your site clean, fast, and future‑ready.</p>
-            <div class="mt-4 h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-              <div class="h-full w-0 bg-gradient-to-r from-yellow-400 via-lime-400 to-emerald-400 feature-meter"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+       <div class="swiper-slide">
+         <div class="feature-step glass p-6 md:p-8 rounded-2xl reveal" data-step="5">
+           <div class="flex flex-col items-center text-center gap-4">
+             <div class="text-yellow-300 text-4xl"><i class="fas fa-life-ring"></i></div>
+             <h3 class="text-2xl md:text-3xl font-bold text-white">Ongoing Support</h3>
+             <p class="text-white">Continuous maintenance, updates, and security — keep your site clean, fast, and future‑ready.</p>
+             <div class="mt-4 h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+               <div class="h-full w-0 bg-gradient-to-r from-yellow-400 via-lime-400 to-emerald-400 feature-meter"></div>
+             </div>
+           </div>
+         </div>
+       </div>
 
-      <div class="feature-step glass p-6 md:p-8 rounded-2xl neon-border reveal" data-step="6">
-        <div class="flex items-start gap-4">
-          <div class="text-pink-300 text-3xl shrink-0"><i class="fas fa-magic"></i></div>
-          <div>
-            <h3 class="text-2xl md:text-3xl font-bold">Smart Interactions</h3>
-            <p class="mt-2 text-slate-300">Micro‑interactions, motion design, and scroll‑driven storytelling that boost engagement.</p>
-            <div class="mt-4 h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-              <div class="h-full w-0 bg-gradient-to-r from-fuchsia-400 via-pink-400 to-rose-400 feature-meter"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+       <div class="swiper-slide">
+         <div class="feature-step glass p-6 md:p-8 rounded-2xl reveal" data-step="6">
+           <div class="flex flex-col items-center text-center gap-4">
+             <div class="text-pink-300 text-4xl"><i class="fas fa-magic"></i></div>
+             <h3 class="text-2xl md:text-3xl font-bold text-white">Smart Interactions</h3>
+             <p class="text-white">Micro‑interactions, motion design, and scroll‑driven storytelling that boost engagement.</p>
+             <div class="mt-4 h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+               <div class="h-full w-0 bg-gradient-to-r from-fuchsia-400 via-pink-400 to-rose-400 feature-meter"></div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="swiper-pagination mt-8"></div>
+   </div>
+ </div>
 
-      <!-- CTA -->
-      <div class="mt-8">
-        <a href="contact/index.html" class="px-5 py-3 rounded-xl btn-primary magnet inline-flex items-center gap-2">
-          <i class="fa fa-calendar-check"></i> Book a Tour
-        </a>
-      </div>
-    </div>
-  </div>
+ <script>
+   // Services: interactive swiper carousel
+   (function(){
+     if (window.Swiper) {
+       new Swiper('.mySwiperServices', {
+         effect: 'fade',
+         fadeEffect: {
+           crossFade: true
+         },
+         grabCursor: true,
+         slidesPerView: 1,
+         spaceBetween: 24,
+         loop: true,
+         autoplay: { delay: 4000, disableOnInteraction: false },
+         pagination: { el: '.swiper-pagination', clickable: true },
+         keyboard: { enabled: true },
+         mousewheel: { forceToAxis: true }
+       });
+     }
 
-  <script>
-    // Services: interactive meters and sticky progress (no images)
-    (function(){
-      const steps = document.querySelectorAll('#services .feature-step');
-      const rail = document.getElementById('serviceProgress');
-      if (!steps.length) return;
-
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(en => {
-          if (en.isIntersecting) {
-            en.target.classList.add('is-visible');
-            const idx = Number(en.target.getAttribute('data-step')) || 1;
-            const meter = en.target.querySelector('.feature-meter');
-            if (meter) meter.style.width = '100%';
-            if (rail) {
-              const pct = Math.min(100, (idx / steps.length) * 100);
-              rail.style.height = pct + '%';
-            }
-          }
-        });
-      }, { threshold: 0.35 });
-
-      steps.forEach(s => io.observe(s));
-
-      steps.forEach(s => {
-        s.addEventListener('mousemove', (e) => {
-          const r = s.getBoundingClientRect();
-          const x = (e.clientX - r.left) / r.width - .5;
-          const y = (e.clientY - r.top) / r.height - .5;
-          s.style.transform = `translateY(-2px) rotateX(${y * -2}deg) rotateY(${x * 2}deg)`;
-        });
-        s.addEventListener('mouseleave', () => { s.style.transform = ''; });
-      });
-    })();
-  </script>
+     // Interactive meters on reveal
+     const steps = document.querySelectorAll('#services .feature-step');
+     const io = new IntersectionObserver((entries) => {
+       entries.forEach(en => {
+         if (en.isIntersecting) {
+           en.target.classList.add('is-visible');
+           const meter = en.target.querySelector('.feature-meter');
+           if (meter) meter.style.width = '100%';
+         }
+       });
+     }, { threshold: 0.5 });
+     steps.forEach(s => io.observe(s));
+   })();
+ </script>
 </section>
 
   <!-- Mobile responsiveness tweaks -->
