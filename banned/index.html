@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Account Banned - Iyonicorp</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="icon" type="image/png" href="logo.png" />
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #0b0f1a; color: #e5e7eb; }
+
+    .aurora {
+      position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(800px 400px at 10% 10%, rgba(239,68,68,0.25), transparent 60%),
+        radial-gradient(600px 300px at 90% 20%, rgba(99,102,241,0.25), transparent 60%),
+        radial-gradient(700px 350px at 30% 90%, rgba(239,68,68,0.2), transparent 60%),
+        linear-gradient(180deg, #0b0f1a 0%, #0b1120 100%);
+      animation: auroraShift 16s ease-in-out infinite alternate;
+    }
+    @keyframes auroraShift {
+      0% { background-position: 0 0, 100% 0, 0 100%, 0 0; }
+      100% { background-position: 10% 5%, 90% 10%, 5% 95%, 0 0; }
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-primary { 
+      background: linear-gradient(135deg, #3b82f6, #6366f1); 
+      color: #fff; 
+      transition: filter .2s ease, transform .15s ease; 
+    }
+    .btn-primary:hover { 
+      filter: brightness(1.1); 
+      transform: translateY(-1px); 
+    }
+
+    .floating { 
+      animation: floaty 6s ease-in-out infinite; 
+    }
+    @keyframes floaty { 
+      0%,100% { transform: translateY(0) } 
+      50% { transform: translateY(-8px) } 
+    }
+
+    .reveal { 
+      opacity: 0; 
+      transform: translateY(20px); 
+      animation: reveal 0.8s ease-out forwards;
+    }
+    @keyframes reveal { 
+      to { opacity: 1; transform: none; } 
+    }
+
+    .neon-border { 
+      box-shadow: 0 0 0 1px rgba(239,68,68,.3), 0 0 25px rgba(239,68,68,.25) inset; 
+    }
+
+    .pulse-slow {
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+    }
+
+    .nav-link { color: #cbd5e1; transition: all .2s ease; }
+    .nav-link:hover { color: #fff; transform: translateY(-1px); }
+
+    footer { background: #0d1222; }
+  </style>
+</head>
+<body class="antialiased selection:bg-red-500/30 selection:text-white min-h-screen flex flex-col">
+  <div class="aurora"></div>
+
+  <!-- Main Content -->
+  <main class="relative z-10 flex-1 flex items-center justify-center px-4 py-12">
+    <div class="glass rounded-3xl neon-border p-10 md:p-12 max-w-2xl w-full text-center reveal">
+      
+      <!-- Icon -->
+      <div class="w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6 pulse-slow" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+        </svg>
+      </div>
+
+      <!-- Title -->
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Account Suspended</h1>
+      
+      <!-- Description -->
+      <div class="space-y-4 mb-8">
+        <p class="text-lg text-slate-300">
+          Your access to <span class="font-semibold text-blue-400">Iyonicorp</span> has been temporarily suspended.
+        </p>
+        <p class="text-base text-slate-400">
+          This action was taken due to a violation of our terms of service or an administrative decision. We take the security and integrity of our platform seriously.
+        </p>
+      </div>
+
+      <!-- Info Box -->
+      <div class="glass border-l-4 border-red-500 p-4 mb-8 rounded-lg text-left">
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0 mt-0.5">
+            <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm text-slate-300 font-medium">
+              If you believe this is a mistake or would like to appeal this decision, please contact our support team.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Button -->
+      <a href="mailto:iyonicorp@gmail.com" 
+         class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-xl text-lg font-semibold shadow-lg">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>
+        Contact Support
+      </a>
+
+      <!-- Additional Info -->
+      <p class="text-sm text-slate-500 mt-6">
+        Response time: Usually within 24-48 hours
+      </p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative z-10 text-white pt-10 pb-6 reveal" style="animation-delay: 0.3s;">
+    <div class="max-w-6xl mx-auto px-6">
+
+      <!-- Footer Links -->
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6 border-b border-slate-700 pb-6">
+        <div class="text-center md:text-left">
+          <h3 class="text-xl font-semibold text-white">Iyonicorp</h3>
+          <p class="text-slate-400 text-sm mt-2">Powering the web, one idea at a time.</p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
+          <a href="https://iyonicorp.com/about/" class="nav-link">About Us</a>
+          <a href="https://iyonicorp.com/terms/" class="nav-link">Terms</a>
+          <a href="https://iyonicorp.com/privacy/" class="nav-link">Privacy</a>
+          <a href="https://iyonicorp.com/refunds/" class="nav-link">Refunds</a>
+          <a href="https://iyonicorp.com/contact/" class="nav-link">Contact</a>
+        </div>
+      </div>
+
+      <!-- Social Media Icons -->
+      <div class="mt-6 flex justify-center gap-6 text-slate-400 text-xl">
+        <a href="https://www.tiktok.com/@iyonicorp" target="_blank" class="hover:text-white transition transform hover:scale-110" aria-label="TikTok">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://www.instagram.com/iyonicorp" target="_blank" class="hover:text-white transition transform hover:scale-110" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.twitter.com/iyonicorp" target="_blank" class="hover:text-white transition transform hover:scale-110" aria-label="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/iyoni-corp-ab9b06354" target="_blank" class="hover:text-white transition transform hover:scale-110" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://www.pinterest.com/iyonicorp/" target="_blank" class="hover:text-white transition transform hover:scale-110" aria-label="Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+        <a href="https://www.facebook.com/iyonicweb" target="_blank" class="hover:text-white transition transform hover:scale-110" aria-label="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://www.youtube.com/@iyonicorp" target="_blank" class="hover:text-white transition transform hover:scale-110" aria-label="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>
+
+      <!-- Copyright -->
+      <div class="text-center text-slate-500 text-sm mt-6">
+        © 2025 Iyonicorp. All Rights Reserved.
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Login - Iyonicorp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <style>
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up {
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+
+    .glow-border {
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 0 10px rgba(59, 130, 246, 0.2),
+        0 0 20px rgba(59, 130, 246, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-black to-gray-800 min-h-screen flex flex-col justify-center items-center text-white px-4 py-8">
+
+  <!-- Header -->
+  <div class="text-center mb-8 fade-up">
+    <img src="logo.png" alt="Admin Logo" class="mx-auto w-20 h-20 sm:w-16 sm:h-16 mb-2">
+    <h1 class="text-3xl sm:text-2xl font-bold">Iyonicorp Admin</h1>
+    <p class="text-gray-400 text-sm mt-1">Secure Admin Panel</p>
+  </div>
+
+  <!-- Login Form -->
+  <div class="bg-gray-900 bg-opacity-90 w-full max-w-sm sm:max-w-md px-6 py-8 rounded-2xl shadow-xl fade-up glow-border">
+    <h2 class="text-2xl font-bold mb-6 text-center text-blue-400">Admin Login</h2>
+
+    <form id="adminLoginForm" class="space-y-4">
+      <input
+        type="text"
+        id="adminUser"
+        placeholder="Username"
+        class="w-full px-4 py-3 text-base rounded-lg border border-gray-700 bg-gray-800 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        required
+      />
+      <input
+        type="password"
+        id="adminPass"
+        placeholder="Password"
+        class="w-full px-4 py-3 text-base rounded-lg border border-gray-700 bg-gray-800 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        required
+      />
+      <button
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 transition-all py-3 rounded-lg text-base font-semibold text-white">
+        Login
+      </button>
+    </form>
+
+    <p id="loginStatus" class="mt-4 text-center text-red-500 text-sm"></p>
+  </div>
+
+
+  <!-- Fix missing year element -->
+<footer class="mt-10 text-gray-400 text-xs text-center">
+  &copy; <span id="year"></span> Iyonicorp Admin. All rights reserved.
+</footer>
+
+  <!-- ⚡ Animated Welcome Popup -->
+<div id="adminWelcomePopup" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center animate-bounce-in">
+    <h2 class="text-3xl font-extrabold text-green-600 animate-pulse">🎉 Welcome Admin!</h2>
+    <p class="mt-3 text-gray-700 text-lg">You’ve successfully logged into the Iyonicorp Admin Portal.</p>
+    <p class="mt-4 text-sm text-gray-500">Redirecting to dashboard in <span id="countdownTimer" class="font-bold text-blue-600">3</span> seconds...</p>
+    <div class="mt-6">
+      <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+        <div class="bg-gradient-to-r from-blue-400 to-green-500 h-2 animate-loadbar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes bounce-in {
+    0% { transform: scale(0.7) rotate(-20deg); opacity: 0; }
+    60% { transform: scale(1.05) rotate(5deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); }
+  }
+
+  .animate-bounce-in {
+    animation: bounce-in 0.9s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  }
+
+  @keyframes loadbar {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+
+  .animate-loadbar {
+    animation: loadbar 3s linear forwards;
+  }
+</style>
+
+
+<script>
+  const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+    ? "http://localhost:5000/api/admin" 
+    : "/api/admin";
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const loginForm = document.getElementById("adminLoginForm");
+  const loginBtn = loginForm.querySelector("button");
+
+  loginForm.onsubmit = async function (e) {
+    e.preventDefault();
+
+    loginBtn.disabled = true;
+    loginBtn.textContent = "Logging in...";
+
+    const username = document.getElementById("adminUser").value;
+    const password = document.getElementById("adminPass").value;
+
+    try {
+      const res = await fetch(`${API_BASE}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("admin", "true");
+        document.getElementById("adminWelcomePopup").classList.remove("hidden");
+        startRedirectCountdown();
+      } else {
+        document.getElementById("loginStatus").textContent = data.message || "Invalid login.";
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Login";
+      }
+    } catch (err) {
+      document.getElementById("loginStatus").textContent = "Server error. Try again later.";
+      loginBtn.disabled = false;
+      loginBtn.textContent = "Login";
+    }
+  };
+
+  function startRedirectCountdown() {
+  let count = 3;
+  const timerEl = document.getElementById("countdownTimer");
+
+  if (!timerEl) {
+    console.error("⛔ countdownTimer element not found!");
+    return;
+  }
+
+  const interval = setInterval(() => {
+    count--;
+    timerEl.textContent = count;
+
+    if (count <= 0) {
+      clearInterval(interval);
+      window.location.href = "../admin";
+    }
+  }, 1000);
+}
+
+</script>
+
+</body>
+</html>

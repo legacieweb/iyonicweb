@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Our Managers | Iyonicorp</title>
+  <meta name="description" content="Meet our dedicated account managers who will help you build and manage your website." />
+  <link rel="icon" href="https://tophomedesigner.com/download-removebg-preview.png" type="image/x-icon" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #0b0f1a; color: #e5e7eb; }
+
+    .aurora {
+      position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(800px 400px at 10% 10%, rgba(99,102,241,0.25), transparent 60%),
+        radial-gradient(600px 300px at 90% 20%, rgba(16,185,129,0.25), transparent 60%),
+        radial-gradient(700px 350px at 30% 90%, rgba(59,130,246,0.2), transparent 60%),
+        linear-gradient(180deg, #0b0f1a 0%, #0b1120 100%);
+      animation: auroraShift 16s ease-in-out infinite alternate;
+    }
+    @keyframes auroraShift {
+      0% { background-position: 0 0, 100% 0, 0 100%, 0 0; }
+      100% { background-position: 10% 5%, 90% 10%, 5% 95%, 0 0; }
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+    }
+    .btn-primary { background: linear-gradient(135deg, #3b82f6, #6366f1); color: #fff; transition: filter .2s ease, transform .15s ease; }
+    .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-ghost { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); transition: all .2s ease; }
+    .btn-ghost:hover { background: rgba(255,255,255,.1); }
+    .gradient-text { background: linear-gradient(90deg,#60a5fa,#a78bfa,#34d399); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .neon-border { box-shadow: 0 0 0 1px rgba(99,102,241,.3), 0 0 25px rgba(99,102,241,.25) inset; }
+    .manager-card { transition: transform .3s ease, box-shadow .3s ease; }
+    .manager-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(99,102,241,.4); }
+    
+    /* Modal styles */
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+    .modal.active { display: flex; align-items: center; justify-content: center; }
+    .modal-content { background: #1a1f2e; margin: auto; padding: 0; border-radius: 20px; max-width: 600px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.5); animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+    .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+    .close:hover, .close:focus { color: #fff; }
+  </style>
+</head>
+<body class="antialiased">
+  <div class="aurora"></div>
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full z-40">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="mt-4 mb-3 glass rounded-2xl flex items-center justify-between px-4 py-2">
+        <a href="https://iyonicorp.com" class="flex items-center gap-2">
+          <img src="download-removebg-preview.png" alt="Iyonicorp Logo" class="h-10 w-auto">
+          <span class="font-semibold text-slate-200">Iyonicorp</span>
+        </a>
+        <a href="https://iyonicorp.com" class="px-4 py-2 rounded-xl btn-ghost hover:text-white">
+          <i class="fa fa-arrow-left"></i> Back to Home
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="pt-32 pb-12">
+    <div class="mx-auto max-w-7xl px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold">
+        Meet Our <span class="gradient-text">Dedicated Managers</span>
+      </h1>
+      <p class="mt-4 text-slate-300 max-w-2xl mx-auto">
+        When you subscribe, you'll choose your personal account manager. Each manager is an expert ready to bring your vision to life.
+      </p>
+    </div>
+  </section>
+
+  <!-- Managers Grid -->
+  <section class="py-12 pb-24">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Manager 1 -->
+        <div class="manager-card glass rounded-3xl overflow-hidden neon-border">
+          <div class="relative h-64 overflow-hidden">
+            <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Sarah Johnson" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-white">Sarah Johnson</h3>
+            <p class="text-indigo-300 text-sm mb-3">eCommerce Specialist</p>
+            <p class="text-slate-400 text-sm mb-4">5+ years building high-converting online stores. Expert in product optimization and checkout flows.</p>
+            <button onclick="openModal('sarah')" class="w-full btn-primary px-4 py-2 rounded-lg">
+              <i class="fa fa-info-circle"></i> View Profile
+            </button>
+          </div>
+        </div>
+
+        <!-- Manager 2 -->
+        <div class="manager-card glass rounded-3xl overflow-hidden neon-border">
+          <div class="relative h-64 overflow-hidden">
+            <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Michael Chen" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-white">Michael Chen</h3>
+            <p class="text-emerald-300 text-sm mb-3">Service Website Expert</p>
+            <p class="text-slate-400 text-sm mb-4">Specializes in service-based businesses. Creates stunning portfolios and booking systems.</p>
+            <button onclick="openModal('michael')" class="w-full btn-primary px-4 py-2 rounded-lg">
+              <i class="fa fa-info-circle"></i> View Profile
+            </button>
+          </div>
+        </div>
+
+        <!-- Manager 3 -->
+        <div class="manager-card glass rounded-3xl overflow-hidden neon-border">
+          <div class="relative h-64 overflow-hidden">
+            <img src="https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Emily Rodriguez" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-white">Emily Rodriguez</h3>
+            <p class="text-pink-300 text-sm mb-3">Creative Director</p>
+            <p class="text-slate-400 text-sm mb-4">Award-winning designer with a passion for modern, animated interfaces and brand storytelling.</p>
+            <button onclick="openModal('emily')" class="w-full btn-primary px-4 py-2 rounded-lg">
+              <i class="fa fa-info-circle"></i> View Profile
+            </button>
+          </div>
+        </div>
+
+        <!-- Manager 4 -->
+        <div class="manager-card glass rounded-3xl overflow-hidden neon-border">
+          <div class="relative h-64 overflow-hidden">
+            <img src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=600" alt="David Thompson" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-white">David Thompson</h3>
+            <p class="text-amber-300 text-sm mb-3">Technical Lead</p>
+            <p class="text-slate-400 text-sm mb-4">Full-stack developer focused on performance, SEO, and scalable architecture.</p>
+            <button onclick="openModal('david')" class="w-full btn-primary px-4 py-2 rounded-lg">
+              <i class="fa fa-info-circle"></i> View Profile
+            </button>
+          </div>
+        </div>
+
+        <!-- Manager 5 -->
+        <div class="manager-card glass rounded-3xl overflow-hidden neon-border">
+          <div class="relative h-64 overflow-hidden">
+            <img src="https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Lisa Anderson" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-white">Lisa Anderson</h3>
+            <p class="text-sky-300 text-sm mb-3">Marketing Strategist</p>
+            <p class="text-slate-400 text-sm mb-4">Combines web design with conversion optimization and digital marketing strategies.</p>
+            <button onclick="openModal('lisa')" class="w-full btn-primary px-4 py-2 rounded-lg">
+              <i class="fa fa-info-circle"></i> View Profile
+            </button>
+          </div>
+        </div>
+
+        <!-- Manager 6 -->
+        <div class="manager-card glass rounded-3xl overflow-hidden neon-border">
+          <div class="relative h-64 overflow-hidden">
+            <img src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=600" alt="James Wilson" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-white">James Wilson</h3>
+            <p class="text-teal-300 text-sm mb-3">SaaS Specialist</p>
+            <p class="text-slate-400 text-sm mb-4">Expert in building complex SaaS platforms with multi-tenant architecture and APIs.</p>
+            <button onclick="openModal('james')" class="w-full btn-primary px-4 py-2 rounded-lg">
+              <i class="fa fa-info-circle"></i> View Profile
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="glass rounded-3xl p-8 md:p-12 text-center neon-border">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Get Started?</h2>
+        <p class="text-slate-300 mb-6">Subscribe now and choose your dedicated manager to begin building your dream website.</p>
+        <a href="signup" class="inline-block btn-primary px-8 py-3 rounded-xl text-lg">
+          <i class="fa fa-rocket"></i> Start Your Journey
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modals for each manager -->
+  <div id="modal-sarah" class="modal">
+    <div class="modal-content">
+      <div class="p-8">
+        <span class="close" onclick="closeModal('sarah')">&times;</span>
+        <h2 class="text-3xl font-bold text-white mb-4">Sarah Johnson</h2>
+        <p class="text-indigo-300 mb-4">eCommerce Specialist</p>
+        <div class="space-y-4 text-slate-300">
+          <p><strong>Experience:</strong> 5+ years in eCommerce development</p>
+          <p><strong>Specialties:</strong></p>
+          <ul class="list-disc list-inside ml-4 space-y-2">
+            <li>Product catalog optimization</li>
+            <li>Conversion rate optimization</li>
+            <li>Payment gateway integration</li>
+            <li>Inventory management systems</li>
+            <li>Mobile-first design</li>
+          </ul>
+          <p><strong>Notable Projects:</strong> Built 200+ successful online stores across fashion, electronics, and lifestyle brands.</p>
+          <p class="text-sm text-slate-400 italic">"I believe every product deserves a beautiful showcase. Let's make your store stand out!"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-michael" class="modal">
+    <div class="modal-content">
+      <div class="p-8">
+        <span class="close" onclick="closeModal('michael')">&times;</span>
+        <h2 class="text-3xl font-bold text-white mb-4">Michael Chen</h2>
+        <p class="text-emerald-300 mb-4">Service Website Expert</p>
+        <div class="space-y-4 text-slate-300">
+          <p><strong>Experience:</strong> 6+ years in service-based web solutions</p>
+          <p><strong>Specialties:</strong></p>
+          <ul class="list-disc list-inside ml-4 space-y-2">
+            <li>Professional portfolios</li>
+            <li>Booking and scheduling systems</li>
+            <li>Service showcase pages</li>
+            <li>Client testimonial integration</li>
+            <li>Contact form optimization</li>
+          </ul>
+          <p><strong>Notable Projects:</strong> Helped 150+ service businesses increase their online bookings by an average of 40%.</p>
+          <p class="text-sm text-slate-400 italic">"Your services deserve a platform that converts visitors into clients. Let's build it together!"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-emily" class="modal">
+    <div class="modal-content">
+      <div class="p-8">
+        <span class="close" onclick="closeModal('emily')">&times;</span>
+        <h2 class="text-3xl font-bold text-white mb-4">Emily Rodriguez</h2>
+        <p class="text-pink-300 mb-4">Creative Director</p>
+        <div class="space-y-4 text-slate-300">
+          <p><strong>Experience:</strong> 7+ years in creative web design</p>
+          <p><strong>Specialties:</strong></p>
+          <ul class="list-disc list-inside ml-4 space-y-2">
+            <li>Brand identity development</li>
+            <li>Animated UI/UX design</li>
+            <li>Visual storytelling</li>
+            <li>Custom illustrations</li>
+            <li>Motion graphics</li>
+          </ul>
+          <p><strong>Notable Projects:</strong> Award-winning designs featured in design galleries. Created unique brand experiences for 100+ clients.</p>
+          <p class="text-sm text-slate-400 italic">"Design is not just what it looks like—it's how it makes people feel. Let's create magic!"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-david" class="modal">
+    <div class="modal-content">
+      <div class="p-8">
+        <span class="close" onclick="closeModal('david')">&times;</span>
+        <h2 class="text-3xl font-bold text-white mb-4">David Thompson</h2>
+        <p class="text-amber-300 mb-4">Technical Lead</p>
+        <div class="space-y-4 text-slate-300">
+          <p><strong>Experience:</strong> 8+ years in full-stack development</p>
+          <p><strong>Specialties:</strong></p>
+          <ul class="list-disc list-inside ml-4 space-y-2">
+            <li>Performance optimization</li>
+            <li>SEO technical implementation</li>
+            <li>Database architecture</li>
+            <li>API development</li>
+            <li>Security best practices</li>
+          </ul>
+          <p><strong>Notable Projects:</strong> Built scalable platforms serving millions of users. Expert in speed optimization achieving sub-2s load times.</p>
+          <p class="text-sm text-slate-400 italic">"Fast, secure, and scalable—that's how every website should be. Let's build something solid!"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-lisa" class="modal">
+    <div class="modal-content">
+      <div class="p-8">
+        <span class="close" onclick="closeModal('lisa')">&times;</span>
+        <h2 class="text-3xl font-bold text-white mb-4">Lisa Anderson</h2>
+        <p class="text-sky-300 mb-4">Marketing Strategist</p>
+        <div class="space-y-4 text-slate-300">
+          <p><strong>Experience:</strong> 6+ years in digital marketing & web design</p>
+          <p><strong>Specialties:</strong></p>
+          <ul class="list-disc list-inside ml-4 space-y-2">
+            <li>Conversion funnel optimization</li>
+            <li>A/B testing strategies</li>
+            <li>Analytics integration</li>
+            <li>Email capture optimization</li>
+            <li>Social media integration</li>
+          </ul>
+          <p><strong>Notable Projects:</strong> Increased client conversion rates by 60% on average. Managed campaigns generating $5M+ in revenue.</p>
+          <p class="text-sm text-slate-400 italic">"A beautiful website is great, but a website that converts is better. Let's drive results!"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-james" class="modal">
+    <div class="modal-content">
+      <div class="p-8">
+        <span class="close" onclick="closeModal('james')">&times;</span>
+        <h2 class="text-3xl font-bold text-white mb-4">James Wilson</h2>
+        <p class="text-teal-300 mb-4">SaaS Specialist</p>
+        <div class="space-y-4 text-slate-300">
+          <p><strong>Experience:</strong> 9+ years in SaaS platform development</p>
+          <p><strong>Specialties:</strong></p>
+          <ul class="list-disc list-inside ml-4 space-y-2">
+            <li>Multi-tenant architecture</li>
+            <li>RESTful & GraphQL APIs</li>
+            <li>Subscription billing systems</li>
+            <li>User authentication & authorization</li>
+            <li>Cloud infrastructure</li>
+          </ul>
+          <p><strong>Notable Projects:</strong> Architected SaaS platforms serving 50K+ users. Expert in building scalable, enterprise-grade solutions.</p>
+          <p class="text-sm text-slate-400 italic">"SaaS is the future. Let's build a platform that scales with your ambitions!"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-[#0d1222]">
+    <div class="mx-auto max-w-7xl px-4 text-center text-slate-400">
+      <p>&copy; 2026 Iyonicorp. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function openModal(managerId) {
+      const modal = document.getElementById('modal-' + managerId);
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeModal(managerId) {
+      const modal = document.getElementById('modal-' + managerId);
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        const activeModal = document.querySelector('.modal.active');
+        if (activeModal) {
+          activeModal.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      }
+    });
+  </script>
+</body>
+</html>

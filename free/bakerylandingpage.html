@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sweet Delights Bakery - Artisan Breads & Pastries</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #d4a574;
+      --primary-dark: #b8935f;
+      --secondary: #8b4513;
+      --accent: #ff6b6b;
+      --warm-brown: #8b4513;
+      --cream: #faf7f0;
+      --dark-brown: #3e2723;
+      --light-brown: #d7ccc8;
+      --gold: #ffd700;
+      --shadow: 0 15px 35px rgba(139, 69, 19, 0.1);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--cream);
+      color: var(--dark-brown);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Floating Ingredients Animation */
+    .floating-ingredients {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    .ingredient {
+      position: absolute;
+      font-size: 2rem;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .ingredient:nth-child(2n) {
+      animation-delay: -2s;
+      animation-duration: 10s;
+    }
+
+    .ingredient:nth-child(3n) {
+      animation-delay: -4s;
+      animation-duration: 12s;
+    }
+
+    .ingredient:nth-child(4n) {
+      animation-delay: -6s;
+      animation-duration: 6s;
+    }
+
+    @keyframes float {
+      0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+        opacity: 0.1; 
+      }
+      50% { 
+        transform: translateY(-20px) rotate(180deg); 
+        opacity: 0.3; 
+      }
+    }
+
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(250, 247, 240, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--warm-brown);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--dark-brown);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--warm-brown);
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #faf7f0 0%, #f5f1eb 50%, #ede4d3 100%);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23d4a574" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23d4a574" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="%23d4a574" opacity="0.1"/><circle cx="10" cy="60" r="1" fill="%23d4a574" opacity="0.1"/><circle cx="90" cy="40" r="1" fill="%23d4a574" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+      opacity: 0.3;
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 700;
+      color: var(--warm-brown);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero-content .subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      color: var(--dark-brown);
+      margin-bottom: 2.5rem;
+      opacity: 0.8;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(139, 69, 19, 0.2);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--warm-brown);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .hero-image:hover img {
+      transform: scale(1.05);
+    }
+
+    .floating-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: white;
+      padding: 1rem;
+      border-radius: 50px;
+      font-weight: 600;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Sections */
+    .section {
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--warm-brown);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-bottom: 4rem;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    /* Menu Section */
+    .menu-section {
+      background: white;
+    }
+
+    .menu-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .menu-tab {
+      padding: 0.75rem 1.5rem;
+      background: var(--cream);
+      border: 2px solid var(--light-brown);
+      border-radius: 25px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .menu-tab.active,
+    .menu-tab:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .menu-item {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid rgba(139, 69, 19, 0.1);
+    }
+
+    .menu-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 50px rgba(139, 69, 19, 0.15);
+    }
+
+    .menu-item-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .menu-item:hover .menu-item-image {
+      transform: scale(1.1);
+    }
+
+    .menu-item-content {
+      padding: 1.5rem;
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .menu-item h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--warm-brown);
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-item-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .menu-item-description {
+      color: var(--dark-brown);
+      opacity: 0.8;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .add-to-cart {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .add-to-cart:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Features Section */
+    .features {
+      background: var(--cream);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid rgba(139, 69, 19, 0.1);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(139, 69, 19, 0.15);
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .feature-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--warm-brown);
+      margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+      color: var(--dark-brown);
+      opacity: 0.8;
+    }
+
+    /* About Section */
+    .about {
+      background: white;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--warm-brown);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text p {
+      margin-bottom: 1.5rem;
+      color: var(--dark-brown);
+      opacity: 0.8;
+      font-size: 1.1rem;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--cream);
+      border-radius: 15px;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      font-family: 'Playfair Display', serif;
+    }
+
+    .stat-label {
+      color: var(--dark-brown);
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+
+    .about-image {
+      position: relative;
+    }
+
+    .about-image img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Gallery Section */
+    .gallery {
+      background: var(--cream);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      aspect-ratio: 1;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(139, 69, 19, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-overlay i {
+      color: white;
+      font-size: 2rem;
+    }
+
+    /* Testimonials Section */
+    .testimonials {
+      background: white;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .testimonial-card {
+      background: var(--cream);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid rgba(139, 69, 19, 0.1);
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 50px rgba(139, 69, 19, 0.15);
+    }
+
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      color: var(--warm-brown);
+    }
+
+    .testimonial-rating {
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-text {
+      color: var(--dark-brown);
+      opacity: 0.8;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* Location Section */
+    .location {
+      background: var(--cream);
+    }
+
+    .location-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .location-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--warm-brown);
+      margin-bottom: 2rem;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: white;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+    }
+
+    .info-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .hours-table {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      margin-top: 2rem;
+    }
+
+    .hours-table h4 {
+      color: var(--warm-brown);
+      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--light-brown);
+    }
+
+    .hours-row:last-child {
+      border-bottom: none;
+    }
+
+    .map-container {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 400px;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Order Section */
+    .order {
+      background: white;
+    }
+
+    .order-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .order-form {
+      background: var(--cream);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--warm-brown);
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid var(--light-brown);
+      border-radius: 10px;
+      background: white;
+      color: var(--dark-brown);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+    }
+
+    .cart-summary {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      height: fit-content;
+    }
+
+    .cart-summary h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--warm-brown);
+      margin-bottom: 1.5rem;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--light-brown);
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-total {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--primary);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--warm-brown);
+      color: white;
+      padding: 3rem 0 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      display: block;
+      transition: var(--transition);
+    }
+
+    .footer-section a:hover {
+      color: var(--primary);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Scroll Animations */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.6s ease-out;
+    }
+
+    .fade-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .fade-in-right {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: all 0.6s ease-out;
+    }
+
+    .fade-in-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .about-content,
+      .location-content,
+      .order-content {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-tabs {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+      }
+
+      .cta-buttons {
+        justify-content: center;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+
+      .section {
+        padding: 4rem 0;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .menu-grid,
+      .features-grid,
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Loading Animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Ingredients Background -->
+  <div class="floating-ingredients" id="floatingIngredients"></div>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="nav-container">
+      <a href="#" class="logo">Sweet Delights</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#location">Location</a></li>
+          <li><a href="#order">Order</a></li>
+        </ul>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-container">
+      <div class="hero-content fade-in-left">
+        <p class="subtitle">Artisan Bakery Since 1995</p>
+        <h1>Freshly Baked<br>Happiness</h1>
+        <p>
+          Experience the authentic taste of handcrafted breads, pastries, and cakes made with the finest ingredients and traditional techniques passed down through generations.
+        </p>
+        <div class="cta-buttons">
+          <a href="#menu" class="btn btn-primary">
+            <i class="fas fa-utensils"></i>
+            Explore Menu
+          </a>
+          <a href="#order" class="btn btn-secondary">
+            <i class="fas fa-shopping-cart"></i>
+            Order Now
+          </a>
+        </div>
+      </div>
+      <div class="hero-image fade-in-right">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&h=400&fit=crop" alt="Freshly baked bread">
+        <div class="floating-badge">
+          <i class="fas fa-star"></i> 4.9/5 Rating
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menu" class="section menu-section">
+    <div class="container">
+      <h2 class="section-title fade-in-up">Our Delicious Menu</h2>
+      <p class="section-subtitle fade-in-up">Freshly made daily with love and premium ingredients</p>
+      
+      <div class="menu-tabs fade-in-up">
+        <div class="menu-tab active" data-category="all">All Items</div>
+        <div class="menu-tab" data-category="bread">Breads</div>
+        <div class="menu-tab" data-category="pastries">Pastries</div>
+        <div class="menu-tab" data-category="cakes">Cakes</div>
+        <div class="menu-tab" data-category="cookies">Cookies</div>
+      </div>
+
+      <div class="menu-grid">
+        <!-- Bread Items -->
+        <div class="menu-item fade-in-up" data-category="bread">
+          <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=400&h=300&fit=crop" alt="Sourdough Bread" class="menu-item-image">
+          <div class="menu-item-content">
+            <div class="menu-item-header">
+              <div>
+                <h3>Sourdough Bread</h3>
+                <div class="menu-item-price">$8.99</div>
+              </div>
+            </div>
+            <p class="menu-item-description">Traditional sourdough with a crispy crust and chewy interior, fermented for 24 hours.</p>
+            <button class="add-to-cart" onclick="addToCart('Sourdough Bread', 8.99)">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-item fade-in-up" data-category="bread">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=300&fit=crop" alt="French Baguette" class="menu-item-image">
+          <div class="menu-item-content">
+            <div class="menu-item-header">
+              <div>
+                <h3>French Baguette</h3>
+                <div class="menu-item-price">$3.99</div>
+              </div>
+            </div>
+            <p class="menu-item-description">Classic French baguette with a golden crust and light, airy interior.</p>
+            <button class="add-to-cart" onclick="addToCart('French Baguette', 3.99)">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <!-- Pastry Items -->
+        <div class="menu-item fade-in-up" data-category="pastries">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=300&fit=crop" alt="Butter Croissant" class="menu-item-image">
+          <div class="menu-item-content">
+            <div class="menu-item-header">
+              <div>
+                <h3>Butter Croissant</h3>
+                <div class="menu-item-price">$2.99</div>
+              </div>
+            </div>
+            <p class="menu-item-description">Flaky, buttery croissant with layers that melt in your mouth.</p>
+            <button class="add-to-cart" onclick="addToCart('Butter Croissant', 2.99)">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-item fade-in-up" data-category="pastries">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Almond Croissant" class="menu-item-image">
+          <div class="menu-item-content">
+            <div class="menu-item-header">
+              <div>
+                <h3>Almond Croissant</h3>
+                <div class="menu-item-price">$3.49</div>
+              </div>
+            </div>
+            <p class="menu-item-description">Croissant filled with almond cream and topped with sliced almonds.</p>
+            <button class="add-to-cart" onclick="addToCart('Almond Croissant', 3.49)">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-item fade-in-up" data-category="pastries">
+          <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=300&fit=crop" alt="Chocolate Danish" class="menu-item-image">
+          <div class="menu-item-content">
+            <div class="menu-item-header">
+              <div>
+                <h3>Chocolate Danish</h3>
+                <div class="menu-item-price">$3.99</div>
+              </div>
+            </div>
+            <p class="menu-item-description">Delicate pastry filled with rich chocolate and cream cheese.</p>
+            <button class="add-to-cart" onclick="addToCart('Chocolate Danish', 3.99)">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <!-- Cake Items -->
+        <div class="menu-item fade-in-up" data-category="cakes">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Chocolate Cake" class="menu-item-image">
+          <div class="menu-item-content">
+            <div class="menu-item-header">
+              <div>
+                <h3>Chocolate Cake</h3>
+                <div class="menu-item-price">$24.99</div>
+              </div>
+            </div>
+            <p class="menu-item-description">Rich, moist chocolate cake with velvety chocolate frosting.</p>
+            <button class="add-to-cart" onclick="addToCart('Chocolate Cake', 24.99)">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-item fade-in-up" data-category="cakes">
+          <img src="https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop" alt="Red Velvet Cake" class="menu-item-image">
+          <div class="menu-item-content">
+            <div class="menu-item-header">
+              <div>
+                <h3>Red Velvet Cake</h3>
+                <div class="menu-item-price">$26.99</div>
+              </div>
+            </div>
+            <p class="menu-item-description">Classic red velvet cake with cream cheese frosting.</p>
+            <button class="add-to-cart" onclick="addToCart('Red Velvet Cake', 26.99)">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <!-- Cookie Items -->
+        <div class="menu-item fade-in-up" data-category="cookies">
+          <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=300&fit=crop" alt="Chocolate Chip Cookies" class="menu-item-image">
+          <div class="menu-item-content">
+            <div class="menu-item-header">
+              <div>
+                <h3>Chocolate Chip Cookies</h3>
+                <div class="menu-item-price">$1.99</div>
+              </div>
+            </div>
+            <p class="menu-item-description">Chewy cookies loaded with chocolate chips.</p>
+            <button class="add-to-cart" onclick="addToCart('Chocolate Chip Cookies', 1.99)">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-item fade-in-up" data-category="cookies">
+          <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=300&fit=crop" alt="Oatmeal Raisin Cookies" class="menu-item-image">
+          <div class="menu-item-content">
+            <div class="menu-item-header">
+              <div>
+                <h3>Oatmeal Raisin Cookies</h3>
+                <div class="menu-item-price">$1.89</div>
+              </div>
+            </div>
+            <p class="menu-item-description">Healthy oat cookies with sweet raisins and warm spices.</p>
+            <button class="add-to-cart" onclick="addToCart('Oatmeal Raisin Cookies', 1.89)">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="section features">
+    <div class="container">
+      <h2 class="section-title fade-in-up">Why Choose Sweet Delights?</h2>
+      <p class="section-subtitle fade-in-up">We're passionate about baking excellence</p>
+      
+      <div class="features-grid">
+        <div class="feature-card fade-in-up">
+          <div class="feature-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3>Fresh Daily</h3>
+          <p>All our products are baked fresh every morning using traditional methods and premium ingredients.</p>
+        </div>
+
+        <div class="feature-card fade-in-up">
+          <div class="feature-icon">
+            <i class="fas fa-award"></i>
+          </div>
+          <h3>Award Winning</h3>
+          <p>Recognized as the best artisan bakery in the region for three consecutive years.</p>
+        </div>
+
+        <div class="feature-card fade-in-up">
+          <div class="feature-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3>Made with Love</h3>
+          <p>Every item is handcrafted with passion and attention to detail by our skilled bakers.</p>
+        </div>
+
+        <div class="feature-card fade-in-up">
+          <div class="feature-icon">
+            <i class="fas fa-seedling"></i>
+          </div>
+          <h3>Natural Ingredients</h3>
+          <p>We use only natural, organic ingredients without any artificial preservatives or additives.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section about">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-text fade-in-left">
+          <h3>Our Story</h3>
+          <p>
+            Founded in 1995 by the passionate baker Maria Rodriguez, Sweet Delights Bakery began as a small family business with a simple mission: to bring the authentic taste of traditional European baking to our community.
+          </p>
+          <p>
+            Over the years, we've grown from a small neighborhood bakery to a beloved local institution, but our commitment to quality and tradition remains unchanged. Every recipe is crafted with care, using techniques passed down through generations.
+          </p>
+          <p>
+            Today, our skilled team of artisan bakers continues to honor the traditions that started it all while innovating with new flavors and techniques to delight our customers.
+          </p>
+
+          <div class="about-stats">
+            <div class="stat">
+              <div class="stat-number">25+</div>
+              <div class="stat-label">Years of Experience</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">10k+</div>
+              <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">50+</div>
+              <div class="stat-label">Daily Fresh Items</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">15</div>
+              <div class="stat-label">Award-Winning Recipes</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-image fade-in-right">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&h=400&fit=crop" alt="Bakery interior">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="section gallery">
+    <div class="container">
+      <h2 class="section-title fade-in-up">Gallery</h2>
+      <p class="section-subtitle fade-in-up">A visual journey through our delicious creations</p>
+      
+      <div class="gallery-grid">
+        <div class="gallery-item fade-in-up">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&h=300&fit=crop" alt="Fresh bread">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item fade-in-up">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=300&h=300&fit=crop" alt="Croissants">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item fade-in-up">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=300&h=300&fit=crop" alt="Cakes">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item fade-in-up">
+          <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=300&h=300&fit=crop" alt="Cookies">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item fade-in-up">
+          <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop" alt="Pastries">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item fade-in-up">
+          <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=300&h=300&fit=crop" alt="Artisan bread">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="section testimonials">
+    <div class="container">
+      <h2 class="section-title fade-in-up">What Our Customers Say</h2>
+      <p class="section-subtitle fade-in-up">Don't just take our word for it</p>
+      
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-in-up">
+          <div class="testimonial-header">
+            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=60&h=60&fit=crop&crop=face" alt="Sarah Johnson" class="testimonial-avatar">
+            <div>
+              <div class="testimonial-name">Sarah Johnson</div>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            "The best bakery in town! Their sourdough bread is absolutely perfect, and the croissants melt in your mouth. I order from here every week and have never been disappointed."
+          </p>
+        </div>
+
+        <div class="testimonial-card fade-in-up">
+          <div class="testimonial-header">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face" alt="Michael Chen" class="testimonial-avatar">
+            <div>
+              <div class="testimonial-name">Michael Chen</div>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            "I ordered a custom birthday cake for my daughter's party, and it was not only beautiful but incredibly delicious. The staff was so helpful and the cake was perfect!"
+          </p>
+        </div>
+
+        <div class="testimonial-card fade-in-up">
+          <div class="testimonial-header">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face" alt="Emily Rodriguez" class="testimonial-avatar">
+            <div>
+              <div class="testimonial-name">Emily Rodriguez</div>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            "The chocolate chip cookies are my weakness! They're always fresh, chewy, and loaded with chocolate. I can't resist stopping by every time I pass by the bakery."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Section -->
+  <section id="location" class="section location">
+    <div class="container">
+      <h2 class="section-title fade-in-up">Visit Us</h2>
+      <p class="section-subtitle fade-in-up">Come experience the warmth and flavor of our bakery</p>
+      
+      <div class="location-content">
+        <div class="location-info fade-in-left">
+          <h3>Sweet Delights Bakery</h3>
+          
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+              <strong>Address</strong><br>
+              123 Artisan Street<br>
+              Downtown District<br>
+              City, State 12345
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div>
+              <strong>Phone</strong><br>
+              (555) 123-BAKE<br>
+              (555) 123-2253
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+              <strong>Email</strong><br>
+              hello@sweetdelights.com<br>
+              orders@sweetdelights.com
+            </div>
+          </div>
+
+          <div class="hours-table">
+            <h4>Opening Hours</h4>
+            <div class="hours-row">
+              <span>Monday - Friday</span>
+              <span>6:00 AM - 8:00 PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Saturday</span>
+              <span>6:00 AM - 9:00 PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Sunday</span>
+              <span>7:00 AM - 6:00 PM</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-container fade-in-right">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.432390684952!2d-73.99157748459353!3d40.748817479327016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25994ccdc7e95%3A0xf0b0fd93e407998a!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1627655433669!5m2!1sen!2sus"
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Order Section -->
+  <section id="order" class="section order">
+    <div class="container">
+      <h2 class="section-title fade-in-up">Place Your Order</h2>
+      <p class="section-subtitle fade-in-up">Freshly baked, delivered to your door</p>
+      
+      <div class="order-content">
+        <form class="order-form fade-in-left" id="orderForm">
+          <h3>Order Details</h3>
+          
+          <div class="form-group">
+            <label for="customerName">Full Name</label>
+            <input type="text" id="customerName" name="customerName" required>
+          </div>
+
+          <div class="form-group">
+            <label for="customerEmail">Email Address</label>
+            <input type="email" id="customerEmail" name="customerEmail" required>
+          </div>
+
+          <div class="form-group">
+            <label for="customerPhone">Phone Number</label>
+            <input type="tel" id="customerPhone" name="customerPhone" required>
+          </div>
+
+          <div class="form-group">
+            <label for="orderType">Order Type</label>
+            <select id="orderType" name="orderType" required>
+              <option value="">Select order type</option>
+              <option value="pickup">Pickup</option>
+              <option value="delivery">Delivery</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="orderDate">Preferred Date</label>
+            <input type="date" id="orderDate" name="orderDate" required>
+          </div>
+
+          <div class="form-group">
+            <label for="orderTime">Preferred Time</label>
+            <input type="time" id="orderTime" name="orderTime" required>
+          </div>
+
+          <div class="form-group">
+            <label for="specialRequests">Special Requests</label>
+            <textarea id="specialRequests" name="specialRequests" rows="3" placeholder="Any special dietary requirements or customizations..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            <i class="fas fa-paper-plane"></i>
+            Submit Order
+          </button>
+        </form>
+
+        <div class="cart-summary fade-in-right">
+          <h3>Your Order</h3>
+          <div id="cartItems">
+            <p style="color: #999; text-align: center; padding: 2rem;">No items in cart yet. Add some delicious items from our menu!</p>
+          </div>
+          <div class="cart-total" id="cartTotal" style="display: none;">
+            Total: $<span id="totalAmount">0.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Sweet Delights Bakery</h3>
+          <p>Bringing you the finest artisan breads, pastries, and cakes since 1995. Made fresh daily with love and tradition.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <a href="#menu">Our Menu</a>
+          <a href="#about">About Us</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#location">Visit Us</a>
+          <a href="#order">Order Online</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>Customer Service</h3>
+          <a href="#">Contact Us</a>
+          <a href="#">FAQ</a>
+          <a href="#">Shipping Info</a>
+          <a href="#">Returns</a>
+          <a href="#">Allergens</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>Newsletter</h3>
+          <p>Subscribe to get special offers and updates on new products.</p>
+          <form style="margin-top: 1rem;">
+            <input type="email" placeholder="Your email address" style="padding: 0.5rem; border: none; border-radius: 5px; margin-right: 0.5rem;">
+            <button type="submit" style="padding: 0.5rem 1rem; background: var(--primary); color: white; border: none; border-radius: 5px; cursor: pointer;">Subscribe</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Sweet Delights Bakery. All rights reserved. | <a href="https://iyonicorp.com" target="_blank" style="color: var(--primary);">iyonicorp.com</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Floating Ingredients Animation
+    function createFloatingIngredients() {
+      const container = document.getElementById('floatingIngredients');
+      const ingredients = ['🌾', '🥖', '🧈', '🍞', '🥐', '🧁', '🍪', '🎂', '🌾', '🥖'];
+      
+      ingredients.forEach((ingredient, index) => {
+        const element = document.createElement('div');
+        element.className = 'ingredient';
+        element.textContent = ingredient;
+        element.style.left = Math.random() * 100 + '%';
+        element.style.top = Math.random() * 100 + '%';
+        element.style.animationDelay = Math.random() * 8 + 's';
+        container.appendChild(element);
+      });
+    }
+
+    // Scroll Animations
+    function handleScrollAnimations() {
+      const elements = document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      elements.forEach(element => {
+        observer.observe(element);
+      });
+    }
+
+    // Header Scroll Effect
+    function handleHeaderScroll() {
+      const header = document.getElementById('header');
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+          header.style.background = 'rgba(250, 247, 240, 0.98)';
+          header.style.backdropFilter = 'blur(20px)';
+        } else {
+          header.style.background = 'rgba(250, 247, 240, 0.95)';
+          header.style.backdropFilter = 'blur(20px)';
+        }
+      });
+    }
+
+    // Smooth Scrolling for Navigation Links
+    function handleSmoothScrolling() {
+      const navLinks = document.querySelectorAll('a[href^="#"]');
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          const targetId = link.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            const offsetTop = targetElement.offsetTop - 80;
+            
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    }
+
+    // Menu Tab Functionality
+    function handleMenuTabs() {
+      const tabs = document.querySelectorAll('.menu-tab');
+      const menuItems = document.querySelectorAll('.menu-item');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const category = tab.getAttribute('data-category');
+          
+          // Update active tab
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          
+          // Filter menu items
+          menuItems.forEach(item => {
+            if (category === 'all' || item.getAttribute('data-category') === category) {
+              item.style.display = 'block';
+              item.style.animation = 'fadeInUp 0.5s ease-out';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+    }
+
+    // Shopping Cart Functionality
+    let cart = [];
+
+    function addToCart(itemName, itemPrice) {
+      const existingItem = cart.find(item => item.name === itemName);
+      
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          name: itemName,
+          price: itemPrice,
+          quantity: 1
+        });
+      }
+      
+      updateCartDisplay();
+      showNotification(`${itemName} added to cart!`);
+    }
+
+    function updateCartDisplay() {
+      const cartItemsContainer = document.getElementById('cartItems');
+      const cartTotal = document.getElementById('cartTotal');
+      const totalAmount = document.getElementById('totalAmount');
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p style="color: #999; text-align: center; padding: 2rem;">No items in cart yet. Add some delicious items from our menu!</p>';
+        cartTotal.style.display = 'none';
+      } else {
+        let total = 0;
+        cartItemsContainer.innerHTML = cart.map(item => {
+          total += item.price * item.quantity;
+          return `
+            <div class="cart-item">
+              <div>
+                <strong>${item.name}</strong><br>
+                <small>$${item.price.toFixed(2)} each</small>
+              </div>
+              <div>
+                <button onclick="updateQuantity('${item.name}', -1)" style="background: #ddd; border: none; padding: 0.25rem 0.5rem; margin: 0 0.25rem; cursor: pointer;">-</button>
+                <span>${item.quantity}</span>
+                <button onclick="updateQuantity('${item.name}', 1)" style="background: #ddd; border: none; padding: 0.25rem 0.5rem; margin: 0 0.25rem; cursor: pointer;">+</button>
+                <button onclick="removeFromCart('${item.name}')" style="background: #ff6b6b; color: white; border: none; padding: 0.25rem 0.5rem; margin-left: 0.5rem; cursor: pointer; border-radius: 3px;">×</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+        
+        totalAmount.textContent = total.toFixed(2);
+        cartTotal.style.display = 'block';
+      }
+    }
+
+    function updateQuantity(itemName, change) {
+      const item = cart.find(item => item.name === itemName);
+      if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+          removeFromCart(itemName);
+        } else {
+          updateCartDisplay();
+        }
+      }
+    }
+
+    function removeFromCart(itemName) {
+      cart = cart.filter(item => item.name !== itemName);
+      updateCartDisplay();
+    }
+
+    // Notification System
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--primary);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        z-index: 10000;
+        transform: translateX(400px);
+        transition: transform 0.3s ease;
+      `;
+      notification.textContent = message;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+      }, 100);
+      
+      setTimeout(() => {
+        notification.style.transform = 'translateX(400px)';
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 3000);
+    }
+
+    // Form Submission
+    function handleFormSubmission() {
+      const orderForm = document.getElementById('orderForm');
+      
+      orderForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        if (cart.length === 0) {
+          showNotification('Please add items to your cart before placing an order.');
+          return;
+        }
+        
+        const submitBtn = orderForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        submitBtn.innerHTML = '<div class="loading"></div> Processing...';
+        submitBtn.disabled = true;
+        
+        // Simulate form submission
+        setTimeout(() => {
+          showNotification('Order submitted successfully! We will contact you soon.');
+          orderForm.reset();
+          cart = [];
+          updateCartDisplay();
+          
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }, 2000);
+      });
+    }
+
+    // Gallery Lightbox
+    function handleGalleryLightbox() {
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      
+      galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const img = item.querySelector('img');
+          const lightbox = document.createElement('div');
+          lightbox.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            cursor: pointer;
+          `;
+          
+          const lightboxImg = document.createElement('img');
+          lightboxImg.src = img.src;
+          lightboxImg.style.cssText = `
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 10px;
+          `;
+          
+          lightbox.appendChild(lightboxImg);
+          document.body.appendChild(lightbox);
+          
+          lightbox.addEventListener('click', () => {
+            document.body.removeChild(lightbox);
+          });
+        });
+      });
+    }
+
+    // Mobile Menu Toggle
+    function handleMobileMenu() {
+      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+      const navLinks = document.querySelector('.nav-links');
+      
+      mobileMenuBtn.addEventListener('click', () => {
+        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+      });
+    }
+
+    // Set minimum date for order form
+    function setMinDate() {
+      const orderDate = document.getElementById('orderDate');
+      const today = new Date().toISOString().split('T')[0];
+      orderDate.min = today;
+    }
+
+    // Initialize all functions
+    document.addEventListener('DOMContentLoaded', () => {
+      createFloatingIngredients();
+      handleScrollAnimations();
+      handleHeaderScroll();
+      handleSmoothScrolling();
+      handleMenuTabs();
+      handleFormSubmission();
+      handleGalleryLightbox();
+      handleMobileMenu();
+      setMinDate();
+    });
+
+    // Add CSS animation keyframes
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

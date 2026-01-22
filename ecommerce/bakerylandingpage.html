@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delicious Bakery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Add custom animations */
+    @keyframes slideIn {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .slide-in {
+      animation: slideIn 1s ease-out;
+    }
+
+    /* Image hover animation */
+    .image-hover:hover {
+      transform: scale(1.1);
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+
+  <!-- Hero Section -->
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-pink-500 to-yellow-400 text-white">
+    <h1 class="text-5xl font-extrabold leading-tight mb-4 animate__animated animate__fadeIn">Welcome to Delicious Bakery!</h1>
+    <p class="text-xl mb-6 max-w-xl animate__animated animate__fadeIn animate__delay-1s">Freshly baked treats made with love and the finest ingredients.</p>
+    <div class="space-x-4 animate__animated animate__fadeIn animate__delay-2s">
+      <a href="#menu" class="bg-white text-pink-600 font-semibold px-6 py-3 rounded-xl shadow hover:bg-gray-100 transition">View Menu</a>
+      <a href="#order" class="bg-white text-pink-600 font-semibold px-6 py-3 rounded-xl shadow hover:bg-gray-100 transition" id="orderBtn">Order Now</a>
+    </div>
+  </section>
+<!-- Menu Section -->
+<section id="menu" class="py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12">Our Menu</h2>
+      <div class="grid md:grid-cols-3 gap-10">
+        <!-- Pastries Category -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg overflow-hidden">
+          <div class="text-pink-600 text-4xl mb-4">🥐</div>
+          <h3 class="text-xl font-semibold mb-2">Pastries</h3>
+          <div class="space-y-6">
+            <div class="flex justify-between items-center">
+              <p class="text-lg">Butter Croissant</p>
+              <p class="font-semibold text-lg">$2.99</p>
+            </div>
+            <div class="flex justify-between items-center">
+              <p class="text-lg">Almond Croissant</p>
+              <p class="font-semibold text-lg">$3.49</p>
+            </div>
+            <div class="flex justify-between items-center">
+              <p class="text-lg">Chocolate Danish</p>
+              <p class="font-semibold text-lg">$3.99</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Cakes Category -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg overflow-hidden">
+          <div class="text-pink-600 text-4xl mb-4">🎂</div>
+          <h3 class="text-xl font-semibold mb-2">Cakes</h3>
+          <div class="space-y-6">
+            <div class="flex justify-between items-center">
+              <p class="text-lg">Chocolate Cake</p>
+              <p class="font-semibold text-lg">$19.99</p>
+            </div>
+            <div class="flex justify-between items-center">
+              <p class="text-lg">Vanilla Sponge Cake</p>
+              <p class="font-semibold text-lg">$17.99</p>
+            </div>
+            <div class="flex justify-between items-center">
+              <p class="text-lg">Red Velvet Cake</p>
+              <p class="font-semibold text-lg">$21.99</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Cookies Category -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg overflow-hidden">
+          <div class="text-pink-600 text-4xl mb-4">🍪</div>
+          <h3 class="text-xl font-semibold mb-2">Cookies</h3>
+          <div class="space-y-6">
+            <div class="flex justify-between items-center">
+              <p class="text-lg">Chocolate Chip Cookies</p>
+              <p class="font-semibold text-lg">$1.99</p>
+            </div>
+            <div class="flex justify-between items-center">
+              <p class="text-lg">Oatmeal Raisin Cookies</p>
+              <p class="font-semibold text-lg">$1.89</p>
+            </div>
+            <div class="flex justify-between items-center">
+              <p class="text-lg">Peanut Butter Cookies</p>
+              <p class="font-semibold text-lg">$2.49</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Features Section -->
+  <section id="features" class="py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12">Why Choose Delicious Bakery?</h2>
+      <div class="grid md:grid-cols-3 gap-10">
+        <!-- Feature 1 -->
+        <div class="bg-white p-6 rounded-2xl shadow text-center">
+          <div class="text-pink-600 text-4xl mb-4">🍰</div>
+          <h3 class="text-xl font-semibold mb-2">Freshly Baked Every Day</h3>
+          <p>We bake fresh goods every day, ensuring you get the most delicious treats every time you visit.</p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="bg-white p-6 rounded-2xl shadow text-center">
+          <div class="text-pink-600 text-4xl mb-4">🥐</div>
+          <h3 class="text-xl font-semibold mb-2">Artisanal Recipes</h3>
+          <p>Our team of bakers uses time-tested artisanal recipes passed down through generations.</p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="bg-white p-6 rounded-2xl shadow text-center">
+          <div class="text-pink-600 text-4xl mb-4">🍪</div>
+          <h3 class="text-xl font-semibold mb-2">Handcrafted with Love</h3>
+          <p>Each pastry is handcrafted with love, ensuring quality and perfection in every bite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Best Sellers Section -->
+  <section id="best-sellers" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12">Our Best Sellers</h2>
+      <div class="grid md:grid-cols-3 gap-10">
+        <!-- Product 1 -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg overflow-hidden">
+          <img src="https://loveandcheesecake.com/cdn/shop/files/buttercroissant2.jpg?v=1711088930&width=480" alt="Croissant" class="w-full rounded-lg image-hover mb-4"/>
+          <h3 class="text-xl font-semibold mb-2">Butter Croissant</h3>
+          <p class="text-lg">Flaky, buttery, and perfectly golden – our signature croissant is the perfect breakfast treat!</p>
+        </div>
+        <!-- Product 2 -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg overflow-hidden">
+          <img src="https://thescranline.com/wp-content/uploads/2022/08/CHOCOLATE-FUDGE-CAKE-24-WEB-07-768x1024.jpg" alt="Cake" class="w-full rounded-lg image-hover mb-4"/>
+          <h3 class="text-xl font-semibold mb-2">Chocolate Cake</h3>
+          <p class="text-lg">Indulge in our rich, moist chocolate cake topped with velvety frosting. A true chocolate lover's dream!</p>
+        </div>
+        <!-- Product 3 -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg overflow-hidden">
+          <img src="https://images.aws.nestle.recipes/resized/5b069c3ed2feea79377014f6766fcd49_Original_NTH_Chocolate_Chip_Cookie_1080_850.jpg" alt="Cookies" class="w-full rounded-lg image-hover mb-4"/>
+          <h3 class="text-xl font-semibold mb-2">Chocolate Chip Cookies</h3>
+          <p class="text-lg">Baked to perfection, these chewy cookies are packed with rich chocolate chips for the ultimate sweet experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="py-20 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12">What Our Customers Say</h2>
+      <div class="flex flex-wrap justify-center gap-10">
+        <!-- Testimonial 1 -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg max-w-md text-center">
+          <p class="italic text-lg mb-4">"The best bakery in town! The pastries are always fresh and absolutely delicious!"</p>
+          <p class="font-semibold">Sarah T.</p>
+        </div>
+        <!-- Testimonial 2 -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg max-w-md text-center">
+          <p class="italic text-lg mb-4">"Their chocolate cake is to die for. Perfectly moist and decadent!"</p>
+          <p class="font-semibold">John R.</p>
+        </div>
+        <!-- Testimonial 3 -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg max-w-md text-center">
+          <p class="italic text-lg mb-4">"I order all my special occasion cakes here. Always a hit with my guests!"</p>
+          <p class="font-semibold">Emily L.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Popup Modal -->
+<div id="orderModal" class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-8 rounded-xl shadow-lg max-w-lg w-full">
+      <h2 class="text-2xl font-semibold text-center mb-4">How to Order</h2>
+      <p class="mb-4">Follow these easy steps to place your order:</p>
+      <ol class="list-decimal pl-5 mb-4">
+        <li>Choose the items you'd like to order.</li>
+        <li>Call us at <strong>+1 (800) 123-4567</strong> to place your order.</li>
+        <li>We will confirm your order and arrange a delivery or pickup time.</li>
+      </ol>
+      <p class="mb-6">If you have any special requests, feel free to mention them when you call!</p>
+      
+      <div class="flex justify-center">
+        <button id="closeModalBtn" class="bg-pink-600 text-white font-semibold px-6 py-3 rounded-xl shadow hover:bg-pink-500">Close</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript for Modal Behavior -->
+  <script>
+    // Get modal elements
+    const orderBtn = document.getElementById('orderBtn');
+    const orderModal = document.getElementById('orderModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+  
+    // Show the modal when "Order Now" button is clicked
+    orderBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      orderModal.classList.remove('hidden'); // Show modal
+    });
+  
+    // Close the modal when "Close" button is clicked
+    closeModalBtn.addEventListener('click', function() {
+      orderModal.classList.add('hidden'); // Hide modal
+    });
+  
+    // Close the modal if the user clicks outside of it
+    window.addEventListener('click', function(e) {
+      if (e.target === orderModal) {
+        orderModal.classList.add('hidden'); // Hide modal
+      }
+    });
+  </script>
+<footer class="bg-pink-600 text-white py-8 text-center text-sm">
+    <div class="mb-4">
+      <p class="font-bold text-xl">Delicious Bakery</p>
+      <p class="text-md">Freshly baked goodness, straight from our oven to your door.</p>
+    </div>
+  
+    <div class="space-x-4 mb-4">
+      <a href="#privacy-policy" class="text-white hover:text-pink-300">Privacy Policy</a> | 
+      <a href="#terms-service" class="text-white hover:text-pink-300">Terms of Service</a>
+    </div>
+  
+    <!-- Address & Contact -->
+    <div class="mt-4">
+      <p class="text-md">123 Bakery Lane, Sweet City, SC 12345</p>
+      <p class="text-sm">Call us: +1 (800) 123-4567</p>
+    </div>
+  
+    <!-- Centered Google Map Embed -->
+    <div class="mt-4 flex justify-center">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.432390684952!2d-73.99157748459353!3d40.748817479327016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25994ccdc7e95%3A0xf0b0fd93e407998a!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1627655433669!5m2!1sen!2sus"
+        width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+  
+    <div class="mt-4">
+      <p>&copy; 2025 Delicious Bakery. <a href="https://iyonicorp.com" target="_blank" class="text-white font-semibold">iyonicorp.com</a>.</p>
+    </div>
+  </footer>
+  
+  
+  <!-- Full Page Privacy Policy Section -->
+  <section id="privacy-policy" class="hidden fixed inset-0 bg-white text-gray-800 p-12 overflow-auto z-50">
+    <div class="max-w-4xl mx-auto">
+      <button onclick="document.getElementById('privacy-policy').classList.add('hidden');" class="absolute top-4 right-4 text-pink-600 text-2xl">X</button>
+      <h3 class="text-3xl font-semibold mb-6">Privacy Policy</h3>
+      <p class="mb-6">Your privacy is very important to us. This Privacy Policy explains how we collect, use, and protect your personal information...</p>
+      <p>We collect personal data when you place an order, subscribe to our newsletter, or contact us. We use this data to improve our services and keep you updated on new bakery items...</p>
+      <!-- Add more privacy policy content here -->
+    </div>
+  </section>
+  
+  <!-- Full Page Terms of Service Section -->
+  <section id="terms-service" class="hidden fixed inset-0 bg-white text-gray-800 p-12 overflow-auto z-50">
+    <div class="max-w-4xl mx-auto">
+      <button onclick="document.getElementById('terms-service').classList.add('hidden');" class="absolute top-4 right-4 text-pink-600 text-2xl">X</button>
+      <h3 class="text-3xl font-semibold mb-6">Terms of Service</h3>
+      <p class="mb-6">These Terms of Service govern your use of Delicious Bakery’s website and services. By accessing or using our website, you agree to comply with the terms outlined in this agreement...</p>
+      <p>All users must agree to the following conditions to use our website and services. These terms include the use of our website, purchasing bakery goods, and any other services provided...</p>
+      <!-- Add more terms of service content here -->
+    </div>
+  </section>
+  
+  <script>
+    // Make sections visible when links are clicked
+    const privacyPolicyLink = document.querySelector('a[href="#privacy-policy"]');
+    const termsServiceLink = document.querySelector('a[href="#terms-service"]');
+  
+    privacyPolicyLink.addEventListener('click', function() {
+      document.getElementById('privacy-policy').classList.remove('hidden');
+      document.getElementById('terms-service').classList.add('hidden');
+    });
+  
+    termsServiceLink.addEventListener('click', function() {
+      document.getElementById('terms-service').classList.remove('hidden');
+      document.getElementById('privacy-policy').classList.add('hidden');
+    });
+  </script>
+  
+</body>
+</html>

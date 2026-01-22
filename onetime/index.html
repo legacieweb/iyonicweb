@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) primary -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6JSC6HT7EC"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-6JSC6HT7EC');
+  </script>
+
+  <!-- Base Meta -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Iyonicorp - One-Time Purchase Templates</title>
+  <meta name="description" content="Browse and preview premium website templates for portfolios, businesses, eCommerce, blogs, and more. Get modern, responsive, and customizable solutions for your business at Iyonicorp." />
+  <meta name="keywords" content="website templates, business websites, portfolio templates, eCommerce, blog templates, landing pages, professional services, Iyonicorp, web development, responsive design, buy website, rent website, web solutions" />
+  <meta name="author" content="Iyonicorp Technologies" />
+  <link rel="canonical" href="https://iyonicorp.com/service/" />
+  <link rel="icon" href="https://tophomedesigner.com/download-removebg-preview.png" type="image/x-icon" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Iyonicorp - Service Websites & Templates" />
+  <meta property="og:description" content="Discover and preview modern website templates for every business need. Fast, responsive, and ready to launch." />
+  <meta property="og:image" content="https://tophomedesigner.com/download-removebg-preview.png" />
+  <meta property="og:url" content="https://iyonicorp.com/service/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Iyonicorp" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Iyonicorp - Service Websites & Templates" />
+  <meta name="twitter:description" content="Browse and preview premium website templates for portfolios, businesses, eCommerce, blogs, and more." />
+  <meta name="twitter:image" content="https://tophomedesigner.com/download-removebg-preview.png" />
+  <meta name="twitter:site" content="@Iyonicorp" />
+
+  <!-- Robots & Sitemap -->
+  <meta name="robots" content="index, follow" />
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://iyonicorp.com/sitemap.xml" />
+
+  <!-- Webmaster Verifications -->
+  <meta name="google-site-verification" content="Dy076_18Gi3ryC5kVpLVUWzZ8y4mnsHQUEE8a_UAyEo" />
+  <meta name="msvalidate.01" content="335DF0B9C58AFDDF8ADF856B8571C44D" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Iyonicorp",
+    "url":"https://iyonicorp.com",
+    "logo":"https://tophomedesigner.com/download-removebg-preview.png",
+    "description":"Iyonicorp builds and sells high-performance custom eCommerce and service websites. Launch your online store or business site fast—fully designed, animated, and ready to grow your brand. Get a dedicated account manager and unmatched support.",
+    "contactPoint":[{
+      "@type":"ContactPoint",
+      "telephone":"+19405032012",
+      "contactType":"customer service",
+      "email":"iyonicorp@gmail.com"
+    }],
+    "sameAs":[
+      "https://www.facebook.com/iyonicweb",
+      "https://www.linkedin.com/in/iyoni-corp-ab9b06354",
+      "https://www.instagram.com/iyonicorp",
+      "https://www.tiktok.com/@iyonicorp",
+      "https://www.twitter.com/iyonicorp",
+      "https://www.pinterest.com/iyonicorp/",
+      "https://www.youtube.com/@iyonicorp"
+    ],
+    "founder":{"@type":"Person","name":"Iyoni Corp"},
+    "address":{"@type":"PostalAddress","addressCountry":"US"}
+  }
+  </script>
+
+  <!-- UI Libraries -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Theme Styles -->
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #0b0f1a; color: #e5e7eb; }
+
+    .aurora {
+      position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(800px 400px at 10% 10%, rgba(99,102,241,0.25), transparent 60%),
+        radial-gradient(600px 300px at 90% 20%, rgba(16,185,129,0.25), transparent 60%),
+        radial-gradient(700px 350px at 30% 90%, rgba(59,130,246,0.2), transparent 60%),
+        linear-gradient(180deg, #0b0f1a 0%, #0b1120 100%);
+      animation: auroraShift 16s ease-in-out infinite alternate;
+    }
+    @keyframes auroraShift {
+      0% { background-position: 0 0, 100% 0, 0 100%, 0 0; }
+      100% { background-position: 10% 5%, 90% 10%, 5% 95%, 0 0; }
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+    }
+    .btn-primary { background: linear-gradient(135deg, #3b82f6, #6366f1); color: #fff; transition: filter .2s ease, transform .15s ease; }
+    .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-ghost { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); }
+    .nav-link { color: #cbd5e1; transition: all .2s ease; }
+    .nav-link:hover { color: #fff; transform: translateY(-1px); }
+    .floating { animation: floaty 6s ease-in-out infinite; }
+    @keyframes floaty { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+    .image-glow { box-shadow: 0 10px 40px rgba(99,102,241,.35); }
+    .gradient-text { background: linear-gradient(90deg,#60a5fa,#a78bfa,#34d399); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .neon-border { box-shadow: 0 0 0 1px rgba(99,102,241,.3), 0 0 25px rgba(99,102,241,.25) inset; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: all .6s cubic-bezier(.2,.65,.3,1); }
+    .reveal.is-visible { opacity: 1; transform: none; }
+    .tilt { transform-style: preserve-3d; will-change: transform; transition: transform .2s ease; }
+    .tilt > .tilt-inner { transform: translateZ(24px); }
+    .pulse-ring { position: absolute; inset: -2px; border-radius: 16px;
+      background: conic-gradient(from 180deg at 50% 50%, rgba(59,130,246,.35), rgba(99,102,241,.35), rgba(16,185,129,.35), rgba(59,130,246,.35));
+      filter: blur(12px); opacity: .35; animation: ring 8s linear infinite;
+    }
+    @keyframes ring { to { transform: rotate(360deg); } }
+    @keyframes popupEnter { 0% { opacity: 0; transform: scale(.95) translateY(30px) } 100% { opacity: 1; transform: scale(1) translateY(0) } }
+    .animate-popupEnter { animation: popupEnter .6s ease-out forwards; }
+    @keyframes sway { 0%,100% { transform: rotate(2deg) } 50% { transform: rotate(-2deg) } }
+    .animate-sway { animation: sway 3s ease-in-out infinite; }
+    .slide { transition: opacity 0.5s ease, transform 0.5s ease; }
+    .slide.hidden { opacity: 0; transform: translateX(100%); }
+    .slide.active { opacity: 1; transform: translateX(0); }
+    .slide.leaving { opacity: 0; transform: translateX(-100%); }
+
+    /* Prevent horizontal overflow */
+    html, body { overflow-x: hidden; }
+    #navbar, #navContainer { max-width: 100vw; }
+    .max-w-7xl, .container { max-width: min(80rem, 100vw); overflow-x: clip; }
+
+    /* Footer */
+    footer { background: #0d1222; }
+
+    /* Service Cards */
+    .service-card {
+      position: relative;
+      border-radius: 24px;
+      padding: 2rem;
+      background: radial-gradient(circle at 20% 20%, rgba(99,102,241,0.22), transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(56,189,248,0.25), transparent 55%),
+        linear-gradient(160deg, rgba(15,23,42,0.95), rgba(30,41,59,0.88));
+      border: 1px solid rgba(148,163,184,0.25);
+      box-shadow: 0 20px 60px -20px rgba(14,23,42,0.7);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 80px -20px rgba(99,102,241,0.5);
+    }
+    .service-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .service-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+    }
+    .service-card p {
+      color: rgba(226,232,240,0.85);
+      margin-bottom: 1rem;
+    }
+    .service-card .price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #60a5fa;
+      margin-bottom: 1.5rem;
+    }
+    .service-card .buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .service-card button {
+      flex: 1;
+      min-width: 120px;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .preview-btn {
+      background: linear-gradient(135deg, rgba(59,130,246,0.8), rgba(99,102,241,0.8));
+      color: #fff;
+      border: 1px solid rgba(59,130,246,0.3);
+    }
+    .preview-btn:hover {
+      background: linear-gradient(135deg, rgba(59,130,246,1), rgba(99,102,241,1));
+      transform: translateY(-2px);
+    }
+    .details-btn {
+      background: rgba(255,255,255,0.1);
+      color: #e5e7eb;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .details-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+    .subscribe-btn {
+      background: linear-gradient(135deg, rgba(249,115,22,0.8), rgba(234,88,12,0.8));
+      color: #fff;
+      border: 1px solid rgba(249,115,22,0.3);
+    }
+    .subscribe-btn:hover {
+      background: linear-gradient(135deg, rgba(249,115,22,1), rgba(234,88,12,1));
+      transform: translateY(-2px);
+    }
+
+    /* Category Filter */
+    .category-filter {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding: 1rem 0;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .category-filter::-webkit-scrollbar { display: none; }
+    .category-btn {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #cbd5e1;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .category-btn:hover, .category-btn.active {
+      background: rgba(59,130,246,0.3);
+      border-color: rgba(59,130,246,0.6);
+      color: #fff;
+    }
+
+    /* Search */
+    .search-container {
+      position: relative;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #e5e7eb;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: rgba(59,130,246,0.5);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+    .search-input::placeholder {
+      color: rgba(226,232,240,0.6);
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(10px);
+      animation: fadeIn 0.3s ease;
+    }
+    .modal.active { display: flex; align-items: center; justify-content: center; }
+    .modal-content {
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 2rem;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      animation: popupEnter 0.4s ease;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e5e7eb;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .modal-close:hover {
+      background: rgba(239,68,68,0.3);
+      color: #fca5a5;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .service-card {
+        padding: 1.5rem;
+      }
+      .service-card .buttons {
+        flex-direction: column;
+      }
+      .service-card button {
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <div class="aurora"></div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 w-full z-40 transition-all">
+    <div class="mx-auto max-w-7xl px-4">
+      <div id="navContainer" class="mt-4 mb-3 glass rounded-2xl flex items-center justify-between px-4 py-2">
+        <a href="../" class="flex items-center gap-2">
+          <img src="https://tophomedesigner.com/download-removebg-preview.png" alt="Iyonicorp Logo" class="h-10 w-auto floating">
+          <span class="font-semibold text-slate-200">Iyonicorp</span>
+        </a>
+        <div class="hidden md:flex items-center gap-6">
+          <a class="nav-link" href="../#ecommerce">eCommerce</a>
+          <a class="nav-link" href="../#services">Services</a>
+          <a class="nav-link" href="../#pricing">Pricing</a>
+          <a class="nav-link" href="../#managers">Managers</a>
+          <a class="nav-link" href="../#contact">Contact</a>
+          <!-- Auth buttons - shown when NOT logged in -->
+          <div id="auth-buttons-desktop" class="flex items-center gap-3">
+            <a href="../login" class="px-4 py-2 rounded-xl btn-ghost hover:text-white">Login</a>
+            <a href="../signup" class="px-4 py-2 rounded-xl btn-primary magnet">Sign Up</a>
+          </div>
+          <!-- User buttons - shown when logged in -->
+          <div id="user-buttons-desktop" class="hidden flex items-center gap-3">
+            <a href="../dashboard" class="px-4 py-2 rounded-xl btn-ghost hover:text-white">Dashboard</a>
+            <button id="logout-btn-desktop" class="px-4 py-2 rounded-xl btn-primary magnet">Logout</button>
+          </div>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden px-3 py-2 rounded-lg btn-ghost" aria-label="Open Menu">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden">
+      <div class="mx-auto max-w-7xl px-4">
+        <div class="glass rounded-2xl px-4 py-3 mb-4">
+          <div class="flex flex-col gap-3">
+            <a class="nav-link" href="../#ecommerce">eCommerce</a>
+            <a class="nav-link" href="../#services">Services</a>
+            <a class="nav-link" href="../#pricing">Pricing</a>
+            <a class="nav-link" href="../#managers">Managers</a>
+            <a class="nav-link" href="../#contact">Contact</a>
+            <!-- Auth buttons - shown when NOT logged in -->
+            <div id="auth-buttons-mobile" class="flex gap-3 pt-2">
+              <a href="../login" class="flex-1 text-center px-4 py-2 rounded-lg btn-ghost">Login</a>
+              <a href="../signup" class="flex-1 text-center px-4 py-2 rounded-lg btn-primary">Sign Up</a>
+            </div>
+            <!-- User buttons - shown when logged in -->
+            <div id="user-buttons-mobile" class="hidden flex-col gap-3 pt-2">
+              <a href="../dashboard" class="text-center px-4 py-2 rounded-lg btn-ghost">Dashboard</a>
+              <button id="logout-btn-mobile" class="px-4 py-2 rounded-lg btn-primary">Logout</button>
+            </div>
+            <button id="close-menu-btn" class="mt-1 px-4 py-2 rounded-lg bg-slate-800/50">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="pt-32 md:pt-40 pb-16">
+    <div class="mx-auto max-w-7xl px-4 text-center">
+      <div class="reveal">
+        <div class="relative p-6 glass rounded-3xl neon-border max-w-4xl mx-auto">
+          <span class="pulse-ring pointer-events-none"></span>
+          <p class="uppercase tracking-widest text-xs text-slate-300">Service Templates</p>
+          <h1 class="mt-2 text-4xl md:text-5xl font-extrabold leading-tight">
+            One-Time <span class="gradient-text">Purchase Templates</span> for Full Ownership
+          </h1>
+          <p class="mt-4 text-slate-300 max-w-2xl mx-auto">Buy premium website templates with one-time payment. Get full ownership of modern, responsive designs for your business.</p>
+          <div class="mt-6 flex flex-wrap justify-center gap-3">
+            <a href="#templates" class="px-5 py-3 rounded-xl btn-primary magnet inline-flex items-center gap-2">
+              <i class="fa fa-eye"></i> Browse Templates
+            </a>
+            <a href="https://iyonicorp.com/contact/" class="px-5 py-3 rounded-xl btn-ghost inline-flex items-center gap-2">
+              <i class="fa fa-comments"></i> Custom Build
+            </a>
+  <section id="hero" class="pt-32 md:pt-40">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div class="reveal">
+          <div class="relative p-6 glass rounded-3xl neon-border">
+            <span class="pulse-ring pointer-events-none"></span>
+            <p class="uppercase tracking-widest text-xs text-slate-300">Premium templates delivered fast</p>
+            <h1 class="mt-2 text-4xl md:text-5xl font-extrabold leading-tight">
+              One-time templates that feel <span class="gradient-text">custom crafted</span>
+            </h1>
+            <p class="mt-4 text-slate-300">Buy premium website templates with one-time payment. Get full ownership of modern, responsive designs engineered for conversions, lightning speed, and effortless management.</p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href="#templates" class="px-5 py-3 rounded-xl btn-primary magnet inline-flex items-center gap-2"><i class="fa fa-rocket"></i> Explore templates</a>
+              <a href="https://iyonicorp.com/contact/" class="px-5 py-3 rounded-xl btn-ghost inline-flex items-center gap-2"><i class="fa fa-comments"></i> Talk to an expert</a>
+            </div>
+            <div class="mt-6 flex items-center gap-4 text-xs text-slate-400">
+              <img src="../logo.png" alt="Badge" class="h-8 w-auto opacity-80" />
+              <span>Over 10,000 businesses launched with Iyonicorp</span>
+            </div>
+          </div>
+        </div>
+        <div class="reveal hidden md:block">
+          <div class="relative">
+            <img src="../Unique color cabinets.jpeg" alt="Template Preview" class="rounded-3xl image-glow w-full object-cover" />
+            <div class="absolute -top-5 -left-5 h-24 w-24 rounded-xl glass floating"></div>
+            <div class="absolute -bottom-6 -right-6 h-28 w-28 rounded-full glass floating"></div>
+>>>>>>> bee9989 (L)
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section class="pb-8">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="search-container reveal">
+        <input type="text" id="searchBox" class="search-input" placeholder="Search templates..." onkeyup="searchTemplates()">
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Filter -->
+  <section class="pb-8">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="category-filter reveal">
+        <button class="category-btn active" onclick="filterCategory('all')">All</button>
+        <button class="category-btn" onclick="filterCategory('Healthcare & Wellness')">Healthcare & Wellness</button>
+        <button class="category-btn" onclick="filterCategory('ProfessionalServices')">Professional Services</button>
+        <button class="category-btn" onclick="filterCategory('IT & Technology')">IT & Technology</button>
+        <button class="category-btn" onclick="filterCategory('Food & Beverage')">Food & Beverage</button>
+        <button class="category-btn" onclick="filterCategory('Real Estate & Property')">Real Estate & Property</button>
+        <button class="category-btn" onclick="filterCategory('Entertainment & Media')">Entertainment & Media</button>
+        <button class="category-btn" onclick="filterCategory('Travel & Hospitality')">Travel & Hospitality</button>
+        <button class="category-btn" onclick="filterCategory('Education & Coaching')">Education & Coaching</button>
+        <button class="category-btn" onclick="filterCategory('Auto & Transportation')">Auto & Transportation</button>
+        <button class="category-btn" onclick="filterCategory('Health')">Health</button>
+        <button class="category-btn" onclick="filterCategory('Bakery')">Bakery</button>
+        <button class="category-btn" onclick="filterCategory('Gifts & Occasions')">Gifts</button>
+        <button class="category-btn" onclick="filterCategory('Beverage')">Beverage</button>
+        <button class="category-btn" onclick="filterCategory('Books & Stationery')">Books</button>
+        <button class="category-btn" onclick="filterCategory('Electronics')">Electronics</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Templates Grid -->
+  <section id="templates" class="pb-24">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="templatesGrid">
+
+        <!-- Modern Portfolio -->
+        <div class="service-card reveal" data-category="portfolio">
+          <img src="https://media.licdn.com/dms/image/v2/D4D12AQEZths38-N2dg/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1709734306401?e=2147483647&v=beta&t=1jTFDzeGhbuP_0s8Eq1LgEJDUxMVBLPLqugeOMw1an0" alt="Modern Portfolio" />
+          <h3>Modern Portfolio</h3>
+          <p>Showcase projects with a curated gallery and request branded tweaks.</p>
+          <div class="price">$2500</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('portifolio.html')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Modern Portfolio', 'Perfect for creatives who need a polished showcase with room for limited service or product offerings.', 2500)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('Modern Portfolio', 2500)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- Bakery Landing Page -->
+        <div class="service-card reveal" data-category="Bakery">
+          <img src="https://www.fooodlove.com/images/jcogs_img/cache/012-close-up-view-of-freshly-baked-bakery_-_28de80_-_8782e36ca3e8764a9e4719edc333d3a48e3f4ae7_1110w.webp" alt="Bakery Landing Page" />
+          <h3>Bakery Landing Page</h3>
+          <p>Highlight top products and capture orders with guided payment controls.</p>
+          <div class="price">$2200</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('bakerylandingpage.html')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Bakery Landing Page', 'BakeryLandingPage is a beautifully crafted and ready-to-launch e-commerce website tailored for bakeries and pastry shops. It features a warm, inviting design optimized for showcasing baked goods and driving sales.', 2200)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('Bakery Landing Page', 2200)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- Iyonicorp Blog -->
+        <div class="service-card reveal" data-category="blog">
+          <img src="https://contenthub-static.grammarly.com/blog/wp-content/uploads/2017/11/how-to-write-a-blog-post-760x406.jpeg" alt="Iyonicorp Blog" />
+          <h3>Iyonicorp Blog</h3>
+          <p>Publish updates and nurture leads while routing paid offerings through managed checkout.</p>
+          <div class="price">$2800</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('https://iyonicblog.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Iyonicorp Blog', 'Clean storytelling layouts for recurring content and lead magnets.', 2800)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('Iyonicorp Blog', 2800)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- Marketing Agency -->
+        <div class="service-card reveal" data-category="landing">
+          <img src="https://allcollectivenouns.com/wp-content/uploads/2024/12/33-11-1024x536.png" alt="Marketing Agency" />
+          <h3>Marketing Agency</h3>
+          <p>Position your agency services with bold sections and managed booking flows.</p>
+          <div class="price">$3200</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('https://marketing.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Marketing Agency', 'Results-driven layout tailored for boutique agencies with lightweight service catalogs.', 3200)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('Marketing Agency', 3200)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- plugin -->
+        <div class="service-card reveal" data-category="Health">
+          <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/i_7_0A1P.H6o/v0/1200x700.webp" alt="plugin" />
+          <h3>plugin</h3>
+          <p>Modern cannabis eCommerce built for high-impact storytelling and compliant sales.</p>
+          <div class="price">$3500</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('https://plugin.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('plugin', 'plugin is a fully designed and ready-to-launch e-commerce website built for selling weed, cannabis, and other marijuana products. It features a clean, modern layout optimized for user experience and conversions.', 3500)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('plugin', 3500)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- Bakery Landing Page -->
+        <div class="service-card reveal" data-category="Bakery">
+          <img src="https://i.imgur.com/oCyEY2A.png" alt="Bakery Landing Page" />
+          <h3>Bakery Landing Page</h3>
+          <p>Highlight top products and capture orders with guided payment controls.</p>
+          <div class="price">$2400</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('bakerylandingpage.html')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Bakery Landing Page', 'BakeryLandingPage is a beautifully crafted and ready-to-launch e-commerce website tailored for bakeries and pastry shops. It features a warm, inviting design optimized for showcasing baked goods and driving sales.', 2400)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('Bakery Landing Page', 2400)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- Lighters -->
+        <div class="service-card reveal" data-category="Gifts & Occasions">
+          <img src="https://i.imgur.com/tOpqfUf.png" alt="Lighters" />
+          <h3>Lighters</h3>
+          <p>Elegant gift shop featuring premium lighters, custom engraving options and luxury accessories.</p>
+          <div class="price">$2900</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('https://Lighters.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Lighters', 'Lighters is a sophisticated e-commerce website designed for selling premium lighters and luxury gifts. It features an elegant layout perfect for showcasing high-end products.', 2900)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('Lighters', 2900)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- Bean Haven -->
+        <div class="service-card reveal" data-category="Beverage">
+          <img src="https://i.imgur.com/Ow8SHbk.png" alt="Bean Haven" />
+          <h3>Bean Haven</h3>
+          <p>Cozy coffee shop experience with menu highlights, subscription blends, and add-on upsells.</p>
+          <div class="price">$2700</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('https://beanhaven.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Bean Haven', 'Bean Haven is a beautifully designed, ready-to-launch e-commerce website built for coffee shops and beverage businesses. It features a warm, inviting layout perfect for showcasing coffee drinks, beans, and café treats.', 2700)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('Bean Haven', 2700)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- Wimson -->
+        <div class="service-card reveal" data-category="Books & Stationery">
+          <img src="https://i.imgur.com/YtOQdPj.png" alt="Wimson eBooks" />
+          <h3>Wimson</h3>
+          <p>Wimson is a focused eBook storefront for authors and publishers. Sell digital books, audiobooks, and subscriptions with instant downloads, DRM options, and integrated reader previews.</p>
+          <div class="price">$3100</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('https://wimson.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Wimson', 'Wimson is a ready-to-launch eBook website designed for selling digital books, audiobooks, and serialized content.', 3100)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('Wimson', 3100)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- IyonicFashion -->
+        <div class="service-card reveal" data-category="Fashion">
+          <img src="http://i.imgur.com/A5j1O5s.png" alt="IyonicFashion" />
+          <h3>IyonicFashion</h3>
+          <p>Campaign-ready apparel store with lookbook galleries and dynamic drop announcements.</p>
+          <div class="price">$3300</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('https://fashion.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('IyonicFashion', 'IyonicFashion is the ultimate platform for selling fashion and apparel. With a sleek, modern design and user-friendly interface, it is tailored for showcasing clothing, accessories, and footwear.', 3300)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('IyonicFashion', 3300)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- PhoneMart -->
+        <div class="service-card reveal" data-category="Electronics">
+          <img src="https://i.imgur.com/JnfD3wK.png" alt="PhoneMart" />
+          <h3>PhoneMart</h3>
+          <p>Tech-forward storefront ready for device drops, bundles, and accessory upsells.</p>
+          <div class="price">$3400</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('https://phone.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('phonemart', 'Phonemart is a modern, ready-to-launch e-commerce template designed for selling smartphones, gadgets, and electronics.', 3400)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('phonemart', 3400)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- lukumisteress -->
+        <div class="service-card reveal" data-category="Fashion">
+          <img src="https://i.imgur.com/T7DNb8W.png" alt="lukumisteress" />
+          <h3>lukumisteress</h3>
+          <p>Interactive footwear experience with drop timers, size guides, and integrated reviews.</p>
+          <div class="price">$3000</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('https://lukumisteress.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('lukumisteress', 'lukumisteress is a modern, ready-to-launch e-commerce website designed for selling shoes and footwear.', 3000)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('lukumisteress', 3000)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- HealthCare Plus -->
+        <div class="service-card reveal" data-category="Healthcare & Wellness">
+          <img src="https://i.imgur.com/EDynpug.jpeg" alt="HealthCare Plus" />
+          <h3>HealthCare Plus</h3>
+          <p>A modern and responsive website template for clinics, hospitals, and medical centers.</p>
+          <div class="price">$3600</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('https://health.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('HealthCare Plus', 'A modern and responsive website template for clinics, hospitals, and medical centers.', 3600)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('HealthCare Plus', 3600)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- Tranquil Essence Spa -->
+        <div class="service-card reveal" data-category="ProfessionalServices">
+          <img src="https://i.imgur.com/2ogZ1dH.png" alt="Tranquil Essence Spa" />
+          <h3>Tranquil Essence Spa</h3>
+          <p>A serene and elegant website template designed for spas and wellness centers.</p>
+          <div class="price">$2800</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('https://tranquil.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Tranquil Essence Spa', 'A serene and elegant website template designed for spas and wellness centers.', 2800)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('Tranquil Essence Spa', 2800)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- Emart Exclusive -->
+        <div class="service-card reveal" data-category="all">
+          <img src="https://i.imgur.com/ptRWlAi.png" alt="Emart Exclusive" />
+          <h3>Emart Exclusive</h3>
+          <p>A premium Emart  designed for modern online shopping convenience.</p>
+          <div class="price">$4200</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('https://emart.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Emart','A premium Website designed for modern online shopping convenience. Browse details, reviews, and add to cart easily.', 4200)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('Emart Exclusive', 4200)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- Iyonic Bots -->
+        <div class="service-card reveal" data-category="IT & Technology">
+          <img src="https://i.imgur.com/5pDv6pB.png" alt="Iyonic Bots" />
+          <h3>Iyonic Bots</h3>
+          <p>Explore the cutting-edge world of Iyonic Bots — a platform designed to revolutionize automation.</p>
+          <div class="price">$4000</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('https://iyonicbots.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Iyonic Bots', 'Explore the cutting-edge world of Iyonic Bots — a platform designed to revolutionize automation and AI-driven solutions for businesses.', 4000)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('Iyonic Bots', 4000)">Purchase</button>
+          </div>
+        </div>
+
+        <!-- Elite Fitness -->
+        <div class="service-card reveal" data-category="Healthcare & Wellness">
+          <img src="https://i.imgur.com/yUNoxg8.png" alt="Elite Fitness" />
+          <h3>Elite Fitness</h3>
+          <p>A modern and dynamic website template for gyms, trainers, and fitness programs.</p>
+          <div class="price">$5000</div>
+          <div class="buttons">
+            <button class="preview-btn" onclick="previewTemplate('https://elitefitness.iyonicorp.com/')">Preview</button>
+            <button class="details-btn" onclick="showDetails('Elite Fitness','A modern and dynamic website template for gyms, trainers, and fitness programs. Showcase your classes, schedules, memberships, and contact details to attract clients.', 5000)">Details</button>
+            <button class="subscribe-btn" onclick="subscribeTemplate('Iyonic Bots', 5000)">Purchase</button>
+          </div>
+        </div>
+  </section>
+
+  <!-- Full-Screen Preview Modal -->
+  <div id="previewModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closePreview()" aria-label="Close preview">
+        <i class="fa fa-times"></i>
+      </button>
+      <iframe id="previewFrame" style="width: 100%; height: 70vh; border: none; border-radius: 12px;"></iframe>
+    </div>
+  </div>
+
+  <!-- Details Modal -->
+  <div id="detailsModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeDetails()" aria-label="Close details">
+        <i class="fa fa-times"></i>
+      </button>
+      <h2 id="detailsTitle" class="text-2xl font-bold text-white mb-4"></h2>
+      <p id="detailsDescription" class="text-slate-300 mb-6 leading-relaxed"></p>
+      <div class="flex items-center justify-between">
+        <div class="text-xl font-semibold text-blue-400" id="detailsPrice"></div>
+        <button class="subscribe-btn px-6 py-3 rounded-xl" onclick="subscribeFromModal()">Subscribe Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="pt-10 pb-6">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6 border-b border-white/10 pb-6">
+        <div class="text-center md:text-left">
+          <h3 class="text-xl font-semibold text-white">Iyonicorp</h3>
+          <p class="text-slate-400 text-sm mt-2">Powering the web, one idea at a time.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
+          <a href="../about/" class="hover:text-white transition">About Us</a>
+          <a href="../terms/" class="hover:text-white transition">Terms</a>
+          <a href="../privacy/" class="hover:text-white transition">Privacy</a>
+          <a href="../refunds/" class="hover:text-white transition">Refunds</a>
+          <a href="../contact/" class="hover:text-white transition">Contact</a>
+        </div>
+      </div>
+
+      <div class="mt-6 flex justify-center gap-6 text-slate-400 text-xl">
+        <a href="https://www.tiktok.com/@iyonicorp" target="_blank" class="hover:text-white transition" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.instagram.com/iyonicorp" target="_blank" class="hover:text-white transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.twitter.com/iyonicorp" target="_blank" class="hover:text-white transition" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/iyoni-corp-ab9b06354" target="_blank" class="hover:text-white transition" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.pinterest.com/iyonicorp/" target="_blank" class="hover:text-white transition" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+        <a href="https://www.facebook.com/iyonicweb" target="_blank" class="hover:text-white transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.youtube.com/@iyonicorp" target="_blank" class="hover:text-white transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+
+      <div class="text-center text-slate-500 text-sm mt-6">
+        © 2026 Iyonicorp. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? "http://localhost:5000"
+      : "https://iyonicweb.onrender.com";
+
+    // Preview functions
+    function previewTemplate(url) {
+      document.getElementById('previewFrame').src = url;
+      document.getElementById('previewModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePreview() {
+      document.getElementById('previewModal').classList.remove('active');
+      document.getElementById('previewFrame').src = '';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Details functions
+    function showDetails(title, description, price) {
+      document.getElementById('detailsTitle').innerText = title;
+      document.getElementById('detailsDescription').innerText = description;
+      document.getElementById('detailsPrice').innerText = '$' + price + '/month';
+      document.getElementById('detailsModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      // Store current template for subscription
+      window.currentTemplate = { name: title, price: price };
+    }
+
+    function closeDetails() {
+      document.getElementById('detailsModal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    function subscribeFromModal() {
+      if (window.currentTemplate) {
+        subscribeTemplate(window.currentTemplate.name, window.currentTemplate.price);
+      }
+    }
+
+    // Search and filter functions
+    function searchTemplates() {
+      let query = document.getElementById('searchBox').value.toLowerCase();
+      let products = document.querySelectorAll('.service-card');
+      products.forEach(product => {
+        let name = product.querySelector('h3').innerText.toLowerCase();
+        product.style.display = name.includes(query) ? 'block' : 'none';
+      });
+    }
+
+    function filterCategory(category) {
+      // Update active button
+      document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      let products = document.querySelectorAll('.service-card');
+      products.forEach(product => {
+        let productCategory = product.getAttribute('data-category');
+        product.style.display = (category === 'all' || productCategory === category) ? 'block' : 'none';
+      });
+    }
+
+    // Purchase function
+    function subscribeTemplate(name, price) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (!user) {
+        alert('Please log in to purchase.');
+        window.location.href = '../login';
+        return;
+      }
+
+      // Disable all purchase buttons to prevent multiple clicks
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach(btn => btn.disabled = true);
+
+      fetch(`${API_BASE}/api/purchase`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: user.email, templateName: name, price: price })
+      })
+      .then(res => res.json())
+      .then(() => {
+        alert('Purchase successful!');
+        window.location.href = '../dashboard';
+      })
+      .catch(() => {
+        alert('Error during purchase');
+        // Re-enable buttons in case of failure
+        buttons.forEach(btn => btn.disabled = false);
+      });
+    }
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+    if (closeMenuBtn && mobileMenu) {
+      closeMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    }
+
+    // Reveal animations
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    revealElements.forEach(el => revealIO.observe(el));
+
+    // Magnet buttons micro-interaction
+    document.querySelectorAll('.magnet').forEach(btn => {
+      if (btn) {
+        btn.addEventListener('mousemove', (e) => {
+          const r = btn.getBoundingClientRect();
+          const x = ((e.clientX - r.left) / r.width - .5) * 10;
+          const y = ((e.clientY - r.top) / r.height - .5) * 10;
+          btn.style.transform = `translate(${x}px, ${y}px)`;
+        });
+        btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0,0)'; });
+      }
+    });
+
+    // Auth state management
+    (function() {
+      function checkAuthState() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+        const authButtonsDesktop = document.getElementById('auth-buttons-desktop');
+        const userButtonsDesktop = document.getElementById('user-buttons-desktop');
+        const authButtonsMobile = document.getElementById('auth-buttons-mobile');
+        const userButtonsMobile = document.getElementById('user-buttons-mobile');
+
+        if (isLoggedIn) {
+          if (authButtonsDesktop) authButtonsDesktop.classList.add('hidden');
+          if (userButtonsDesktop) {
+            userButtonsDesktop.classList.remove('hidden');
+            userButtonsDesktop.classList.add('flex');
+          }
+          if (authButtonsMobile) authButtonsMobile.classList.add('hidden');
+          if (userButtonsMobile) {
+            userButtonsMobile.classList.remove('hidden');
+            userButtonsMobile.classList.add('flex');
+          }
+        } else {
+          if (authButtonsDesktop) authButtonsDesktop.classList.remove('hidden');
+          if (userButtonsDesktop) userButtonsDesktop.classList.add('hidden');
+          if (authButtonsMobile) authButtonsMobile.classList.remove('hidden');
+          if (userButtonsMobile) userButtonsMobile.classList.add('hidden');
+        }
+      }
+
+      function handleLogout() {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userName');
+        window.location.href = '../';
+      }
+
+      const logoutBtnDesktop = document.getElementById('logout-btn-desktop');
+      const logoutBtnMobile = document.getElementById('logout-btn-mobile');
+
+      if (logoutBtnDesktop) {
+        logoutBtnDesktop.addEventListener('click', handleLogout);
+      }
+      if (logoutBtnMobile) {
+        logoutBtnMobile.addEventListener('click', handleLogout);
+      }
+
+      checkAuthState();
+
+      window.addEventListener('storage', function(e) {
+        if (e.key === 'isLoggedIn') {
+          checkAuthState();
+        }
+      });
+    })();
+
+    // Additional GA property config
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('config', 'G-8TDD56RPJC');
+  </script>
+</body>
+</html>

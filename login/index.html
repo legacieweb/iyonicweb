@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Login - Access Your Iyonicorp Dashboard</title>
+
+  <!-- Meta Description -->
+  <meta name="description" content="Securely log in to your Iyonicorp account to manage your custom websites, subscriptions, domains, and more.">
+
+  <!-- Meta Keywords -->
+  <meta name="keywords" content="Iyonicorp login, user dashboard login, website manager login, web subscriptions, domain login, custom websites, iyonicorp dashboard, client login, ecommerce control panel, iyonicorp account access">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.iyonicorp.com/login" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://tophomedesigner.com/download-removebg-preview.png" />
+
+  <!-- Open Graph (Facebook/LinkedIn) -->
+  <meta property="og:title" content="Login to Iyonicorp | Manage Your Web Services" />
+  <meta property="og:description" content="Access your Iyonicorp dashboard to manage your websites, domains, and subscriptions. Secure & reliable platform." />
+  <meta property="og:image" content="https://videos.openai.com/vg-assets/assets%2Ftask_01jsgs5eqteg49qm4fytq8mq88%2Fimg_0.webp?st=2025-04-23T05%3A56%3A22Z&se=2025-04-29T06%3A56%3A22Z&sks=b&skt=2025-04-23T05%3A56%3A22Z&ske=2025-04-29T06%3A56%3A22Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=3d249c53-07fa-4ba4-9b65-0bf8eb4ea46a&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=Q29aRBd%2BwOTv55W5QOdi9M%2FfEavBwrpyEC7pk1GD7Rc%3D&az=oaivgprodscus" />
+  <meta property="og:url" content="https://www.iyonicorp.com/login" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Iyonicorp" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Login to Iyonicorp | Manage Your Web Services" />
+  <meta name="twitter:description" content="Control your Iyonicorp experience. Login to handle your websites, billing, and domains." />
+  <meta name="twitter:image" content="https://videos.openai.com/vg-assets/assets%2Ftask_01jsgs5eqteg49qm4fytq8mq88%2Fimg_0.webp?st=2025-04-23T05%3A56%3A22Z&se=2025-04-29T06%3A56%3A22Z&sks=b&skt=2025-04-23T05%3A56%3A22Z&ske=2025-04-29T06%3A56%3A22Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=3d249c53-07fa-4ba4-9b65-0bf8eb4ea46a&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=Q29aRBd%2BwOTv55W5QOdi9M%2FfEavBwrpyEC7pk1GD7Rc%3D&az=oaivgprodscus" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #0b0f1a; color: #e5e7eb; }
+
+    .aurora {
+      position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(800px 400px at 10% 10%, rgba(99,102,241,0.25), transparent 60%),
+        radial-gradient(600px 300px at 90% 20%, rgba(16,185,129,0.25), transparent 60%),
+        radial-gradient(700px 350px at 30% 90%, rgba(59,130,246,0.2), transparent 60%),
+        linear-gradient(180deg, #0b0f1a 0%, #0b1120 100%);
+      animation: auroraShift 16s ease-in-out infinite alternate;
+    }
+    @keyframes auroraShift {
+      0% { background-position: 0 0, 100% 0, 0 100%, 0 0; }
+      100% { background-position: 10% 5%, 90% 10%, 5% 95%, 0 0; }
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-primary { 
+      background: linear-gradient(135deg, #3b82f6, #6366f1); 
+      color: #fff; 
+      transition: filter .2s ease, transform .15s ease; 
+    }
+    .btn-primary:hover { 
+      filter: brightness(1.1); 
+      transform: translateY(-1px); 
+    }
+
+    .input-field {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #e5e7eb;
+      transition: all 0.3s ease;
+    }
+
+    .input-field:focus {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(99,102,241,0.5);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+      outline: none;
+    }
+
+    .input-field::placeholder {
+      color: #94a3b8;
+    }
+
+    .floating { 
+      animation: floaty 6s ease-in-out infinite; 
+    }
+    @keyframes floaty { 
+      0%,100% { transform: translateY(0) } 
+      50% { transform: translateY(-8px) } 
+    }
+
+    .gradient-text { 
+      background: linear-gradient(90deg,#60a5fa,#a78bfa,#34d399); 
+      -webkit-background-clip: text; 
+      background-clip: text; 
+      color: transparent; 
+    }
+
+    .reveal { 
+      opacity: 0; 
+      transform: translateY(20px); 
+      animation: reveal 0.8s ease-out forwards;
+    }
+    @keyframes reveal { 
+      to { opacity: 1; transform: none; } 
+    }
+
+    .notification {
+      animation: slideInRight 0.4s ease-out;
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .neon-border { 
+      box-shadow: 0 0 0 1px rgba(99,102,241,.3), 0 0 25px rgba(99,102,241,.25) inset; 
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-indigo-500/30 selection:text-white min-h-screen flex flex-col">
+  <div class="aurora"></div>
+
+  <!-- Header -->
+  <header class="relative z-10 w-full py-8 px-4 text-center reveal">
+    <div class="flex items-center justify-center gap-3 mb-2">
+      <img src="logo.png" alt="Iyonicorp Logo" class="w-12 h-12 md:w-14 md:h-14 floating">
+      <h1 class="text-4xl md:text-5xl font-bold text-slate-200">Iyonicorp</h1>
+    </div>
+    <p class="text-slate-400 text-sm md:text-base">Access Your Dashboard</p>
+  </header>
+
+  <!-- Login Card -->
+  <main class="relative z-10 flex-1 flex items-center justify-center px-4 py-8">
+    <div class="glass rounded-3xl neon-border p-8 md:p-10 w-full max-w-md reveal" style="animation-delay: 0.2s;">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">Welcome Back</h2>
+        <p class="text-slate-400">Sign in to continue to your dashboard</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="space-y-5">
+        <div>
+          <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+          <input 
+            type="email" 
+            id="email" 
+            placeholder="you@example.com" 
+            class="input-field w-full px-4 py-3 text-base rounded-xl"
+            required 
+          />
+        </div>
+        
+        <div>
+          <label for="password" class="block text-sm font-medium text-slate-300 mb-2">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            placeholder="••••••••" 
+            class="input-field w-full px-4 py-3 text-base rounded-xl"
+            required 
+          />
+        </div>
+
+        <button 
+          type="submit" 
+          class="btn-primary w-full py-3.5 rounded-xl text-base font-semibold shadow-lg"
+        >
+          Sign In
+        </button>
+      </form>
+
+      <div class="mt-6 space-y-3">
+        <p class="text-sm text-center text-slate-400">
+          <a href="#" onclick="toggleResetForm(); return false;" class="text-blue-400 hover:text-blue-300 font-medium hover:underline">Forgot your password?</a>
+        </p>
+        <p class="text-sm text-center text-slate-400">
+          Don't have an account? 
+          <a href="../signup" class="text-blue-400 hover:text-blue-300 font-medium hover:underline">Sign up</a>
+        </p>
+      </div>
+
+      <!-- Reset Password Form -->
+      <div id="resetForm" class="hidden mt-8 pt-8 border-t border-slate-700">
+        <h3 class="text-xl font-semibold mb-4 text-center text-white">Reset Password</h3>
+        <div class="space-y-4">
+          <input 
+            type="email" 
+            id="resetEmail" 
+            placeholder="Enter your email" 
+            class="input-field w-full px-4 py-3 text-base rounded-xl"
+          />
+          <button 
+            onclick="sendResetCode()" 
+            class="w-full bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-xl font-medium transition-all"
+          >
+            Send Reset Code
+          </button>
+
+          <input 
+            type="text" 
+            id="resetCode" 
+            placeholder="Enter reset code" 
+            class="input-field w-full px-4 py-3 text-base rounded-xl"
+          />
+          <input 
+            type="password" 
+            id="newPassword" 
+            placeholder="New password" 
+            class="input-field w-full px-4 py-3 text-base rounded-xl"
+          />
+          <button 
+            onclick="submitNewPassword()" 
+            class="btn-primary w-full py-3 rounded-xl font-medium"
+          >
+            Update Password
+          </button>
+
+          <p id="resetMessage" class="text-sm text-center text-slate-400"></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Notification Popup -->
+  <div id="notifyPopup" class="notification fixed top-5 right-5 z-50 hidden max-w-sm rounded-xl shadow-2xl transition-all duration-300">
+    <div class="glass px-6 py-4 rounded-xl flex items-center gap-3">
+      <span id="popupIcon" class="text-2xl">🔔</span>
+      <span id="popupMessage" class="text-sm font-medium text-white">Message here</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="relative z-10 text-center py-6 text-slate-400 text-sm">
+    &copy; <span id="year"></span> Iyonicorp. All rights reserved.
+  </footer>
+
+<script>
+  const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? "http://localhost:5000"
+    : "https://iyonicweb.onrender.com";
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const popup = document.getElementById("notifyPopup");
+  const popupMsg = document.getElementById("popupMessage");
+  const popupIcon = document.getElementById("popupIcon");
+
+  function showPopup(message, type = "info") {
+    popupMsg.textContent = message;
+    
+    if (type === "error") {
+      popupIcon.textContent = "❌";
+    } else if (type === "success") {
+      popupIcon.textContent = "✅";
+    } else {
+      popupIcon.textContent = "ℹ️";
+    }
+    
+    popup.classList.remove("hidden");
+    setTimeout(() => popup.classList.add("hidden"), 4000);
+  }
+
+  function toggleResetForm() {
+    const form = document.getElementById("resetForm");
+    form.classList.toggle("hidden");
+  }
+
+  document.getElementById("loginForm").onsubmit = async function (e) {
+    e.preventDefault();
+    const loginBtn = e.target.querySelector("button[type='submit']");
+    loginBtn.disabled = true;
+    loginBtn.textContent = "Signing in...";
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+      const res = await fetch(`${API_BASE}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userEmail", data.user.email || email);
+        if (data.user.name) {
+          localStorage.setItem("userName", data.user.name);
+        }
+        showPopup("Login successful! Redirecting...", "success");
+        setTimeout(() => window.location.href = "../dashboard", 1500);
+      } else {
+        showPopup(data.message || "Login failed", "error");
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Sign In";
+      }
+    } catch (err) {
+      showPopup("Network error. Please try again.", "error");
+      loginBtn.disabled = false;
+      loginBtn.textContent = "Sign In";
+    }
+  };
+
+  async function sendResetCode() {
+    const email = document.getElementById("resetEmail").value;
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = "Sending...";
+
+    if (!email) {
+      showPopup("Please enter your email", "error");
+      btn.disabled = false;
+      btn.textContent = "Send Reset Code";
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/api/auth/send-reset-code`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+      const data = await res.json();
+      showPopup(data.message || "Code sent!", "success");
+    } catch {
+      showPopup("Error sending reset code.", "error");
+    }
+
+    btn.disabled = false;
+    btn.textContent = "Send Reset Code";
+  }
+
+  async function submitNewPassword() {
+    const email = document.getElementById("resetEmail").value;
+    const code = document.getElementById("resetCode").value;
+    const newPassword = document.getElementById("newPassword").value;
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = "Updating...";
+
+    if (!email || !code || !newPassword) {
+      showPopup("Please fill all fields.", "error");
+      btn.disabled = false;
+      btn.textContent = "Update Password";
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/api/auth/confirm-reset`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, code, newPassword })
+      });
+      const data = await res.json();
+      showPopup(data.message || "Password updated!", "success");
+    } catch {
+      showPopup("Error updating password.", "error");
+    }
+
+    btn.disabled = false;
+    btn.textContent = "Update Password";
+  }
+</script>
+
+</body>
+</html>

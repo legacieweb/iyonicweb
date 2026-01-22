@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Create Your Account – Iyonicorp</title>
+
+  <!-- Meta Description -->
+  <meta name="description" content="Sign up to Iyonicorp and unlock powerful custom websites, domain tools, and subscription features. Quick, secure, and fully managed web solutions.">
+
+  <!-- Meta Keywords -->
+  <meta name="keywords" content="Iyonicorp signup, create account, register Iyonicorp, custom websites, web solutions, ecommerce subscription, domain management, secure signup, Iyonicorp dashboard access">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.iyonicorp.com/signup" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png" />
+
+  <!-- Open Graph (for social sharing) -->
+  <meta property="og:title" content="Create Your Iyonicorp Account" />
+  <meta property="og:description" content="Join Iyonicorp to manage custom sites, web subscriptions, domains, and more with ease." />
+  <meta property="og:image" content="https://videos.openai.com/vg-assets/assets%2Ftask_01jsgsc3gveawadez0trj1e5pj%2Fimg_1.webp?st=2025-04-23T05%3A54%3A27Z&se=2025-04-29T06%3A54%3A27Z&sks=b&skt=2025-04-23T05%3A54%3A27Z&ske=2025-04-29T06%3A54%3A27Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=3d249c53-07fa-4ba4-9b65-0bf8eb4ea46a&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=oMt9AYbX3c0TtARy31ojHmuY0NA5R4v1smJlrT2u9AU%3D&az=oaivgprodscus" />
+  <meta property="og:url" content="https://www.iyonicorp.com/signup" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Iyonicorp" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Create Your Iyonicorp Account" />
+  <meta name="twitter:description" content="Sign up to Iyonicorp to start building your online presence with ease." />
+  <meta name="twitter:image" content="https://videos.openai.com/vg-assets/assets%2Ftask_01jsgsc3gveawadez0trj1e5pj%2Fimg_1.webp?st=2025-04-23T05%3A54%3A27Z&se=2025-04-29T06%3A54%3A27Z&sks=b&skt=2025-04-23T05%3A54%3A27Z&ske=2025-04-29T06%3A54%3A27Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=3d249c53-07fa-4ba4-9b65-0bf8eb4ea46a&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=oMt9AYbX3c0TtARy31ojHmuY0NA5R4v1smJlrT2u9AU%3D&az=oaivgprodscus" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #0b0f1a; color: #e5e7eb; }
+
+    .aurora {
+      position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(800px 400px at 10% 10%, rgba(99,102,241,0.25), transparent 60%),
+        radial-gradient(600px 300px at 90% 20%, rgba(16,185,129,0.25), transparent 60%),
+        radial-gradient(700px 350px at 30% 90%, rgba(59,130,246,0.2), transparent 60%),
+        linear-gradient(180deg, #0b0f1a 0%, #0b1120 100%);
+      animation: auroraShift 16s ease-in-out infinite alternate;
+    }
+    @keyframes auroraShift {
+      0% { background-position: 0 0, 100% 0, 0 100%, 0 0; }
+      100% { background-position: 10% 5%, 90% 10%, 5% 95%, 0 0; }
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-primary { 
+      background: linear-gradient(135deg, #3b82f6, #6366f1); 
+      color: #fff; 
+      transition: filter .2s ease, transform .15s ease; 
+    }
+    .btn-primary:hover { 
+      filter: brightness(1.1); 
+      transform: translateY(-1px); 
+    }
+
+    .input-field {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #e5e7eb;
+      transition: all 0.3s ease;
+    }
+
+    .input-field:focus {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(99,102,241,0.5);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+      outline: none;
+    }
+
+    .input-field::placeholder {
+      color: #94a3b8;
+    }
+
+    .floating { 
+      animation: floaty 6s ease-in-out infinite; 
+    }
+    @keyframes floaty { 
+      0%,100% { transform: translateY(0) } 
+      50% { transform: translateY(-8px) } 
+    }
+
+    .gradient-text { 
+      background: linear-gradient(90deg,#60a5fa,#a78bfa,#34d399); 
+      -webkit-background-clip: text; 
+      background-clip: text; 
+      color: transparent; 
+    }
+
+    .reveal { 
+      opacity: 0; 
+      transform: translateY(20px); 
+      animation: reveal 0.8s ease-out forwards;
+    }
+    @keyframes reveal { 
+      to { opacity: 1; transform: none; } 
+    }
+
+    .notification {
+      animation: slideInRight 0.4s ease-out;
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .neon-border { 
+      box-shadow: 0 0 0 1px rgba(99,102,241,.3), 0 0 25px rgba(99,102,241,.25) inset; 
+    }
+
+    .feature-badge {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-indigo-500/30 selection:text-white min-h-screen flex flex-col">
+  <div class="aurora"></div>
+
+  <!-- Header -->
+  <header class="relative z-10 w-full py-8 px-4 text-center reveal">
+    <div class="flex items-center justify-center gap-3 mb-2">
+      <img src="logo.png" alt="Iyonicorp Logo" class="w-12 h-12 md:w-14 md:h-14 floating">
+      <h1 class="text-4xl md:text-5xl font-bold text-slate-200">Iyonicorp</h1>
+    </div>
+    <p class="text-slate-400 text-sm md:text-base">Start Your Digital Journey Today</p>
+  </header>
+
+  <!-- Signup Form -->
+  <main class="relative z-10 flex-1 flex items-center justify-center px-4 py-8">
+    <div class="glass rounded-3xl neon-border p-8 md:p-10 w-full max-w-lg reveal" style="animation-delay: 0.2s;">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">Create Account</h2>
+        <p class="text-slate-400">Join thousands of satisfied customers</p>
+      </div>
+
+      <!-- Feature Badges -->
+      <div class="flex flex-wrap justify-center gap-2 mb-8">
+        <span class="feature-badge text-xs px-3 py-1.5 rounded-full text-slate-200 font-medium">Fast Setup</span>
+        <span class="feature-badge text-xs px-3 py-1.5 rounded-full text-slate-200 font-medium">Secure</span>
+        <span class="feature-badge text-xs px-3 py-1.5 rounded-full text-slate-200 font-medium">Premium Features</span>
+      </div>
+
+      <form id="signupForm" class="space-y-5">
+        <div>
+          <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Full Name</label>
+          <input 
+            type="text" 
+            id="name" 
+            placeholder="John Doe" 
+            class="input-field w-full px-4 py-3 text-base rounded-xl"
+            required 
+          />
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+          <input 
+            type="email" 
+            id="email" 
+            placeholder="you@example.com" 
+            class="input-field w-full px-4 py-3 text-base rounded-xl"
+            required 
+          />
+        </div>
+
+        <div>
+          <label for="phone" class="block text-sm font-medium text-slate-300 mb-2">Phone Number</label>
+          <input 
+            type="text" 
+            id="phone" 
+            placeholder="+1 (555) 000-0000" 
+            class="input-field w-full px-4 py-3 text-base rounded-xl"
+            required 
+          />
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-slate-300 mb-2">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            placeholder="••••••••" 
+            class="input-field w-full px-4 py-3 text-base rounded-xl"
+            required 
+          />
+          <p class="text-xs text-slate-500 mt-1">Must be at least 8 characters</p>
+        </div>
+
+        <button 
+          type="submit" 
+          class="btn-primary w-full py-3.5 rounded-xl text-base font-semibold shadow-lg"
+        >
+          Create Account
+        </button>
+      </form>
+
+      <p class="text-sm text-center mt-6 text-slate-400">
+        Already have an account? 
+        <a href="../login" class="text-blue-400 hover:text-blue-300 font-medium hover:underline">Sign in</a>
+      </p>
+
+      <p class="text-xs text-center mt-4 text-slate-500">
+        By signing up, you agree to our 
+        <a href="https://iyonicorp.com/terms/" class="text-blue-400 hover:underline">Terms</a> and 
+        <a href="https://iyonicorp.com/privacy/" class="text-blue-400 hover:underline">Privacy Policy</a>
+      </p>
+    </div>
+  </main>
+
+  <!-- Notification Popup -->
+  <div id="errorPopup" class="notification fixed top-5 right-5 z-50 hidden max-w-sm rounded-xl shadow-2xl transition-all duration-300">
+    <div class="glass px-6 py-4 rounded-xl flex items-center gap-3">
+      <span id="popupIcon" class="text-2xl"></span>
+      <span id="popupText" class="text-sm font-medium text-white">Something went wrong</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="relative z-10 text-center py-6 text-slate-400 text-sm">
+    &copy; <span id="year"></span> Iyonicorp. All rights reserved.
+  </footer>
+
+  <script>
+    const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? "http://localhost:5000"
+      : "https://iyonicweb.onrender.com";
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const form = document.getElementById("signupForm");
+    const signupBtn = form.querySelector("button[type='submit']");
+    const errorPopup = document.getElementById("errorPopup");
+    const popupText = document.getElementById("popupText");
+    const popupIcon = document.getElementById("popupIcon");
+
+    function showError(message, type = "error") {
+      popupText.textContent = message;
+      
+      if (type === "error") {
+        popupIcon.textContent = "";
+      } else if (type === "success") {
+        popupIcon.textContent = "";
+      } else {
+        popupIcon.textContent = "";
+      }
+
+      errorPopup.classList.remove("hidden");
+      setTimeout(() => {
+        errorPopup.classList.add("hidden");
+      }, 4000);
+    }
+
+    form.onsubmit = async function (e) {
+      e.preventDefault();
+
+      // Disable button to prevent double clicks
+      signupBtn.disabled = true;
+      signupBtn.textContent = "Creating account...";
+
+      const email = document.getElementById("email").value;
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const password = document.getElementById("password").value;
+
+      // 1. Email validation (MX + inbox check)
+      try {
+        const validationRes = await fetch(`https://emailvalidation.abstractapi.com/v1/?api_key=560021071fea4ea69f36df4e47a42a7b&email=${encodeURIComponent(email)}`);
+        const validationData = await validationRes.json();
+
+        if (!validationData.deliverability || validationData.deliverability !== "DELIVERABLE") {
+          showError("That email does not appear to be real or deliverable.", "error");
+          signupBtn.disabled = false;
+          signupBtn.textContent = "Create Account";
+          return;
+        }
+      } catch (err) {
+        showError("Failed to validate email. Please check your internet connection.", "error");
+        signupBtn.disabled = false;
+        signupBtn.textContent = "Create Account";
+        return;
+      }
+
+      // 2. Signup request
+      try {
+        const res = await fetch(`${API_BASE}/api/auth/signup`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, phone, password }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          localStorage.setItem("user", JSON.stringify(data.user));
+          localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("userEmail", data.user.email || email);
+          if (data.user.name || name) {
+            localStorage.setItem("userName", data.user.name || name);
+          }
+          showError("Account created successfully! Redirecting...", "success");
+          setTimeout(() => {
+            window.location.href = "https://iyonicorp.com";
+          }, 1500);
+        } else {
+          const errMsg = res.status === 409
+            ? "This email is already registered. Try logging in."
+            : (data.message || "Signup failed.");
+
+          showError(errMsg, "error");
+          signupBtn.disabled = false;
+          signupBtn.textContent = "Create Account";
+        }
+      } catch (err) {
+        showError("Server error. Please try again later.", "error");
+        signupBtn.disabled = false;
+        signupBtn.textContent = "Create Account";
+      }
+    };
+  </script>
+
+</body>
+</html>
