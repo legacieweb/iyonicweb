@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User"); // Adjust path if needed
+const User = require("../models/User");
 const nodemailer = require('nodemailer');
+const axios = require('axios');
 
 // Store verification codes temporarily
 const verificationCodes = {}; // { email: code }
@@ -16,7 +17,7 @@ router.post("/send-reset-code", async (req, res) => {
   verificationCodes[email] = code;
 
   // Send email (using nodemailer)
-  const transporter = require("nodemailer").createTransport({
+  const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
       user: process.env.EMAIL_USER,
@@ -51,7 +52,7 @@ router.post("/confirm-reset", async (req, res) => {
   if (!user) return res.status(404).json({ message: "User not found" });
 
   user.password = newPassword;
-  await user.save();
+  await User.save(user);
 
   delete verificationCodes[email]; // cleanup
   res.json({ message: "Password updated successfully" });
@@ -62,16 +63,33 @@ router.post("/signup", async (req, res) => {
   const { name, email, phone, password } = req.body;
 
   try {
-    // Check if email already exists
+    // 1. Check if email already exists
     const existing = await User.findOne({ email });
     if (existing) {
       return res.status(409).json({ message: "Email already exists" });
     }
 
-    // Create user
+    // 2. Optional Backend Email Validation
+    if (process.env.ABSTRACT_API_KEY) {
+       try {
+         const validationRes = await axios.get(`https://emailvalidation.abstractapi.com/v1/?api_key=${process.env.ABSTRACT_API_KEY}&email=${encodeURIComponent(email)}`);
+         const validationData = validationRes.data;
+         
+         // Only block if we're sure it's undeliverable. 
+         // If API returns 422 or other errors (handled by catch), we allow signup.
+         if (validationData.deliverability === "UNDELIVERABLE") {
+            return res.status(400).json({ message: "The provided email is undeliverable." });
+         }
+       } catch (apiErr) {
+         console.warn("Abstract API email validation failed or quota exceeded:", apiErr.message);
+         // Do not block signup if API fails
+       }
+    }
+
+    // 3. Create user
     const newUser = await User.create({ name, email, phone, password });
 
-    // Nodemailer setup
+    // 4. Nodemailer setup
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -101,6 +119,7 @@ router.post("/signup", async (req, res) => {
     res.status(500).json({ message: "Signup failed" });
   }
 });
+
 router.post("/change-password", async (req, res) => {
   const { email, oldPassword, newPassword } = req.body;
   const user = await User.findOne({ email });
@@ -109,7 +128,7 @@ router.post("/change-password", async (req, res) => {
   if (user.password !== oldPassword) return res.status(400).json({ message: "Incorrect current password" });
 
   user.password = newPassword;
-  await user.save();
+  await User.save(user);
   res.json({ message: "Password updated" });
 });
 

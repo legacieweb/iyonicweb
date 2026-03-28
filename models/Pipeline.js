@@ -1,24 +1,24 @@
-const mongoose = require("mongoose");
+const db = require('../config/db');
 
-const PipelineSchema = new mongoose.Schema({
-  businessName: { type: String, required: true },
-  email: { type: String },
-  phone: { type: String },
-  secondaryPhone: { type: String },
-  altContact: { type: String },
-  status: {
-    type: String,
-    enum: ["Lead", "Contacted", "Proposal", "In Progress", "Completed"],
-    default: "Lead"
+const Pipeline = {
+  async findOne(query) {
+    return db('Pipelines').where(query).first();
   },
-  notes: { type: String },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now }
-});
+  async find(query) {
+    return db('Pipelines').where(query);
+  },
+  async create(data) {
+    const [pipeline] = await db('Pipelines').insert(data).returning('*');
+    return pipeline;
+  },
+  async findByIdAndUpdate(id, update, options) {
+    const set = update.$set || update;
+    const [pipeline] = await db('Pipelines').where({ id }).update(set).returning('*');
+    return pipeline;
+  },
+  async findByIdAndDelete(id) {
+    return db('Pipelines').where({ id }).del();
+  }
+};
 
-PipelineSchema.pre("save", function(next) {
-  this.updatedAt = Date.now();
-  next();
-});
-
-module.exports = mongoose.model("Pipeline", PipelineSchema);
+module.exports = Pipeline;

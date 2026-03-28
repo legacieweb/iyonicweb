@@ -1,9 +1,19 @@
-const mongoose = require("mongoose");
+const db = require('../config/db');
 
-const ManagedDomainRequestSchema = new mongoose.Schema({
-  email: { type: String, required: true },
-  domainInterest: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now }
-});
+const ManagedDomainRequest = {
+  async findOne(query) {
+    return db('ManagedDomainRequests').where(query).first();
+  },
+  async find(query) {
+    return db('ManagedDomainRequests').where(query);
+  },
+  async create(data) {
+    const [request] = await db('ManagedDomainRequests').insert(data).returning('*');
+    return request;
+  },
+  async deleteOne(query) {
+    return db('ManagedDomainRequests').where(query).del();
+  }
+};
 
-module.exports = mongoose.model("ManagedDomainRequest", ManagedDomainRequestSchema);
+module.exports = ManagedDomainRequest;

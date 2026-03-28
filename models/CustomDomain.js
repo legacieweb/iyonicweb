@@ -1,11 +1,31 @@
-const mongoose = require("mongoose");
+const db = require('../config/db');
 
-const customDomainSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
-  domain: { type: String, required: true },
-  siteId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Subscription' },
-  setup: { type: String, enum: ["self", "assisted"], required: true },
-  createdAt: { type: Date, default: Date.now }
-});
+const CustomDomain = {
+  async findOne(query) {
+    return db('CustomDomains').where(query).first();
+  },
+  async find(query) {
+    return db('CustomDomains').where(query);
+  },
+  async findById(id) {
+    return db('CustomDomains').where({ id }).first();
+  },
+  async create(data) {
+    const [domain] = await db('CustomDomains').insert(data).returning('*');
+    return domain;
+  },
+  async insertMany(inserts) {
+    return db('CustomDomains').insert(inserts);
+  },
+  async save(domain) {
+    if (domain.id) {
+       const { id, ...data } = domain;
+       await db('CustomDomains').where({ id }).update(data);
+    } else {
+       const [newDomain] = await db('CustomDomains').insert(domain).returning('*');
+       Object.assign(domain, newDomain);
+    }
+  }
+};
 
-module.exports = mongoose.model("CustomDomain", customDomainSchema);
+module.exports = CustomDomain;

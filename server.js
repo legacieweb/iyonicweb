@@ -1,9 +1,8 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
-const CustomDomain = require("./models/CustomDomain"); // Adjust the path as needed
+const CustomDomain = require("./models/CustomDomain");
 const nodemailer = require("nodemailer");
 
 // Load environment variables from .env
@@ -16,24 +15,26 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
-    process.exit(1);
-  });
-
 // Models
 const User = require("./models/User");
 const Subscription = require("./models/Subscription");
-const authRoutes = require("./routes/authRoutes"); // This path must be correct
+const authRoutes = require("./routes/authRoutes");
+const db = require("./config/db");
+
+// Check DB Connection
+db.raw('SELECT 1')
+  .then(() => {
+    console.log('PostgreSQL (Neon DB) connected successfully');
+  })
+  .catch((err) => {
+    console.error('PostgreSQL connection error:', err);
+    process.exit(1);
+  });
 
 const requestManagedDomainRoute = require("./routes/requestManagedDomain");
 app.use("/api/request-managed-domain", requestManagedDomainRoute);
 
-
-app.use("/api/auth", authRoutes); // must be a valid router
-
+app.use("/api/auth", authRoutes);
 
 app.post("/api/auth/login", async (req, res) => {
   try {
@@ -48,7 +49,6 @@ app.post("/api/auth/login", async (req, res) => {
   }
 });
 
-
 // Password reset
 app.post("/api/auth/reset", async (req, res) => {
   try {
@@ -58,7 +58,7 @@ app.post("/api/auth/reset", async (req, res) => {
 
     const newPass = Math.random().toString(36).substring(2, 8);
     user.password = newPass;
-    await user.save();
+    await User.save(user);
 
     console.log(`New password for ${email}: ${newPass}`);
     res.json({ message: "Password has been reset. Check the server console." });
@@ -76,7 +76,7 @@ app.post("/api/subscribe", async (req, res) => {
     if (!user) return res.status(401).json({ message: "User not found" });
 
     const subscription = await Subscription.create({
-      userId: user._id,
+      userId: user.id,
       siteName,
       price,
     });
@@ -95,13 +95,14 @@ app.get("/api/user-subscriptions", async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    const subs = await Subscription.find({ userId: user._id });
+    const subs = await Subscription.find({ userId: user.id });
     res.json(subs);
   } catch (error) {
     console.error("Fetch subscriptions error:", error);
     res.status(500).json({ message: "Server error getting subscriptions" });
   }
 });
+
 app.post("/api/site-settings", async (req, res) => {
   const { id, customName, domain } = req.body;
 
@@ -112,7 +113,7 @@ app.post("/api/site-settings", async (req, res) => {
     subscription.customName = customName;
     subscription.domain = domain;
 
-    await subscription.save();
+    await Subscription.save(subscription);
 
     res.json({ message: "Site updated successfully" });
   } catch (error) {
@@ -120,6 +121,7 @@ app.post("/api/site-settings", async (req, res) => {
     res.status(500).json({ message: "Server error updating site" });
   }
 });
+
 app.post("/api/claim-subdomain", async (req, res) => {
   const { email, subdomain, siteId } = req.body;
 
@@ -138,7 +140,7 @@ app.post("/api/claim-subdomain", async (req, res) => {
 
   // Enforce 5 free subdomain limit
   const userClaims = await Subscription.countDocuments({
-    userId: user._id,
+    userId: user.id,
     domain: { $regex: /\.iyonicorp\.com$/i }
   });
 
@@ -149,12 +151,12 @@ app.post("/api/claim-subdomain", async (req, res) => {
   }
 
   // Ensure the subscription is valid and belongs to user
-  const userSub = await Subscription.findOne({ _id: siteId, userId: user._id });
+  const userSub = await Subscription.findOne({ id: siteId, userId: user.id });
   if (!userSub) return res.status(404).json({ message: "Subscription not found for this site" });
 
   // Assign subdomain
   userSub.domain = domain;
-  await userSub.save();
+  await Subscription.save(userSub);
 
   res.json({ message: `You claimed ${domain} successfully! (${userClaims + 1}/5 used)` });
 });
@@ -167,14 +169,12 @@ app.get("/api/user-subdomain-count", async (req, res) => {
   if (!user) return res.status(404).json({ message: "User not found" });
 
   const count = await Subscription.countDocuments({
-    userId: user._id,
+    userId: user.id,
     domain: { $regex: /\.iyonicorp\.com$/i }
   });
 
   res.json({ count });
 });
-
-
 
 app.post("/api/record-payment", async (req, res) => {
   const { subscriptionId, amount } = req.body;
@@ -207,7 +207,7 @@ app.post("/api/record-payment", async (req, res) => {
     sub.lastPaymentDate = new Date();
     sub.expiresAt = new Date(Date.now() + planDays * 24 * 60 * 60 * 1000);
 
-    await sub.save();
+    await Subscription.save(sub);
     res.json({ message: "Payment recorded and expiry date set." });
 
   } catch (err) {
@@ -216,7 +216,6 @@ app.post("/api/record-payment", async (req, res) => {
   }
 });
 
-
 app.post("/api/update-plan", async (req, res) => {
   const { subscriptionId, planType } = req.body;
   try {
@@ -224,40 +223,19 @@ app.post("/api/update-plan", async (req, res) => {
     if (!sub) return res.status(404).json({ message: "Subscription not found" });
 
     sub.planType = planType;
-    await sub.save();
+    await Subscription.save(sub);
     res.json({ message: "Plan updated successfully." });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error." });
   }
 });
+
 const adminRoutes = require("./routes/adminRoutes");
 app.use("/api/admin", adminRoutes);
 
-app.post("/api/claim-subdomain", async (req, res) => {
-  const { email, subdomain, siteId } = req.body;
+// Duplicate /api/claim-subdomain removed (logic combined above)
 
-  if (!email || !subdomain || !siteId) {
-    return res.status(400).json({ message: "Missing required fields" });
-  }
-
-  // Mock check if domain is taken
-  const domainTaken = false; // Change this as needed
-
-  if (domainTaken) {
-    return res.status(409).json({ message: "Domain already taken" });
-  }
-
-  // TODO: Save to your DB
-  const domain = `${subdomain.toLowerCase()}.iyonicorp.com`;
-
-  console.log(`User ${email} claimed domain ${domain} for site ${siteId}`);
-
-  return res.json({ message: `You claimed ${domain} successfully!` });
-});
-
-
-// /api/custom-domain-request
 app.post("/api/custom-domain-request", async (req, res) => {
   const { email, domains, setup, siteId } = req.body;
 
@@ -270,7 +248,7 @@ app.post("/api/custom-domain-request", async (req, res) => {
     if (!user) return res.status(404).json({ message: "User not found" });
 
     const inserts = domains.map(domain => ({
-      userId: user._id,
+      userId: user.id,
       siteId,
       domain,
       setup,
@@ -285,8 +263,6 @@ app.post("/api/custom-domain-request", async (req, res) => {
   }
 });
 
-
-// GET endpoint to fetch user's custom domains
 app.get("/api/custom-domains", async (req, res) => {
   const { email } = req.query;
 
@@ -298,7 +274,7 @@ app.get("/api/custom-domains", async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    const domains = await CustomDomain.find({ userId: user._id });
+    const domains = await CustomDomain.find({ userId: user.id });
     return res.json(domains);
   } catch (err) {
     console.error("Failed to fetch custom domains:", err.message);
@@ -314,12 +290,11 @@ app.post("/api/assign-domain", async (req, res) => {
   if (!domain) return res.status(404).json({ message: "Domain not found" });
 
   domain.siteId = siteId;
-  await domain.save();
+  await CustomDomain.save(domain);
 
   res.json({ message: "Domain assigned to site." });
 });
 
-// Add to your user route file
 app.get("/api/user-status", async (req, res) => {
   const email = req.query.email;
   const user = await User.findOne({ email });
@@ -336,7 +311,7 @@ app.post("/api/admin/ban-user", async (req, res) => {
       return res.status(400).json({ message: "Missing or invalid fields." });
     }
 
-    const user = await User.findOneAndUpdate({ email }, { $set: { banned } });
+    const user = await User.findOneAndUpdate({ email }, { banned });
 
     if (!user) {
       return res.status(404).json({ message: "User not found." });
@@ -353,17 +328,18 @@ app.post("/api/admin/ban-user", async (req, res) => {
     res.status(500).json({ message: "Internal server error." });
   }
 });
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "iyonicorp@gmail.com",  // Your email
-    pass: "dikfirjarvijwskx"          // Use an App Password, NOT regular Gmail password
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
 });
 
 async function sendBanEmail(email) {
   await transporter.sendMail({
-    from: `"Iyonicorp Admin" <iyonicorp@gmail.com>`,
+    from: `"Iyonicorp Admin" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: "Your Iyonicorp Account Has Been Banned",
     html: `

@@ -1,16 +1,12 @@
-const mongoose = require('mongoose');
+const knex = require('knex');
+require('dotenv').config();
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
-    console.log('MongoDB Connected');
-  } catch (err) {
-    console.error(err.message);
-    process.exit(1);
+const db = knex({
+  client: 'pg',
+  connection: {
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
   }
-};
+});
 
-module.exports = connectDB;
+module.exports = db;

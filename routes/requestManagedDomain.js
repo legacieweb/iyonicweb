@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
-const DomainRequest = require("../models/ManagedDomainRequest"); // MongoDB model
+const DomainRequest = require("../models/ManagedDomainRequest");
 
 // Setup email transporter
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.EMAIL_USER,     // e.g. iyonicorp@gmail.com
-    pass: process.env.EMAIL_PASS      // App Password (not your main password)
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
 });
 
@@ -22,8 +22,7 @@ router.post("/", async (req, res) => {
 
   try {
     // 1. Save to DB
-    const record = new DomainRequest({ email, domainInterest });
-    await record.save();
+    await DomainRequest.create({ email, domainInterest });
 
     // 2. Email the user
     await transporter.sendMail({
